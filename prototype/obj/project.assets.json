@@ -50,11 +50,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Matt\\Desktop\\prototype\\prototype.csproj",
+      "projectUniqueName": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\prototype\\prototype.csproj",
       "projectName": "prototype",
-      "projectPath": "C:\\Users\\Matt\\Desktop\\prototype\\prototype.csproj",
+      "projectPath": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\prototype\\prototype.csproj",
       "packagesPath": "C:\\Users\\Matt\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Matt\\Desktop\\prototype\\obj\\",
+      "outputPath": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\prototype\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Matt\\AppData\\Roaming\\NuGet\\NuGet.Config",
