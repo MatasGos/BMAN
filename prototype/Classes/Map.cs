@@ -19,7 +19,6 @@ namespace prototype.Classes
         private int clientCount;
         private int playerLimit = 4;
         private LinkedList<Bomb> bombs;
-        const int explosionTime = 200;
         private Wall[] walls;
         private int wallCount;
         private int playerSize = 15;
@@ -92,72 +91,6 @@ namespace prototype.Classes
                 MessageBox.Show("Player limit reached");
             }
         }
-        public Bitmap updatedMap()
-        {
-            Bitmap newMap = this.getMap();
-            for (int i = 0; i < this.getPlayerCount(); i++)
-            {
-                Player player = players[i];
-                int[] xy = player.getPos();
-                for (int x = 0; x < playerSize; x++)
-                {
-                    for (int y = 0; y < playerSize; y++)
-                    {
-                        newMap.SetPixel(x + xy[0], y + xy[1], player.getPixel(x, y));
-                    }
-                }
-            }
-            LinkedList<Bomb> bombsRemove = new LinkedList<Bomb>();
-            foreach (Bomb bomb in bombs)
-            {
-                int tick = bomb.tick();
-                if (tick > 0)
-                {
-                    int[] xy = bomb.getPos();
-                    for (int x = 0; x < 25; x++)
-                    {
-                        for (int y = 0; y < 25; y++)
-                        {
-                            newMap.SetPixel(x + xy[0], y + xy[1], bombPic.GetPixel(x, y));
-                        }
-                    }
-                }
-                else if (tick > -explosionTime)
-                {
-                    int[] xy = bomb.getPos();
-                    int power = bomb.getPower();
-                    for (int x = 0 - 27 * power; x < 25 + 27 * power; x++)
-                    {
-                        //for (int x = Math.Max(0 - 27 * power, 0); x < Math.Min(25 + 27 * power, background.Width); x++)
-                        if (x > 0 && x < 25)
-                        {
-                            for (int y = 0 - 27 * power; y < 25 + 27 * power; y++)
-                            {
-                                Color explosionColor = Color.FromArgb(230, 114, 56);
-                                newMap.SetPixel(Math.Max(x + xy[0], 1), Math.Max(Math.Min(y + xy[1], background.Height - 1), 0), explosionColor);
-                            }
-                        }
-                        else
-                        {
-                            for (int y = 0; y < 25; y++)
-                            {
-                                Color explosionColor = Color.FromArgb(230, 114, 56);
-                                newMap.SetPixel(Math.Max(Math.Min(x + xy[0], background.Height - 1), 0), y + xy[1], explosionColor);
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    bombsRemove.AddFirst(bomb);
-                }
-            }
-            foreach (Bomb bomb in bombsRemove)
-            {
-                bombs.Remove(bomb);
-            }
-            return newMap;
-        }
         public Bitmap getMap()
         {
             RectangleF cloneRect = new RectangleF(0, 0, 25 * xsize + xsize * 2, 25 * ysize + ysize * 2);
@@ -194,16 +127,7 @@ namespace prototype.Classes
             this.addPlayer();
             return ++clientCount;
         }
-        public void move(int id, int px, int py)
-        {
-            int[] xy = players[id - 1].getPos();
-            int step = players[id - 1].getSpeed();
-            if (xy[0] + px * step > -1 && xy[0] + px * step < 515 && xy[1] + py * step > -1 && xy[1] + py * step < 515)
-            {
-                players[id - 1].move(px, py);
-            }
-        }
-        public int[] Move(int id, int px, int py)
+        public void Move(int id, int px, int py)
         {
             int[] xy = players[id - 1].getPos();
             int step = players[id - 1].getSpeed();
@@ -233,12 +157,7 @@ namespace prototype.Classes
             {
                 players[id - 1].move1(px, py);
             }*/
-            else 
-            {
-                return new int[] { x, y };
-            }
             //return getTile(xy[0], xy[1]);
-            return center;
         }
         public bool isOccupiedSquared(int[,] edges)
         {
@@ -338,6 +257,10 @@ namespace prototype.Classes
                 walls[this.wallCount++] = new Wall(0, y * 27);
                 walls[this.wallCount++] = new Wall((xsize-1) * 27, y * 27);
             }
+        }
+        public LinkedList<Bomb> getBombs()
+        {
+            return bombs;
         }
     }
 }

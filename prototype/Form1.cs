@@ -16,19 +16,19 @@ namespace prototype
     public partial class Form1 : Form
     {
         const int xsize = 20;
+        public const int playerSize = 15;
         const int ysize = 20;
         private int clientId;
         private int timePlayed;
         public static readonly int[] background = { 98, 65, 8 };
         private bool _keyTop, _keyLeft, _keyRight, _keyBot, _keyBomb;
+        private Game game;
         public Form1()
         {
             InitializeComponent();
-
-            map = new Map(xsize, ysize, background);
+            game = new Game();
             initialiseValues();
-
-            pictureBox1.Image = map.getMap();
+            pictureBox1.Image = game.getGame();
         }
         public void initialiseValues()
         {
@@ -41,16 +41,15 @@ namespace prototype
             _keyBomb = false;
         }
         public int startspeed = 1;
-        Map map;
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
                 timePlayed = 0;
-                clientId = map.join();
+                clientId = game.join();
                 label1.Text = clientId.ToString();
 
-                pictureBox1.Image = map.getMap();
+                pictureBox1.Image = game.getGame();
             }
             catch (ArgumentException)
             {
@@ -59,7 +58,7 @@ namespace prototype
         }
         private void update_Map_Slow()
         {
-            Bitmap back = map.updatedMap();
+            Bitmap back = game.getGame();
             pictureBox2.Image = back;
             
         }
@@ -117,15 +116,13 @@ namespace prototype
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if(clientId != 404)
-            {
-                int[] xy = map.getPlayers()[0].getPos();
-                label1.Text = xy[0].ToString();
-                label2.Text = xy[1].ToString();
-            }
             checkButtonClicks();
             timePlayed++;
             update_Map_Slow();
+            if (clientId != 404)
+            {
+                label1.Text = game.getMap().getPlayers()[1].getPos().ToString();
+            }
         }
         private void checkButtonClicks()
         {
@@ -133,24 +130,24 @@ namespace prototype
             {
                 if (_keyTop) 
                 {
-                    int[] a = map.Move(clientId, 0, -1);
+                    game.Move(clientId, 0, -1);
                 }
                 if (_keyLeft) 
-                {  
-                    int[] a = map.Move(clientId, -1, 0);
+                {
+                    game.Move(clientId, -1, 0);
                 }
                 if (_keyBot) 
                 {
-                    int[] a = map.Move(clientId, 0, 1);
+                    game.Move(clientId, 0, 1);
                 }
                 if (_keyRight) 
                 {
-                    int[] a = map.Move(clientId, 1, 0);
+                    game.Move(clientId, 1, 0);
                 }
                 if (_keyBomb)
                 {
                     _keyBomb = false;
-                    map.addBomb(clientId);
+                    game.addBomb(clientId);
                 }
             }
         }
@@ -159,9 +156,9 @@ namespace prototype
         {
             try
             {
-                map = new Map(xsize, ysize, background);
+                game = new Game();
 
-                pictureBox1.Image = map.getMap();
+                pictureBox1.Image = game.getGame();
             }
             catch (ArgumentException)
             {
