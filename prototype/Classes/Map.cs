@@ -127,7 +127,7 @@ namespace prototype.Classes
             this.addPlayer();
             return ++clientCount;
         }
-        public void Move(int id, int px, int py)
+        public string Move(int id, int px, int py)
         {
             int[] xy = players[id - 1].getPos();
             int step = players[id - 1].getSpeed();
@@ -158,6 +158,8 @@ namespace prototype.Classes
                 players[id - 1].move1(px, py);
             }*/
             //return getTile(xy[0], xy[1]);
+            string ret = edges[0, 0] + "-" + edges[0, 1] + "|||" + edges[1, 0] + "-" + edges[1, 1] + "|||" + edges[2, 0] + "-" + edges[2, 1] + "|||" + edges[3, 0] + "-" + edges[3, 1];
+            return ret;
         }
         public bool isOccupiedSquared(int[,] edges)
         {
@@ -193,7 +195,7 @@ namespace prototype.Classes
             }
             if (bombs.Contains(new Bomb(topLeft[0], topLeft[1])))
             {
-                return true;
+                return !bombs.Find(new Bomb(topLeft[0], topLeft[1])).Value.getWT();
             }
 
             return false;
@@ -204,14 +206,14 @@ namespace prototype.Classes
             edges[0, 0] = xy[0];
             edges[0, 1] = xy[1];
 
-            edges[1, 0] = xy[0] + playerSize/2;
+            edges[1, 0] = xy[0] + playerSize;
             edges[1, 1] = xy[1];
 
             edges[2, 0] = xy[0];
-            edges[2, 1] = xy[1] + playerSize / 2;
+            edges[2, 1] = xy[1] + playerSize;
 
-            edges[3, 0] = xy[0] + playerSize / 2;
-            edges[3, 1] = xy[1] + playerSize / 2;
+            edges[3, 0] = xy[0] + playerSize;
+            edges[3, 1] = xy[1] + playerSize;
 
             return edges;
         }

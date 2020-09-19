@@ -12,7 +12,9 @@ namespace prototype.Classes
         private int x, y;
         private int timeleft;
         const int explosionTime = 200;
-        bool delete;
+        private bool walkThrough;
+        private int ticks;
+        private int objectAfter = 50;
         public Bomb(Player player,int[] xy)
         {
             this.player = player;
@@ -21,6 +23,8 @@ namespace prototype.Classes
             this.x = xy[0];
             this.y = xy[1];
             this.strength = player.getPower();
+            ticks = 0;
+            walkThrough = true;
         }
         public Bomb(int x, int y)
         {
@@ -32,6 +36,10 @@ namespace prototype.Classes
             if (timeleft <= 0) {
                 bool delete = true;
             }
+            if (ticks++ > objectAfter)
+            {
+                walkThrough = false;
+            }
             this.timeleft--;
             return timeleft+1;
         }
@@ -42,6 +50,10 @@ namespace prototype.Classes
         public int getPower()
         {
             return strength;
+        }
+        public bool getWT()
+        {
+            return walkThrough;
         }
         public override bool Equals(object obj)
         {

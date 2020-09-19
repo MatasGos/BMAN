@@ -24,6 +24,9 @@ namespace prototype.Classes
         {
             clientCount = 0;
             map = new Map(xsize, ysize, backcolor);
+            background = map.getMap();
+            this.bombPic = new Bitmap("bomb.jpg");
+            this.wallPic = new Bitmap("wall.png");
         }
 
         public Map getMap()
@@ -98,9 +101,9 @@ namespace prototype.Classes
             }
             return newMap;
         }
-        public void Move(int id, int px, int py)
+        public string Move(int id, int px, int py)
         {
-            map.Move(id, px, py);
+            return map.Move(id, px, py);
         }
         public int join()
         {
@@ -110,6 +113,10 @@ namespace prototype.Classes
         public void addBomb(int playerId)
         {
             map.addBomb(playerId);
+        }
+        public Player getPlayer(int id)
+        {
+            return map.getPlayers()[id];
         }
     }
 }

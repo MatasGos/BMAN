@@ -121,7 +121,7 @@ namespace prototype
             update_Map_Slow();
             if (clientId != 404)
             {
-                label1.Text = game.getMap().getPlayers()[1].getPos().ToString();
+                //label1.Text = game.getMap().getPlayers()[1].getPos().ToString();
             }
         }
         private void checkButtonClicks()
@@ -130,18 +130,21 @@ namespace prototype
             {
                 if (_keyTop) 
                 {
-                    game.Move(clientId, 0, -1);
+                    label1.Text = game.Move(clientId, 0, -1);
                 }
                 if (_keyLeft) 
                 {
+                    label1.Text =
                     game.Move(clientId, -1, 0);
                 }
                 if (_keyBot) 
                 {
+                    label1.Text =
                     game.Move(clientId, 0, 1);
                 }
                 if (_keyRight) 
                 {
+                    label1.Text = game.getPlayer(0).getPos()[0].ToString() + "-" + game.getPlayer(0).getPos()[1].ToString();
                     game.Move(clientId, 1, 0);
                 }
                 if (_keyBomb)
