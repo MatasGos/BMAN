@@ -10,11 +10,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using System.Windows.Forms;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace prototype
 {
     public partial class Form1 : Form
     {
+        HubConnection connection;
         const int xsize = 20;
         public const int playerSize = 15;
         const int ysize = 20;
@@ -23,9 +25,15 @@ namespace prototype
         public static readonly int[] background = { 98, 65, 8 };
         private bool _keyTop, _keyLeft, _keyRight, _keyBot, _keyBomb;
         private Game game;
+        public int startspeed = 1;
         public Form1()
         {
             InitializeComponent();
+            connection = new HubConnectionBuilder().WithUrl("http://localhost:5000/gamehub").Build();
+            connection.On<int, string>("ReceiveMessage", (user, message) =>
+            {
+                richTextBox1.Text = richTextBox1.Text + user + ": " + message + "\n";
+            });
             game = new Game();
             initialiseValues();
             pictureBox1.Image = game.getGame();
@@ -40,16 +48,19 @@ namespace prototype
             _keyRight = false;
             _keyBomb = false;
         }
-        public int startspeed = 1;
-        private void button1_Click(object sender, EventArgs e)
+        
+        private async void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                timePlayed = 0;
-                clientId = game.join();
+                clientId = game.join(textBox1.Text);
                 label1.Text = clientId.ToString();
 
                 pictureBox1.Image = game.getGame();
+
+                richTextBox1.Text = richTextBox1.Text + "Connecting..." + "\n";
+                await connection.StartAsync();
+                richTextBox1.Text = richTextBox1.Text + "Connected to the server" + "\n";
             }
             catch (ArgumentException)
             {
@@ -91,6 +102,24 @@ namespace prototype
             }
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await connection.InvokeAsync("SendMessage", clientId, textBox2.Text);
+            }
+            catch (Exception ex)
+            {
+
+                richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
+            }
+        }
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             
@@ -121,30 +150,62 @@ namespace prototype
             update_Map_Slow();
             if (clientId != 404)
             {
-                //label1.Text = game.getMap().getPlayers()[1].getPos().ToString();
             }
         }
-        private void checkButtonClicks()
+        private async void checkButtonClicks()
         {
             if (clientId != 404)
             {
                 if (_keyTop) 
                 {
                     label1.Text = game.Move(clientId, 0, -1);
+                    try
+                    {
+                        await connection.InvokeAsync("Move", clientId, 0, -1);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
+                    }
                 }
                 if (_keyLeft) 
                 {
-                    label1.Text =
+                    try
+                    {
+                        await connection.InvokeAsync("Move", clientId, -1, 0);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
+                    }
                     game.Move(clientId, -1, 0);
                 }
                 if (_keyBot) 
                 {
-                    label1.Text =
+                    try
+                    {
+                        await connection.InvokeAsync("Move", clientId, 0, 1);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
+                    }
                     game.Move(clientId, 0, 1);
                 }
                 if (_keyRight) 
                 {
-                    label1.Text = game.getPlayer(0).getPos()[0].ToString() + "-" + game.getPlayer(0).getPos()[1].ToString();
+                    try
+                    {
+                        await connection.InvokeAsync("Move", clientId, 1, 0);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
+                    }
                     game.Move(clientId, 1, 0);
                 }
                 if (_keyBomb)
@@ -155,17 +216,16 @@ namespace prototype
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private async void button3_Click(object sender, EventArgs e)
         {
             try
             {
-                game = new Game();
-
-                pictureBox1.Image = game.getGame();
+                await connection.InvokeAsync("SendMessage", clientId, textBox1.Text);
             }
-            catch (ArgumentException)
+            catch (Exception ex)
             {
-                MessageBox.Show("There was an error.");
+
+                richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
             }
         }
 

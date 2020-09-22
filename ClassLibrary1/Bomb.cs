@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Windows.Forms;
 
 namespace prototype.Classes
 {
-    class Bomb
+    public class Bomb
     {
         private Player player;
         private int strength;
@@ -19,7 +18,6 @@ namespace prototype.Classes
         {
             this.player = player;
             this.timeleft = player.bombTime();
-            bool delete = false;
             this.x = xy[0];
             this.y = xy[1];
             this.strength = player.getPower();
@@ -34,7 +32,6 @@ namespace prototype.Classes
         public int tick()
         {  
             if (timeleft <= 0) {
-                bool delete = true;
             }
             if (ticks++ > objectAfter)
             {
@@ -54,17 +51,6 @@ namespace prototype.Classes
         public bool getWT()
         {
             return walkThrough;
-        }
-        public override bool Equals(object obj)
-        {
-            var item = obj as Bomb;
-
-            if (item == null)
-            {
-                return false;
-            }
-
-            return this.x.Equals(item.x) && this.y.Equals(item.y);
         }
     }
 }

@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
-using System.Windows.Forms;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
-using System.Drawing.Text;
+
 
 namespace prototype.Classes
 {
-    class Map
+    public class Map
     {
         private int xsize, ysize;
-        private Bitmap background, bombPic, wallPic;
         private Player[] players;
         private int playerCount;
         private int defaultSpeed = 1;
@@ -24,7 +22,6 @@ namespace prototype.Classes
         private int playerSize = 15;
         public Map(int xsize, int ysize, int[] color)
         {
-            this.background = new Bitmap(25 * xsize + xsize * 2, 25 * ysize + ysize * 2);
             this.xsize = xsize;
             this.ysize = ysize;
             drawMap(color);
@@ -32,82 +29,28 @@ namespace prototype.Classes
         }
         public void drawMap(int[] color)
         {
-            this.wallCount = 50;
-            this.bombPic = new Bitmap("bomb.jpg");
-            this.wallPic = new Bitmap("wall.png");
-            plantWalls(wallCount);
-            Color black = Color.FromArgb(0, 0, 0);
-            Color newColor = Color.FromArgb(color[0], color[1], color[2]);
-            for (int x = 0; x < background.Width; x++)
-            {
-                for (int y = 0; y < background.Height; y++)
-                {
-                    background.SetPixel(x, y, newColor);
-                }
-            }
-            for (int x = 27; x < background.Width; x += 27)
-            {
-                for (int y = 0; y < background.Height; y++)
-                {
-                    background.SetPixel(x - 2, y, black);
-                    background.SetPixel(x - 1, y, black);
-                }
-            }
-            for (int y = 27; y < background.Height; y += 27)
-            {
-                for (int x = 0; x < background.Height; x++)
-                {
-                    background.SetPixel(x, y - 1, black);
-                    background.SetPixel(x, y - 2, black);
-                }
-            }
-            for (int i = 0; i < wallCount; i++)
-            {
-                int[] xy = walls[i].getPos();
-                for (int x = 0; x < 25; x++)
-                {
-                    for (int y = 0; y < 25; y++)
-                    {
-                        background.SetPixel(x + xy[0], y + xy[1], wallPic.GetPixel(x, y));
-                    }
-                }
-            }
 
+            this.wallCount = 0;
+            plantWalls(wallCount);
             playerCount = 0;
             players = new Player[10];
             bombs = new LinkedList<Bomb>();
-
-
         }
-        public void addPlayer()
+        public void addPlayer(string name)
         {
             if (playerCount < playerLimit)
             {
-                players[playerCount] = new Player(playerCount + 1, defaultSpeed, new int[] { this.xsize, this.ysize });
+                players[playerCount] = new Player(playerCount + 1, defaultSpeed, new int[] { this.xsize, this.ysize }, name);
                 this.playerCount = playerCount + 1;
             }
             else
             {
-                MessageBox.Show("Player limit reached");
             }
         }
-        public Bitmap getMap()
-        {
-            RectangleF cloneRect = new RectangleF(0, 0, 25 * xsize + xsize * 2, 25 * ysize + ysize * 2);
-            System.Drawing.Imaging.PixelFormat format = background.PixelFormat;
-            return background.Clone(cloneRect, format);
-        }
-        /// <summary>
-        /// gets top left position of the block the player is in
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+
         public int[] getTile(int x, int y)
         {
             int[] result = new int[2];
-            /*result[0] = x + playerSize / 2;
-            result[1] = y + playerSize / 2;*/
 
             result[0] = x / 27 * 27;
             result[1] = y / 27 * 27;
@@ -122,9 +65,9 @@ namespace prototype.Classes
         {
             return playerCount;
         }
-        public int join()
+        public int join(string name)
         {
-            this.addPlayer();
+            this.addPlayer(name);
             return ++clientCount;
         }
         public string Move(int id, int px, int py)
@@ -153,11 +96,6 @@ namespace prototype.Classes
             {
                 players[id - 1].move1(px, py);
             }
-            /*else if (!isOccupied(new int[] { x, y }) )
-            {
-                players[id - 1].move1(px, py);
-            }*/
-            //return getTile(xy[0], xy[1]);
             string ret = edges[0, 0] + "-" + edges[0, 1] + "|||" + edges[1, 0] + "-" + edges[1, 1] + "|||" + edges[2, 0] + "-" + edges[2, 1] + "|||" + edges[3, 0] + "-" + edges[3, 1];
             return ret;
         }
@@ -263,6 +201,14 @@ namespace prototype.Classes
         public LinkedList<Bomb> getBombs()
         {
             return bombs;
+        }
+        public Wall[] getWalls()
+        {
+            return walls;
+        }
+        public int getWallsCount()
+        {
+            return wallCount;
         }
     }
 }

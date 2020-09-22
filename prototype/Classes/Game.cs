@@ -12,10 +12,11 @@ namespace prototype.Classes
         private LinkedList<Bomb> bombs;
         private int clientCount;
         private Map map;
-        public const int playerSize = 15;
+        private const int playerSize = 15;
         const int xsize = 20;
         const int ysize = 20;
         public static readonly int[] backcolor = { 98, 65, 8 };
+        private Bitmap[] playerPictures;
 
         //placeholder kol nera explosion klases
         const int explosionTime = 200;
@@ -24,19 +25,69 @@ namespace prototype.Classes
         {
             clientCount = 0;
             map = new Map(xsize, ysize, backcolor);
-            background = map.getMap();
+            makeMap();
+            getPlayerPics();
             this.bombPic = new Bitmap("bomb.jpg");
             this.wallPic = new Bitmap("wall.png");
         }
-
-        public Map getMap()
+        public Bitmap getMap()
         {
-            return map;
+            RectangleF cloneRect = new RectangleF(0, 0, 25 * xsize + xsize * 2, 25 * ysize + ysize * 2);
+            System.Drawing.Imaging.PixelFormat format = background.PixelFormat;
+            return background.Clone(cloneRect, format);
+        }
+        public void update()
+        {
+        }
+
+        public void makeMap()
+        {
+            this.background = new Bitmap(25 * xsize + xsize * 2, 25 * ysize + ysize * 2);
+            this.bombPic = new Bitmap("bomb.jpg");
+            this.wallPic = new Bitmap("wall.png");
+
+            Color black = Color.FromArgb(0, 0, 0);
+            Color newColor = Color.FromArgb(backcolor[0], backcolor[1], backcolor[2]);
+            for (int x = 0; x < background.Width; x++)
+            {
+                for (int y = 0; y < background.Height; y++)
+                {
+                    background.SetPixel(x, y, newColor);
+                }
+            }
+            for (int x = 27; x < background.Width; x += 27)
+            {
+                for (int y = 0; y < background.Height; y++)
+                {
+                    background.SetPixel(x - 2, y, black);
+                    background.SetPixel(x - 1, y, black);
+                }
+            }
+            for (int y = 27; y < background.Height; y += 27)
+            {
+                for (int x = 0; x < background.Height; x++)
+                {
+                    background.SetPixel(x, y - 1, black);
+                    background.SetPixel(x, y - 2, black);
+                }
+            }
+            Wall[] walls = map.getWalls();
+            for (int i = 0; i < map.getWallsCount(); i++)
+            {
+                int[] xy = walls[i].getPos();
+                for (int x = 0; x < 25; x++)
+                {
+                    for (int y = 0; y < 25; y++)
+                    {
+                        background.SetPixel(x + xy[0], y + xy[1], wallPic.GetPixel(x, y));
+                    }
+                }
+            }
         }
         public Bitmap getGame()
         {
             bombs = map.getBombs();
-            Bitmap newMap = map.getMap();
+            Bitmap newMap = getMap();
             Player[] players = map.getPlayers();
             for (int i = 0; i < map.getPlayerCount(); i++)
             {
@@ -46,7 +97,7 @@ namespace prototype.Classes
                 {
                     for (int y = 0; y < playerSize; y++)
                     {
-                        newMap.SetPixel(x + xy[0], y + xy[1], player.getPixel(x, y));
+                        newMap.SetPixel(x + xy[0], y + xy[1], playerPictures[i].GetPixel(x, y));
                     }
                 }
             }
@@ -105,9 +156,9 @@ namespace prototype.Classes
         {
             return map.Move(id, px, py);
         }
-        public int join()
+        public int join(string name)
         {
-            map.addPlayer();
+            map.addPlayer(name);
             return ++clientCount;
         }
         public void addBomb(int playerId)
@@ -117,6 +168,14 @@ namespace prototype.Classes
         public Player getPlayer(int id)
         {
             return map.getPlayers()[id];
+        }
+        private void getPlayerPics()
+        {
+            this.playerPictures = new Bitmap[4];
+            for (int i = 0; i < 4; i++)
+            {
+                this.playerPictures[i] = new Bitmap("p1.png");
+            }
         }
     }
 }

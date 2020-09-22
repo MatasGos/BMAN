@@ -2,60 +2,64 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
-using System.Windows.Forms;
+
 
 namespace prototype.Classes
 {
-    class Player
+    public class Player
     {
         private int x, y;
         private int speed;
         private int lives;
         private int bombTimer, bombStrength;
-        private Bitmap picture;
+        //private Bitmap picture;
+        private string name;
 
-        public Player(int id, int speed, int[] xysize)
+        public Player(int id, int speed, int[] xysize, string name)
         {
             switch (id)
             {
                 case 1:
+                    this.name = name;
                     this.x = 27;
                     this.y = 27;
                     this.speed = speed;
-                    this.picture = new Bitmap("p1.png");
+                    //this.picture = new Bitmap("p1.png");
                     this.lives = 5;
                     this.bombTimer = 200;
                     this.bombStrength = 2;
                     break;
                 case 2:
+                    this.name = name;
                     this.x = 25 * xysize[0] + xysize[0] * 2-25-27;
                     this.y = 27;
                     this.speed = speed;
-                    this.picture = new Bitmap("p1.png");
+                    //this.picture = new Bitmap("p1.png");
                     this.lives = 5;
                     this.bombTimer = 200;
                     this.bombStrength = 2;
                     break;
                 case 3:
+                    this.name = name;
                     this.x = 27;
                     this.y = 25 * xysize[1] + xysize[1] * 2 - 25 - 27;
                     this.speed = speed;
-                    this.picture = new Bitmap("p1.png");
+                    //this.picture = new Bitmap("p1.png");
                     this.lives = 5;
                     this.bombTimer = 200;
                     this.bombStrength = 2;
                     break;
                 case 4:
+                    this.name = name;
                     this.x = 25 * xysize[0] + xysize[0] * 2 - 25 - 27;
                     this.y = 25 * xysize[1] + xysize[1] * 2 - 25 - 27;
                     this.speed = speed;
-                    this.picture = new Bitmap("p1.png");
+                    //this.picture = new Bitmap("p1.png");
                     this.lives = 5;
                     this.bombTimer = 200;
                     this.bombStrength = 2;
                     break;
                 default:
-                    MessageBox.Show("Player constructor error");
                     break;
             }
         }
@@ -73,10 +77,10 @@ namespace prototype.Classes
             this.x += x;
             this.y += y;
         }
-        public Color getPixel(int x,int y)
+/*        public Color getPixel(int x,int y)
         {
             return picture.GetPixel(x, y);
-        }
+        }*/
         public void reset()
         {
             this.x = 0;
