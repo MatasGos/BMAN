@@ -8,23 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Matt\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Server\\Server.csproj",
+      "projectUniqueName": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Server\\Server.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Server\\obj\\",
+      "projectPath": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\Server\\Server.csproj",
+      "packagesPath": "C:\\Users\\Matt\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\Server\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Matt\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

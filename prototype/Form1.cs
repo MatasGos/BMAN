@@ -31,6 +31,7 @@ namespace prototype
         public const int playerSize = 15;
         public static readonly int[] background = { 98, 65, 8 };
         Bitmap playerPicture = new Bitmap("p1.png");
+        List<PlayerSimple> playersSimple;
 
         public Form1()
         {
@@ -52,8 +53,8 @@ namespace prototype
             {
                 richTextBox1.AppendText(username + ": " + message + "\n");
             });
+            playersSimple = new List<PlayerSimple>();
 
-            List<PlayerSimple> playersSimple = new List<PlayerSimple>();
             //Game has started info of players sent
             connection.On<List<string>>("InitializePlayers", (players) =>
             {
@@ -81,6 +82,7 @@ namespace prototype
                     richTextBox1.AppendText(p.username + "  " + p.id + "  " + p.x + "  " + p.y + "\n");
                 }*/
                 pictureBox1.Image = DrawPlayersSimple(game, playersSimple);
+                label1.Text = "bbbbb";
             });
 
             game = new Game();
@@ -169,7 +171,8 @@ namespace prototype
         private void update_Map_Slow()
         {
             Bitmap back = game.getGame();
-            pictureBox1.Image = back;
+            //pictureBox1.Image = back;
+            label1.Text = "aaaaa";
             
         }
 
@@ -232,6 +235,11 @@ namespace prototype
             }
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             
@@ -260,6 +268,7 @@ namespace prototype
             checkButtonClicks();
             timePlayed++;
             update_Map_Slow();
+            label2.Text = playersSimple.Count().ToString();
             if (clientId != 404)
             {
             }
