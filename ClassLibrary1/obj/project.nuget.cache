@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "liVbrS+qGR+1CrBseVFWwaV4plA5dKvHDewlH90Ij/NTrhiRbALdnkDm+H0RGLqLB18RIWrWcMaPsQNyKcnzsw==",
+  "dgSpecHash": "KJFGhI/xLkmOsZd9RI8Yw8MKCgzqoTQudjVRrDBgLnxxtCSTSnbT5I6enSLgK2VChqjjI4StkXUsXksAnstZWg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj",
+  "projectFilePath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Matt\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\Matt\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
   ],
   "logs": []
 }

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace prototype.Classes
 {
-    class Game
+    public class Game
     {
         private Bitmap background, bombPic, wallPic;
         private LinkedList<Bomb> bombs;
@@ -30,6 +30,7 @@ namespace prototype.Classes
             this.bombPic = new Bitmap("bomb.jpg");
             this.wallPic = new Bitmap("wall.png");
         }
+
         public Bitmap getMap()
         {
             RectangleF cloneRect = new RectangleF(0, 0, 25 * xsize + xsize * 2, 25 * ysize + ysize * 2);

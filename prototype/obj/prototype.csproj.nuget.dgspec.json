@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\prototype\\prototype.csproj": {}
+    "C:\\Users\\User\\Desktop\\Bomberman-prototype\\prototype\\prototype.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj": {
+    "C:\\Users\\User\\Desktop\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj",
         "projectName": "ClassLibrary1",
-        "projectPath": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj",
-        "packagesPath": "C:\\Users\\Matt\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\ClassLibrary1\\obj\\",
+        "projectPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\ClassLibrary1\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Matt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -59,17 +62,20 @@
         }
       }
     },
-    "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\prototype\\prototype.csproj": {
+    "C:\\Users\\User\\Desktop\\Bomberman-prototype\\prototype\\prototype.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\prototype\\prototype.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\prototype\\prototype.csproj",
         "projectName": "prototype",
-        "projectPath": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\prototype\\prototype.csproj",
-        "packagesPath": "C:\\Users\\Matt\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\prototype\\obj\\",
+        "projectPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\prototype\\prototype.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\prototype\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Matt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -82,8 +88,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj": {
-                "projectPath": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj"
+              "C:\\Users\\User\\Desktop\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj"
               }
             }
           }

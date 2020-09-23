@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using System.Windows.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
+using System.Threading;
 
 namespace prototype
 {
@@ -18,30 +19,117 @@ namespace prototype
     {
         HubConnection connection;
         const int xsize = 20;
-        public const int playerSize = 15;
         const int ysize = 20;
-        private int clientId;
-        private int timePlayed;
-        public static readonly int[] background = { 98, 65, 8 };
-        private bool _keyTop, _keyLeft, _keyRight, _keyBot, _keyBomb;
         private Game game;
+
+        private string username;
+        private int clientId;
+        private int timePlayed = 0;
+        private bool _keyTop, _keyLeft, _keyRight, _keyBot, _keyBomb;
+
         public int startspeed = 1;
+        public const int playerSize = 15;
+        public static readonly int[] background = { 98, 65, 8 };
+        Bitmap playerPicture = new Bitmap("p1.png");
+
         public Form1()
         {
+            //FORM SHIT
             InitializeComponent();
+
             connection = new HubConnectionBuilder().WithUrl("http://localhost:5000/gamehub").Build();
-            connection.On<int, string>("ReceiveMessage", (user, message) =>
+
+            //RECEIVING MESSAGES
+
+            //Someone has logged in
+            connection.On<string>("LoggedinMessage", (username) =>
             {
-                richTextBox1.Text = richTextBox1.Text + user + ": " + message + "\n";
+                richTextBox1.AppendText(username + " has logged in\n", Color.Green);
             });
+
+            //Someone sent a message
+            connection.On<string, string>("ReceiveMessage", (username, message) =>
+            {
+                richTextBox1.AppendText(username + ": " + message + "\n");
+            });
+
+            List<PlayerSimple> playersSimple = new List<PlayerSimple>();
+            //Game has started info of players sent
+            connection.On<List<string>>("InitializePlayers", (players) =>
+            {
+                playersSimple.Clear();
+                PlayerSimple ps = new PlayerSimple();
+                foreach (var player in players)
+                {
+                    string[] playerInfo = player.Split('|');
+                    /*
+                    foreach (var item in playerInfo)
+                    {
+                        richTextBox1.AppendText(item + "\n");
+                    }
+                    richTextBox1.AppendText("\n");*/
+                    ps.username = playerInfo[0];
+                    ps.id = playerInfo[1];
+                    ps.x = int.Parse(playerInfo[2]);
+                    ps.y = int.Parse(playerInfo[3]);
+                    playersSimple.Add(ps);
+                }
+                richTextBox1.AppendText(playersSimple.Count + "\n");
+                /*
+                foreach (var p in playersSimple)
+                {
+                    richTextBox1.AppendText(p.username + "  " + p.id + "  " + p.x + "  " + p.y + "\n");
+                }*/
+                pictureBox1.Image = DrawPlayersSimple(game, playersSimple);
+            });
+
             game = new Game();
             initialiseValues();
-            pictureBox1.Image = game.getGame();
+            //pictureBox1.Image = game.getGame();
+            //pictureBox1.Image = DrawPlayersSimple(game, playersSimple);
         }
+
+        public class PlayerSimple 
+        {
+            public string username;
+            public string id;
+            public int x, y;
+
+            public PlayerSimple()
+            {
+            }
+
+            public PlayerSimple(string username, string id, int x, int y)
+            {
+                this.username = username;
+                this.id = id;
+                this.x = x;
+                this.y = y;
+            }
+        }
+
+        public Bitmap DrawPlayersSimple(Game game, List<PlayerSimple> players)
+        {
+            Bitmap newMap = game.getMap();
+            PlayerSimple[] simplePlayers = players.ToArray();
+            for (int i = 0; i < players.Count; i++)
+            {
+                PlayerSimple player = simplePlayers[i];
+                int[] xy = new int[] { player.x, player.y };
+                for (int x = 0; x < playerSize; x++)
+                {
+                    for (int y = 0; y < playerSize; y++)
+                    {
+                        newMap.SetPixel(x + xy[0], y + xy[1], playerPicture.GetPixel(x, y));
+                    }
+                }
+            }
+            return newMap;
+        }
+
         public void initialiseValues()
         {
             clientId = 404;
-            timePlayed = 0;
             _keyTop = false;
             _keyBot = false;
             _keyLeft = false;
@@ -52,6 +140,17 @@ namespace prototype
         private async void button1_Click(object sender, EventArgs e)
         {
             try
+            {
+                await connection.StartAsync();
+                username = textBox1.Text;
+                await connection.InvokeAsync("LoginMessage", username);
+                richTextBox1.AppendText("Connected to the server\n", Color.Green);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("There was an error.");
+            }
+            /*try
             {
                 clientId = game.join(textBox1.Text);
                 label1.Text = clientId.ToString();
@@ -65,12 +164,12 @@ namespace prototype
             catch (ArgumentException)
             {
                 MessageBox.Show("There was an error." );
-            }
+            }*/
         }
         private void update_Map_Slow()
         {
             Bitmap back = game.getGame();
-            pictureBox2.Image = back;
+            pictureBox1.Image = back;
             
         }
 
@@ -112,6 +211,19 @@ namespace prototype
             try
             {
                 await connection.InvokeAsync("SendMessage", clientId, textBox2.Text);
+            }
+            catch (Exception ex)
+            {
+
+                richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
+            }
+        }
+
+        private async void button3_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                await connection.InvokeAsync("StartMessage");
             }
             catch (Exception ex)
             {
@@ -229,6 +341,20 @@ namespace prototype
             }
         }
 
+    }
+
+    public static class RichTextBoxExtension
+    {
+        //For colored text
+        public static void AppendText(this RichTextBox box, string text, Color color)
+        {
+            box.SelectionStart = box.TextLength;
+            box.SelectionLength = 0;
+
+            box.SelectionColor = color;
+            box.AppendText(text);
+            box.SelectionColor = box.ForeColor;
+        }
     }
 
 }
