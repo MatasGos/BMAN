@@ -1,0 +1,39 @@
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.csprojAssemblyReference.cache
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.AssemblyInfoInputs.cache
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.AssemblyInfo.cs
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.csproj.CoreCompileInputs.cache
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.RazorAssemblyInfo.cache
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.RazorAssemblyInfo.cs
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\Server Side.exe
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\Server Side.deps.json
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\Server Side.runtimeconfig.json
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\Server Side.runtimeconfig.dev.json
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\Server Side.dll
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\Server Side.pdb
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\Server Side.Views.dll
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\Server Side.Views.pdb
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.TagHelpers.input.cache
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.TagHelpers.output.cache
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.RazorCoreGenerate.cache
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Razor\Pages\Index.cshtml.g.cs
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Razor\Pages\Privacy.cshtml.g.cs
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_Layout.cshtml.g.cs
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Razor\Pages\_ViewStart.cshtml.g.cs
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.RazorTargetAssemblyInfo.cache
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.RazorTargetAssemblyInfo.cs
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.Views.pdb
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\staticwebassets\Server Side.StaticWebAssets.Manifest.cache
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\staticwebassets\Server Side.StaticWebAssets.xml
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.dll
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.pdb
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.genruntimeconfig.cache
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.csproj.CopyComplete
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\ClassLibrary1.dll
+C:\Users\Matt\Desktop\github\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\ClassLibrary1.pdb

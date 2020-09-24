@@ -13,39 +13,24 @@ namespace prototype.Classes
         private int xsize, ysize;
         private Player[] players;
         private int playerCount;
-        private int defaultSpeed = 1;
-        private int clientCount;
-        private int playerLimit = 4;
         private LinkedList<Bomb> bombs;
         private Wall[] walls;
         private int wallCount;
         private int playerSize = 15;
-        public Map(int xsize, int ysize, int[] color)
+        public Map(int xsize, int ysize, int[] color, int wallCount)
         {
             this.xsize = xsize;
             this.ysize = ysize;
-            drawMap(color);
-            this.clientCount = 0;
+            drawMap(color, wallCount);
         }
-        public void drawMap(int[] color)
+        public void drawMap(int[] color, int wallCount)
         {
 
-            this.wallCount = 0;
+            this.wallCount = wallCount;
             plantWalls(wallCount);
             playerCount = 0;
             players = new Player[10];
             bombs = new LinkedList<Bomb>();
-        }
-        public void addPlayer(string name)
-        {
-            if (playerCount < playerLimit)
-            {
-                players[playerCount] = new Player(playerCount + 1, defaultSpeed, new int[] { this.xsize, this.ysize }, name);
-                this.playerCount = playerCount + 1;
-            }
-            else
-            {
-            }
         }
 
         public int[] getTile(int x, int y)
@@ -65,15 +50,20 @@ namespace prototype.Classes
         {
             return playerCount;
         }
-        public int join(string name)
+
+        public List<Player> Move(string id, int px, int py, List<Player> playerList)
         {
-            this.addPlayer(name);
-            return ++clientCount;
-        }
-        public string Move(int id, int px, int py)
-        {
-            int[] xy = players[id - 1].getPos();
-            int step = players[id - 1].getSpeed();
+            Player temp = new Player(id, -1, -1);
+            int[] xy = new int[2];
+            int step = 0;
+            foreach (Player player in playerList)
+            {
+                if (player.getId() == id)
+                {
+                    xy = player.getPos();
+                    step = player.getSpeed();
+                }
+            }
             int[] center = getCenterPlayer(xy);
             int x = center[0] + px * playerSize / 2;
             int y = center[1] + py * playerSize / 2;
@@ -90,14 +80,25 @@ namespace prototype.Classes
             }
             if (!isOccupied(center) && isOccupiedSquared(edges))
             {
-                players[id - 1].move(px, py);
+                foreach (Player player in playerList)
+                {
+                    if (player.getId() == id)
+                    {
+                        player.move(px, py);
+                    }
+                }
             }
             else if (!isOccupied(new int[] { x, y }) && isOccupiedSquared(edges1))
             {
-                players[id - 1].move1(px, py);
+                foreach (Player player in playerList)
+                {
+                    if (player.getId() == id)
+                    {
+                        player.move1(px, py);
+                    }
+                }
             }
-            string ret = edges[0, 0] + "-" + edges[0, 1] + "|||" + edges[1, 0] + "-" + edges[1, 1] + "|||" + edges[2, 0] + "-" + edges[2, 1] + "|||" + edges[3, 0] + "-" + edges[3, 1];
-            return ret;
+            return playerList;
         }
         public bool isOccupiedSquared(int[,] edges)
         {

@@ -31,11 +31,12 @@ namespace prototype
         public const int playerSize = 15;
         public static readonly int[] background = { 98, 65, 8 };
         Bitmap playerPicture = new Bitmap("p1.png");
-        List<PlayerSimple> playersSimple;
+
 
         public Form1()
         {
-            //FORM SHIT
+            int count = 0;
+            //FORM 
             InitializeComponent();
 
             connection = new HubConnectionBuilder().WithUrl("http://localhost:5000/gamehub").Build();
@@ -43,91 +44,43 @@ namespace prototype
             //RECEIVING MESSAGES
 
             //Someone has logged in
-            connection.On<string>("LoggedinMessage", (username) =>
+            /*            connection.On<string>("LoggedinMessage", (username) =>
+                        {
+
+                            richTextBox1.AppendText(username + " has logged in\n", Color.Green);
+                        });*/
+            connection.On<string, Map>("LoggedinMessage", (username, map) =>
             {
                 richTextBox1.AppendText(username + " has logged in\n", Color.Green);
             });
+
+            connection.On<Map>("ReceiveMap", (map) =>
+            {
+                richTextBox1.AppendText("mapas kraunamas");
+                game.setMap(map);
+                richTextBox1.AppendText("mapas pakrautas");
+            });
+
 
             //Someone sent a message
             connection.On<string, string>("ReceiveMessage", (username, message) =>
             {
                 richTextBox1.AppendText(username + ": " + message + "\n");
             });
-            playersSimple = new List<PlayerSimple>();
 
             //Game has started info of players sent
             connection.On<List<string>>("InitializePlayers", (players) =>
             {
-                playersSimple.Clear();
-                PlayerSimple ps = new PlayerSimple();
-                foreach (var player in players)
-                {
-                    string[] playerInfo = player.Split('|');
-                    /*
-                    foreach (var item in playerInfo)
-                    {
-                        richTextBox1.AppendText(item + "\n");
-                    }
-                    richTextBox1.AppendText("\n");*/
-                    ps.username = playerInfo[0];
-                    ps.id = playerInfo[1];
-                    ps.x = int.Parse(playerInfo[2]);
-                    ps.y = int.Parse(playerInfo[3]);
-                    playersSimple.Add(ps);
-                }
-                richTextBox1.AppendText(playersSimple.Count + "\n");
-                /*
-                foreach (var p in playersSimple)
-                {
-                    richTextBox1.AppendText(p.username + "  " + p.id + "  " + p.x + "  " + p.y + "\n");
-                }*/
-                pictureBox1.Image = DrawPlayersSimple(game, playersSimple);
-                label1.Text = "bbbbb";
+                game.update(players);
+                label1.Text = count++.ToString();
+                checkButtonClicksSERVER();
             });
 
             game = new Game();
             initialiseValues();
-            //pictureBox1.Image = game.getGame();
-            //pictureBox1.Image = DrawPlayersSimple(game, playersSimple);
         }
 
-        public class PlayerSimple 
-        {
-            public string username;
-            public string id;
-            public int x, y;
 
-            public PlayerSimple()
-            {
-            }
-
-            public PlayerSimple(string username, string id, int x, int y)
-            {
-                this.username = username;
-                this.id = id;
-                this.x = x;
-                this.y = y;
-            }
-        }
-
-        public Bitmap DrawPlayersSimple(Game game, List<PlayerSimple> players)
-        {
-            Bitmap newMap = game.getMap();
-            PlayerSimple[] simplePlayers = players.ToArray();
-            for (int i = 0; i < players.Count; i++)
-            {
-                PlayerSimple player = simplePlayers[i];
-                int[] xy = new int[] { player.x, player.y };
-                for (int x = 0; x < playerSize; x++)
-                {
-                    for (int y = 0; y < playerSize; y++)
-                    {
-                        newMap.SetPixel(x + xy[0], y + xy[1], playerPicture.GetPixel(x, y));
-                    }
-                }
-            }
-            return newMap;
-        }
 
         public void initialiseValues()
         {
@@ -150,30 +103,15 @@ namespace prototype
             }
             catch (Exception ex)
             {
-                MessageBox.Show("There was an error.");
+                MessageBox.Show("There was an error."+ex.ToString());
             }
-            /*try
-            {
-                clientId = game.join(textBox1.Text);
-                label1.Text = clientId.ToString();
-
-                pictureBox1.Image = game.getGame();
-
-                richTextBox1.Text = richTextBox1.Text + "Connecting..." + "\n";
-                await connection.StartAsync();
-                richTextBox1.Text = richTextBox1.Text + "Connected to the server" + "\n";
-            }
-            catch (ArgumentException)
-            {
-                MessageBox.Show("There was an error." );
-            }*/
         }
         private void update_Map_Slow()
         {
             Bitmap back = game.getGame();
-            //pictureBox1.Image = back;
-            label1.Text = "aaaaa";
-            
+            //richTextBox1.AppendText(game.getCount().ToString());
+            pictureBox1.Image = back;
+            label1.Text = new Player("aaaa", 10,10).getString();            
         }
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
@@ -226,6 +164,7 @@ namespace prototype
         {
             try
             {
+                label2.Text = game.uploadGame();
                 await connection.InvokeAsync("StartMessage");
             }
             catch (Exception ex)
@@ -265,24 +204,19 @@ namespace prototype
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            checkButtonClicks();
+            //checkButtonClicks();
             timePlayed++;
             update_Map_Slow();
-            label2.Text = playersSimple.Count().ToString();
-            if (clientId != 404)
-            {
-            }
         }
-        private async void checkButtonClicks()
+
+        private async void checkButtonClicksSERVER()
         {
-            if (clientId != 404)
-            {
-                if (_keyTop) 
+           
+                if (_keyTop)
                 {
-                    label1.Text = game.Move(clientId, 0, -1);
                     try
                     {
-                        await connection.InvokeAsync("Move", clientId, 0, -1);
+                        await connection.InvokeAsync("Move", 0, -1);
                     }
                     catch (Exception ex)
                     {
@@ -290,57 +224,55 @@ namespace prototype
                         richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
                     }
                 }
-                if (_keyLeft) 
+                if (_keyLeft)
                 {
                     try
                     {
-                        await connection.InvokeAsync("Move", clientId, -1, 0);
+                        await connection.InvokeAsync("Move", -1, 0);
                     }
                     catch (Exception ex)
                     {
 
                         richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
                     }
-                    game.Move(clientId, -1, 0);
                 }
-                if (_keyBot) 
+                if (_keyBot)
                 {
+                    richTextBox1.AppendText("downnnn");
                     try
                     {
-                        await connection.InvokeAsync("Move", clientId, 0, 1);
+                        await connection.InvokeAsync("Move", 0, 1);
                     }
                     catch (Exception ex)
                     {
 
                         richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
                     }
-                    game.Move(clientId, 0, 1);
                 }
-                if (_keyRight) 
+                if (_keyRight)
                 {
                     try
                     {
-                        await connection.InvokeAsync("Move", clientId, 1, 0);
+                        await connection.InvokeAsync("Move", 1, 0);
                     }
                     catch (Exception ex)
                     {
 
                         richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
                     }
-                    game.Move(clientId, 1, 0);
                 }
                 if (_keyBomb)
                 {
                     _keyBomb = false;
                     game.addBomb(clientId);
                 }
-            }
+            
         }
-
         private async void button3_Click(object sender, EventArgs e)
         {
             try
             {
+                label2.Text =game.uploadGame();
                 await connection.InvokeAsync("SendMessage", clientId, textBox1.Text);
             }
             catch (Exception ex)

@@ -114,7 +114,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(918, 470);
+            this.button2.Location = new System.Drawing.Point(919, 473);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 9;
@@ -127,7 +127,7 @@
             this.button3.Location = new System.Drawing.Point(564, 89);
             this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(82, 22);
+            this.button3.Size = new System.Drawing.Size(93, 29);
             this.button3.TabIndex = 10;
             this.button3.Text = "Start game";
             this.button3.UseVisualStyleBackColor = true;

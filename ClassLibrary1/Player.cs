@@ -12,49 +12,55 @@ namespace prototype.Classes
         private int speed;
         private int lives;
         private int bombTimer, bombStrength;
-        //private Bitmap picture;
-        private string name;
-
-        public Player(int id, int speed, int[] xysize, string name)
+        private string id;
+        private string username;
+        public Player(string _id, int x, int y)
         {
-            switch (id)
+            this.username = _id;
+            this.id = _id;
+            this.x = x;
+            this.y = y;
+        }
+        public Player(int no, int speed, int[] xysize, string name, string id)
+        {
+            switch (no)
             {
                 case 1:
-                    this.name = name;
+                    this.id = id;
+                    this.username = name;
                     this.x = 27;
                     this.y = 27;
                     this.speed = speed;
-                    //this.picture = new Bitmap("p1.png");
                     this.lives = 5;
                     this.bombTimer = 200;
                     this.bombStrength = 2;
                     break;
                 case 2:
-                    this.name = name;
+                    this.id = id;
+                    this.username = name;
                     this.x = 25 * xysize[0] + xysize[0] * 2-25-27;
                     this.y = 27;
                     this.speed = speed;
-                    //this.picture = new Bitmap("p1.png");
                     this.lives = 5;
                     this.bombTimer = 200;
                     this.bombStrength = 2;
                     break;
                 case 3:
-                    this.name = name;
+                    this.id = id;
+                    this.username = name;
                     this.x = 27;
                     this.y = 25 * xysize[1] + xysize[1] * 2 - 25 - 27;
                     this.speed = speed;
-                    //this.picture = new Bitmap("p1.png");
                     this.lives = 5;
                     this.bombTimer = 200;
                     this.bombStrength = 2;
                     break;
                 case 4:
-                    this.name = name;
+                    this.id = id;
+                    this.username = name;
                     this.x = 25 * xysize[0] + xysize[0] * 2 - 25 - 27;
                     this.y = 25 * xysize[1] + xysize[1] * 2 - 25 - 27;
                     this.speed = speed;
-                    //this.picture = new Bitmap("p1.png");
                     this.lives = 5;
                     this.bombTimer = 200;
                     this.bombStrength = 2;
@@ -77,10 +83,6 @@ namespace prototype.Classes
             this.x += x;
             this.y += y;
         }
-/*        public Color getPixel(int x,int y)
-        {
-            return picture.GetPixel(x, y);
-        }*/
         public void reset()
         {
             this.x = 0;
@@ -97,6 +99,30 @@ namespace prototype.Classes
         public int getSpeed()
         {
             return speed;
+        }
+        public string getString()
+        {
+            return this.id + "+" + this.x + "+" + this.y;
+        }
+        public override bool Equals(object obj)
+        {
+            var item = obj as Player;
+
+            if (item == null)
+            {
+                return false;
+            }
+
+            return this.id.Equals(item.id);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.id.GetHashCode();
+        }
+        public string getId()
+        {
+            return this.id;
         }
 
     }
