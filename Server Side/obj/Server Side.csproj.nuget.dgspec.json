@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\Server Side\\Server Side.csproj": {}
+    "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\Server Side\\Server Side.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj": {
+    "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj",
+        "projectUniqueName": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj",
         "projectName": "ClassLibrary1",
-        "projectPath": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj",
-        "packagesPath": "C:\\Users\\Matt\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\ClassLibrary1\\obj\\",
+        "projectPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj",
+        "packagesPath": "C:\\Users\\matgos\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\ClassLibrary1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Matt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\matgos\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -59,17 +59,17 @@
         }
       }
     },
-    "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\Server Side\\Server Side.csproj": {
+    "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\Server Side\\Server Side.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\Server Side\\Server Side.csproj",
+        "projectUniqueName": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\Server Side\\Server Side.csproj",
         "projectName": "Server Side",
-        "projectPath": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\Server Side\\Server Side.csproj",
-        "packagesPath": "C:\\Users\\Matt\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\Server Side\\obj\\",
+        "projectPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\Server Side\\Server Side.csproj",
+        "packagesPath": "C:\\Users\\matgos\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\Server Side\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Matt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\matgos\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -82,8 +82,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj": {
-                "projectPath": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj"
+              "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj": {
+                "projectPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj"
               }
             }
           }

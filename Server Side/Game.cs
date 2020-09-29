@@ -58,15 +58,9 @@ namespace Server
 
             //SEND A LIST OF STRINGS THAT CONTAIN PLAYER INITIAL INFORMATION
             context.All.SendAsync("InitializePlayers", playerInfo);
-            foreach (var item in playerInfo)
-            {
-                //Console.WriteLine(item);
-            }
 
-            Console.WriteLine();
+            //Console.WriteLine();
 
-            //Random xd = new Random();
-            //context.All.SendAsync("ReceiveMessage", "Server", xd.Next(0, 1000000).ToString());
         }
     }
 }

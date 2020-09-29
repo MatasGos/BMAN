@@ -11,7 +11,6 @@ namespace prototype.Classes
     public class Map
     {
         private int xsize, ysize;
-        private Player[] players;
         private int playerCount;
         private LinkedList<Bomb> bombs;
         private Wall[] walls;
@@ -29,7 +28,6 @@ namespace prototype.Classes
             this.wallCount = wallCount;
             plantWalls(wallCount);
             playerCount = 0;
-            players = new Player[10];
             bombs = new LinkedList<Bomb>();
         }
 
@@ -42,15 +40,6 @@ namespace prototype.Classes
 
             return result;
         }
-        public Player[] getPlayers()
-        {
-            return players;
-        }
-        public int getPlayerCount()
-        {
-            return playerCount;
-        }
-
         public List<Player> Move(string id, int px, int py, List<Player> playerList)
         {
             Player temp = new Player(id, -1, -1);
@@ -111,15 +100,6 @@ namespace prototype.Classes
             }
             return true;
         }
-        public int[] test(int id, int px, int py)
-        {
-            int[] xy = players[id - 1].getPos();
-            int step = players[id - 1].getSpeed();
-            int[] center = getCenterPlayer(xy);
-            center[0] += px * step;
-            center[1] += py * step;
-            return center;
-        }
         public bool isOccupied(int[] xy)
         {
             int[] topLeft = getTile(xy[0], xy[1]);
@@ -163,11 +143,12 @@ namespace prototype.Classes
             result[1] = xy[1] + playerSize / 2;
             return result;    
         }
-        public void addBomb(int playerId)
+        //not working
+        public void addBomb(string playerId)
         {
-           // int[] playerpos = players[playerId - 1].getPos();
+           /*// int[] playerpos = players[playerId - 1].getPos();
             int [] playerpos = getCenterPlayer(players[playerId - 1].getPos());
-            bombs.AddFirst(new Bomb(players[playerId-1], this.getTile(playerpos[0], playerpos[1])));
+            bombs.AddFirst(new Bomb(players[playerId-1], this.getTile(playerpos[0], playerpos[1])));*/
         }
         private void plantWalls(int wallCount)
         {

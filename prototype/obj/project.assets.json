@@ -587,19 +587,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Matt\\.nuget\\packages\\": {}
+    "C:\\Users\\matgos\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\prototype\\prototype.csproj",
+      "projectUniqueName": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\prototype\\prototype.csproj",
       "projectName": "prototype",
-      "projectPath": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\prototype\\prototype.csproj",
-      "packagesPath": "C:\\Users\\Matt\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\prototype\\obj\\",
+      "projectPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\prototype\\prototype.csproj",
+      "packagesPath": "C:\\Users\\matgos\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\prototype\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Matt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\matgos\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -612,8 +612,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj": {
-              "projectPath": "C:\\Users\\Matt\\Desktop\\github\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj"
+            "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj": {
+              "projectPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj"
             }
           }
         }

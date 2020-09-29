@@ -30,34 +30,35 @@ namespace prototype.Classes
             this.bombPic = new Bitmap("bomb.jpg");
             this.wallPic = new Bitmap("wall.png");
         }
+        // Pakeicia zemelapi
         public void setMap(Map map)
         {
             this.map = map;
         }
-        public string uploadGame()
+        // Atnaujina zemelapi pagal turima player, wall sarasa
+        public void uploadGame()
         {
             makeMap();
-            return map.getWallsCount().ToString();
         }
+        // Nuklonuoja Zemelapi su jo sienomis
         public Bitmap getMap()
         {
             RectangleF cloneRect = new RectangleF(0, 0, 25 * xsize + xsize * 2, 25 * ysize + ysize * 2);
             System.Drawing.Imaging.PixelFormat format = background.PixelFormat;
             return background.Clone(cloneRect, format);
         }
+        // Atnaujina players, bombs ir boxes sarasa
         public void update(List<string> playersUpdated)
         {
             this.players.Clear();
             foreach (string pp in playersUpdated)
             {
                 string[] playerInfo = pp.Split('+');
-                //return (player);
                 Player temp = new Player(playerInfo[0], Int32.Parse(playerInfo[1]), Int32.Parse(playerInfo[2]));
                 this.players.AddFirst(temp);
-                //return temp;
             }
         }
-
+        // zemelapio atnaujinimas
         public void makeMap()
         {
             this.background = new Bitmap(25 * xsize + xsize * 2, 25 * ysize + ysize * 2);
@@ -102,11 +103,11 @@ namespace prototype.Classes
                 }
             }
         }
+        // Ant zemelapio su walls, nupiesia players, bombs ir t.t., ir ji grazina
         public Bitmap getGame()
         {
             bombs = map.getBombs();
             Bitmap newMap = getMap();
-            Player[] players = map.getPlayers();
             foreach (Player player in this.players)
             {
                 int[] xy = player.getPos();
@@ -168,10 +169,11 @@ namespace prototype.Classes
             }
             return newMap;
         }
-        public void addBomb(int playerId)
+        public void addBomb(string playerId)
         {
             map.addBomb(playerId);
         }
+        // testavimui. Dont delete pls.
         public Player getPlayer(int id)
         {
             foreach (Player player in players)
@@ -180,6 +182,7 @@ namespace prototype.Classes
             }
             return null;
         }
+        // Zaideju nuotrauku pakrovimo placeholderis
         private void getPlayerPics()
         {
             this.playerPictures = new Bitmap[4];
@@ -188,6 +191,5 @@ namespace prototype.Classes
                 this.playerPictures[i] = new Bitmap("p1.png");
             }
         }
-        public int getCount() { return players.Count; }
     }
 }

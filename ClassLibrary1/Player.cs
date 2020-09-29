@@ -83,11 +83,6 @@ namespace prototype.Classes
             this.x += x;
             this.y += y;
         }
-        public void reset()
-        {
-            this.x = 0;
-            this.y = 0;
-        }
         public int getPower()
         {
             return bombStrength;
@@ -103,22 +98,6 @@ namespace prototype.Classes
         public string getString()
         {
             return this.id + "+" + this.x + "+" + this.y;
-        }
-        public override bool Equals(object obj)
-        {
-            var item = obj as Player;
-
-            if (item == null)
-            {
-                return false;
-            }
-
-            return this.id.Equals(item.id);
-        }
-
-        public override int GetHashCode()
-        {
-            return this.id.GetHashCode();
         }
         public string getId()
         {

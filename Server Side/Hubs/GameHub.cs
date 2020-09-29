@@ -22,7 +22,6 @@ namespace Server.Hubs
         }
         public async Task Move(int x, int y)
         {
-            Console.WriteLine(x + " " + y);
             Server.MovePlayer(Context.ConnectionId, x , y);
         }
 
@@ -37,7 +36,7 @@ namespace Server.Hubs
             Console.WriteLine(username + " has logged in.");
             Console.ResetColor();
 
-            await Clients.Others.SendAsync("LoggedinMessage", username, Server.map);
+            await Clients.Others.SendAsync("LoggedinMessage", username);
         }
 
         //Sends a message to start the game to everyone after someone presses the start button

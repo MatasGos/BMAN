@@ -18,19 +18,11 @@ namespace prototype
     public partial class Form1 : Form
     {
         HubConnection connection;
-        const int xsize = 20;
-        const int ysize = 20;
         private Game game;
 
         private string username;
-        private int clientId;
-        private int timePlayed = 0;
+        private int clientId; // sito gali but kad nereikia, bet bijau trint
         private bool _keyTop, _keyLeft, _keyRight, _keyBot, _keyBomb;
-
-        public int startspeed = 1;
-        public const int playerSize = 15;
-        public static readonly int[] background = { 98, 65, 8 };
-        Bitmap playerPicture = new Bitmap("p1.png");
 
 
         public Form1()
@@ -44,16 +36,13 @@ namespace prototype
             //RECEIVING MESSAGES
 
             //Someone has logged in
-            /*            connection.On<string>("LoggedinMessage", (username) =>
-                        {
-
-                            richTextBox1.AppendText(username + " has logged in\n", Color.Green);
-                        });*/
-            connection.On<string, Map>("LoggedinMessage", (username, map) =>
+            connection.On<string>("LoggedinMessage", (username) =>
             {
+
                 richTextBox1.AppendText(username + " has logged in\n", Color.Green);
             });
 
+            //Send map
             connection.On<Map>("ReceiveMap", (map) =>
             {
                 richTextBox1.AppendText("mapas kraunamas");
@@ -79,8 +68,6 @@ namespace prototype
             game = new Game();
             initialiseValues();
         }
-
-
 
         public void initialiseValues()
         {
@@ -109,7 +96,6 @@ namespace prototype
         private void update_Map_Slow()
         {
             Bitmap back = game.getGame();
-            //richTextBox1.AppendText(game.getCount().ToString());
             pictureBox1.Image = back;
             label1.Text = new Player("aaaa", 10,10).getString();            
         }
@@ -155,7 +141,6 @@ namespace prototype
             }
             catch (Exception ex)
             {
-
                 richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
             }
         }
@@ -164,7 +149,7 @@ namespace prototype
         {
             try
             {
-                label2.Text = game.uploadGame();
+                game.uploadGame();
                 await connection.InvokeAsync("StartMessage");
             }
             catch (Exception ex)
@@ -181,8 +166,6 @@ namespace prototype
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            
-
             if (e.KeyCode == Keys.W)
             {
                 _keyTop = true;                        
@@ -204,8 +187,6 @@ namespace prototype
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //checkButtonClicks();
-            timePlayed++;
             update_Map_Slow();
         }
 
@@ -220,7 +201,6 @@ namespace prototype
                     }
                     catch (Exception ex)
                     {
-
                         richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
                     }
                 }
@@ -232,20 +212,17 @@ namespace prototype
                     }
                     catch (Exception ex)
                     {
-
                         richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
                     }
                 }
                 if (_keyBot)
                 {
-                    richTextBox1.AppendText("downnnn");
                     try
                     {
                         await connection.InvokeAsync("Move", 0, 1);
                     }
                     catch (Exception ex)
                     {
-
                         richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
                     }
                 }
@@ -257,14 +234,22 @@ namespace prototype
                     }
                     catch (Exception ex)
                     {
-
                         richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
                     }
                 }
                 if (_keyBomb)
                 {
                     _keyBomb = false;
-                    game.addBomb(clientId);
+                    //game.addBomb(clientId);
+                    /*try
+                    {
+                        await connection.InvokeAsync("Move", 1, 0);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
+                    }*/ // kazkas tokio turetu buti tik vietoj move place bomb or something idk lol
                 }
             
         }
@@ -272,7 +257,6 @@ namespace prototype
         {
             try
             {
-                label2.Text =game.uploadGame();
                 await connection.InvokeAsync("SendMessage", clientId, textBox1.Text);
             }
             catch (Exception ex)
