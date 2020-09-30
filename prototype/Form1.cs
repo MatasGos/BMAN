@@ -25,6 +25,11 @@ namespace prototype
         private string username;                                        //Player's chosen username
         private bool _keyTop, _keyLeft, _keyRight, _keyBot, _keyBomb;   //Booleans to see if the key was pressed at a specific time frame
 
+        JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.All
+        };
+
         public Form1()
         {
             // FORM AND DATA INITIALIZATION
@@ -48,25 +53,12 @@ namespace prototype
             });
 
             //Game has started info of players sent
-            connection.On<string, string>("SendData", (players, map) =>
+            connection.On<string, string>("SendData", (jsonPlayers, jsonMap) =>
             {
-
-            });
-
-            //TODO: GAME LOGIC
-            //Game has started info of players sent
-            connection.On<List<string>>("InitializePlayers", (players) =>
-            {
-                //game.update(players);
-                checkButtonClicksSERVER();
-            });
-
-            //Receive the map
-            connection.On<Map>("ReceiveMap", (map) =>
-            {
-                richTextBox1.AppendText("mapas kraunamas");
-                //game.setMap(map);
-                richTextBox1.AppendText("mapas pakrautas");
+                game.players = JsonConvert.DeserializeObject<List<Player>>(jsonPlayers, settings);
+                game.map = JsonConvert.DeserializeObject<Map>(jsonMap, settings);
+                game.drawMap();
+                //pictureBox1.Image = game.background;
             });
         }
 
@@ -135,9 +127,7 @@ namespace prototype
 
         private void update_Map_Slow()
         {
-            //Bitmap back = game.getGame();
-            Bitmap back = game.getMap();
-            pictureBox1.Image = back;          
+            pictureBox1.Image = game.background;          
         }
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)

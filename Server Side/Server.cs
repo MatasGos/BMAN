@@ -15,7 +15,7 @@ namespace Server
     {
         public static List<Player> playerList = new List<Player>();    
         public static IHubCallerClients context;
-        public static Game game;
+        public static GameServer game;
 
         public static void AddPlayer(string id, string username)
         {
@@ -29,7 +29,7 @@ namespace Server
 
         public static void StartGame()
         {
-            game = new Game(context);
+            game = new GameServer(context);
             Thread gameLoop = new Thread(new ThreadStart(game.GameLoop));
             gameLoop.Start();
         }

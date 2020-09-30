@@ -22,5 +22,10 @@ namespace Model
             this.y = 100;
             this.speed = 3;
         }
+
+        public int[] getPos()
+        {
+            return new int[] { this.x, this.y };
+        }
     }
 }

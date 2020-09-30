@@ -86,9 +86,6 @@ C:\Users\User\Desktop\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\Se
 C:\Users\User\Desktop\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\Server Side.dll
 C:\Users\User\Desktop\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\Server Side.pdb
 C:\Users\User\Desktop\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\Server Side.Views.dll
-C:\Users\User\Desktop\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\Server Side.Views.pdb
-C:\Users\User\Desktop\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\ClassLibrary1.dll
-C:\Users\User\Desktop\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\ClassLibrary1.pdb
 C:\Users\User\Desktop\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.csprojAssemblyReference.cache
 C:\Users\User\Desktop\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.AssemblyInfoInputs.cache
 C:\Users\User\Desktop\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.AssemblyInfo.cs
@@ -102,3 +99,5 @@ C:\Users\User\Desktop\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Se
 C:\Users\User\Desktop\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.pdb
 C:\Users\User\Desktop\Bomberman-prototype\Server Side\obj\Debug\netcoreapp3.1\Server Side.genruntimeconfig.cache
 C:\Users\User\Desktop\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\Model.dll
+C:\Users\User\Desktop\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\User\Desktop\Bomberman-prototype\Server Side\bin\Debug\netcoreapp3.1\Model.pdb

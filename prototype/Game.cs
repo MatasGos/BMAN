@@ -11,33 +11,27 @@ namespace prototype
 {
     public class Game
     {
-        const int xSize = 23;       //Number of blocks left to right
-        const int ySize = 19;       //Number of blocks top to bottom
-        const int playerSize = 15;  //Player size in pixels e.g. 15x15
+        public int xSize = 23;       //Number of blocks left to right
+        public int ySize = 19;       //Number of blocks top to bottom
+        public int playerSize = 15;  //Player size in pixels e.g. 15x15
 
-        private LinkedList<Player> players; //List of players with their stats
-        private Map map;                    //Map data
+        public List<Player> players; //List of players with their stats
+        public Map map;                    //Map data
 
-        private Bitmap background, wallPic;
+        public Bitmap background, wallPic, playerPic;
 
         public Game()
         {
-            this.players = new LinkedList<Player>();
+            this.players = new List<Player>();
             this.map = new Map(xSize, ySize);
-            JsonSerializerSettings settings = new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.All
-            };
-            string json = JsonConvert.SerializeObject(map, settings);
-            Debug.WriteLine(json);
-            Map map2 = JsonConvert.DeserializeObject<Map>(json, settings);
         }
 
         public void drawMap()
         {
-            Block[,] blocks = map.getMap();
-            this.background = new Bitmap(25 * xSize, 25 * ySize);
-            this.wallPic = new Bitmap("wall.png");
+            Block[,] blocks = map.getBlocks();
+            background = new Bitmap(25 * xSize, 25 * ySize);
+            wallPic = new Bitmap("wall.png");
+            playerPic = new Bitmap("p1.png");
 
             Color newColor = Color.Brown;
             for (int x = 0; x < background.Width; x++)
@@ -48,6 +42,7 @@ namespace prototype
                 }
             }
 
+            //Draw walls
             for (int i = 0; i < xSize; i++)
             {
                 for (int j = 0; j < ySize; j++)
@@ -61,6 +56,19 @@ namespace prototype
                                 background.SetPixel(i * 25 + x, j * 25 + y, wallPic.GetPixel(x, y));
                             }
                         }
+                    }
+                }
+            }
+
+            //Draw players
+            foreach (Player p in players)
+            {
+                int[] xy = p.getPos();
+                for (int x = 0; x < playerSize; x++)
+                {
+                    for (int y = 0; y < playerSize; y++)
+                    {
+                        background.SetPixel(x + xy[0], y + xy[1], playerPic.GetPixel(x, y));
                     }
                 }
             }

@@ -12,10 +12,11 @@ using Server.Hubs;
 
 namespace Server
 {
-    public class Game
+    public class GameServer
     {
         const int xSize = 23;       //Number of blocks left to right
         const int ySize = 19;       //Number of blocks top to bottom
+        Map map;
         bool isRunning = false;
 
         private IHubCallerClients context;
@@ -24,10 +25,11 @@ namespace Server
             TypeNameHandling = TypeNameHandling.All
         };
 
-        public Game(IHubCallerClients _context)
+        public GameServer(IHubCallerClients _context)
         {
             context = _context;
-            Map map = new Map(xSize, ySize);
+            map = new Map(xSize, ySize);
+            map.generateWalls();
         }
 
         public void GameLoop()
@@ -55,10 +57,9 @@ namespace Server
         }
         public void GameLogic()
         {
-            string json = JsonConvert.SerializeObject(map, settings);
-            Debug.WriteLine(json);
-            Map map2 = JsonConvert.DeserializeObject<Map>(json, settings);
-            context.All.SendAsync("SendData")
+            string jsonPlayers = JsonConvert.SerializeObject(Server.GetPlayers(), settings);
+            string jsonMap = JsonConvert.SerializeObject(map, settings);
+            context.All.SendAsync("SendData", jsonPlayers, jsonMap);
         }
     }
 }

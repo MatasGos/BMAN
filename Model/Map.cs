@@ -18,10 +18,9 @@ namespace Model
             this.xSize = xSize;
             this.ySize = ySize;
             blocks = new Block[xSize, ySize];
-            generateWalls();
         }
 
-        public Block[,] getMap()
+        public Block[,] getBlocks()
         {
             return blocks;
         }
