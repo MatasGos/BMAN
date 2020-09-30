@@ -152,14 +152,14 @@ namespace Model
             edges[0, 0] = xy[0];
             edges[0, 1] = xy[1];
 
-            edges[1, 0] = xy[0] + 15;
+            edges[1, 0] = xy[0] + 14;
             edges[1, 1] = xy[1];
 
             edges[2, 0] = xy[0];
-            edges[2, 1] = xy[1] + 15;
+            edges[2, 1] = xy[1] + 14;
 
-            edges[3, 0] = xy[0] + 15;
-            edges[3, 1] = xy[1] + 15;
+            edges[3, 0] = xy[0] + 14;
+            edges[3, 1] = xy[1] + 14;
 
             return edges;
         }
@@ -184,12 +184,11 @@ namespace Model
             Block[] b = new Block[25];
             int[] xy = getTile(posx, posy);
             int count = 0;
-            for (int x = Math.Max(0,xy[0]-2); x <= Math.Min(xy[0]+2,xSize); x++)
+            for (int x = Math.Max(0,xy[0]-2); x <= Math.Min(xy[0]+2,xSize-1); x++)
             {
-                for (int y = Math.Max(0, xy[1] - 2); y <= Math.Min(xy[1] + 2, ySize); y++)
+                for (int y = Math.Max(0, xy[1] - 2); y <= Math.Min(xy[1] + 2, ySize-1); y++)
                 {
                     b[count++] = blocks[x, y];
-                    
                 }
             }
             return b;

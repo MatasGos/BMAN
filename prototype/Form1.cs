@@ -39,6 +39,7 @@ namespace prototype
             connection = new HubConnectionBuilder().WithUrl("http://localhost:5000/gamehub").Build();   //Set up the hub connection
             game = new Game();      //Initialize the game logic object
             timer1.Enabled = true;
+            richTextBox1.Enabled = false;
             // RECEIVING MESSAGES
             //Receive another player's login message
             connection.On<string>("ReceiveLoginMessage", (username) =>
