@@ -65,58 +65,45 @@ namespace Model
                 }
             }
         }
-
-        /*        public void Move(List<Player> playerList, string id, int x, int y)
-                {
-                    Player movingPlayer = null;
-                    foreach (var player in playerList)
-                    {
-                        if (player.id == id)
-                        {
-                            movingPlayer = player;
-                            break;
-                        }
-                    }
-                    //tadas loxas
-                    movingPlayer.x += x;
-                    movingPlayer.y += y;
-                }*/
+        //MATAS LOOZERIS
         public void Move(List<Player> playerList, string id, int px, int py)
         {
-            if (px != 0 || py != 0)
+            if (px == 0 && py == 0)
             {
-                Player movingPlayer = null;
-                foreach (var player in playerList)
-                {
-                    if (player.id == id)
-                    {
-                        movingPlayer = player;
-                        break;
-                    }
-                }
-                Block[] b = getNearbyBlocks(movingPlayer.x, movingPlayer.y);
-                int[,] edges = getEdges(new int[] { movingPlayer.x, movingPlayer.y });
-                int[,] edges1 = getEdges(new int[] { movingPlayer.x, movingPlayer.y });
-                for (int i = 0; i < 4; i++)
-                {
-                    edges[i, 0] += px * movingPlayer.speed;
-                    edges[i, 1] += py * movingPlayer.speed;
-                    edges1[i, 0] += px;
-                    edges1[i, 1] += py;
-                }
-                if (isOccupiedSquared(edges, b))
-                {
-                    movingPlayer.x += px * movingPlayer.speed;
-                    movingPlayer.y += py * movingPlayer.speed;
-                }
-                else if (isOccupiedSquared(edges1, b))
-                {
-                    movingPlayer.x += px;
-                    movingPlayer.y += py;
-                }
-                movingPlayer.directionx = 0;
-                movingPlayer.directiony = 0;
+                return;
             }
+
+            Player movingPlayer = null;
+            foreach (var player in playerList)
+            {
+                if (player.id == id)
+                {
+                    movingPlayer = player;
+                    break;
+                }
+            }
+            Block[] b = getNearbyBlocks(movingPlayer.x, movingPlayer.y);
+            int[,] edges = getEdges(new int[] { movingPlayer.x, movingPlayer.y });
+            int[,] edges1 = getEdges(new int[] { movingPlayer.x, movingPlayer.y });
+            for (int i = 0; i < 4; i++)
+            {
+                edges[i, 0] += px * movingPlayer.speed;
+                edges[i, 1] += py * movingPlayer.speed;
+                edges1[i, 0] += px;
+                edges1[i, 1] += py;
+            }
+            if (isOccupiedSquared(edges, b))
+            {
+                movingPlayer.x += px * movingPlayer.speed;
+                movingPlayer.y += py * movingPlayer.speed;
+            }
+            else if (isOccupiedSquared(edges1, b))
+            {
+                movingPlayer.x += px;
+                movingPlayer.y += py;
+            }
+            movingPlayer.directionx = 0;
+            movingPlayer.directiony = 0;
         }
         public bool isOccupiedSquared(int[,] edges, Block[] b)
         {

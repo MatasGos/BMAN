@@ -20,6 +20,7 @@ namespace prototype
 
         public Bitmap background, field, wallPic, playerPic;
         public bool gameStarted = false;
+
         public Game()
         {
             this.players = new List<Player>();
@@ -30,7 +31,7 @@ namespace prototype
         {
             Block[,] blocks = map.getBlocks();
             background = new Bitmap(25 * xSize, 25 * ySize);
-            Color newColor = Color.Brown;
+            Color newColor = Color.BurlyWood;
             wallPic = new Bitmap("wall.png");
             for (int x = 0; x < background.Width; x++)
             {

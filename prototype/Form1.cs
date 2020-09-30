@@ -39,7 +39,7 @@ namespace prototype
             connection = new HubConnectionBuilder().WithUrl("http://localhost:5000/gamehub").Build();   //Set up the hub connection
             game = new Game();      //Initialize the game logic object
             timer1.Enabled = true;
-            richTextBox1.Enabled = false;
+
             // RECEIVING MESSAGES
             //Receive another player's login message
             connection.On<string>("ReceiveLoginMessage", (username) =>
@@ -56,7 +56,6 @@ namespace prototype
             //Game has started info of players sent
             connection.On<string, string>("SendData", (jsonPlayers, jsonMap) =>
             {
-                checkButtonClicksSERVER();
                 game.players = JsonConvert.DeserializeObject<List<Player>>(jsonPlayers, settings);
                 game.map = JsonConvert.DeserializeObject<Map>(jsonMap, settings);
                 if (game.gameStarted == false)
@@ -122,19 +121,12 @@ namespace prototype
         {
             try
             {
-                //game.uploadGame();
                 await connection.InvokeAsync("StartMessage");
             }
             catch (Exception ex)
             {
-
                 richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
             }
-        }
-
-        private void update_Map_Slow()
-        {
-                  
         }
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
@@ -143,11 +135,6 @@ namespace prototype
             {
                 _keyBomb = true;
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -195,13 +182,11 @@ namespace prototype
         {
             if (game.gameStarted)
             {
-                checkButtonClicksSERVER();
-                //game.drawMap();
-                //pictureBox1.Image = game.field;
+                checkButtonClicksServer();
             }
         }
 
-        private async void checkButtonClicksSERVER()
+        private async void checkButtonClicksServer()
         {
             if (_keyTop)
             {

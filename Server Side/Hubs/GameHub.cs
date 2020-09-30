@@ -48,4 +48,3 @@ namespace Server.Hubs
         }
     }
 }
-//Server.game.map.Move(Server.GetPlayers(), Context.ConnectionId, x, y)

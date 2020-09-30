@@ -38,7 +38,6 @@ namespace Server
             double oneSecondInMs = 1000.0;
             double oneTickLength = oneSecondInMs / tickRate;
 
-            //await Clients.All.SendAsync("StartedMessage");
             isRunning = true;
             var sw = new Stopwatch();
             sw.Start();
@@ -57,12 +56,14 @@ namespace Server
         }
         public void GameLogic()
         {
-            string jsonPlayers = JsonConvert.SerializeObject(Server.GetPlayers(), settings);
-            string jsonMap = JsonConvert.SerializeObject(map, settings);
             foreach(var player in Server.GetPlayers())
             {
                 map.Move(Server.playerList, player.id, player.directionx, player.directiony);
             }
+
+            string jsonMap = JsonConvert.SerializeObject(map, settings);
+            string jsonPlayers = JsonConvert.SerializeObject(Server.GetPlayers(), settings);
+
             context.All.SendAsync("SendData", jsonPlayers, jsonMap);
         }
     }
