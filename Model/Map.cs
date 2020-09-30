@@ -16,18 +16,19 @@ namespace Model
         //Size of the map in blocks e.g 15x15
         public int xSize { get; set; }
         public int ySize { get; set; }
-        public Block[,] blocks { get; set; }
+        public Unit[,] units { get; set; }
+        public Explosive[,] explosives { get; set; }
 
         public Map(int xSize, int ySize)
         {
             this.xSize = xSize;
             this.ySize = ySize;
-            blocks = new Block[xSize, ySize];
+            units = new Unit[xSize, ySize];
         }
 
-        public Block[,] getBlocks()
+        public Unit[,] getUnits()
         {
-            return blocks;
+            return units;
         }
 
         //Generates outter perimeter and also inner walls
@@ -39,11 +40,11 @@ namespace Model
                 {
                     if (x == 0 || x == xSize - 1)
                     {
-                        blocks[x, y] = new Wall(x, y);
+                        units[x, y] = new Wall(x, y);
                     }
                     else if (y == 0 || y == ySize - 1)
                     {
-                        blocks[x, y] = new Wall(x, y);
+                        units[x, y] = new Wall(x, y);
                     }
                 }
             }
@@ -58,31 +59,38 @@ namespace Model
                         {
                             if (x % 2 == 0 && y % 2 == 0)
                             {
-                                blocks[x, y] = new Wall(x, y);
+                                if (x <= xSize/2)
+                                {
+                                    units[x, y] = new Box(x, y);
+                                }
+                                else
+                                {
+                                    units[x, y] = new Wall(x, y);
+                                }
                             }
+                                /*if (x <= xSize / 2)
+                                {
+                                    units[x, y] = new Box(x, y);
+                                }
+                                else
+                                {
+                                    units[x, y] = new Box(x, y);
+                                }*/
                         }
                     }
                 }
             }
         }
         //MATAS LOOZERIS
-        public void Move(List<Player> playerList, string id, int px, int py)
+        public void Move(Player movingPlayer)
         {
+            int px = movingPlayer.directionx;
+            int py = movingPlayer.directiony;
             if (px == 0 && py == 0)
             {
                 return;
             }
-
-            Player movingPlayer = null;
-            foreach (var player in playerList)
-            {
-                if (player.id == id)
-                {
-                    movingPlayer = player;
-                    break;
-                }
-            }
-            Block[] b = getNearbyBlocks(movingPlayer.x, movingPlayer.y);
+            Unit[] b = getNearbyBlocks(movingPlayer.x, movingPlayer.y);
             int[,] edges = getEdges(new int[] { movingPlayer.x, movingPlayer.y });
             int[,] edges1 = getEdges(new int[] { movingPlayer.x, movingPlayer.y });
             for (int i = 0; i < 4; i++)
@@ -105,7 +113,7 @@ namespace Model
             movingPlayer.directionx = 0;
             movingPlayer.directiony = 0;
         }
-        public bool isOccupiedSquared(int[,] edges, Block[] b)
+        public bool isOccupiedSquared(int[,] edges, Unit[] b)
         {
             for (int i = 0; i < 4; i++)
             {
@@ -116,16 +124,15 @@ namespace Model
             }
             return true;
         }
-        public bool isOccupied(int[] xy, Block[] b)
+        public bool isOccupied(int[] xy, Unit[] b)
         {
             int[] topLeft = getTile(xy[0], xy[1]);
-            //Debug.WriteLine(topLeft[0] + ":" + topLeft[1]);
 
             for (int i = 0; i < 25; i++)
             {
                 if(b[i] != null)
                 {
-                    if (b[i].x == topLeft[0] && b[i].y == topLeft[1])
+                    if (b[i].x == topLeft[0] && b[i].y == topLeft[1] && b[i].isSolid == true)
                     {
                         return true;
                     }
@@ -166,19 +173,37 @@ namespace Model
 
             return result;
         }
-        public Block[] getNearbyBlocks(int posx, int posy)
+        public Unit[] getNearbyBlocks(int posx, int posy)
         {
-            Block[] b = new Block[25];
+            Unit[] b = new Unit[25];
             int[] xy = getTile(posx, posy);
             int count = 0;
             for (int x = Math.Max(0,xy[0]-2); x <= Math.Min(xy[0]+2,xSize-1); x++)
             {
                 for (int y = Math.Max(0, xy[1] - 2); y <= Math.Min(xy[1] + 2, ySize-1); y++)
                 {
-                    b[count++] = blocks[x, y];
+                    b[count++] = units[x, y];
                 }
             }
             return b;
+        }
+
+        public void PlaceBomb(Player player)
+        {
+            if (!player.placeBomb)
+            {
+                return;
+            }
+
+            int[] playerCenter = getCenterPlayer(new int[] { player.x, player.y });
+            int[] playerTile = getTile(playerCenter[0], playerCenter[1]);
+            if (units[playerTile[0], playerTile[1]] == null)
+            {
+                units[playerTile[0], playerTile[1]] = new Bomb(playerTile[0], playerTile[1]);
+            }
+
+            player.placeBomb = false;
+
         }
     }
 }

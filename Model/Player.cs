@@ -14,6 +14,7 @@ namespace Model
         public int speed { get; set; }
         public int directionx { get; set; }
         public int directiony { get; set; }
+        public bool placeBomb { get; set; }
 
         public Player(string id, string username)
         {

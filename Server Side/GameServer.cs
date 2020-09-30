@@ -17,7 +17,7 @@ namespace Server
         const int xSize = 23;       //Number of blocks left to right
         const int ySize = 19;       //Number of blocks top to bottom
         public Map map;
-        bool isRunning = false;
+        public bool isRunning = false;
 
         private IHubCallerClients context;
         JsonSerializerSettings settings = new JsonSerializerSettings
@@ -58,7 +58,8 @@ namespace Server
         {
             foreach(var player in Server.GetPlayers())
             {
-                map.Move(Server.playerList, player.id, player.directionx, player.directiony);
+                map.Move(player);
+                map.PlaceBomb(player);
             }
 
             string jsonMap = JsonConvert.SerializeObject(map, settings);

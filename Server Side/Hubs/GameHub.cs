@@ -46,5 +46,13 @@ namespace Server.Hubs
                 Server.GetPlayerById(Context.ConnectionId).directiony = y;
             });
         }
+
+        public async Task SendPlaceBombMessage()
+        {
+            await Task.Run(() =>
+            {
+                Server.GetPlayerById(Context.ConnectionId).placeBomb = true;
+            });
+        }
     }
 }

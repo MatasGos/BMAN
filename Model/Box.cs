@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Model
 {
-    public class Wall : Block
+    public class Box : Block
     {
-        public Wall(int x, int y) : base(x, y)
+        public Box(int x, int y) : base(x, y)
         {
-            isBreakable = false;
+            isBreakable = true;
             isSolid = true;
         }
     }

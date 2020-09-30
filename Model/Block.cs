@@ -4,16 +4,12 @@ using System.Text;
 
 namespace Model
 {
-    public class Block
+    public abstract class Block : Unit
     {
-        public int x { get; set; }
-        public int y { get; set; }
         public bool isBreakable { get; set; }
 
-        public Block(int x, int y)
+        public Block(int x, int y) : base(x, y)
         {
-            this.x = x;
-            this.y = y;
             isBreakable = true;
         }
         public int[] getPos()

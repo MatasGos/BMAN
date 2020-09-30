@@ -43,9 +43,12 @@ namespace Server
 
         public static void StartGame()
         {
-            game = new GameServer(context);
-            Thread gameLoop = new Thread(new ThreadStart(game.GameLoop));
-            gameLoop.Start();
+            if (game == null)
+            {
+                game = new GameServer(context);
+                Thread gameLoop = new Thread(new ThreadStart(game.GameLoop));
+                gameLoop.Start();
+            }
         }
     }
 }

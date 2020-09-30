@@ -40,6 +40,7 @@ namespace prototype
             game = new Game();      //Initialize the game logic object
             timer1.Enabled = true;
 
+
             // RECEIVING MESSAGES
             //Receive another player's login message
             connection.On<string>("ReceiveLoginMessage", (username) =>
@@ -61,6 +62,7 @@ namespace prototype
                 if (game.gameStarted == false)
                 {
                     game.gameStarted = true;
+                    button3.Enabled = false;
                     game.drawBackground();
                 }
                 game.drawMap();
@@ -131,10 +133,7 @@ namespace prototype
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == 'q')
-            {
-                _keyBomb = true;
-            }
+            
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -154,6 +153,10 @@ namespace prototype
             if (e.KeyCode == Keys.D)
             {
                 _keyRight = false;
+            }
+            if (e.KeyCode == Keys.Space)
+            {
+                _keyBomb = false;
             }
         }
 
@@ -175,76 +178,77 @@ namespace prototype
             {
                 _keyRight = true;
             }
-            
+            if (e.KeyCode == Keys.Space)
+            {
+                _keyBomb = true;
+            }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (game.gameStarted)
+            {
+                //game.drawMap();
+                //pictureBox1.Image = game.field;
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (game.gameStarted)
             {
-                checkButtonClicksServer();
+                CheckButtonPresses();
             }
         }
 
-        private async void checkButtonClicksServer()
+        private void CheckButtonPresses()
         {
-            if (_keyTop)
-            {
-                try
-                {
-                    await connection.InvokeAsync("SendMoveMessage", 0, -1);
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
-                }
-            }
+            int x = 0;
+            int y = 0;
             if (_keyLeft)
             {
-                try
-                {
-                    await connection.InvokeAsync("SendMoveMessage", -1, 0);
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
-                }
-            }
-            if (_keyBot)
-            {
-                try
-                {
-                    await connection.InvokeAsync("SendMoveMessage", 0, 1);
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
-                }
+                x -= 1;
             }
             if (_keyRight)
             {
-                try
-                {
-                    await connection.InvokeAsync("SendMoveMessage", 1, 0);
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
-                }
+                x += 1;
             }
+            if (_keyTop)
+            {
+                y -= 1;
+            }
+            if (_keyBot)
+            {
+                y += 1;
+            }
+            SendMoveCommand(x, y);
             if (_keyBomb)
             {
-                _keyBomb = false;
-                //game.addBomb(clientId);
-                /*try
-                {
-                    await connection.InvokeAsync("Move", 1, 0);
-                }
-                catch (Exception ex)
-                {
+                SendPlaceBombCommand();
+            }
+            
+        }
+        public async void SendMoveCommand(int x, int y)
+        {
+            try
+            {
+                await connection.InvokeAsync("SendMoveMessage", x, y);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
+            }
+        }
 
-                    richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
-                }*/ // kazkas tokio turetu buti tik vietoj move place bomb or something idk lol
+        public async void SendPlaceBombCommand()
+        {
+            try
+            {
+                await connection.InvokeAsync("SendPlaceBombMessage");
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
             }
         }
     }
