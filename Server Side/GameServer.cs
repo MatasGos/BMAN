@@ -61,7 +61,7 @@ namespace Server
             string jsonMap = JsonConvert.SerializeObject(map, settings);
             foreach(var player in Server.GetPlayers())
             {
-                player.Move();
+                map.Move(Server.playerList, player.id, player.directionx, player.directiony);
             }
             context.All.SendAsync("SendData", jsonPlayers, jsonMap);
         }

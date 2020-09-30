@@ -20,22 +20,14 @@ namespace Model
             this.id = id;
             this.username = username;
             //DEFAULT VALUES
-            this.x = 25;
-            this.y = 25;
+            this.x = 26;
+            this.y = 26;
             this.speed = 3;
         }
 
         public int[] getPos()
         {
             return new int[] { this.x, this.y };
-        }
-
-        public void Move()
-        {
-            x += directionx*speed;
-            y += directiony*speed;
-            directionx = 0;
-            directiony = 0;
         }
 
         public void SetDirection(int px, int py)

@@ -63,7 +63,7 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 33;
+            this.timer1.Interval = 1;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // pictureBox1
@@ -93,6 +93,7 @@
             this.textBox1.PlaceholderText = "Enter username";
             this.textBox1.Size = new System.Drawing.Size(100, 23);
             this.textBox1.TabIndex = 6;
+            this.textBox1.Text = "Player";
             // 
             // richTextBox1
             // 
