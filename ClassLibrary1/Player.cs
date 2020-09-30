@@ -8,12 +8,23 @@ namespace prototype.Classes
 {
     public class Player
     {
-        private int x, y;
-        private int speed;
+        private string id;      //SignalR given context id
+        private string username;
+        private int x, y;       //Spawn position and further the position of the player
+        private int speed;      //Walk speed
         private int lives;
         private int bombTimer, bombStrength;
-        private string id;
-        private string username;
+
+        public Player(string id, string username)
+        {
+            this.id = id;
+            this.username = username;
+            //DEFAULT VALUES
+            this.x = 100;
+            this.y = 100;
+            this.speed = 3;
+        }
+
         public Player(string _id, int x, int y)
         {
             this.username = _id;
@@ -21,6 +32,7 @@ namespace prototype.Classes
             this.x = x;
             this.y = y;
         }
+
         public Player(int no, int speed, int[] xysize, string name, string id)
         {
             switch (no)

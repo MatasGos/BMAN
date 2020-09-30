@@ -6,20 +6,30 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
+using Model;
+using Newtonsoft.Json;
 using Server.Hubs;
 
 namespace Server
 {
     public class Game
     {
+        const int xSize = 23;       //Number of blocks left to right
+        const int ySize = 19;       //Number of blocks top to bottom
         bool isRunning = false;
-        Random r = new Random();
-        private readonly IHubCallerClients context;
+
+        private IHubCallerClients context;
+        JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.All
+        };
 
         public Game(IHubCallerClients _context)
         {
             context = _context;
+            Map map = new Map(xSize, ySize);
         }
+
         public void GameLoop()
         {
             int tickRate = 30;
@@ -31,7 +41,6 @@ namespace Server
             var sw = new Stopwatch();
             sw.Start();
 
-            int tick = 1;
             while (isRunning)
             {
                 double startTime = sw.Elapsed.TotalMilliseconds;
@@ -42,25 +51,14 @@ namespace Server
                     //await Task.Delay((int)(oneTickLength - elapsedTime));
                     Thread.Sleep((int)(oneTickLength - elapsedTime));
                 }
-                //Console.WriteLine(tick + "zzzzz " + (int)sw.Elapsed.TotalMilliseconds);
-                tick++;
             }
         }
         public void GameLogic()
         {
-            //FORM PLAYER DATA TO BE SENT
-            List<string> playerInfo = new List<string>();
-            foreach (var player in Server.GetPlayers())
-            {
-                string str = player.getString();
-                playerInfo.Add(str);
-            }
-
-            //SEND A LIST OF STRINGS THAT CONTAIN PLAYER INITIAL INFORMATION
-            context.All.SendAsync("InitializePlayers", playerInfo);
-
-            //Console.WriteLine();
-
+            string json = JsonConvert.SerializeObject(map, settings);
+            Debug.WriteLine(json);
+            Map map2 = JsonConvert.DeserializeObject<Map>(json, settings);
+            context.All.SendAsync("SendData")
         }
     }
 }

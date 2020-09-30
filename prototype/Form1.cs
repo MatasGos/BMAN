@@ -1,5 +1,4 @@
-﻿using prototype.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,66 +11,68 @@ using System.Threading.Tasks.Dataflow;
 using System.Windows.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
 using System.Threading;
+using Model;
+using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace prototype
 {
     public partial class Form1 : Form
     {
-        HubConnection connection;
-        private Game game;
+        private HubConnection connection;   //SignalR Hub connection object to connect to the server
+        private Game game;                  //Game logic object for user-side
 
-        private string username;
-        private int clientId; // sito gali but kad nereikia, bet bijau trint
-        private bool _keyTop, _keyLeft, _keyRight, _keyBot, _keyBomb;
-
+        private string username;                                        //Player's chosen username
+        private bool _keyTop, _keyLeft, _keyRight, _keyBot, _keyBomb;   //Booleans to see if the key was pressed at a specific time frame
 
         public Form1()
         {
-            int count = 0;
-            //FORM 
-            InitializeComponent();
+            // FORM AND DATA INITIALIZATION
+            InitializeComponent();  //Initialize form components
+            initializeValues();     //Initialize keypress booleans
+            connection = new HubConnectionBuilder().WithUrl("http://localhost:5000/gamehub").Build();   //Set up the hub connection
+            game = new Game();      //Initialize the game logic object
 
-            connection = new HubConnectionBuilder().WithUrl("http://localhost:5000/gamehub").Build();
 
-            //RECEIVING MESSAGES
-
-            //Someone has logged in
-            connection.On<string>("LoggedinMessage", (username) =>
+            // RECEIVING MESSAGES
+            //Receive another player's login message
+            connection.On<string>("ReceiveLoginMessage", (username) =>
             {
-
                 richTextBox1.AppendText(username + " has logged in\n", Color.Green);
             });
 
-            //Send map
-            connection.On<Map>("ReceiveMap", (map) =>
-            {
-                richTextBox1.AppendText("mapas kraunamas");
-                game.setMap(map);
-                richTextBox1.AppendText("mapas pakrautas");
-            });
-
-
-            //Someone sent a message
+            //Receive another player's sent message
             connection.On<string, string>("ReceiveMessage", (username, message) =>
             {
                 richTextBox1.AppendText(username + ": " + message + "\n");
             });
 
             //Game has started info of players sent
+            connection.On<string, string>("SendData", (players, map) =>
+            {
+
+            });
+
+            //TODO: GAME LOGIC
+            //Game has started info of players sent
             connection.On<List<string>>("InitializePlayers", (players) =>
             {
-                game.update(players);
-                label1.Text = count++.ToString();
+                //game.update(players);
                 checkButtonClicksSERVER();
             });
 
-            game = new Game();
-            initialiseValues();
+            //Receive the map
+            connection.On<Map>("ReceiveMap", (map) =>
+            {
+                richTextBox1.AppendText("mapas kraunamas");
+                //game.setMap(map);
+                richTextBox1.AppendText("mapas pakrautas");
+            });
         }
 
-        public void initialiseValues()
+        //Initialize boolean keypress values
+        public void initializeValues()
         {
-            clientId = 404;
             _keyTop = false;
             _keyBot = false;
             _keyLeft = false;
@@ -79,25 +80,64 @@ namespace prototype
             _keyBomb = false;
         }
         
+        //Login button
         private async void button1_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text != "")
+            {
+                try
+                {
+                    await connection.StartAsync();
+                    username = textBox1.Text;
+                    await connection.InvokeAsync("SendLoginMessage", username);
+                    richTextBox1.AppendText("Connected to the server\n", Color.Green);
+                    textBox1.Enabled = false;
+                    button1.Enabled = false;
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
+                }
+            }
+        }
+
+        //Send message button
+        private async void button2_Click(object sender, EventArgs e)
+        {
+            if (textBox2.Text != "")
+            {
+                try
+                {
+                    await connection.InvokeAsync("SendMessage", username, textBox2.Text);
+                    textBox2.Clear();
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
+                }
+            }
+        }
+
+        //Start game button
+        private async void button3_Click(object sender, EventArgs e)
         {
             try
             {
-                await connection.StartAsync();
-                username = textBox1.Text;
-                await connection.InvokeAsync("LoginMessage", username);
-                richTextBox1.AppendText("Connected to the server\n", Color.Green);
+                //game.uploadGame();
+                await connection.InvokeAsync("StartMessage");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("There was an error."+ex.ToString());
+
+                richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
             }
         }
+
         private void update_Map_Slow()
         {
-            Bitmap back = game.getGame();
-            pictureBox1.Image = back;
-            label1.Text = new Player("aaaa", 10,10).getString();            
+            //Bitmap back = game.getGame();
+            Bitmap back = game.getMap();
+            pictureBox1.Image = back;          
         }
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
@@ -128,42 +168,6 @@ namespace prototype
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private async void button2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                await connection.InvokeAsync("SendMessage", clientId, textBox2.Text);
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
-            }
-        }
-
-        private async void button3_Click_1(object sender, EventArgs e)
-        {
-            try
-            {
-                game.uploadGame();
-                await connection.InvokeAsync("StartMessage");
-            }
-            catch (Exception ex)
-            {
-
-                richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
-            }
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.W)
@@ -192,80 +196,65 @@ namespace prototype
 
         private async void checkButtonClicksSERVER()
         {
-           
-                if (_keyTop)
-                {
-                    try
-                    {
-                        await connection.InvokeAsync("Move", 0, -1);
-                    }
-                    catch (Exception ex)
-                    {
-                        richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
-                    }
-                }
-                if (_keyLeft)
-                {
-                    try
-                    {
-                        await connection.InvokeAsync("Move", -1, 0);
-                    }
-                    catch (Exception ex)
-                    {
-                        richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
-                    }
-                }
-                if (_keyBot)
-                {
-                    try
-                    {
-                        await connection.InvokeAsync("Move", 0, 1);
-                    }
-                    catch (Exception ex)
-                    {
-                        richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
-                    }
-                }
-                if (_keyRight)
-                {
-                    try
-                    {
-                        await connection.InvokeAsync("Move", 1, 0);
-                    }
-                    catch (Exception ex)
-                    {
-                        richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
-                    }
-                }
-                if (_keyBomb)
-                {
-                    _keyBomb = false;
-                    //game.addBomb(clientId);
-                    /*try
-                    {
-                        await connection.InvokeAsync("Move", 1, 0);
-                    }
-                    catch (Exception ex)
-                    {
-
-                        richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
-                    }*/ // kazkas tokio turetu buti tik vietoj move place bomb or something idk lol
-                }
-            
-        }
-        private async void button3_Click(object sender, EventArgs e)
-        {
-            try
+            if (_keyTop)
             {
-                await connection.InvokeAsync("SendMessage", clientId, textBox1.Text);
+                try
+                {
+                    await connection.InvokeAsync("Move", 0, -1);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
+                }
             }
-            catch (Exception ex)
+            if (_keyLeft)
             {
+                try
+                {
+                    await connection.InvokeAsync("Move", -1, 0);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
+                }
+            }
+            if (_keyBot)
+            {
+                try
+                {
+                    await connection.InvokeAsync("Move", 0, 1);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
+                }
+            }
+            if (_keyRight)
+            {
+                try
+                {
+                    await connection.InvokeAsync("Move", 1, 0);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
+                }
+            }
+            if (_keyBomb)
+            {
+                _keyBomb = false;
+                //game.addBomb(clientId);
+                /*try
+                {
+                    await connection.InvokeAsync("Move", 1, 0);
+                }
+                catch (Exception ex)
+                {
 
-                richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
+                    richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
+                }*/ // kazkas tokio turetu buti tik vietoj move place bomb or something idk lol
             }
         }
-
     }
 
     public static class RichTextBoxExtension
@@ -281,5 +270,4 @@ namespace prototype
             box.SelectionColor = box.ForeColor;
         }
     }
-
 }

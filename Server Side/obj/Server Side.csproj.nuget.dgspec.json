@@ -1,31 +1,34 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\Server Side\\Server Side.csproj": {}
+    "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Server Side\\Server Side.csproj": {}
   },
   "projects": {
-    "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj": {
+    "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj",
-        "projectName": "ClassLibrary1",
-        "projectPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj",
-        "packagesPath": "C:\\Users\\matgos\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\ClassLibrary1\\obj\\",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Model\\Model.csproj",
+        "projectName": "Model",
+        "projectPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Model\\Model.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Model\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\matgos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netstandard2.0"
+          "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netstandard2.0": {
+          "netcoreapp3.1": {
             "projectReferences": {}
           }
         },
@@ -36,13 +39,11 @@
         }
       },
       "frameworks": {
-        "netstandard2.0": {
+        "netcoreapp3.1": {
           "dependencies": {
-            "NETStandard.Library": {
-              "suppressParent": "All",
+            "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[2.0.3, )",
-              "autoReferenced": true
+              "version": "[12.0.3, )"
             }
           },
           "imports": [
@@ -55,21 +56,29 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\Server Side\\Server Side.csproj": {
+    "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Server Side\\Server Side.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\Server Side\\Server Side.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Server Side\\Server Side.csproj",
         "projectName": "Server Side",
-        "projectPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\Server Side\\Server Side.csproj",
-        "packagesPath": "C:\\Users\\matgos\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\Server Side\\obj\\",
+        "projectPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Server Side\\Server Side.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Server Side\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\matgos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -82,8 +91,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj": {
-                "projectPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\ClassLibrary1\\ClassLibrary1.csproj"
+              "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Model\\Model.csproj"
               }
             }
           }
@@ -96,6 +105,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
