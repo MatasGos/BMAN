@@ -27,6 +27,20 @@ namespace Server
             return playerList;
         }
 
+        public static Player GetPlayerById(string id)
+        {
+            Player toReturn = null;
+            foreach (var player in playerList)
+            {
+                if (player.id == id)
+                {
+                    toReturn = player;
+                    break;
+                }
+            }
+            return toReturn;
+        }
+
         public static void StartGame()
         {
             game = new GameServer(context);

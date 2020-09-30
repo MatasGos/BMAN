@@ -16,7 +16,7 @@ namespace Server
     {
         const int xSize = 23;       //Number of blocks left to right
         const int ySize = 19;       //Number of blocks top to bottom
-        Map map;
+        public Map map;
         bool isRunning = false;
 
         private IHubCallerClients context;
@@ -59,6 +59,10 @@ namespace Server
         {
             string jsonPlayers = JsonConvert.SerializeObject(Server.GetPlayers(), settings);
             string jsonMap = JsonConvert.SerializeObject(map, settings);
+            foreach(var player in Server.GetPlayers())
+            {
+                player.Move();
+            }
             context.All.SendAsync("SendData", jsonPlayers, jsonMap);
         }
     }

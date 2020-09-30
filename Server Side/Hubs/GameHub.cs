@@ -37,5 +37,15 @@ namespace Server.Hubs
             Server.context = this.Clients;  //Sets the context to send messages to clients not only from the hub
             Server.StartGame();
         }
+
+        public async Task SendMoveMessage(int x, int y)
+        {
+            await Task.Run(() =>
+            {
+                Server.GetPlayerById(Context.ConnectionId).directionx = x;
+                Server.GetPlayerById(Context.ConnectionId).directiony = y;
+            });
+        }
     }
 }
+//Server.game.map.Move(Server.GetPlayers(), Context.ConnectionId, x, y)

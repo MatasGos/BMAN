@@ -14,6 +14,7 @@ using System.Threading;
 using Model;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Xml;
 
 namespace prototype
 {
@@ -37,8 +38,7 @@ namespace prototype
             initializeValues();     //Initialize keypress booleans
             connection = new HubConnectionBuilder().WithUrl("http://localhost:5000/gamehub").Build();   //Set up the hub connection
             game = new Game();      //Initialize the game logic object
-
-
+            timer1.Enabled = true;
             // RECEIVING MESSAGES
             //Receive another player's login message
             connection.On<string>("ReceiveLoginMessage", (username) =>
@@ -55,10 +55,16 @@ namespace prototype
             //Game has started info of players sent
             connection.On<string, string>("SendData", (jsonPlayers, jsonMap) =>
             {
+                checkButtonClicksSERVER();
                 game.players = JsonConvert.DeserializeObject<List<Player>>(jsonPlayers, settings);
                 game.map = JsonConvert.DeserializeObject<Map>(jsonMap, settings);
+                if (game.gameStarted == false)
+                {
+                    game.gameStarted = true;
+                    game.drawBackground();
+                }
                 game.drawMap();
-                //pictureBox1.Image = game.background;
+                pictureBox1.Image = game.field;
             });
         }
 
@@ -127,7 +133,7 @@ namespace prototype
 
         private void update_Map_Slow()
         {
-            pictureBox1.Image = game.background;          
+                  
         }
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
@@ -136,6 +142,11 @@ namespace prototype
             {
                 _keyBomb = true;
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -181,7 +192,12 @@ namespace prototype
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            update_Map_Slow();
+            if (game.gameStarted)
+            {
+                checkButtonClicksSERVER();
+                //game.drawMap();
+                //pictureBox1.Image = game.field;
+            }
         }
 
         private async void checkButtonClicksSERVER()
@@ -190,7 +206,7 @@ namespace prototype
             {
                 try
                 {
-                    await connection.InvokeAsync("Move", 0, -1);
+                    await connection.InvokeAsync("SendMoveMessage", 0, -1);
                 }
                 catch (Exception ex)
                 {
@@ -201,7 +217,7 @@ namespace prototype
             {
                 try
                 {
-                    await connection.InvokeAsync("Move", -1, 0);
+                    await connection.InvokeAsync("SendMoveMessage", -1, 0);
                 }
                 catch (Exception ex)
                 {
@@ -212,7 +228,7 @@ namespace prototype
             {
                 try
                 {
-                    await connection.InvokeAsync("Move", 0, 1);
+                    await connection.InvokeAsync("SendMoveMessage", 0, 1);
                 }
                 catch (Exception ex)
                 {
@@ -223,7 +239,7 @@ namespace prototype
             {
                 try
                 {
-                    await connection.InvokeAsync("Move", 1, 0);
+                    await connection.InvokeAsync("SendMoveMessage", 1, 0);
                 }
                 catch (Exception ex)
                 {

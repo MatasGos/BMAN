@@ -18,22 +18,20 @@ namespace prototype
         public List<Player> players; //List of players with their stats
         public Map map;                    //Map data
 
-        public Bitmap background, wallPic, playerPic;
-
+        public Bitmap background, field, wallPic, playerPic;
+        public bool gameStarted = false;
         public Game()
         {
             this.players = new List<Player>();
             this.map = new Map(xSize, ySize);
         }
 
-        public void drawMap()
+        public void drawBackground()
         {
             Block[,] blocks = map.getBlocks();
             background = new Bitmap(25 * xSize, 25 * ySize);
-            wallPic = new Bitmap("wall.png");
-            playerPic = new Bitmap("p1.png");
-
             Color newColor = Color.Brown;
+            wallPic = new Bitmap("wall.png");
             for (int x = 0; x < background.Width; x++)
             {
                 for (int y = 0; y < background.Height; y++)
@@ -59,7 +57,13 @@ namespace prototype
                     }
                 }
             }
-
+        }
+        public void drawMap()
+        {
+            Block[,] blocks = map.getBlocks();
+            field = getMap();
+            wallPic = new Bitmap("wall.png");
+            playerPic = new Bitmap("p1.png");
             //Draw players
             foreach (Player p in players)
             {
@@ -68,7 +72,7 @@ namespace prototype
                 {
                     for (int y = 0; y < playerSize; y++)
                     {
-                        background.SetPixel(x + xy[0], y + xy[1], playerPic.GetPixel(x, y));
+                        field.SetPixel(x + xy[0], y + xy[1], playerPic.GetPixel(x, y));
                     }
                 }
             }

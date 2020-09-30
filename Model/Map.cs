@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
+using System.Threading.Tasks;
 
 namespace Model
 {
@@ -59,6 +62,22 @@ namespace Model
                     }
                 }
             }
+        }
+
+        public void Move(List<Player> playerList, string id, int x, int y)
+        {
+            Player movingPlayer = null;
+            foreach (var player in playerList)
+            {
+                if (player.id == id)
+                {
+                    movingPlayer = player;
+                    break;
+                }
+            }
+            //tadas loxas
+            movingPlayer.x += x;
+            movingPlayer.y += y;
         }
     }
 }
