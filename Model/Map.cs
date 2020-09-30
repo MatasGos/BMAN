@@ -57,7 +57,7 @@ namespace Model
                     {
                         if (x < (xSize - 1) && y < (ySize - 1))
                         {
-                            if (x % 2 == 0 && y % 2 == 0)
+                            /*if (x % 2 == 0 && y % 2 == 0)
                             {
                                 if (x <= xSize/2)
                                 {
@@ -67,14 +67,14 @@ namespace Model
                                 {
                                     units[x, y] = new Wall(x, y);
                                 }
-                            }
-                                /*if (x <= xSize / 2)
+                            }*/
+                               /* if (x <= xSize / 2)
                                 {
                                     units[x, y] = new Box(x, y);
                                 }
                                 else
                                 {
-                                    units[x, y] = new Box(x, y);
+                                    units[x, y] = new Bomb(x, y);
                                 }*/
                         }
                     }
@@ -197,6 +197,7 @@ namespace Model
 
             int[] playerCenter = getCenterPlayer(new int[] { player.x, player.y });
             int[] playerTile = getTile(playerCenter[0], playerCenter[1]);
+
             if (units[playerTile[0], playerTile[1]] == null)
             {
                 units[playerTile[0], playerTile[1]] = new Bomb(playerTile[0], playerTile[1]);
