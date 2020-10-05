@@ -38,6 +38,7 @@ namespace Server.Hubs
             Server.StartGame();
         }
 
+        //Sends a move message
         public async Task SendMoveMessage(int x, int y)
         {
             await Task.Run(() =>
@@ -47,6 +48,7 @@ namespace Server.Hubs
             });
         }
 
+        //Sends a place bomb message
         public async Task SendPlaceBombMessage()
         {
             await Task.Run(() =>

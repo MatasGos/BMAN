@@ -26,19 +26,19 @@ namespace prototype
         private string username;                                        //Player's chosen username
         private bool _keyTop, _keyLeft, _keyRight, _keyBot, _keyBomb;   //Booleans to see if the key was pressed at a specific time frame
 
-        JsonSerializerSettings settings = new JsonSerializerSettings
-        {
-            TypeNameHandling = TypeNameHandling.All
-        };
+        //Json settings
+        JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
         public Form1()
         {
             // FORM AND DATA INITIALIZATION
             InitializeComponent();  //Initialize form components
             initializeValues();     //Initialize keypress booleans
+
             connection = new HubConnectionBuilder().WithUrl("http://localhost:5000/gamehub").Build();   //Set up the hub connection
+
             game = new Game();      //Initialize the game logic object
-            timer1.Enabled = true;
+            timer1.Enabled = true;  //Enable timer that draws the map
 
 
             // RECEIVING MESSAGES
@@ -131,11 +131,7 @@ namespace prototype
             }
         }
 
-        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
-        }
-
+        //Form key press event handler
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.W)
@@ -160,6 +156,7 @@ namespace prototype
             }
         }
 
+        //Form key press event handler
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.W)
@@ -184,15 +181,7 @@ namespace prototype
             }
         }
 
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            if (game.gameStarted)
-            {
-                //game.drawMap();
-                //pictureBox1.Image = game.field;
-            }
-        }
-
+        //Timer that checks button presses
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (game.gameStarted)
@@ -201,10 +190,12 @@ namespace prototype
             }
         }
 
+        //Checking which buttons were pressed
         private void CheckButtonPresses()
         {
             int x = 0;
             int y = 0;
+
             if (_keyLeft)
             {
                 x -= 1;
@@ -221,13 +212,15 @@ namespace prototype
             {
                 y += 1;
             }
-            SendMoveCommand(x, y);
             if (_keyBomb)
             {
                 SendPlaceBombCommand();
             }
-            
+
+            SendMoveCommand(x, y);
         }
+
+        //Send a move command to the server
         public async void SendMoveCommand(int x, int y)
         {
             try
@@ -240,6 +233,7 @@ namespace prototype
             }
         }
 
+        //Send a place bomb command to the server
         public async void SendPlaceBombCommand()
         {
             try

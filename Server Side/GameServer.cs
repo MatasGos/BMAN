@@ -20,10 +20,7 @@ namespace Server
         public bool isRunning = false;
 
         private IHubCallerClients context;
-        JsonSerializerSettings settings = new JsonSerializerSettings
-        {
-            TypeNameHandling = TypeNameHandling.All
-        };
+        JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
         public GameServer(IHubCallerClients _context)
         {

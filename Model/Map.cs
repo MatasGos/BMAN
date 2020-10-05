@@ -81,18 +81,22 @@ namespace Model
                 }
             }
         }
+
         //MATAS LOOZERIS
         public void Move(Player movingPlayer)
         {
             int px = movingPlayer.directionx;
             int py = movingPlayer.directiony;
+
             if (px == 0 && py == 0)
             {
                 return;
             }
+
             Unit[] b = getNearbyBlocks(movingPlayer.x, movingPlayer.y);
             int[,] edges = getEdges(new int[] { movingPlayer.x, movingPlayer.y });
             int[,] edges1 = getEdges(new int[] { movingPlayer.x, movingPlayer.y });
+
             for (int i = 0; i < 4; i++)
             {
                 edges[i, 0] += px * movingPlayer.speed;
@@ -100,6 +104,7 @@ namespace Model
                 edges1[i, 0] += px;
                 edges1[i, 1] += py;
             }
+
             if (isOccupiedSquared(edges, b))
             {
                 movingPlayer.x += px * movingPlayer.speed;
@@ -110,9 +115,11 @@ namespace Model
                 movingPlayer.x += px;
                 movingPlayer.y += py;
             }
+
             movingPlayer.directionx = 0;
             movingPlayer.directiony = 0;
         }
+
         public bool isOccupiedSquared(int[,] edges, Unit[] b)
         {
             for (int i = 0; i < 4; i++)
@@ -124,6 +131,7 @@ namespace Model
             }
             return true;
         }
+
         public bool isOccupied(int[] xy, Unit[] b)
         {
             int[] topLeft = getTile(xy[0], xy[1]);
@@ -140,6 +148,7 @@ namespace Model
             }
             return false;
         }
+
         public int[,] getEdges(int[] xy)
         {
             int[,] edges = new int[4, 2];
@@ -157,6 +166,7 @@ namespace Model
 
             return edges;
         }
+
         public int[] getCenterPlayer(int[] xy)
         {
             int[] result = new int[2];
@@ -164,6 +174,7 @@ namespace Model
             result[1] = xy[1] + 15 / 2;
             return result;
         }
+
         public int[] getTile(int x, int y)
         {
             int[] result = new int[2];
@@ -173,14 +184,15 @@ namespace Model
 
             return result;
         }
+
         public Unit[] getNearbyBlocks(int posx, int posy)
         {
             Unit[] b = new Unit[25];
             int[] xy = getTile(posx, posy);
             int count = 0;
-            for (int x = Math.Max(0,xy[0]-2); x <= Math.Min(xy[0]+2,xSize-1); x++)
+            for (int x = Math.Max(0, xy[0] - 2); x <= Math.Min(xy[0] + 2, xSize - 1); x++)
             {
-                for (int y = Math.Max(0, xy[1] - 2); y <= Math.Min(xy[1] + 2, ySize-1); y++)
+                for (int y = Math.Max(0, xy[1] - 2); y <= Math.Min(xy[1] + 2, ySize - 1); y++)
                 {
                     b[count++] = units[x, y];
                 }
@@ -204,7 +216,6 @@ namespace Model
             }
 
             player.placeBomb = false;
-
         }
     }
 }
