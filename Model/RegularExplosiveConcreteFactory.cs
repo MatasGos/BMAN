@@ -12,10 +12,9 @@ namespace Model
             return new Bomb(x, y);
         }
 
-        public override Explosive CreateExplosion(int x, int y)
+        public override Explosive CreateExplosion(int x, int y, double placeTime)
         {
-            //return new Explosive(x, y);
-            throw new NotImplementedException();
+            return new Explosion(x, y, placeTime);
         }
 
         public override Explosive CreateMine(int x, int y)

@@ -12,9 +12,5 @@ namespace Model
         {
             isBreakable = true;
         }
-        public int[] getPos()
-        {
-            return new int[] { this.x, this.y };
-        }
     }
 }

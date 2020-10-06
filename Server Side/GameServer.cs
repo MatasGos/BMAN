@@ -18,6 +18,7 @@ namespace Server
         const int ySize = 19;       //Number of blocks top to bottom
         public Map map;
         public bool isRunning = false;
+        Stopwatch sw;
 
         private IHubCallerClients context;
         JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
@@ -36,7 +37,7 @@ namespace Server
             double oneTickLength = oneSecondInMs / tickRate;
 
             isRunning = true;
-            var sw = new Stopwatch();
+            sw = new Stopwatch();
             sw.Start();
 
             while (isRunning)
@@ -55,10 +56,12 @@ namespace Server
         {
             foreach(var player in Server.GetPlayers())
             {
-                map.PlaceExplosive(player);
+                map.PlaceExplosive(player, sw.Elapsed.TotalMilliseconds);
                 map.Move(player);
             }
+            map.UpdateExplosives(sw.Elapsed.TotalMilliseconds);
 
+            //TODO: Make copies of map and players as it sometimes crashes
             string jsonMap = JsonConvert.SerializeObject(map, settings);
             string jsonPlayers = JsonConvert.SerializeObject(Server.GetPlayers(), settings);
 

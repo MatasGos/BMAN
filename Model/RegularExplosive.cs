@@ -9,7 +9,6 @@ namespace Model
     {
         public RegularExplosive(int x, int y) : base(x, y)
         {
-
         }
     }
 }

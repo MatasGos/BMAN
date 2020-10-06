@@ -8,6 +8,6 @@ namespace Model
     {
         public abstract Explosive CreateBomb(int x, int y);
         public abstract Explosive CreateMine(int x, int y);
-        public abstract Explosive CreateExplosion(int x, int y);
+        public abstract Explosive CreateExplosion(int x, int y, double placeTime);
     }
 }

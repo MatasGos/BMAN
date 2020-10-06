@@ -11,10 +11,10 @@ namespace Model
             return new SuperBomb(x, y);
         }
 
-        public override Explosive CreateExplosion(int x, int y)
+        public override Explosive CreateExplosion(int x, int y, double placeTime)
         {
-            //return new SuperExplosive(x, y);
-            throw new NotImplementedException();
+            //TODO: SUPER EXPLOSIVE
+            return new Explosion(x, y, placeTime);
         }
 
         public override Explosive CreateMine(int x, int y)

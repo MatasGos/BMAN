@@ -9,7 +9,7 @@ namespace Model
         public SuperBomb(int x, int y) : base(x, y)
         {
             isSolid = false;
-            timeToExplosion = 3000;
+            timeToExplosion = 3000.0;
             explosionPower = 3;
         }
     }

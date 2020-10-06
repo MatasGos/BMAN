@@ -8,6 +8,7 @@ using System.Net.Security;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace Model
 {
@@ -17,7 +18,6 @@ namespace Model
         public int xSize { get; set; }
         public int ySize { get; set; }
         public Unit[,] units { get; set; }
-        public Explosive[,] explosives { get; set; }
 
         public Map(int xSize, int ySize)
         {
@@ -193,15 +193,116 @@ namespace Model
             return b;
         }
 
-        public void PlaceExplosive(Player player)
+        public void UpdateExplosives(double time)
         {
-            if (player.action == "")
+            for (int x = 0; x < xSize; x++)
+            {
+                for (int y = 0; y < ySize; y++)
+                {
+                    if (units[x, y] is Explosion)
+                    {
+                        Explosion explosion = (Explosion)units[x, y];
+                        if (explosion.placeTime + explosion.explosionDuration < time)
+                        {
+                            units[x, y] = null;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void PlaceRegularExplosion(int xTile, int yTile, double placeTime, ExplosiveAbstractFactory factory)
+        {
+            //TODO: Get explosion power from the player
+            int explosionPower = 3;
+
+            bool topFinished = false;
+            bool bottomFinished = false;
+            bool leftFinished = false;
+            bool rightFinished = false;
+
+            if (units[xTile, yTile] != null)
+            {
                 return;
+            }
+            units[xTile, yTile] = factory.CreateExplosion(xTile, yTile, placeTime);
+
+            for (int i = 1; i < explosionPower; i++)
+            {
+                if (!topFinished)
+                {
+                    if (units[xTile, yTile - i] == null)
+                    {
+                        units[xTile, yTile - i] = factory.CreateExplosion(xTile, yTile - i, placeTime);
+                    }
+                    else
+                    {
+                        topFinished = true;
+                    }
+                }
+                if (!bottomFinished)
+                {
+                    if (units[xTile, yTile + i] == null)
+                    {
+                        units[xTile, yTile + i] = factory.CreateExplosion(xTile, yTile + i, placeTime);
+                    }
+                    else
+                    {
+                        bottomFinished = true;
+                    }
+                }
+                if (!leftFinished)
+                {
+                    if (units[xTile - i, yTile] == null)
+                    {
+                        units[xTile - i, yTile] = factory.CreateExplosion(xTile - i, yTile, placeTime);
+                    }
+                    else
+                    {
+                        leftFinished = true;
+                    }
+                }
+                if (!rightFinished)
+                {
+                    if (units[xTile + i, yTile] == null)
+                    {
+                        units[xTile + i, yTile] = factory.CreateExplosion(xTile + i, yTile, placeTime);
+                    }
+                    else
+                    {
+                        rightFinished = true;
+                    }
+                }
+            }
+        }
+
+        public void PlaceSuperExplosion(int xTile, int yTile, double placeTime, ExplosiveAbstractFactory factory)
+        {
+            //TODO: Get explosion power from the player
+            int explosionPower = 3;
+
+            for (int x = Math.Max(1, xTile - explosionPower); x <= Math.Min(xTile + explosionPower, xSize - 2); x++)
+            {
+                for (int y = Math.Max(1, yTile - explosionPower); y <= Math.Min(yTile + explosionPower, ySize - 2); y++)
+                {
+                    if (units[x, y] == null)
+                    {
+                        units[x, y] = factory.CreateExplosion(x, y, placeTime);
+                    }
+                }
+            }
+        }
+
+        public void PlaceExplosive(Player player, double placeTime)
+        {
+            if (player.action == "") return;
 
             int[] playerCenter = getCenterPlayer(new int[] { player.x, player.y });
             int[] playerTile = getTile(playerCenter[0], playerCenter[1]);
-            Explosive toPlace = null;
+
             ExplosiveAbstractFactory factory;
+            Explosive toPlace = null;
+
             if (units[playerTile[0], playerTile[1]] == null)
             {
                 if (player.HasBoost("superexplosive"))
@@ -212,7 +313,8 @@ namespace Model
                 {
                     factory = new RegularExplosiveConcreteFactory();
                 }
-                switch (player.action)
+
+                /*switch (player.action)
                 {
                     case "placeBomb":
                         toPlace = factory.CreateBomb(playerTile[0], playerTile[1]);
@@ -221,11 +323,14 @@ namespace Model
                         toPlace = factory.CreateMine(playerTile[0], playerTile[1]);
                         break;
                     default:
-                        break;
+                        throw new Exception();
                 }
                 
+                units[playerTile[0], playerTile[1]] = toPlace;*/
 
-                units[playerTile[0], playerTile[1]] = toPlace;
+                //Find where to place explosive blacks and place 
+                //units[playerTile[0], playerTile[1]] = factory.CreateExplosion(playerTile[0], playerTile[1], placeTime);
+                PlaceRegularExplosion(playerTile[0], playerTile[1], placeTime, factory);
             }
 
             player.action = "";

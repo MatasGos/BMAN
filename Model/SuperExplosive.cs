@@ -8,7 +8,6 @@ namespace Model
     {
         public SuperExplosive(int x, int y) : base(x, y)
         {
-
         }
     }
 }

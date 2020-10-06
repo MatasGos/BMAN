@@ -8,6 +8,7 @@ namespace Model
     {
         public string boostType { get; set; }
         public int timeLeft { get; set; } //in ticks?
+
         public Boost(int x, int y, string boostType, int timeLeft) : base(x, y)
         {
             isBreakable = false;

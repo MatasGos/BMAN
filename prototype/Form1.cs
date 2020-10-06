@@ -177,8 +177,6 @@ namespace prototype
 
         }
 
-        
-
         //Form key press event handler
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {

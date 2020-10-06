@@ -6,9 +6,10 @@ namespace Model
 {
     public abstract class Unit
     {
-        public int x;
-        public int y;
-        public bool isSolid;
+        public int x { get; set; }
+        public int y { get; set; }
+        public bool isSolid { get; set; }
+
         public Unit(int x, int y)
         {
             this.x = x;

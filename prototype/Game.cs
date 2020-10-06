@@ -34,6 +34,8 @@ namespace prototype
         Bitmap minePic = new Bitmap("mine.png");
         Bitmap superbombPic = new Bitmap("superbomb.png");
         Bitmap superminePic = new Bitmap("supermine.png");
+        Bitmap explosionPic = new Bitmap("explosion.png");
+
         //Pictures saved as Color arrays
         Color[,] wallPicColor;
         Color[,] playerPicColor;
@@ -42,6 +44,7 @@ namespace prototype
         Color[,] minePicColor;
         Color[,] superbombPicColor;
         Color[,] superminePicColor;
+        Color[,] explosionPicColor;
 
         public bool gameStarted = false;    //Bool showing if the game has started or ended/hasn't started yet
 
@@ -66,6 +69,7 @@ namespace prototype
             minePicColor = GetPicColor(minePic);
             superbombPicColor = GetPicColor(superbombPic);
             superminePicColor = GetPicColor(superminePic);
+            explosionPicColor = GetPicColor(explosionPic);
 
             //Draw background
             for (int x = 0; x < background.Width; x++)
@@ -93,7 +97,6 @@ namespace prototype
                     }
                 }
             }
-          
         }
 
         public void drawMap()
@@ -101,7 +104,6 @@ namespace prototype
             //Get map data and get a background picture copy
             Unit[,] blocks = map.getUnits();
             field = getMap();
-
 
             Color[,] picColor = null;
             //Lock the Bitmap bits for faster drawing
@@ -118,6 +120,9 @@ namespace prototype
                         {
                             case Box x:
                                 picColor = boxPicColor;
+                                break;
+                            case Explosion x:
+                                picColor = explosionPicColor;
                                 break;
                             case Bomb x:
                                 picColor = bombPicColor;

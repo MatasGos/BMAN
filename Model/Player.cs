@@ -12,6 +12,7 @@ namespace Model
         public int x { get; set; }
         public int y { get; set; }
         public int speed { get; set; }
+        public int explosionPower { get; set; }
         public int directionx { get; set; }
         public int directiony { get; set; }
         public string action { get; set; }
@@ -19,12 +20,14 @@ namespace Model
 
         public Player(string id, string username)
         {
+            this.action = "";
             this.id = id;
             this.username = username;
             //DEFAULT VALUES
             this.x = 26;
             this.y = 26;
             this.speed = 3;
+            this.explosionPower = 3;
             boosts = new List<Boost>();
         }
 
