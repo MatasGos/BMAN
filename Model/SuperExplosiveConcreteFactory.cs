@@ -13,6 +13,7 @@ namespace Model
 
         public override Explosive CreateExplosion(int x, int y)
         {
+            //return new SuperExplosive(x, y);
             throw new NotImplementedException();
         }
 

@@ -18,9 +18,11 @@ namespace Model
                     toReturn = new Box(x, y);
                     break;
                 case "Boost":
+                    //toReturn = new Boost(x, y, boostType, timeleft);
                     throw new NotImplementedException();
                     break;
                 case "Teleporter":
+                    //toReturn = new Teleporter(x,y);
                     throw new NotImplementedException();
                     break;
                 default:

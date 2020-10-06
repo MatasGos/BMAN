@@ -14,6 +14,7 @@ namespace Model
 
         public override Explosive CreateExplosion(int x, int y)
         {
+            //return new Explosive(x, y);
             throw new NotImplementedException();
         }
 
