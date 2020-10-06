@@ -14,7 +14,7 @@ namespace Model
         public int speed { get; set; }
         public int directionx { get; set; }
         public int directiony { get; set; }
-        public bool placeBomb { get; set; }
+        public string action { get; set; }
 
         public Player(string id, string username)
         {
@@ -35,6 +35,11 @@ namespace Model
         {
             directionx = px;
             directiony = py;
+        }
+
+        public void SetAction(string action)
+        {
+            this.action = action;
         }
     }
 }

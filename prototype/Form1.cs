@@ -195,6 +195,7 @@ namespace prototype
         {
             int x = 0;
             int y = 0;
+            string action = "";
 
             if (_keyLeft)
             {
@@ -214,10 +215,11 @@ namespace prototype
             }
             if (_keyBomb)
             {
-                SendPlaceBombCommand();
+                action = "placeBomb";
             }
-
+            SendActionCommand(action);
             SendMoveCommand(x, y);
+            
         }
 
         //Send a move command to the server
@@ -234,11 +236,11 @@ namespace prototype
         }
 
         //Send a place bomb command to the server
-        public async void SendPlaceBombCommand()
+        public async void SendActionCommand(string action)
         {
             try
             {
-                await connection.InvokeAsync("SendPlaceBombMessage");
+                await connection.InvokeAsync("SendActionMessage", action);
             }
             catch (Exception ex)
             {

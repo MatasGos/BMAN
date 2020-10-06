@@ -49,11 +49,11 @@ namespace Server.Hubs
         }
 
         //Sends a place bomb message
-        public async Task SendPlaceBombMessage()
+        public async Task SendActionMessage(string action)
         {
             await Task.Run(() =>
             {
-                Server.GetPlayerById(Context.ConnectionId).placeBomb = true;
+                Server.GetPlayerById(Context.ConnectionId).SetAction(action);
             });
         }
     }

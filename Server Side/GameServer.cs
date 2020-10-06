@@ -55,8 +55,15 @@ namespace Server
         {
             foreach(var player in Server.GetPlayers())
             {
+                switch(player.action)
+                {
+                    case "placeBomb":
+                        map.PlaceBomb(player);
+                        break;
+                    default:
+                        break;
+                }
                 map.Move(player);
-                map.PlaceBomb(player);
             }
 
             string jsonMap = JsonConvert.SerializeObject(map, settings);
@@ -64,5 +71,6 @@ namespace Server
 
             context.All.SendAsync("SendData", jsonPlayers, jsonMap);
         }
+
     }
 }

@@ -94,11 +94,42 @@ namespace prototype
             Unit[,] blocks = map.getUnits();
             field = getMap();
 
+
+            Color[,] picColor = null;
             //Lock the Bitmap bits for faster drawing
             LockBits();
-            
-            //Draw boxes
+
+            //Draw units
             for (int i = 0; i < xSize; i++)
+            {
+                for (int j = 0; j < ySize; j++)
+                {
+                    if (blocks[i, j] != null && !(blocks[i,j] is Wall))
+                    {
+                        switch (blocks[i,j])
+                        {
+                            case Box x:
+                                picColor = boxPicColor;
+                                break;
+                            case Bomb x:
+                                picColor = bombPicColor;
+                                break;
+                            default:
+                                break;
+                        }
+                        for (int x = 0; x < unitSize; x++)
+                        {
+                            for (int y = 0; y < unitSize; y++)
+                            {
+                                SetPixel(i * unitSize + x, j * unitSize + y, picColor[x, y]);
+                            }
+                        }
+                    }
+                }
+            }
+
+            //Draw boxes
+            /*for (int i = 0; i < xSize; i++)
             {
                 for (int j = 0; j < ySize; j++)
                 {
@@ -131,7 +162,7 @@ namespace prototype
                         }
                     }
                 }
-            }
+            }*/
 
             //Draw players
             foreach (Player p in players)
