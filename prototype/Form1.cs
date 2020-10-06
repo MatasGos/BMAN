@@ -24,7 +24,7 @@ namespace prototype
         private Game game;                  //Game logic object for user-side
 
         private string username;                                        //Player's chosen username
-        private bool _keyTop, _keyLeft, _keyRight, _keyBot, _keyBomb;   //Booleans to see if the key was pressed at a specific time frame
+        private bool _keyTop, _keyLeft, _keyRight, _keyBot, _keyBomb, _keyMine;   //Booleans to see if the key was pressed at a specific time frame
 
         //Json settings
         JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
@@ -154,7 +154,30 @@ namespace prototype
             {
                 _keyBomb = false;
             }
+            if (e.KeyCode == Keys.M)
+            {
+                _keyMine = false;
+            }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (!game.gameStarted)
+                return;
+            connection.InvokeAsync("DebugAddBoost");
+        }
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (!game.gameStarted)
+                return;
+            connection.InvokeAsync("DebugRemoveBoost");
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        
 
         //Form key press event handler
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -178,6 +201,10 @@ namespace prototype
             if (e.KeyCode == Keys.Space)
             {
                 _keyBomb = true;
+            }
+            if (e.KeyCode == Keys.M)
+            {
+                _keyMine = true;
             }
         }
 
@@ -216,6 +243,10 @@ namespace prototype
             if (_keyBomb)
             {
                 action = "placeBomb";
+            }
+            if (_keyMine)
+            {
+                action = "placeMine";
             }
             SendActionCommand(action);
             SendMoveCommand(x, y);

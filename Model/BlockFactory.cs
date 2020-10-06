@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Model
 {
-    public class UnitBlockFactory
+    public class BlockFactory
     {
-        public Unit CreateBlock(string type, int x, int y)
+        public Block CreateBlock(string type, int x, int y)
         {
-            Unit toReturn = null;
+            Block toReturn = null;
             switch(type)
             {
                 case "Wall":

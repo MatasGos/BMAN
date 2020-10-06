@@ -31,12 +31,17 @@ namespace prototype
         Bitmap playerPic = new Bitmap("p1.png");
         Bitmap boxPic = new Bitmap("box.png");
         Bitmap bombPic = new Bitmap("bomb.jpg");
-
+        Bitmap minePic = new Bitmap("mine.png");
+        Bitmap superbombPic = new Bitmap("superbomb.png");
+        Bitmap superminePic = new Bitmap("supermine.png");
         //Pictures saved as Color arrays
         Color[,] wallPicColor;
         Color[,] playerPicColor;
         Color[,] boxPicColor;
         Color[,] bombPicColor;
+        Color[,] minePicColor;
+        Color[,] superbombPicColor;
+        Color[,] superminePicColor;
 
         public bool gameStarted = false;    //Bool showing if the game has started or ended/hasn't started yet
 
@@ -58,6 +63,9 @@ namespace prototype
             playerPicColor = GetPicColor(playerPic);
             boxPicColor = GetPicColor(boxPic);
             bombPicColor = GetPicColor(bombPic);
+            minePicColor = GetPicColor(minePic);
+            superbombPicColor = GetPicColor(superbombPic);
+            superminePicColor = GetPicColor(superminePic);
 
             //Draw background
             for (int x = 0; x < background.Width; x++)
@@ -113,6 +121,15 @@ namespace prototype
                                 break;
                             case Bomb x:
                                 picColor = bombPicColor;
+                                break;
+                            case Mine x:
+                                picColor = minePicColor;
+                                break;
+                            case SuperBomb x:
+                                picColor = superbombPicColor;
+                                break;
+                            case SuperMine x:
+                                picColor = superminePicColor;
                                 break;
                             default:
                                 break;

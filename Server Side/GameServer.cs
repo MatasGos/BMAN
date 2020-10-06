@@ -55,14 +55,7 @@ namespace Server
         {
             foreach(var player in Server.GetPlayers())
             {
-                switch(player.action)
-                {
-                    case "placeBomb":
-                        map.PlaceBomb(player);
-                        break;
-                    default:
-                        break;
-                }
+                map.PlaceExplosive(player);
                 map.Move(player);
             }
 

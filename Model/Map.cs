@@ -34,7 +34,7 @@ namespace Model
         //Generates outter perimeter and also inner walls
         public void generateWalls()
         {
-            UnitBlockFactory factory = new UnitBlockFactory();
+            BlockFactory factory = new BlockFactory();
             for (int x = 0; x < xSize; x++)
             {
                 for (int y = 0; y < ySize; y++)
@@ -69,14 +69,6 @@ namespace Model
                                     units[x, y] = factory.CreateBlock("Wall", x, y);
                                 }
                             }
-                               /* if (x <= xSize / 2)
-                                {
-                                    units[x, y] = new Box(x, y);
-                                }
-                                else
-                                {
-                                    units[x, y] = new Bomb(x, y);
-                                }*/
                         }
                     }
                 }
@@ -201,14 +193,39 @@ namespace Model
             return b;
         }
 
-        public void PlaceBomb(Player player)
+        public void PlaceExplosive(Player player)
         {
+            if (player.action == "")
+                return;
+
             int[] playerCenter = getCenterPlayer(new int[] { player.x, player.y });
             int[] playerTile = getTile(playerCenter[0], playerCenter[1]);
-
+            Explosive toPlace = null;
+            ExplosiveAbstractFactory factory;
             if (units[playerTile[0], playerTile[1]] == null)
             {
-                units[playerTile[0], playerTile[1]] = new Bomb(playerTile[0], playerTile[1]);
+                if (player.HasBoost("superexplosive"))
+                {
+                    factory = new SuperExplosiveConcreteFactory();
+                }
+                else
+                {
+                    factory = new RegularExplosiveConcreteFactory();
+                }
+                switch (player.action)
+                {
+                    case "placeBomb":
+                        toPlace = factory.CreateBomb(playerTile[0], playerTile[1]);
+                        break;
+                    case "placeMine":
+                        toPlace = factory.CreateMine(playerTile[0], playerTile[1]);
+                        break;
+                    default:
+                        break;
+                }
+                
+
+                units[playerTile[0], playerTile[1]] = toPlace;
             }
 
             player.action = "";

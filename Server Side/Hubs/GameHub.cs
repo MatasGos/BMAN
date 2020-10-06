@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Model;
 
 namespace Server.Hubs
 {
@@ -54,6 +55,24 @@ namespace Server.Hubs
             await Task.Run(() =>
             {
                 Server.GetPlayerById(Context.ConnectionId).SetAction(action);
+            });
+        }
+
+        public async Task DebugAddBoost()
+        {
+            await Task.Run(() =>
+            {
+                Server.GetPlayerById(Context.ConnectionId).AddBoost(new Boost(0, 0, "superexplosive", -1));
+                Console.WriteLine("Add");
+            });
+        }
+
+        public async Task DebugRemoveBoost()
+        {
+            await Task.Run(() =>
+            {
+                Server.GetPlayerById(Context.ConnectionId).RemoveBoostDebug("superexplosive");
+                Console.WriteLine("Remove");
             });
         }
     }

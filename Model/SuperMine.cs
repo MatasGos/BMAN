@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Model
 {
-    public class Bomb : RegularExplosive
+    public class SuperMine : SuperExplosive
     {
-        public Bomb(int x, int y) : base(x, y)
+        public SuperMine(int x, int y) : base(x, y)
         {
             isSolid = false;
-            timeToExplosion = 4000;
+            timeToExplosion = -1;
             explosionPower = 2;
         }
     }
