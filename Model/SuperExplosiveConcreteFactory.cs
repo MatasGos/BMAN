@@ -6,9 +6,9 @@ namespace Model
 {
     public class SuperExplosiveConcreteFactory : ExplosiveAbstractFactory
     {
-        public override Explosive CreateBomb(int x, int y)
+        public override Explosive CreateBomb(int x, int y, int explosionPower, double placeTime)
         {
-            return new SuperBomb(x, y);
+            return new SuperBomb(x, y, explosionPower, placeTime);
         }
 
         public override Explosive CreateExplosion(int x, int y, double placeTime)

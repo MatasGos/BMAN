@@ -6,11 +6,13 @@ namespace Model
 {
     public class SuperBomb : SuperExplosive
     {
-        public SuperBomb(int x, int y) : base(x, y)
+        public double detonationTime { get; set; }
+        public SuperBomb(int x, int y, int explosionPower, double placeTime) : base(x, y)
         {
             isSolid = false;
             timeToExplosion = 3000.0;
-            explosionPower = 3;
+            this.explosionPower = explosionPower;
+            detonationTime = placeTime + timeToExplosion;
         }
     }
 }

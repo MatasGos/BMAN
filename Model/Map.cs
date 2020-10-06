@@ -199,93 +199,95 @@ namespace Model
             {
                 for (int y = 0; y < ySize; y++)
                 {
+                    ExplosiveAbstractFactory factory;
                     if (units[x, y] is Explosion)
                     {
                         Explosion explosion = (Explosion)units[x, y];
-                        if (explosion.placeTime + explosion.explosionDuration < time)
+                        if (explosion.removalTime < time)
                         {
                             units[x, y] = null;
+                        }
+                    }
+                    else if (units[x, y] is Bomb)
+                    {
+                        factory = new RegularExplosiveConcreteFactory();
+                        Bomb bomb = (Bomb)units[x, y];
+
+                        if (bomb.detonationTime < time)
+                        {
+                            PlaceRegularExplosion(x, y, bomb.explosionPower, time, factory);
+                        }
+                    }
+                    else if (units[x, y] is SuperBomb)
+                    {
+                        factory = new SuperExplosiveConcreteFactory();
+                        SuperBomb bomb = (SuperBomb)units[x, y];
+
+                        if (bomb.detonationTime < time)
+                        {
+                            PlaceSuperExplosion(x, y, bomb.explosionPower, time, factory);
                         }
                     }
                 }
             }
         }
 
-        public void PlaceRegularExplosion(int xTile, int yTile, double placeTime, ExplosiveAbstractFactory factory)
+        public void PlaceRegularExplosion(int xTile, int yTile, int explosionPower, double placeTime, ExplosiveAbstractFactory factory)
         {
-            //TODO: Get explosion power from the player
-            int explosionPower = 3;
-
             bool topFinished = false;
             bool bottomFinished = false;
             bool leftFinished = false;
             bool rightFinished = false;
 
-            if (units[xTile, yTile] != null)
-            {
-                return;
-            }
             units[xTile, yTile] = factory.CreateExplosion(xTile, yTile, placeTime);
 
             for (int i = 1; i < explosionPower; i++)
             {
                 if (!topFinished)
                 {
-                    if (units[xTile, yTile - i] == null)
-                    {
-                        units[xTile, yTile - i] = factory.CreateExplosion(xTile, yTile - i, placeTime);
-                    }
-                    else
-                    {
-                        topFinished = true;
-                    }
+                    topFinished = RegularExplosionCreation(xTile, yTile - i, placeTime, topFinished, factory);
                 }
                 if (!bottomFinished)
                 {
-                    if (units[xTile, yTile + i] == null)
-                    {
-                        units[xTile, yTile + i] = factory.CreateExplosion(xTile, yTile + i, placeTime);
-                    }
-                    else
-                    {
-                        bottomFinished = true;
-                    }
+                    bottomFinished = RegularExplosionCreation(xTile, yTile + i, placeTime, bottomFinished, factory);
                 }
                 if (!leftFinished)
                 {
-                    if (units[xTile - i, yTile] == null)
-                    {
-                        units[xTile - i, yTile] = factory.CreateExplosion(xTile - i, yTile, placeTime);
-                    }
-                    else
-                    {
-                        leftFinished = true;
-                    }
+                    leftFinished = RegularExplosionCreation(xTile - i, yTile, placeTime, leftFinished, factory);
                 }
                 if (!rightFinished)
                 {
-                    if (units[xTile + i, yTile] == null)
-                    {
-                        units[xTile + i, yTile] = factory.CreateExplosion(xTile + i, yTile, placeTime);
-                    }
-                    else
-                    {
-                        rightFinished = true;
-                    }
+                    rightFinished = RegularExplosionCreation(xTile + i, yTile, placeTime, rightFinished, factory);
                 }
             }
         }
 
-        public void PlaceSuperExplosion(int xTile, int yTile, double placeTime, ExplosiveAbstractFactory factory)
+        public bool RegularExplosionCreation(int x, int y, double placeTime, bool isFinished, ExplosiveAbstractFactory factory)
         {
-            //TODO: Get explosion power from the player
-            int explosionPower = 3;
+            if (units[x, y] == null)
+            {
+                units[x, y] = factory.CreateExplosion(x, y, placeTime);
+            }
+            else
+            {
+                if (units[x, y] is Box)
+                {
+                    units[x, y] = factory.CreateExplosion(x, y, placeTime);
+                }
+                isFinished = true;
+            }
+            return isFinished;
+        }
+
+        public void PlaceSuperExplosion(int xTile, int yTile, int explosionPower, double placeTime, ExplosiveAbstractFactory factory)
+        {
+            units[xTile, yTile] = factory.CreateExplosion(xTile, yTile, placeTime);
 
             for (int x = Math.Max(1, xTile - explosionPower); x <= Math.Min(xTile + explosionPower, xSize - 2); x++)
             {
                 for (int y = Math.Max(1, yTile - explosionPower); y <= Math.Min(yTile + explosionPower, ySize - 2); y++)
                 {
-                    if (units[x, y] == null)
+                    if (units[x, y] == null || units[x, y] is Box)
                     {
                         units[x, y] = factory.CreateExplosion(x, y, placeTime);
                     }
@@ -314,10 +316,10 @@ namespace Model
                     factory = new RegularExplosiveConcreteFactory();
                 }
 
-                /*switch (player.action)
+                switch (player.action)
                 {
                     case "placeBomb":
-                        toPlace = factory.CreateBomb(playerTile[0], playerTile[1]);
+                        toPlace = factory.CreateBomb(playerTile[0], playerTile[1], player.explosionPower, placeTime);
                         break;
                     case "placeMine":
                         toPlace = factory.CreateMine(playerTile[0], playerTile[1]);
@@ -326,11 +328,11 @@ namespace Model
                         throw new Exception();
                 }
                 
-                units[playerTile[0], playerTile[1]] = toPlace;*/
+                units[playerTile[0], playerTile[1]] = toPlace;
 
                 //Find where to place explosive blacks and place 
                 //units[playerTile[0], playerTile[1]] = factory.CreateExplosion(playerTile[0], playerTile[1], placeTime);
-                PlaceRegularExplosion(playerTile[0], playerTile[1], placeTime, factory);
+                //PlaceRegularExplosion(playerTile[0], playerTile[1], player.explosionPower, placeTime, factory);
             }
 
             player.action = "";

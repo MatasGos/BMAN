@@ -6,11 +6,13 @@ namespace Model
 {
     public class Bomb : RegularExplosive
     {
-        public Bomb(int x, int y) : base(x, y)
+        public double detonationTime { get; set; }
+        public Bomb(int x, int y, int explosionPower, double placeTime) : base(x, y)
         {
             isSolid = false;
             timeToExplosion = 2000.0;
-            explosionPower = 2;
+            this.explosionPower = explosionPower;
+            detonationTime = placeTime + timeToExplosion;
         }
     }
 }
