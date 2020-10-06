@@ -34,7 +34,7 @@ namespace Model
         //Generates outter perimeter and also inner walls
         public void generateWalls()
         {
-            BlockFactory factory = new BlockFactory();
+            Factory factory = new BlockFactory();
             for (int x = 0; x < xSize; x++)
             {
                 for (int y = 0; y < ySize; y++)

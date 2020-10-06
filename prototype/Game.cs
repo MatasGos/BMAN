@@ -145,42 +145,6 @@ namespace prototype
                 }
             }
 
-            //Draw boxes
-            /*for (int i = 0; i < xSize; i++)
-            {
-                for (int j = 0; j < ySize; j++)
-                {
-                    if (blocks[i, j] != null && blocks[i, j] is Box)
-                    {
-                        for (int x = 0; x < unitSize; x++)
-                        {
-                            for (int y = 0; y < unitSize; y++)
-                            {
-                                SetPixel(i * unitSize + x, j * unitSize + y, boxPicColor[x, y]);
-                            }
-                        }
-                    }
-                }
-            }
-
-            //Draw bombs
-            for (int i = 0; i < xSize; i++)
-            {
-                for (int j = 0; j < ySize; j++)
-                {
-                    if (blocks[i, j] != null && blocks[i, j] is Bomb)
-                    {
-                        for (int x = 0; x < unitSize; x++)
-                        {
-                            for (int y = 0; y < unitSize; y++)
-                            {
-                                SetPixel(i * unitSize + x, j * unitSize + y, bombPicColor[x, y]);
-                            }
-                        }
-                    }
-                }
-            }*/
-
             //Draw players
             foreach (Player p in players)
             {

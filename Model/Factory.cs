@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Model
 {
-    class Factory
+    public abstract class Factory
     {
+        public abstract Block CreateBlock(string type, int x, int y);
     }
 }

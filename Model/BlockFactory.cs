@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Model
 {
-    public class BlockFactory
+    public class BlockFactory : Factory
     {
-        public Block CreateBlock(string type, int x, int y)
+        public override Block CreateBlock(string type, int x, int y)
         {
             Block toReturn = null;
             switch(type)
