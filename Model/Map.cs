@@ -34,7 +34,7 @@ namespace Model
         //Generates outter perimeter and also inner walls
         public void generateWalls()
         {
-            Factory factory = FactorySingleton.GetInstance();
+            Factory factory = BlockFactorySingleton.GetInstance();
 
             for (int x = 0; x < xSize; x++)
             {

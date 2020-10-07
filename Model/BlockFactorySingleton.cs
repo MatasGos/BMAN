@@ -4,17 +4,16 @@ using System.Text;
 
 namespace Model
 {
-    //TODO: Rename to BlockFactorySingleton???
-    public class FactorySingleton : BlockFactory
+    public class BlockFactorySingleton : BlockFactory
     {
-        private static FactorySingleton instance = null;
+        private static BlockFactorySingleton instance = null;
         private static object lockObject = new object();
 
-        public FactorySingleton()
+        public BlockFactorySingleton()
         {
         }
 
-        public static FactorySingleton GetInstance()
+        public static BlockFactorySingleton GetInstance()
         {
             if (instance == null)
             {
@@ -22,7 +21,7 @@ namespace Model
                 {
                     if (instance == null)
                     {
-                        instance = new FactorySingleton();
+                        instance = new BlockFactorySingleton();
                     }
                 }
             }
