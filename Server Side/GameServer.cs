@@ -58,6 +58,7 @@ namespace Server
             {
                 map.PlaceExplosive(player, sw.Elapsed.TotalMilliseconds);
                 map.Move(player);
+                map.PickupBoost(player);
             }
             map.UpdateExplosives(sw.Elapsed.TotalMilliseconds);
 

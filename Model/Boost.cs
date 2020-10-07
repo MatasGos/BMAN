@@ -7,14 +7,29 @@ namespace Model
     public class Boost : Block
     {
         public string boostType { get; set; }
-        public int timeLeft { get; set; } //in ticks?
+        public BoostAlgorithm algorithm { get; set; }
+        //public int timeLeft { get; set; } //in ticks?
 
-        public Boost(int x, int y, string boostType, int timeLeft) : base(x, y)
+        public Boost(int x, int y) : base(x, y)
         {
             isBreakable = false;
             isSolid = false;
-            this.boostType = boostType;
-            this.timeLeft = timeLeft;
+            randBoost();
+        }
+        private void randBoost()
+        {
+            Random rand = new Random();
+            int n = rand.Next(100);
+            if (n < 50)
+            {
+                this.boostType = "speed";
+                algorithm = new SpeedBoostAlgorithm();
+            }
+            else if (n < 100)
+            {
+                this.boostType = "explosion";
+                algorithm = new ExplosionRangeBoostAlgorithm();
+            }
         }
     }
 }

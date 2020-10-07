@@ -62,7 +62,7 @@ namespace Server.Hubs
         {
             await Task.Run(() =>
             {
-                Server.GetPlayerById(Context.ConnectionId).AddBoost(new Boost(0, 0, "superexplosive", -1));
+                Server.GetPlayerById(Context.ConnectionId).AddBoost(new Boost(0, 0));
                 Console.WriteLine("Add");
             });
         }

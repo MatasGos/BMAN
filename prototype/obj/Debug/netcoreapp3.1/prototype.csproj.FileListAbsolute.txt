@@ -124,8 +124,6 @@ C:\Users\matgos\Documents\GitHub\Bomberman-prototype\prototype\bin\Debug\netcore
 C:\Users\matgos\Documents\GitHub\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
 C:\Users\matgos\Documents\GitHub\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll
 C:\Users\matgos\Documents\GitHub\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\System.Threading.Channels.dll
-C:\Users\matgos\Documents\GitHub\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\ClassLibrary1.dll
-C:\Users\matgos\Documents\GitHub\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\ClassLibrary1.pdb
 C:\Users\matgos\Documents\GitHub\Bomberman-prototype\prototype\obj\Debug\netcoreapp3.1\prototype.csproj.CopyComplete
 C:\Users\matgos\Documents\GitHub\Bomberman-prototype\prototype\obj\Debug\netcoreapp3.1\prototype.genruntimeconfig.cache
 C:\Users\User\Desktop\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\Model.dll
@@ -170,3 +168,6 @@ C:\Users\Valdas\Documents\GitHub\Bomberman-prototype\prototype\obj\Debug\netcore
 C:\Users\Valdas\Documents\GitHub\Bomberman-prototype\prototype\obj\Debug\netcoreapp3.1\prototype.dll
 C:\Users\Valdas\Documents\GitHub\Bomberman-prototype\prototype\obj\Debug\netcoreapp3.1\prototype.pdb
 C:\Users\Valdas\Documents\GitHub\Bomberman-prototype\prototype\obj\Debug\netcoreapp3.1\prototype.genruntimeconfig.cache
+C:\Users\matgos\Documents\GitHub\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\matgos\Documents\GitHub\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\Model.dll
+C:\Users\matgos\Documents\GitHub\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\Model.pdb

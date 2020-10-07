@@ -32,6 +32,7 @@ namespace prototype
         Bitmap boxPic = new Bitmap("box.png");
         Bitmap bombPic = new Bitmap("bomb.jpg");
         Bitmap minePic = new Bitmap("mine.png");
+        Bitmap boostPic = new Bitmap("mine.png");
         Bitmap superbombPic = new Bitmap("superbomb.png");
         Bitmap superminePic = new Bitmap("supermine.png");
         Bitmap explosionPic = new Bitmap("explosion.png");
@@ -42,6 +43,7 @@ namespace prototype
         Color[,] boxPicColor;
         Color[,] bombPicColor;
         Color[,] minePicColor;
+        Color[,] boostPicColor;
         Color[,] superbombPicColor;
         Color[,] superminePicColor;
         Color[,] explosionPicColor;
@@ -67,6 +69,7 @@ namespace prototype
             boxPicColor = GetPicColor(boxPic);
             bombPicColor = GetPicColor(bombPic);
             minePicColor = GetPicColor(minePic);
+            boostPicColor = GetPicColor(boostPic);
             superbombPicColor = GetPicColor(superbombPic);
             superminePicColor = GetPicColor(superminePic);
             explosionPicColor = GetPicColor(explosionPic);
@@ -129,6 +132,9 @@ namespace prototype
                                 break;
                             case Mine x:
                                 picColor = minePicColor;
+                                break;
+                            case Boost x:
+                                picColor = boostPicColor;
                                 break;
                             case SuperBomb x:
                                 picColor = superbombPicColor;

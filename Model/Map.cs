@@ -272,7 +272,17 @@ namespace Model
             {
                 if (units[x, y] is Box)
                 {
-                    units[x, y] = factory.CreateExplosion(x, y, placeTime);
+                    Random rand = new Random();
+                    int n = rand.Next(100);
+                    if (n < 30)
+                    {
+                        units[x, y] = new Boost(x, y);
+                    }
+                    else
+                    {
+                        units[x, y] = factory.CreateExplosion(x, y, placeTime);
+                    }
+                    
                 }
                 isFinished = true;
             }
@@ -336,6 +346,19 @@ namespace Model
             }
 
             player.action = "";
+        }
+        public void PickupBoost(Player player)
+        {
+            int[] playerCenter = getCenterPlayer(new int[] { player.x, player.y });
+            int[] playerTile = getTile(playerCenter[0], playerCenter[1]);
+
+            if (units[playerTile[0], playerTile[1]] is Boost)
+            {
+                Boost boost = (Boost)units[playerTile[0], playerTile[1]];
+                boost.algorithm.UseBoost(player);
+
+                units[playerTile[0], playerTile[1]] = null;
+            }
         }
     }
 }

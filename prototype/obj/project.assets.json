@@ -631,23 +631,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\matgos\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\prototype\\prototype.csproj",
+      "projectUniqueName": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\prototype\\prototype.csproj",
       "projectName": "prototype",
-      "projectPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\prototype\\prototype.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\prototype\\obj\\",
+      "projectPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\prototype\\prototype.csproj",
+      "packagesPath": "C:\\Users\\matgos\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\prototype\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\matgos\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -660,8 +656,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Model\\Model.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Model\\Model.csproj"
+            "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\Model\\Model.csproj": {
+              "projectPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\Model\\Model.csproj"
             }
           }
         }
