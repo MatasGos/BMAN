@@ -7,6 +7,14 @@ namespace Model
 {
     public class Player
     {
+        public enum PlayerNum : int
+        {
+            P1 = 0,
+            P2 = 1,
+            P3 = 2,
+            P4 = 3
+        }
+        public PlayerNum num { get; set; }
         public string id { get; set; }
         public string username { get; set; }
         public int x { get; set; }
@@ -17,6 +25,14 @@ namespace Model
         public int directiony { get; set; }
         public string action { get; set; }
         public List<Boost> boosts { get; set; }
+
+        public Player()
+        {
+            this.action = "";
+            this.speed = 3;
+            this.explosionPower = 3;
+            boosts = new List<Boost>();
+        }
 
         public Player(string id, string username)
         {
@@ -29,6 +45,11 @@ namespace Model
             this.speed = 3;
             this.explosionPower = 3;
             boosts = new List<Boost>();
+        }
+
+        public Player(string id, string username, int num) : this(id, username)
+        {
+            this.num = (PlayerNum)num;
         }
 
         public int[] getPos()

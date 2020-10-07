@@ -19,7 +19,13 @@ namespace Server
 
         public static void AddPlayer(string id, string username)
         {
-            playerList.Add(new Player(id, username));
+            PlayerBuilder builder = new ConcretePlayerBuilder();
+            builder.BuildId(id);
+            builder.BuildUsername(username);
+            builder.BuildNum(playerList.Count);
+            Player player = builder.GetPlayer();
+            playerList.Add(player);
+            //playerList.Add(new Player(id, username));
         }
 
         public static List<Player> GetPlayers()

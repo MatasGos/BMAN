@@ -8,7 +8,7 @@ namespace Model
     {
         public override void UseBoost(Player player)
         {
-            player.speed += 5;
+            player.speed += 1;
         }
     }
 }
