@@ -264,7 +264,7 @@ namespace Model
 
         public bool RegularExplosionCreation(int x, int y, double placeTime, bool isFinished, ExplosiveAbstractFactory factory)
         {
-            if (units[x, y] == null)
+            if (units[x, y] == null || units[x, y] is Explosion)
             {
                 units[x, y] = factory.CreateExplosion(x, y, placeTime);
             }
@@ -287,7 +287,7 @@ namespace Model
             {
                 for (int y = Math.Max(1, yTile - explosionPower); y <= Math.Min(yTile + explosionPower, ySize - 2); y++)
                 {
-                    if (units[x, y] == null || units[x, y] is Box)
+                    if (units[x, y] == null || units[x, y] is Box || units[x, y] is Explosion)
                     {
                         units[x, y] = factory.CreateExplosion(x, y, placeTime);
                     }
