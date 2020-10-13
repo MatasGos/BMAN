@@ -277,7 +277,7 @@ namespace Model
                     int n = rand.Next(100);
                     if (n < 30)
                     {
-                        units[x, y] = new Boost(x, y);
+                        units[x, y] = PickBoostStrategy(x, y);
                     }
                     else
                     {
@@ -288,6 +288,24 @@ namespace Model
                 isFinished = true;
             }
             return isFinished;
+        }
+
+        public Boost PickBoostStrategy(int x, int y)
+        {
+            Boost boost = new Boost(x, y);
+            Random rand = new Random();
+            int n = rand.Next(100);
+            if (n < 50)
+            {
+                boost.boostType = "speed";
+                boost.algorithm = new SpeedBoostAlgorithm();
+            }
+            else if (n < 100)
+            {
+                boost.boostType = "explosion";
+                boost.algorithm = new ExplosionRangeBoostAlgorithm();
+            }
+            return boost;
         }
 
         public void PlaceSuperExplosion(int xTile, int yTile, int explosionPower, double placeTime, ExplosiveAbstractFactory factory)

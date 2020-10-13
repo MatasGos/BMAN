@@ -14,22 +14,6 @@ namespace Model
         {
             isBreakable = false;
             isSolid = false;
-            randBoost();
-        }
-        private void randBoost()
-        {
-            Random rand = new Random();
-            int n = rand.Next(100);
-            if (n < 50)
-            {
-                this.boostType = "speed";
-                algorithm = new SpeedBoostAlgorithm();
-            }
-            else if (n < 100)
-            {
-                this.boostType = "explosion";
-                algorithm = new ExplosionRangeBoostAlgorithm();
-            }
         }
     }
 }
