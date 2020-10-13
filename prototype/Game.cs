@@ -106,11 +106,33 @@ namespace prototype
         {
             //Get map data and get a background picture copy
             Unit[,] blocks = map.getUnits();
+            Boost[,] boosts = map.getBoosts();
             field = getMap();
 
             Color[,] picColor = null;
             //Lock the Bitmap bits for faster drawing
             LockBits();
+
+            //Draw boosts
+            for (int i = 0; i < xSize; i++)
+            {
+                for (int j = 0; j < ySize; j++)
+                {
+                    if (boosts[i, j] != null)
+                    {
+                        //TODO: Switch thru different boost pictures
+                        picColor = boostPicColor;
+
+                        for (int x = 0; x < unitSize; x++)
+                        {
+                            for (int y = 0; y < unitSize; y++)
+                            {
+                                SetPixel(i * unitSize + x, j * unitSize + y, picColor[x, y]);
+                            }
+                        }
+                    }
+                }
+            }
 
             //Draw units
             for (int i = 0; i < xSize; i++)
@@ -132,9 +154,6 @@ namespace prototype
                                 break;
                             case Mine x:
                                 picColor = minePicColor;
-                                break;
-                            case Boost x:
-                                picColor = boostPicColor;
                                 break;
                             case SuperBomb x:
                                 picColor = superbombPicColor;

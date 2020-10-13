@@ -18,17 +18,24 @@ namespace Model
         public int xSize { get; set; }
         public int ySize { get; set; }
         public Unit[,] units { get; set; }
+        public Boost[,] boosts { get; set; }
 
         public Map(int xSize, int ySize)
         {
             this.xSize = xSize;
             this.ySize = ySize;
             units = new Unit[xSize, ySize];
+            boosts = new Boost[xSize, ySize];
         }
 
         public Unit[,] getUnits()
         {
             return units;
+        }
+
+        public Boost[,] getBoosts()
+        {
+            return boosts;
         }
 
         //Generates outter perimeter and also inner walls
@@ -277,12 +284,9 @@ namespace Model
                     int n = rand.Next(100);
                     if (n < 30)
                     {
-                        units[x, y] = PickBoostStrategy(x, y);
+                        boosts[x, y] = PickBoostStrategy(x, y);
                     }
-                    else
-                    {
-                        units[x, y] = factory.CreateExplosion(x, y, placeTime);
-                    }
+                    units[x, y] = factory.CreateExplosion(x, y, placeTime);
                     
                 }
                 isFinished = true;
@@ -371,12 +375,12 @@ namespace Model
             int[] playerCenter = getCenterPlayer(new int[] { player.x, player.y });
             int[] playerTile = getTile(playerCenter[0], playerCenter[1]);
 
-            if (units[playerTile[0], playerTile[1]] is Boost)
+            if (boosts[playerTile[0], playerTile[1]] is Boost)
             {
-                Boost boost = (Boost)units[playerTile[0], playerTile[1]];
+                Boost boost = (Boost)boosts[playerTile[0], playerTile[1]];
                 boost.algorithm.UseBoost(player);
 
-                units[playerTile[0], playerTile[1]] = null;
+                boosts[playerTile[0], playerTile[1]] = null;
             }
         }
     }

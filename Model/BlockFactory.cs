@@ -18,7 +18,8 @@ namespace Model
                     toReturn = new Box(x, y);
                     break;
                 case "Boost":
-                    toReturn = new Boost(x, y);
+                    //Should be added to boosts array, not units
+                    toReturn = null;
                     break;
                 case "Teleporter":
                     //toReturn = new Teleporter(x,y);
