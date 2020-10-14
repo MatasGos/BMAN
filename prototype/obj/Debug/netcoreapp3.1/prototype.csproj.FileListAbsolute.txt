@@ -173,3 +173,5 @@ C:\Users\matgos\Documents\GitHub\Bomberman-prototype\prototype\bin\Debug\netcore
 C:\Users\matgos\Documents\GitHub\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\Model.pdb
 C:\Users\Valdas\Documents\GitHub\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authorization.dll
 C:\Users\Valdas\Documents\GitHub\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.SignalR.Core.dll
+C:\Users\User\Desktop\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authorization.dll
+C:\Users\User\Desktop\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.SignalR.Core.dll

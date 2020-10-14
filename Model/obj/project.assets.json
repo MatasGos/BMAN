@@ -1245,23 +1245,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Valdas\\.nuget\\packages\\": {},
+    "C:\\Users\\User\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Valdas\\Documents\\GitHub\\Bomberman-prototype\\Model\\Model.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Model\\Model.csproj",
       "projectName": "Model",
-      "projectPath": "C:\\Users\\Valdas\\Documents\\GitHub\\Bomberman-prototype\\Model\\Model.csproj",
-      "packagesPath": "C:\\Users\\Valdas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Valdas\\Documents\\GitHub\\Bomberman-prototype\\Model\\obj\\",
+      "projectPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Model\\Model.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Model\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Valdas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -17,13 +17,14 @@ namespace Server
     {
         const int xSize = 23;       //Number of blocks left to right
         const int ySize = 19;       //Number of blocks top to bottom
+
         public Map map;
         public bool isRunning = false;
         Stopwatch sw;
         public List<IPlayerObserver> playerList = new List<IPlayerObserver>();
         private IHubCallerClients context;
-        JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
+        JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
         
         public GameServer(IHubCallerClients _context)
         {
@@ -56,10 +57,12 @@ namespace Server
             }
 
         }
+
         public void AddObserver(IPlayerObserver player)
         {
             playerList.Add(player);
         }
+
         public void GameLoop()
         {
             int tickRate = 30;
@@ -82,6 +85,7 @@ namespace Server
                 }
             }
         }
+
         public void GameLogic()
         {
             foreach(Player player in playerList)
@@ -91,15 +95,16 @@ namespace Server
                 map.PickupBoost(player);
             }
             map.UpdateExplosives(sw.Elapsed.TotalMilliseconds);
+
             //TODO: Make copies of map and players as it sometimes crashes
             string jsonMap = JsonConvert.SerializeObject(map, settings);
             string jsonPlayers = JsonConvert.SerializeObject(Server.GetPlayers(), settings);
+
             foreach(var player in playerList)
             {
                 player.update(context, jsonMap, jsonPlayers);
             }
             //context.All.SendAsync("SendData", jsonPlayers, jsonMap);
         }
-
     }
 }
