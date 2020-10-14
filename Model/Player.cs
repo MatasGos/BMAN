@@ -14,6 +14,7 @@ namespace Model
             P3 = 2,
             P4 = 3
         }
+
         public PlayerNum num { get; set; }
         public string id { get; set; }
         public string username { get; set; }
@@ -34,22 +35,18 @@ namespace Model
             boosts = new List<Boost>();
         }
 
-        public Player(string id, string username)
+        public Player(string id, string username, int num)
         {
             this.action = "";
             this.id = id;
             this.username = username;
             //DEFAULT VALUES
+            this.num = (PlayerNum)num;
             this.x = 26;
             this.y = 26;
             this.speed = 3;
             this.explosionPower = 3;
             boosts = new List<Boost>();
-        }
-
-        public Player(string id, string username, int num) : this(id, username)
-        {
-            this.num = (PlayerNum)num;
         }
 
         public int[] getPos()

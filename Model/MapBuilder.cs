@@ -13,6 +13,5 @@ namespace Model
         public abstract void BuildTeleporter();
 
         public abstract Map GetMap();
-
     }
 }

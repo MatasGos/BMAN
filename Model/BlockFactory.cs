@@ -17,10 +17,6 @@ namespace Model
                 case "Box":
                     toReturn = new Box(x, y);
                     break;
-                case "Boost":
-                    //Should be added to boosts array, not units
-                    toReturn = null;
-                    break;
                 case "Teleporter":
                     //toReturn = new Teleporter(x,y);
                     throw new NotImplementedException();

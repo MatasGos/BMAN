@@ -8,7 +8,6 @@ namespace Model
     {
         public string boostType { get; set; }
         public BoostAlgorithm algorithm { get; set; }
-        //public int timeLeft { get; set; } //in ticks?
 
         public Boost(int x, int y) : base(x, y)
         {

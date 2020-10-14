@@ -7,6 +7,7 @@ namespace Model
     public class Bomb : RegularExplosive
     {
         public double detonationTime { get; set; }
+
         public Bomb(int x, int y, int explosionPower, double placeTime) : base(x, y)
         {
             isSolid = false;
