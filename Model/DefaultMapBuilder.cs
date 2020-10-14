@@ -14,6 +14,7 @@ namespace Model
         public DefaultMapBuilder()
         {
             this.map = new Map(xSize, ySize);
+            this.map.mapName = "default";
             factory = BlockFactorySingleton.GetInstance();
         }
 

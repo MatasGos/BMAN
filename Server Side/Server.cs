@@ -16,6 +16,7 @@ namespace Server
         public static List<Player> playerList = new List<Player>();    
         public static IHubCallerClients context;
         public static GameServer game;
+        public static List<Map> mapCache = new List<Map>();
 
         public static void AddPlayer(string id, string username)
         {
@@ -35,6 +36,26 @@ namespace Server
                 if (player.id == id)
                 {
                     toReturn = player;
+                    break;
+                }
+            }
+            return toReturn;
+        }
+
+        public static void AddMap(Map map)
+        {
+            mapCache.Add(map);
+        }
+
+        //Returns null if didn't find
+        public static Map GetMapByName(string name)
+        {
+            Map toReturn = null;
+            foreach(var map in mapCache)
+            {
+                if (map.mapName.Equals(name))
+                {
+                    toReturn = map;
                     break;
                 }
             }

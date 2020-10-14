@@ -21,7 +21,6 @@ namespace Server
         public bool isRunning = false;
         Stopwatch sw;
         public List<Player> playerList = new List<Player>();
-
         private IHubCallerClients context;
         JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
@@ -32,22 +31,30 @@ namespace Server
 
             Random rand = new Random();
             int r = rand.Next(100);
-            if (r < 0)
+            MapDirector mapDirector;
+            if (r < 50)
             {
-                MapBuilder concreteBuilder = new ConcreteMapBuilder();
-                MapDirector mapDirector = new MapDirector(concreteBuilder);
-
-                mapDirector.constructMap();
-                map = mapDirector.getMap();
+                mapDirector = new MapDirector(new ConcreteMapBuilder());
             }
             else
             {
-                MapBuilder concreteBuilder = new DefaultMapBuilder();
-                MapDirector mapDirector = new MapDirector(concreteBuilder);
+                mapDirector = new MapDirector(new DefaultMapBuilder());                
+            }
 
+            Map mapFromCache = Server.GetMapByName(mapDirector.getMap().mapName);
+            //If the map was already generated, clone it
+            //If the map was not generated before, generate it and put a copy of it in cache
+            if (mapFromCache != null)
+            {
+                map = mapFromCache.Clone();
+            }
+            else
+            {
                 mapDirector.constructMap();
                 map = mapDirector.getMap();
+                Server.AddMap(map.Clone());
             }
+
         }
         public void AddPlayer(Player player)
         {
@@ -84,7 +91,6 @@ namespace Server
                 map.PickupBoost(player);
             }
             map.UpdateExplosives(sw.Elapsed.TotalMilliseconds);
-
             //TODO: Make copies of map and players as it sometimes crashes
             string jsonMap = JsonConvert.SerializeObject(map, settings);
             string jsonPlayers = JsonConvert.SerializeObject(Server.GetPlayers(), settings);

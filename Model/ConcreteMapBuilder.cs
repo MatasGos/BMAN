@@ -14,6 +14,7 @@ namespace Model
         public ConcreteMapBuilder()
         {
             this.map = new Map(xSize, ySize);
+            this.map.mapName = "concrete";
             factory = BlockFactorySingleton.GetInstance();
         }
 

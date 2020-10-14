@@ -12,16 +12,17 @@ using System.Runtime.CompilerServices;
 
 namespace Model
 {
-    public class Map
+    public class Map : ICloneable<Map>
     {
         //Size of the map in blocks e.g 15x15
+        public string mapName { get; set; }
         public int xSize { get; set; }
         public int ySize { get; set; }
         public Unit[,] units { get; set; }
         public Boost[,] boosts { get; set; }
         public const int width = 23;
         public const int height = 19;
-        
+
         public Map()
         {
             this.xSize = width;
@@ -100,7 +101,7 @@ namespace Model
 
             for (int i = 0; i < 25; i++)
             {
-                if(b[i] != null)
+                if (b[i] != null)
                 {
                     if (b[i].x == topLeft[0] && b[i].y == topLeft[1] && b[i].isSolid == true)
                     {
@@ -248,7 +249,7 @@ namespace Model
                         boosts[x, y] = PickBoostStrategy(x, y);
                     }
                     units[x, y] = factory.CreateExplosion(x, y, placeTime);
-                    
+
                 }
                 isFinished = true;
             }
@@ -321,7 +322,7 @@ namespace Model
                     default:
                         throw new Exception();
                 }
-                
+
                 units[playerTile[0], playerTile[1]] = toPlace;
             }
 
@@ -339,6 +340,22 @@ namespace Model
 
                 boosts[playerTile[0], playerTile[1]] = null;
             }
+        }
+
+        public Map Clone()
+        {
+            Map clone = (Map)this.MemberwiseClone();
+            clone.units = new Unit[xSize, ySize];
+            clone.boosts = new Boost[xSize, ySize];
+            for (int i = 0; i < xSize; i++)
+            {
+                for (int j = 0; j < ySize; j++)
+                {
+                    clone.units[i, j] = units[i, j];
+                    clone.boosts[i, j] = boosts[i, j];
+                }
+            }
+            return clone;
         }
     }
 }
