@@ -13,7 +13,6 @@ C:\Users\Valdas\Documents\GitHub\Bomberman-prototype\Model\bin\Debug\netcoreapp3
 C:\Users\Valdas\Documents\GitHub\Bomberman-prototype\Model\obj\Debug\netcoreapp3.1\Model.csprojAssemblyReference.cache
 C:\Users\Valdas\Documents\GitHub\Bomberman-prototype\Model\obj\Debug\netcoreapp3.1\Model.AssemblyInfoInputs.cache
 C:\Users\Valdas\Documents\GitHub\Bomberman-prototype\Model\obj\Debug\netcoreapp3.1\Model.AssemblyInfo.cs
-C:\Users\Valdas\Documents\GitHub\Bomberman-prototype\Model\obj\Debug\netcoreapp3.1\Model.csproj.CoreCompileInputs.cache
 C:\Users\Valdas\Documents\GitHub\Bomberman-prototype\Model\obj\Debug\netcoreapp3.1\Model.dll
 C:\Users\Valdas\Documents\GitHub\Bomberman-prototype\Model\obj\Debug\netcoreapp3.1\Model.pdb
 C:\Users\matgos\Documents\GitHub\Bomberman-prototype\Model\bin\Debug\netcoreapp3.1\Model.deps.json
@@ -25,3 +24,4 @@ C:\Users\matgos\Documents\GitHub\Bomberman-prototype\Model\obj\Debug\netcoreapp3
 C:\Users\matgos\Documents\GitHub\Bomberman-prototype\Model\obj\Debug\netcoreapp3.1\Model.csproj.CoreCompileInputs.cache
 C:\Users\matgos\Documents\GitHub\Bomberman-prototype\Model\obj\Debug\netcoreapp3.1\Model.dll
 C:\Users\matgos\Documents\GitHub\Bomberman-prototype\Model\obj\Debug\netcoreapp3.1\Model.pdb
+C:\Users\Valdas\Documents\GitHub\Bomberman-prototype\Model\obj\Debug\netcoreapp3.1\Model.csproj.CoreCompileInputs.cache

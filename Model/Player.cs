@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.SignalR;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
 namespace Model
 {
-    public class Player
+    public class Player : IPlayerObserver
     {
         public PlayerNum num { get; set; }
         public string id { get; set; }
@@ -112,6 +113,11 @@ namespace Model
             {
                 boosts.RemoveAt(index);
             }
+        }
+
+        public void update(IHubCallerClients context, string jsonMap, string jsonPlayers)
+        {
+            context.Client(id).SendAsync("SendData", jsonPlayers, jsonMap);
         }
     }
 }
