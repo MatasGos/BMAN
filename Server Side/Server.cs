@@ -69,7 +69,7 @@ namespace Server
                 game = new GameServer(context);
                 foreach(var player in playerList)
                 {
-                    game.AddPlayer(player);
+                    game.AddObserver(player);
                 }
                 Thread gameLoop = new Thread(new ThreadStart(game.GameLoop));
                 gameLoop.Start();

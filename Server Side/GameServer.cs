@@ -20,7 +20,7 @@ namespace Server
         public Map map;
         public bool isRunning = false;
         Stopwatch sw;
-        public List<Player> playerList = new List<Player>();
+        public List<IPlayerObserver> playerList = new List<IPlayerObserver>();
         private IHubCallerClients context;
         JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
@@ -56,7 +56,7 @@ namespace Server
             }
 
         }
-        public void AddPlayer(Player player)
+        public void AddObserver(IPlayerObserver player)
         {
             playerList.Add(player);
         }
@@ -84,7 +84,7 @@ namespace Server
         }
         public void GameLogic()
         {
-            foreach(var player in playerList)
+            foreach(Player player in playerList)
             {
                 map.PlaceExplosive(player, sw.Elapsed.TotalMilliseconds);
                 map.Move(player);

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Model
 {
-    interface IPlayerObserver
+    public interface IPlayerObserver
     {
         public abstract void update(IHubCallerClients context, string jsonMap, string jsonPlayers);
     }
