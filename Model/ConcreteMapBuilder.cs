@@ -8,12 +8,18 @@ namespace Model
     {
         private int xSize = 23;
         private int ySize = 19;
-        private Map _map;
+        private Map map;
+        Factory factory;
+
+        public ConcreteMapBuilder()
+        {
+            this.map = new Map(xSize, ySize);
+            factory = BlockFactorySingleton.GetInstance();
+        }
+
         public override void BuildWalls()
         {
-            Factory factory = BlockFactorySingleton.GetInstance();
-
-            BuildOutsideWalls(factory);
+            BuildOutsideWalls();
 
             for (int x = 0; x < xSize; x++)
             {
@@ -26,7 +32,7 @@ namespace Model
                             if (x % 2 == 0 && y % 2 == 0)
                             {
                                 
-                                _map.units[x, y] = factory.CreateBlock("Wall", x, y);
+                                map.units[x, y] = factory.CreateBlock("Wall", x, y);
                             
                             }
                         }
@@ -35,27 +41,7 @@ namespace Model
             }
         }
 
-        public override void BuildBox()
-        {
-            Factory factory = BlockFactorySingleton.GetInstance();
-
-            for (int x = 2; x < xSize-2; x++)
-            {
-                for (int y = 2; y < ySize-2; y++)
-                {
-                    if (_map.units[x, y] == null)
-                    {
-                        _map.units[x, y] = factory.CreateBlock("Box", x, y);
-                    }
-                } 
-            }
-        }
-
-        public override Map GetMap()
-        {
-            return _map;
-        }
-        private void BuildOutsideWalls(Factory factory)
+        private void BuildOutsideWalls()
         {
             for (int x = 0; x < xSize; x++)
             {
@@ -63,23 +49,38 @@ namespace Model
                 {
                     if (x == 0 || x == xSize - 1)
                     {
-                        _map.units[x, y] = factory.CreateBlock("Wall", x, y);
+                        map.units[x, y] = factory.CreateBlock("Wall", x, y);
                     }
                     else if (y == 0 || y == ySize - 1)
                     {
-                        _map.units[x, y] = factory.CreateBlock("Wall", x, y);
+                        map.units[x, y] = factory.CreateBlock("Wall", x, y);
                     }
                 }
             }
         }
-        public override void BuildTeleporter()
-        {
 
+        public override void BuildBox()
+        {
+            for (int x = 2; x < xSize-2; x++)
+            {
+                for (int y = 2; y < ySize-2; y++)
+                {
+                    if (map.units[x, y] == null)
+                    {
+                        map.units[x, y] = factory.CreateBlock("Box", x, y);
+                    }
+                } 
+            }
         }
 
-        public ConcreteMapBuilder()
+        public override void BuildTeleporter()
         {
-            this._map = new Map(xSize, ySize);
+            //TODO: Build the teleporter
+        }
+
+        public override Map GetMap()
+        {
+            return map;
         }
     }
 }

@@ -7,14 +7,6 @@ namespace Model
 {
     public class Player
     {
-        public enum PlayerNum : int
-        {
-            P1 = 0,
-            P2 = 1,
-            P3 = 2,
-            P4 = 3
-        }
-
         public PlayerNum num { get; set; }
         public string id { get; set; }
         public string username { get; set; }
@@ -26,6 +18,14 @@ namespace Model
         public int directiony { get; set; }
         public string action { get; set; }
         public List<Boost> boosts { get; set; }
+
+        public enum PlayerNum : int
+        {
+            P1 = 0,
+            P2 = 1,
+            P3 = 2,
+            P4 = 3
+        }
 
         public Player()
         {
@@ -40,8 +40,9 @@ namespace Model
             this.action = "";
             this.id = id;
             this.username = username;
-            //DEFAULT VALUES
             this.num = (PlayerNum)num;
+
+            //DEFAULT VALUES
             this.x = 26;
             this.y = 26;
             this.speed = 3;
@@ -78,10 +79,12 @@ namespace Model
             }
             boosts.Add(boost);
         }
+
         public void RemoveBoost(Boost boost)
         {
             boosts.Remove(boost);
         }
+
         public bool HasBoost(string boostType)
         {
             foreach (var x in boosts)
