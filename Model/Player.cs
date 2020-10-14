@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.SignalR;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
 namespace Model
 {
-    public class Player
+    public class Player : IPlayerObserver
     {
         public PlayerNum num { get; set; }      //Which player it is(changes spawn position and player image)
         public string id { get; set; }          //Player's id (equals to connection id)
@@ -115,6 +116,11 @@ namespace Model
             {
                 boosts.RemoveAt(index);
             }
+        }
+
+        public void update(IHubCallerClients context, string jsonMap, string jsonPlayers)
+        {
+            context.Client(id).SendAsync("SendData", jsonPlayers, jsonMap);
         }
     }
 }

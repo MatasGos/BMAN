@@ -171,3 +171,5 @@ C:\Users\Valdas\Documents\GitHub\Bomberman-prototype\prototype\obj\Debug\netcore
 C:\Users\matgos\Documents\GitHub\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\matgos\Documents\GitHub\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\Model.dll
 C:\Users\matgos\Documents\GitHub\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\Model.pdb
+C:\Users\Valdas\Documents\GitHub\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authorization.dll
+C:\Users\Valdas\Documents\GitHub\Bomberman-prototype\prototype\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.SignalR.Core.dll

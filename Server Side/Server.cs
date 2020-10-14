@@ -46,6 +46,10 @@ namespace Server
             if (game == null)
             {
                 game = new GameServer(context);
+                foreach(var player in playerList)
+                {
+                    game.AddPlayer(player);
+                }
                 Thread gameLoop = new Thread(new ThreadStart(game.GameLoop));
                 gameLoop.Start();
             }

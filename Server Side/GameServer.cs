@@ -20,10 +20,12 @@ namespace Server
         public Map map;
         public bool isRunning = false;
         Stopwatch sw;
+        public List<Player> playerList = new List<Player>();
 
         private IHubCallerClients context;
         JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
+        
         public GameServer(IHubCallerClients _context)
         {
             context = _context;
@@ -47,7 +49,10 @@ namespace Server
                 map = mapDirector.getMap();
             }
         }
-
+        public void AddPlayer(Player player)
+        {
+            playerList.Add(player);
+        }
         public void GameLoop()
         {
             int tickRate = 30;
@@ -72,7 +77,7 @@ namespace Server
         }
         public void GameLogic()
         {
-            foreach(var player in Server.GetPlayers())
+            foreach(var player in playerList)
             {
                 map.PlaceExplosive(player, sw.Elapsed.TotalMilliseconds);
                 map.Move(player);
@@ -83,8 +88,11 @@ namespace Server
             //TODO: Make copies of map and players as it sometimes crashes
             string jsonMap = JsonConvert.SerializeObject(map, settings);
             string jsonPlayers = JsonConvert.SerializeObject(Server.GetPlayers(), settings);
-
-            context.All.SendAsync("SendData", jsonPlayers, jsonMap);
+            foreach(var player in playerList)
+            {
+                player.update(context, jsonMap, jsonPlayers);
+            }
+            //context.All.SendAsync("SendData", jsonPlayers, jsonMap);
         }
 
     }
