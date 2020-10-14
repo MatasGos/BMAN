@@ -46,13 +46,13 @@ namespace Server
             //If the map was not generated before, generate it and put a copy of it in cache
             if (mapFromCache != null)
             {
-                map = mapFromCache.Clone();
+                map = mapFromCache;
             }
             else
             {
                 mapDirector.constructMap();
                 map = mapDirector.getMap();
-                Server.AddMap(map.Clone());
+                Server.AddMap(map);
             }
 
         }
