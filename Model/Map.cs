@@ -323,10 +323,6 @@ namespace Model
                 }
                 
                 units[playerTile[0], playerTile[1]] = toPlace;
-
-                //Find where to place explosive blacks and place 
-                //units[playerTile[0], playerTile[1]] = factory.CreateExplosion(playerTile[0], playerTile[1], placeTime);
-                //PlaceRegularExplosion(playerTile[0], playerTile[1], player.explosionPower, placeTime, factory);
             }
 
             player.action = "";
