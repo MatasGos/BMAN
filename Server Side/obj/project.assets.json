@@ -71,19 +71,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\matgos\\.nuget\\packages\\": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\Server Side\\Server Side.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Server Side\\Server Side.csproj",
       "projectName": "Server Side",
-      "projectPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\Server Side\\Server Side.csproj",
-      "packagesPath": "C:\\Users\\matgos\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\Server Side\\obj\\",
+      "projectPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Server Side\\Server Side.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Server Side\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\matgos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -96,8 +100,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\Model\\Model.csproj": {
-              "projectPath": "C:\\Users\\matgos\\Documents\\GitHub\\Bomberman-prototype\\Model\\Model.csproj"
+            "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Model\\Model.csproj": {
+              "projectPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Model\\Model.csproj"
             }
           }
         }

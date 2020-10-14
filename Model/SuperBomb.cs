@@ -7,6 +7,7 @@ namespace Model
     public class SuperBomb : SuperExplosive
     {
         public double detonationTime { get; set; }
+
         public SuperBomb(int x, int y, int explosionPower, double placeTime) : base(x, y)
         {
             isSolid = false;

@@ -11,6 +11,5 @@ namespace Model
         public abstract void BuildBox();
 
         public abstract Map GetMap();
-
     }
 }
