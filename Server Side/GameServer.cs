@@ -35,11 +35,24 @@ namespace Server
         {
             context = _context;
 
-            MapBuilder concreteBuilder = new ConcreteMapBuilder();
-            MapDirector mapDirector = new MapDirector(concreteBuilder);
+            Random rand = new Random();
+            int r = rand.Next(100);
+            if (r < 0)
+            {
+                MapBuilder concreteBuilder = new ConcreteMapBuilder();
+                MapDirector mapDirector = new MapDirector(concreteBuilder);
 
-            mapDirector.constructMap();
-            map = mapDirector.getMap();
+                mapDirector.constructMap();
+                map = mapDirector.getMap();
+            }
+            else
+            {
+                MapBuilder concreteBuilder = new DefaultMapBuilder();
+                MapDirector mapDirector = new MapDirector(concreteBuilder);
+
+                mapDirector.constructMap();
+                map = mapDirector.getMap();
+            }
         }
 
         public void GameLoop()

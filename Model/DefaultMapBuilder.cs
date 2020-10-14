@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model
 {
-    public class ConcreteMapBuilder : MapBuilder
+    public class DefaultMapBuilder : MapBuilder
     {
         private int xSize = 23;
         private int ySize = 19;
@@ -15,21 +15,13 @@ namespace Model
 
             BuildOutsideWalls(factory);
 
-            for (int x = 0; x < xSize; x++)
+            for (int x = 1; x < xSize-1; x++)
             {
-                for (int y = 0; y < ySize; y++)
+                for (int y = 1; y < ySize-1; y++)
                 {
-                    if (x > 1 && y > 1)
-                    {
-                        if (x < (xSize - 1) && y < (ySize - 1))
-                        {
-                            if (x % 2 == 0 && y % 2 == 0)
-                            {
-                                
-                                _map.units[x, y] = factory.CreateBlock("Wall", x, y);
-                            
-                            }
-                        }
+                    if (x % 2 == 0 && y % 2 == 0)
+                    { 
+                        _map.units[x, y] = factory.CreateBlock("Wall", x, y);         
                     }
                 }
             }
@@ -48,6 +40,17 @@ namespace Model
                         _map.units[x, y] = factory.CreateBlock("Box", x, y);
                     }
                 } 
+            }
+            for (int x = 3; x < xSize-3; x++)
+            {
+                _map.units[x, 1] = factory.CreateBlock("Box", x, 1);
+                _map.units[x, ySize - 2] = factory.CreateBlock("Box", x, ySize-2);
+            }
+
+            for (int y = 3; y < ySize - 3; y++)
+            {
+                _map.units[1, y] = factory.CreateBlock("Box", 1, y);
+                _map.units[xSize - 2, y] = factory.CreateBlock("Box", xSize-2, y);
             }
         }
 
@@ -72,12 +75,13 @@ namespace Model
                 }
             }
         }
+
         public override void BuildTeleporter()
         {
 
         }
 
-        public ConcreteMapBuilder()
+        public DefaultMapBuilder()
         {
             this._map = new Map(xSize, ySize);
         }

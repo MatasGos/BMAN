@@ -45,56 +45,6 @@ namespace Model
             return boosts;
         }
 
-        //Generates outter perimeter and also inner walls
-        public void generateWalls()
-        {
-            Factory factory = BlockFactorySingleton.GetInstance();
-
-            generateOutsideWalls(factory);
-
-            for (int x = 0; x < xSize; x++)
-            {
-                for (int y = 0; y < ySize; y++)
-                {
-                    if (x > 1 && y > 1)
-                    {
-                        if (x < (xSize - 1) && y < (ySize - 1))
-                        {
-                            if (x % 2 == 0 && y % 2 == 0)
-                            {
-                                if (x <= xSize/2)
-                                {
-                                    units[x, y] = factory.CreateBlock("Box", x, y);
-                                }
-                                else
-                                {
-                                    units[x, y] = factory.CreateBlock("Wall", x, y);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        public void generateOutsideWalls(Factory factory)
-        {
-            for (int x = 0; x < xSize; x++)
-            {
-                for (int y = 0; y < ySize; y++)
-                {
-                    if (x == 0 || x == xSize - 1)
-                    {
-                        units[x, y] = factory.CreateBlock("Wall", x, y);
-                    }
-                    else if (y == 0 || y == ySize - 1)
-                    {
-                        units[x, y] = factory.CreateBlock("Wall", x, y);
-                    }
-                }
-            }
-        }
-
-        //MATAS LOOZERIS
         public void Move(Player movingPlayer)
         {
             int px = movingPlayer.directionx;

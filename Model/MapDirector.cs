@@ -22,6 +22,7 @@ namespace Model
         {
             this.mapBuilder.BuildWalls();
             this.mapBuilder.BuildBox();
+            this.mapBuilder.BuildTeleporter();
         }
     }
 }

@@ -10,6 +10,8 @@ namespace Model
 
         public abstract void BuildBox();
 
+        public abstract void BuildTeleporter();
+
         public abstract Map GetMap();
 
     }
