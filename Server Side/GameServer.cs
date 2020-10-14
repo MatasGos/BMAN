@@ -24,13 +24,6 @@ namespace Server
         private IHubCallerClients context;
         JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
-
-        /*PlayerBuilder builder = new ConcretePlayerBuilder();
-        builder.BuildId(id);
-            builder.BuildUsername(username);
-            builder.BuildNum(playerList.Count);
-            Player player = builder.GetPlayer();
-        playerList.Add(player);*/
         public GameServer(IHubCallerClients _context)
         {
             context = _context;
