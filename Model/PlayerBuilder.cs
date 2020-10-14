@@ -13,5 +13,7 @@ namespace Model
         public abstract void BuildNum(int num);
 
         public abstract Player GetPlayer();
+
+        
     }
 }

@@ -19,7 +19,14 @@ namespace Model
         public int ySize { get; set; }
         public Unit[,] units { get; set; }
         public Boost[,] boosts { get; set; }
-
+        public const int width = 23;
+        public const int height = 19;
+        
+        public Map()
+        {
+            this.xSize = width;
+            this.ySize = height;
+        }
         public Map(int xSize, int ySize)
         {
             this.xSize = xSize;
@@ -43,20 +50,7 @@ namespace Model
         {
             Factory factory = BlockFactorySingleton.GetInstance();
 
-            for (int x = 0; x < xSize; x++)
-            {
-                for (int y = 0; y < ySize; y++)
-                {
-                    if (x == 0 || x == xSize - 1)
-                    {
-                        units[x, y] = factory.CreateBlock("Wall", x, y);
-                    }
-                    else if (y == 0 || y == ySize - 1)
-                    {
-                        units[x, y] = factory.CreateBlock("Wall", x, y);
-                    }
-                }
-            }
+            generateOutsideWalls(factory);
 
             for (int x = 0; x < xSize; x++)
             {
@@ -78,6 +72,23 @@ namespace Model
                                 }
                             }
                         }
+                    }
+                }
+            }
+        }
+        public void generateOutsideWalls(Factory factory)
+        {
+            for (int x = 0; x < xSize; x++)
+            {
+                for (int y = 0; y < ySize; y++)
+                {
+                    if (x == 0 || x == xSize - 1)
+                    {
+                        units[x, y] = factory.CreateBlock("Wall", x, y);
+                    }
+                    else if (y == 0 || y == ySize - 1)
+                    {
+                        units[x, y] = factory.CreateBlock("Wall", x, y);
                     }
                 }
             }

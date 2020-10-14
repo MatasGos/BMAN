@@ -150,7 +150,7 @@ namespace prototype
             {
                 _keyRight = false;
             }
-            if (e.KeyCode == Keys.Space)
+            if (e.KeyCode == Keys.Q)
             {
                 _keyBomb = false;
             }
@@ -196,7 +196,7 @@ namespace prototype
             {
                 _keyRight = true;
             }
-            if (e.KeyCode == Keys.Space)
+            if (e.KeyCode == Keys.Q)
             {
                 _keyBomb = true;
             }
