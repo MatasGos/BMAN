@@ -467,6 +467,7 @@
       "path": "microsoft.netcore.targets/1.1.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -837,6 +838,7 @@
       "path": "system.reflection.emit/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -872,6 +874,7 @@
       "path": "system.reflection.emit.ilgeneration/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -1251,11 +1254,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Model\\Model.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Desktop\\BMAN\\Model\\Model.csproj",
       "projectName": "Model",
-      "projectPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Model\\Model.csproj",
+      "projectPath": "C:\\Users\\User\\Desktop\\BMAN\\Model\\Model.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Desktop\\Bomberman-prototype\\Model\\obj\\",
+      "outputPath": "C:\\Users\\User\\Desktop\\BMAN\\Model\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
