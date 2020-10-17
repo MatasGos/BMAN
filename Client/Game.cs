@@ -6,6 +6,7 @@ using Model;
 using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 namespace Client
 {
@@ -26,15 +27,15 @@ namespace Client
         public int depth;               //How many bits per pixel are there in the map image
 
         //Pictures used in drawing the map
-        Bitmap wallPic = new Bitmap("Images/wall.png");
-        Bitmap playerPic = new Bitmap("Images/p1.png");
-        Bitmap boxPic = new Bitmap("Images/box.png");
-        Bitmap bombPic = new Bitmap("Images/bomb.jpg");
-        Bitmap minePic = new Bitmap("Images/mine.png");
-        Bitmap boostPic = new Bitmap("Images/mine.png");
-        Bitmap superbombPic = new Bitmap("Images/superbomb.png");
-        Bitmap superminePic = new Bitmap("Images/supermine.png");
-        Bitmap explosionPic = new Bitmap("Images/explosion.png");
+        Bitmap wallPic = Images.wall;
+        Bitmap playerPic = Images.p1;
+        Bitmap boxPic = Images.box;
+        Bitmap bombPic = Images.bomb;
+        Bitmap minePic = Images.mine;
+        Bitmap boostPic = Images.mine;
+        Bitmap superbombPic = Images.superbomb;
+        Bitmap superminePic = Images.supermine;
+        Bitmap explosionPic = Images.explosion;
 
         //Pictures saved as Color arrays
         Color[,] wallPicColor;
