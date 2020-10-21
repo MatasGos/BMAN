@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 
 namespace Model
 {
@@ -349,6 +350,11 @@ namespace Model
                 }
             }
             return clone;
+        }
+
+        public string GetJson(JsonSerializerSettings settings)
+        {
+            return JsonConvert.SerializeObject(this, settings);
         }
     }
 }

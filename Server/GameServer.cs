@@ -18,7 +18,7 @@ namespace Server
         const int xSize = 23;       //Number of blocks left to right
         const int ySize = 19;       //Number of blocks top to bottom
 
-        public Map map;
+        public MapAdapter map;
         public bool isRunning = false;
         Stopwatch sw;
         public List<IPlayerObserver> playerList = new List<IPlayerObserver>();
@@ -47,13 +47,14 @@ namespace Server
             //If the map was not generated before, generate it and put a copy of it in cache
             if (mapFromCache != null)
             {
-                map = mapFromCache;
+                map = new MapAdapter(mapFromCache);
             }
             else
             {
                 mapDirector.constructMap();
-                map = mapDirector.getMap();
-                Server.AddMap(map);
+                Map temp = mapDirector.getMap();
+                map = new MapAdapter(temp);
+                Server.AddMap(temp);
             }
 
         }
@@ -90,14 +91,12 @@ namespace Server
         {
             foreach(Player player in playerList)
             {
-                map.PlaceExplosive(player, sw.Elapsed.TotalMilliseconds);
-                map.Move(player);
-                map.PickupBoost(player);
+                map.PerformPlayerActions(player, sw.Elapsed.TotalMilliseconds);
             }
             map.UpdateExplosives(sw.Elapsed.TotalMilliseconds);
 
             //TODO: Make copies of map and players as it sometimes crashes
-            string jsonMap = JsonConvert.SerializeObject(map, settings);
+            string jsonMap = map.GetJson(settings);
             string jsonPlayers = JsonConvert.SerializeObject(Server.GetPlayers(), settings);
 
             foreach(var player in playerList)

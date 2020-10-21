@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -122,5 +123,6 @@ namespace Model
         {
             context.Client(id).SendAsync("SendData", jsonPlayers, jsonMap);
         }
+
     }
 }
