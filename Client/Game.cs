@@ -10,6 +10,8 @@ using System.Runtime.Versioning;
 
 namespace Client
 {
+    //A - atvaizdo objektas (Bitmap)
+    //B - spalvos objektas  (Color)
     public class Game
     {
         public int xSize = 23;      //Number of blocks(units) left to right in the map
@@ -20,22 +22,24 @@ namespace Client
         public List<Player> players;//List of players with their stats
         public Map map;             //Map data
 
-        public Bitmap background, field;//Bitmap images used in showing the map on screen
+        //public Bitmap field;//Bitmap images used in showing the map on screen
         IntPtr Iptr = IntPtr.Zero;      //Pointer for bitmap data copying from memory
         BitmapData bitmapData;          //Map bitmap data construct with properties
         public byte[] pixels;           //Map pixel data array in bytes
         public int depth;               //How many bits per pixel are there in the map image
+        private GraphicsAdapter<Bitmap,Color> field;
+        private GraphicsAdapter<Bitmap, Color> background;
 
         //Pictures used in drawing the map
-        Bitmap wallPic = Images.wall;
-        Bitmap playerPic = Images.p1;
-        Bitmap boxPic = Images.box;
-        Bitmap bombPic = Images.bomb;
-        Bitmap minePic = Images.mine;
-        Bitmap boostPic = Images.mine;
-        Bitmap superbombPic = Images.superbomb;
-        Bitmap superminePic = Images.supermine;
-        Bitmap explosionPic = Images.explosion;
+        //Bitmap wallPic = Images.wall;
+        ////Bitmap playerPic = Images.p1;
+       // Bitmap boxPic = Images.box;
+       // ////Bitmap bombPic = Images.bomb;
+        //Bitmap minePic = Images.mine;
+        //Bitmap boostPic = Images.mine;
+       // Bitmap superbombPic = Images.superbomb;
+        //Bitmap superminePic = Images.supermine;
+      //  Bitmap explosionPic = Images.explosion;
 
         //Pictures saved as Color arrays
         Color[,] wallPicColor;
@@ -54,30 +58,49 @@ namespace Client
         {
             this.players = new List<Player>();
             this.map = new Map(xSize, ySize);
+            this.field = new BitmapConcreteAdapter(xSize * unitSize, ySize * unitSize);
         }
         
         public void drawBackground()
         {
             //Get map blocks(units) and initialise background picture with it's color
             Unit[,] blocks = map.getUnits();
-            background = new Bitmap(xSize * unitSize, ySize * unitSize);
+            background = new BitmapConcreteAdapter(xSize * unitSize, ySize * unitSize);
             Color backgroundColor = Color.BurlyWood;
 
             //Save pictures as Color object arrays to know every pixel's color
-            wallPicColor = GetPicColor(wallPic);
-            playerPicColor = GetPicColor(playerPic);
-            boxPicColor = GetPicColor(boxPic);
-            bombPicColor = GetPicColor(bombPic);
-            minePicColor = GetPicColor(minePic);
-            boostPicColor = GetPicColor(boostPic);
-            superbombPicColor = GetPicColor(superbombPic);
-            superminePicColor = GetPicColor(superminePic);
-            explosionPicColor = GetPicColor(explosionPic);
-
+            GraphicsAdapter<Bitmap, Color> wallPic = new BitmapConcreteAdapter(unitSize, unitSize);
+            wallPic.SetImage(Images.wall);
+            wallPicColor = wallPic.GetColorArray();
+            GraphicsAdapter<Bitmap, Color> playerPic = new BitmapConcreteAdapter(playerSize, playerSize);
+            playerPic.SetImage(Images.p1);
+            playerPicColor = playerPic.GetColorArray();
+            GraphicsAdapter<Bitmap, Color> boxPic = new BitmapConcreteAdapter(unitSize, unitSize);
+            boxPic.SetImage(Images.box);
+            boxPicColor = boxPic.GetColorArray();
+            GraphicsAdapter<Bitmap, Color> bombPic = new BitmapConcreteAdapter(unitSize, unitSize);
+            bombPic.SetImage(Images.bomb);
+            bombPicColor = bombPic.GetColorArray();
+            GraphicsAdapter<Bitmap, Color> minePic = new BitmapConcreteAdapter(unitSize, unitSize);
+            minePic.SetImage(Images.mine);
+            minePicColor = minePic.GetColorArray();
+            GraphicsAdapter<Bitmap, Color> boostPic = new BitmapConcreteAdapter(unitSize, unitSize);
+            boostPic.SetImage(Images.mine);
+            boostPicColor = boostPic.GetColorArray();
+            GraphicsAdapter<Bitmap, Color> superbombPic = new BitmapConcreteAdapter(unitSize, unitSize);
+            superbombPic.SetImage(Images.superbomb);
+            superbombPicColor = superbombPic.GetColorArray();
+            GraphicsAdapter<Bitmap, Color> superminePic = new BitmapConcreteAdapter(unitSize, unitSize);
+            superminePic.SetImage(Images.supermine);
+            superminePicColor = superminePic.GetColorArray();
+            GraphicsAdapter<Bitmap, Color> explosionPic = new BitmapConcreteAdapter(unitSize, unitSize);
+            explosionPic.SetImage(Images.explosion);
+            explosionPicColor = explosionPic.GetColorArray();
+            background.LockBits();
             //Draw background
-            for (int x = 0; x < background.Width; x++)
+            for (int x = 0; x < background.GetWidth(); x++)
             {
-                for (int y = 0; y < background.Height; y++)
+                for (int y = 0; y < background.GetHeight(); y++)
                 {
                     background.SetPixel(x, y, backgroundColor);
                 }
@@ -100,6 +123,7 @@ namespace Client
                     }
                 }
             }
+            background.UnlockBits();
         }
 
         public void drawMap()
@@ -107,11 +131,11 @@ namespace Client
             //Get map data and get a background picture copy
             Unit[,] blocks = map.getUnits();
             Boost[,] boosts = map.getBoosts();
-            field = getMap();
+            field.SetImage(background.GetImageCopy());
 
             Color[,] picColor = null;
             //Lock the Bitmap bits for faster drawing
-            LockBits();
+            field.LockBits();
 
             //Draw boosts
             for (int i = 0; i < xSize; i++)
@@ -127,7 +151,7 @@ namespace Client
                         {
                             for (int y = 0; y < unitSize; y++)
                             {
-                                SetPixel(i * unitSize + x, j * unitSize + y, picColor[x, y]);
+                                field.SetPixel(i * unitSize + x, j * unitSize + y, picColor[x, y]);
                             }
                         }
                     }
@@ -168,7 +192,7 @@ namespace Client
                         {
                             for (int y = 0; y < unitSize; y++)
                             {
-                                SetPixel(i * unitSize + x, j * unitSize + y, picColor[x, y]);
+                                field.SetPixel(i * unitSize + x, j * unitSize + y, picColor[x, y]);
                             }
                         }
                     }
@@ -183,76 +207,15 @@ namespace Client
                 {
                     for (int y = 0; y < playerSize; y++)
                     {
-                        SetPixel(x + xy[0], y + xy[1], playerPicColor[x, y]);
+                        field.SetPixel(x + xy[0], y + xy[1], playerPicColor[x, y]);
                     }
                 }
             }
 
             //Unlock Bitmap bits
-            UnlockBits();
+            field.UnlockBits();
         }
 
-        //Get map picture's copy as a bitmap
-        public Bitmap getMap()
-        {
-            RectangleF cloneRectangle = new RectangleF(0, 0, xSize * unitSize, ySize * unitSize);
-            PixelFormat format = background.PixelFormat;
-            return background.Clone(cloneRectangle, format);
-        }
-
-        //Lock Bitmap for faster drawing
-        public void LockBits()
-        {
-            try
-            {
-                //Total pixel count in map
-                int pixelCount = xSize * unitSize * ySize * unitSize;
-
-                //Rectangle for locking
-                Rectangle rectangle = new Rectangle(0, 0, xSize * unitSize, ySize * unitSize);
-
-                //Get source bitmap pixel format size
-                depth = Bitmap.GetPixelFormatSize(field.PixelFormat);
-
-                //Check if bpp (Bits Per Pixel) is 8, 24, or 32
-                if (depth != 8 && depth != 24 && depth != 32)
-                {
-                    throw new Exception("Only 8, 24 and 32 bpp images are supported.");
-                }
-
-                //Lock bitmap and return bitmap data
-                bitmapData = field.LockBits(rectangle, ImageLockMode.ReadWrite, field.PixelFormat);
-
-                //Create byte array to copy pixel values
-                int step = depth / 8;
-                pixels = new byte[pixelCount * step];   //Galima iskelti kad kiekviena tick'a nekurtu naujo array/ jeigu lagins
-                Iptr = bitmapData.Scan0;
-
-                //Copy data from pointer to array
-                Marshal.Copy(Iptr, pixels, 0, pixels.Length);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        //Unlock bitmap for faster drawing
-        public void UnlockBits()
-        {
-            try
-            {
-                //Copy data from byte array to a pointer
-                Marshal.Copy(pixels, 0, Iptr, pixels.Length);
-
-                //Unlock bitmap data
-                field.UnlockBits(bitmapData);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
 
         //Get the picture's data as a Color array
         public Color[,] GetPicColor(Bitmap originPic)
@@ -268,32 +231,9 @@ namespace Client
             return destination;
         }
 
-        //Set the pixel in a locked bitmap to a specific color
-        public void SetPixel(int x, int y, Color color)
+        public Bitmap GetImage()
         {
-            //Get color components count
-            int cCount = depth / 8;
-
-            //Get start index of the specified pixel
-            int i = ((y * xSize * unitSize) + x) * cCount;
-
-            if (depth == 32) //For 32 bpp set Red, Green, Blue and Alpha
-            {
-                pixels[i] = color.B;
-                pixels[i + 1] = color.G;
-                pixels[i + 2] = color.R;
-                pixels[i + 3] = color.A;
-            }
-            if (depth == 24) //For 24 bpp set Red, Green and Blue
-            {
-                pixels[i] = color.B;
-                pixels[i + 1] = color.G;
-                pixels[i + 2] = color.R;
-            }
-            if (depth == 8) //For 8 bpp set color value (Red, Green and Blue values are the same)
-            {
-                pixels[i] = color.B;
-            }
+            return field.GetImage();
         }
     }
 }

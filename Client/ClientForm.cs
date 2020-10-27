@@ -61,7 +61,7 @@ namespace Client
                     game.drawBackground();
                 }
                 game.drawMap();
-                pictureBox1.Image = game.field;
+                pictureBox1.Image = game.GetImage();
             });
         }
 
