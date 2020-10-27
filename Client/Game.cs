@@ -22,11 +22,6 @@ namespace Client
         public List<Player> players;//List of players with their stats
         public Map map;             //Map data
 
-        //public Bitmap field;//Bitmap images used in showing the map on screen
-        IntPtr Iptr = IntPtr.Zero;      //Pointer for bitmap data copying from memory
-        BitmapData bitmapData;          //Map bitmap data construct with properties
-        public byte[] pixels;           //Map pixel data array in bytes
-        public int depth;               //How many bits per pixel are there in the map image
         private GraphicsAdapter<Bitmap,Color> field;
         private GraphicsAdapter<Bitmap, Color> background;
 
@@ -96,6 +91,7 @@ namespace Client
             GraphicsAdapter<Bitmap, Color> explosionPic = new BitmapConcreteAdapter(unitSize, unitSize);
             explosionPic.SetImage(Images.explosion);
             explosionPicColor = explosionPic.GetColorArray();
+
             background.LockBits();
             //Draw background
             for (int x = 0; x < background.GetWidth(); x++)
