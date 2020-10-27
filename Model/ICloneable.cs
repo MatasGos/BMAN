@@ -6,6 +6,6 @@ namespace Model
 {
     interface ICloneable<T>
     {
-        public abstract T Clone();
+        public abstract T Clone(bool deepCopy);
     }
 }

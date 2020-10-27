@@ -18,7 +18,7 @@ namespace Server
         const int xSize = 23;       //Number of blocks left to right
         const int ySize = 19;       //Number of blocks top to bottom
 
-        public MapAdapter map;
+        public IMapAdapter map;
         public bool isRunning = false;
         Stopwatch sw;
         public List<IPlayerObserver> playerList = new List<IPlayerObserver>();

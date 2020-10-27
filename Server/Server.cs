@@ -44,7 +44,7 @@ namespace Server
 
         public static void AddMap(Map map)
         {
-            mapCache.Add(map.Clone());
+            mapCache.Add(map.Clone(true));
         }
 
         //Returns null if didn't find
@@ -61,7 +61,7 @@ namespace Server
             }
             if (toReturn != null)
             {
-                toReturn = toReturn.Clone();
+                toReturn = toReturn.Clone(true);
             }
             return toReturn;
         }

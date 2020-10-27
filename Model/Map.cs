@@ -336,9 +336,13 @@ namespace Model
             }
         }
 
-        public Map Clone()
+        public Map Clone(bool deepCopy)
         {
             Map clone = (Map)this.MemberwiseClone();
+            if (deepCopy == false)
+            {
+                return clone;
+            }
             clone.units = new Unit[xSize, ySize];
             clone.boosts = new Boost[xSize, ySize];
             for (int i = 0; i < xSize; i++)
