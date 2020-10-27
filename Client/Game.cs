@@ -212,21 +212,6 @@ namespace Client
             field.UnlockBits();
         }
 
-
-        //Get the picture's data as a Color array
-        public Color[,] GetPicColor(Bitmap originPic)
-        {
-            Color[,] destination = new Color[originPic.Width, originPic.Height];
-            for (int x = 0; x < originPic.Width; x++)
-            {
-                for (int y = 0; y < originPic.Height; y++)
-                {
-                    destination[x, y] = originPic.GetPixel(x, y);
-                }
-            }
-            return destination;
-        }
-
         public Bitmap GetImage()
         {
             return field.GetImage();
