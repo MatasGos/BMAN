@@ -322,6 +322,7 @@ namespace Model
 
             player.action = "";
         }
+
         public void PickupBoost(Player player)
         {
             int[] playerCenter = getCenterPlayer(new int[] { player.x, player.y });

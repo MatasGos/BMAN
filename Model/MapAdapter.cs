@@ -8,6 +8,7 @@ namespace Model
     public class MapAdapter : IMapAdapter
     {
         private Map map; //adaptee
+
         public MapAdapter(Map map)
         {
             this.map = map;

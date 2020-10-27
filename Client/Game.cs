@@ -26,15 +26,16 @@ namespace Client
         private GraphicsAdapter<Bitmap, Color> background;
 
         //Pictures used in drawing the map
+
         //Bitmap wallPic = Images.wall;
-        ////Bitmap playerPic = Images.p1;
-       // Bitmap boxPic = Images.box;
-       // ////Bitmap bombPic = Images.bomb;
+        //Bitmap playerPic = Images.p1;
+        //Bitmap boxPic = Images.box;
+        //Bitmap bombPic = Images.bomb;
         //Bitmap minePic = Images.mine;
         //Bitmap boostPic = Images.mine;
-       // Bitmap superbombPic = Images.superbomb;
+        //Bitmap superbombPic = Images.superbomb;
         //Bitmap superminePic = Images.supermine;
-      //  Bitmap explosionPic = Images.explosion;
+        //Bitmap explosionPic = Images.explosion;
 
         //Pictures saved as Color arrays
         Color[,] wallPicColor;
@@ -67,32 +68,41 @@ namespace Client
             GraphicsAdapter<Bitmap, Color> wallPic = new BitmapConcreteAdapter(unitSize, unitSize);
             wallPic.SetImage(Images.wall);
             wallPicColor = wallPic.GetColorArray();
+
             GraphicsAdapter<Bitmap, Color> playerPic = new BitmapConcreteAdapter(playerSize, playerSize);
             playerPic.SetImage(Images.p1);
             playerPicColor = playerPic.GetColorArray();
+
             GraphicsAdapter<Bitmap, Color> boxPic = new BitmapConcreteAdapter(unitSize, unitSize);
             boxPic.SetImage(Images.box);
             boxPicColor = boxPic.GetColorArray();
+
             GraphicsAdapter<Bitmap, Color> bombPic = new BitmapConcreteAdapter(unitSize, unitSize);
             bombPic.SetImage(Images.bomb);
             bombPicColor = bombPic.GetColorArray();
+
             GraphicsAdapter<Bitmap, Color> minePic = new BitmapConcreteAdapter(unitSize, unitSize);
             minePic.SetImage(Images.mine);
             minePicColor = minePic.GetColorArray();
+
             GraphicsAdapter<Bitmap, Color> boostPic = new BitmapConcreteAdapter(unitSize, unitSize);
             boostPic.SetImage(Images.mine);
             boostPicColor = boostPic.GetColorArray();
+
             GraphicsAdapter<Bitmap, Color> superbombPic = new BitmapConcreteAdapter(unitSize, unitSize);
             superbombPic.SetImage(Images.superbomb);
             superbombPicColor = superbombPic.GetColorArray();
+
             GraphicsAdapter<Bitmap, Color> superminePic = new BitmapConcreteAdapter(unitSize, unitSize);
             superminePic.SetImage(Images.supermine);
             superminePicColor = superminePic.GetColorArray();
+
             GraphicsAdapter<Bitmap, Color> explosionPic = new BitmapConcreteAdapter(unitSize, unitSize);
             explosionPic.SetImage(Images.explosion);
             explosionPicColor = explosionPic.GetColorArray();
 
             background.LockBits();
+
             //Draw background
             for (int x = 0; x < background.GetWidth(); x++)
             {

@@ -17,6 +17,5 @@ namespace Client
         public int GetWidth();
         public int GetHeight();
         public void SetImage(A image);
-
     }
 }
