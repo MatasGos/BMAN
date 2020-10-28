@@ -20,7 +20,9 @@ namespace Server
 
         public static void AddPlayer(string id, string username)
         {
-            playerList.Add(new Player(id, username, playerList.Count));
+            Player p = new Player(id, username, playerList.Count);
+            Console.WriteLine(p.pictureStructure);
+            playerList.Add(p);
         }
 
         public static List<Player> GetPlayers()

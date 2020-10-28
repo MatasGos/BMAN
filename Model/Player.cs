@@ -9,6 +9,7 @@ namespace Model
 {
     public class Player : IPlayerObserver
     {
+        public string pictureStructure { get; set; }
         public PlayerNum num { get; set; }      //Which player it is(changes spawn position and player image)
         public string id { get; set; }          //Player's id (equals to connection id)
         public string username { get; set; }
@@ -41,6 +42,7 @@ namespace Model
             this.speed = 3;
             this.explosionPower = 2;
             this.boosts = new List<Boost>();
+            this.pictureStructure = "";      
         }
 
         public Player(string id, string username, int num) : this()
@@ -51,8 +53,32 @@ namespace Model
 
             //DEFAULT VALUES
             //TODO: check which player it is and where to spawn him
-            this.x = 26;
-            this.y = 26;
+            
+            IPlayerStructure playerStructure = null;
+            switch (this.num)
+            {
+                case PlayerNum.P1:
+                    playerStructure = new PlayerShoesDecorator(new PlayerFedoraDecorator(new PlayerRed()));
+                    this.x = 26;
+                    this.y = 26;
+                    break;
+                case PlayerNum.P2:
+                    playerStructure = new PlayerShoesDecorator(new PlayerFedoraDecorator(new PlayerBlue()));
+                    this.x = 534;
+                    this.y = 26;
+                    break;
+                case PlayerNum.P3:
+                    playerStructure = new PlayerShoesDecorator(new PlayerFedoraDecorator(new PlayerGreen()));
+                    this.x = 26;
+                    this.y = 434;
+                    break;
+                case PlayerNum.P4:
+                    playerStructure = new PlayerShoesDecorator(new PlayerFedoraDecorator(new PlayerYellow()));
+                    this.x = 534;
+                    this.y = 434;
+                    break;
+            }
+            this.pictureStructure = playerStructure.GetPlayerStructure();
         }
 
         public int[] getPos()
@@ -123,6 +149,5 @@ namespace Model
         {
             context.Client(id).SendAsync("SendData", jsonPlayers, jsonMap);
         }
-
     }
 }
