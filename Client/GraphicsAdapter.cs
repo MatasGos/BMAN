@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Client
 {
-    //A - atvaizdo objektas (Bitmap)
-    //B - spalvos objektas  (Color)
-    interface GraphicsAdapter<A, B>
+    //A - atvaizdo objektas (pvz: Bitmap)
+    //B - spalvos objektas  (pvz: Color)
+    public interface GraphicsAdapter<A, B>
     {
         public void UnlockBits();
         public void LockBits();

@@ -16,7 +16,7 @@ namespace Client
     public partial class ClientForm : Form
     {
         private HubConnection connection;   //SignalR Hub connection object to connect to the server
-        private Game game;                  //Game logic object for user-side
+        private Game<Bitmap, Color> game;                  //Game logic object for user-side
 
         private string username;                                        //Player's chosen username
         private bool _keyTop, _keyLeft, _keyRight, _keyBot, _keyBomb, _keyMine;   //Booleans to see if the key was pressed at a specific time frame
@@ -32,7 +32,7 @@ namespace Client
 
             connection = new HubConnectionBuilder().WithUrl("http://localhost:5000/gamehub").Build();   //Set up the hub connection
 
-            game = new Game();      //Initialize the game logic object
+            game = new Game<Bitmap, Color>();      //Initialize the game logic object
             timer1.Enabled = true;  //Enable timer that draws the map
 
 
@@ -61,7 +61,7 @@ namespace Client
                     game.drawBackground();
                 }
                 game.drawMap();
-                pictureBox1.Image = game.GetImage();
+                pictureBox1.Image = game.GetField().GetImage();
             });
         }
 

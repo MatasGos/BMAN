@@ -12,7 +12,7 @@ namespace Client
 {
     //A - atvaizdo objektas (Bitmap)
     //B - spalvos objektas  (Color)
-    public class Game
+    public class Game<A,B>
     {
         public int xSize = 23;      //Number of blocks(units) left to right in the map
         public int ySize = 19;      //Number of blocks(units) top to bottom in the map
@@ -22,93 +22,83 @@ namespace Client
         public List<Player> players;//List of players with their stats
         public Map map;             //Map data
 
-        private GraphicsAdapter<Bitmap,Color> field;
-        private GraphicsAdapter<Bitmap, Color> background;
+        private GraphicsAdapter<A, B> field;
+        private GraphicsAdapter<A, B> background;
 
-        //Pictures used in drawing the map
+        private GraphicsRepository<A, B> graphics;
 
-        //Bitmap wallPic = Images.wall;
-        //Bitmap playerPic = Images.p1;
-        //Bitmap boxPic = Images.box;
-        //Bitmap bombPic = Images.bomb;
-        //Bitmap minePic = Images.mine;
-        //Bitmap boostPic = Images.mine;
-        //Bitmap superbombPic = Images.superbomb;
-        //Bitmap superminePic = Images.supermine;
-        //Bitmap explosionPic = Images.explosion;
 
         //Pictures saved as Color arrays
-        Color[,] wallPicColor;
-        Color[,] playerPicColor;
-        Color[,] boxPicColor;
-        Color[,] bombPicColor;
-        Color[,] minePicColor;
-        Color[,] boostPicColor;
-        Color[,] superbombPicColor;
-        Color[,] superminePicColor;
-        Color[,] explosionPicColor;
-        Color[,] fedoraColor;
-        Color[,] shoesColor;
+        B[,] wallPicColor;
+        B[,] playerPicColor;
+        B[,] boxPicColor;
+        B[,] bombPicColor;
+        B[,] minePicColor;
+        B[,] boostPicColor;
+        B[,] superbombPicColor;
+        B[,] superminePicColor;
+        B[,] explosionPicColor;
+        B[,] fedoraColor;
+        B[,] shoesColor;
 
-        Dictionary<int, Color[,]> playerPicsColors;
+        Dictionary<int, B[,]> playerPicsColors;
 
         public bool gameStarted = false;    //Bool showing if the game has started or ended/hasn't started yet
 
         public Game()
         {
-            playerPicsColors = new Dictionary<int, Color[,]>();
+            playerPicsColors = new Dictionary<int, B[,]>();
             this.players = new List<Player>();
             this.map = new Map(xSize, ySize);
-            this.field = new BitmapConcreteAdapter(xSize * unitSize, ySize * unitSize);
+            this.graphics = new GraphicsRepository<A, B>();
+            this.field = graphics.CreateGraphicsObject(xSize * unitSize, ySize * unitSize);
         }
 
         public void FormPlayerImages()
         {
-            Color[,] tempColor = new Color[15, 15];
-            Color c = Color.FromArgb(0, 0, 0, 0);
+            B[,] tempColor = new B[playerSize, playerSize];
+            B c = graphics.ColorFromArgb(0, 0, 0, 0);
             foreach (var p in players)
             {
                 string s = p.pictureStructure;
-
-                //Color[,] tempColor;
                 switch (s[0])
                 {
                     case '0':
-                        for (int x = 0; x < 15; x++)
+                        for (int x = 0; x < playerSize; x++)
                         {
-                            for (int y = 0; y < 15; y++)
+                            for (int y = 0; y < playerSize; y++)
                             {
-                                c = Color.FromArgb(playerPicColor[x, y].A, Math.Min(255, playerPicColor[x, y].R + 255), playerPicColor[x, y].G, playerPicColor[x, y].B);
+                                c = graphics.ColorFromArgb(graphics.ColorA(playerPicColor[x, y]), Math.Min(255, graphics.ColorR(playerPicColor[x, y]) + 255), graphics.ColorG(playerPicColor[x, y]), graphics.ColorB(playerPicColor[x, y]));
                                 tempColor[x, y] = c;
                             }
                         }
                         break;
                     case '1':
-                        for (int x = 0; x < 15; x++)
+                        for (int x = 0; x < playerSize; x++)
                         {
-                            for (int y = 0; y < 15; y++)
+                            for (int y = 0; y < playerSize; y++)
                             {
-                                c = Color.FromArgb(playerPicColor[x, y].A, playerPicColor[x, y].R, playerPicColor[x, y].G, Math.Min(255, playerPicColor[x, y].B + 255));
+                                c = graphics.ColorFromArgb(graphics.ColorA(playerPicColor[x, y]), graphics.ColorR(playerPicColor[x, y]), graphics.ColorG(playerPicColor[x, y]), Math.Min(255, graphics.ColorB(playerPicColor[x, y]) + 255));
                                 tempColor[x, y] = c;
                             }
                         }
                         break;
                     case '2':
-                        for (int x = 0; x < 15; x++)
+                        for (int x = 0; x < playerSize; x++)
                         {
-                            for (int y = 0; y < 15; y++)
+                            for (int y = 0; y < playerSize; y++)
                             {
-                                c = Color.FromArgb(playerPicColor[x, y].A, playerPicColor[x, y].R, Math.Min(255, playerPicColor[x, y].G + 255), playerPicColor[x, y].B);
+                                c = graphics.ColorFromArgb(graphics.ColorA(playerPicColor[x, y]), graphics.ColorR(playerPicColor[x, y]), Math.Min(255, graphics.ColorG(playerPicColor[x, y]) + 255), graphics.ColorB(playerPicColor[x, y]));
                                 tempColor[x, y] = c;
                             }
                         }
                         break;
                     case '3':
-                        for (int x = 0; x < 15; x++)
+                        for (int x = 0; x < playerSize; x++)
                         {
-                            for (int y = 0; y < 15; y++)
+                            for (int y = 0; y < playerSize; y++)
                             {
-                                c = Color.FromArgb(playerPicColor[x, y].A, Math.Min(255, playerPicColor[x, y].R + 255), Math.Min(255, playerPicColor[x, y].G + 255), playerPicColor[x, y].B);
+                                c = graphics.ColorFromArgb(graphics.ColorA(playerPicColor[x, y]), Math.Min(255, graphics.ColorR(playerPicColor[x, y]) + 255), Math.Min(255, graphics.ColorG(playerPicColor[x, y]) + 255), graphics.ColorB(playerPicColor[x, y]));
                                 tempColor[x, y] = c;
                             }
                         }
@@ -119,13 +109,13 @@ namespace Client
                     case '0':
                         break;
                     case '1':
-                        for (int x = 0; x < 15; x++)
+                        for (int x = 0; x < playerSize; x++)
                         {
-                            for (int y = 0; y < 15; y++)
+                            for (int y = 0; y < playerSize; y++)
                             {
-                                if (fedoraColor[x, y].A > 0)
+                                if (graphics.ColorA(fedoraColor[x, y]) > 0)
                                 {
-                                    c = Color.FromArgb(fedoraColor[x, y].A, fedoraColor[x, y].R, fedoraColor[x, y].G, fedoraColor[x, y].B);
+                                    c = graphics.ColorFromArgb(graphics.ColorA(fedoraColor[x, y]), graphics.ColorR(fedoraColor[x, y]), graphics.ColorG(fedoraColor[x, y]), graphics.ColorB(fedoraColor[x, y]));
                                     tempColor[x, y] = c;
                                 }
                             }
@@ -137,13 +127,13 @@ namespace Client
                     case '0':
                         break;
                     case '1':
-                        for (int x = 0; x < 15; x++)
+                        for (int x = 0; x < playerSize; x++)
                         {
-                            for (int y = 0; y < 15; y++)
+                            for (int y = 0; y < playerSize; y++)
                             {
-                                if (shoesColor[x, y].A > 0)
+                                if (graphics.ColorA(shoesColor[x, y]) > 0)
                                 {
-                                    c = Color.FromArgb(shoesColor[x, y].A, shoesColor[x, y].R, shoesColor[x, y].G, shoesColor[x, y].B);
+                                    c = graphics.ColorFromArgb(graphics.ColorA(shoesColor[x, y]), graphics.ColorR(shoesColor[x, y]), graphics.ColorG(shoesColor[x, y]), graphics.ColorB(shoesColor[x, y]));
                                     tempColor[x, y] = c;
                                 }
                             }
@@ -151,68 +141,76 @@ namespace Client
                         break;
                 }
                 //int.Parse(s[0].ToString())
-                playerPicsColors.Add(int.Parse(s[0].ToString()), (Color[,])tempColor.Clone());
+                B[,] temp = new B[playerSize, playerSize];
+                for (int x = 0; x < playerSize; x++)
+                {
+                    for (int y = 0; y < playerSize; y++)
+                    {
+                        temp[x, y] = tempColor[x, y];
+                    }
+                }
+                playerPicsColors.Add(int.Parse(s[0].ToString()), temp);
                 //playerPicsColors[(int)s[0]] = tempColor;
                 //string idk = s[0].toString()
                 //playerPicsColors[int.Parse(s[0].toString())];
 
             }
         }
-        
+
         public void drawBackground()
         {
             //Get map blocks(units) and initialise background picture with it's color
             Unit[,] blocks = map.getUnits();
-            background = new BitmapConcreteAdapter(xSize * unitSize, ySize * unitSize);
-            Color backgroundColor = Color.BurlyWood;
+            background = graphics.CreateGraphicsObject(xSize * unitSize, ySize * unitSize);
+            B backgroundColor = graphics.GetBackgroundColor();
 
             //Save pictures as Color object arrays to know every pixel's color
-            GraphicsAdapter<Bitmap, Color> wallPic = new BitmapConcreteAdapter(unitSize, unitSize);
-            wallPic.SetImage(Images.wall);
+            GraphicsAdapter<A, B> wallPic = graphics.CreateGraphicsObject(unitSize, unitSize);
+            wallPic.SetImage(graphics.GetImage("wall"));
             wallPicColor = wallPic.GetColorArray();
 
-            GraphicsAdapter<Bitmap, Color> playerPic = new BitmapConcreteAdapter(playerSize, playerSize);
-            playerPic.SetImage(Images.p1);
+            GraphicsAdapter<A, B> playerPic = graphics.CreateGraphicsObject(playerSize, playerSize);
+            playerPic.SetImage(graphics.GetImage("p1"));
             playerPicColor = playerPic.GetColorArray();
 
-            GraphicsAdapter<Bitmap, Color> fedora = new BitmapConcreteAdapter(playerSize, playerSize);
-            fedora.SetImage(Images.fedora);
+            GraphicsAdapter<A, B> boxPic = graphics.CreateGraphicsObject(unitSize, unitSize);
+            boxPic.SetImage(graphics.GetImage("box"));
+            boxPicColor = boxPic.GetColorArray();
+
+            GraphicsAdapter<A, B> bombPic = graphics.CreateGraphicsObject(unitSize, unitSize);
+            bombPic.SetImage(graphics.GetImage("bomb"));
+            bombPicColor = bombPic.GetColorArray();
+
+            GraphicsAdapter<A, B> minePic = graphics.CreateGraphicsObject(unitSize, unitSize);
+            minePic.SetImage(graphics.GetImage("mine"));
+            minePicColor = minePic.GetColorArray();
+
+            GraphicsAdapter<A, B> boostPic = graphics.CreateGraphicsObject(unitSize, unitSize);
+            boostPic.SetImage(graphics.GetImage("mine"));
+            boostPicColor = boostPic.GetColorArray();
+
+            GraphicsAdapter<A, B> superbombPic = graphics.CreateGraphicsObject(unitSize, unitSize);
+            superbombPic.SetImage(graphics.GetImage("superbomb"));
+            superbombPicColor = superbombPic.GetColorArray();
+
+            GraphicsAdapter<A, B> superminePic = graphics.CreateGraphicsObject(unitSize, unitSize);
+            superminePic.SetImage(graphics.GetImage("supermine"));
+            superminePicColor = superminePic.GetColorArray();
+
+            GraphicsAdapter<A, B> explosionPic = graphics.CreateGraphicsObject(unitSize, unitSize);
+            explosionPic.SetImage(graphics.GetImage("explosion"));
+            explosionPicColor = explosionPic.GetColorArray();
+
+            GraphicsAdapter<A, B> fedora = graphics.CreateGraphicsObject(playerSize, playerSize);
+            fedora.SetImage(graphics.GetImage("fedora"));
             fedoraColor = fedora.GetColorArray();
 
-            GraphicsAdapter<Bitmap, Color> shoes = new BitmapConcreteAdapter(playerSize, playerSize);
-            shoes.SetImage(Images.shoes);
+            GraphicsAdapter<A, B> shoes = graphics.CreateGraphicsObject(playerSize, playerSize);
+            shoes.SetImage(graphics.GetImage("shoes"));
             shoesColor = shoes.GetColorArray();
-
-            GraphicsAdapter<Bitmap, Color> boxPic = new BitmapConcreteAdapter(unitSize, unitSize);
-            boxPic.SetImage(Images.box);
-            boxPicColor = boxPic.GetColorArray();
 
             FormPlayerImages();
 
-            GraphicsAdapter<Bitmap, Color> bombPic = new BitmapConcreteAdapter(unitSize, unitSize);
-            bombPic.SetImage(Images.bomb);
-            bombPicColor = bombPic.GetColorArray();
-
-            GraphicsAdapter<Bitmap, Color> minePic = new BitmapConcreteAdapter(unitSize, unitSize);
-            minePic.SetImage(Images.mine);
-            minePicColor = minePic.GetColorArray();
-
-
-            GraphicsAdapter<Bitmap, Color> boostPic = new BitmapConcreteAdapter(unitSize, unitSize);
-            boostPic.SetImage(Images.mine);
-            boostPicColor = boostPic.GetColorArray();
-
-            GraphicsAdapter<Bitmap, Color> superbombPic = new BitmapConcreteAdapter(unitSize, unitSize);
-            superbombPic.SetImage(Images.superbomb);
-            superbombPicColor = superbombPic.GetColorArray();
-
-            GraphicsAdapter<Bitmap, Color> superminePic = new BitmapConcreteAdapter(unitSize, unitSize);
-            superminePic.SetImage(Images.supermine);
-            superminePicColor = superminePic.GetColorArray();
-
-            GraphicsAdapter<Bitmap, Color> explosionPic = new BitmapConcreteAdapter(unitSize, unitSize);
-            explosionPic.SetImage(Images.explosion);
-            explosionPicColor = explosionPic.GetColorArray();
 
             background.LockBits();
 
@@ -252,7 +250,7 @@ namespace Client
             Boost[,] boosts = map.getBoosts();
             field.SetImage(background.GetImageCopy());
 
-            Color[,] picColor = null;
+            B[,] picColor = null;
             //Lock the Bitmap bits for faster drawing
             field.LockBits();
 
@@ -335,9 +333,9 @@ namespace Client
             field.UnlockBits();
         }
 
-        public Bitmap GetImage()
+        public GraphicsAdapter<A, B> GetField()
         {
-            return field.GetImage();
+            return field;
         }
     }
 }
