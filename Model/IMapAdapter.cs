@@ -12,5 +12,7 @@ namespace Model
         public void UpdateExplosives(double time);
 
         public string GetJson(JsonSerializerSettings settings);
+
+        public MapFacade GetMapFacade();
     }
 }

@@ -44,7 +44,7 @@ namespace Model
 
         public void Move(Player movingPlayer)
         {
-            mapFacade.Move(movingPlayer);
+            //mapFacade.Move(movingPlayer);
         }
 
         public void PlaceExplosive(Player player, double placeTime)

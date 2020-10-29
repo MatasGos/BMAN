@@ -19,7 +19,7 @@ namespace Client
         private Game<Bitmap, Color> game;                  //Game logic object for user-side
 
         private string username;                                        //Player's chosen username
-        private bool _keyTop, _keyLeft, _keyRight, _keyBot, _keyBomb, _keyMine;   //Booleans to see if the key was pressed at a specific time frame
+        private bool _keyTop, _keyLeft, _keyRight, _keyBot, _keyBomb, _keyMine, _keyUndo;   //Booleans to see if the key was pressed at a specific time frame
 
         //Json settings
         JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
@@ -153,6 +153,10 @@ namespace Client
             {
                 _keyMine = false;
             }
+            if (e.KeyCode == Keys.T)
+            {
+                _keyUndo = false;
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -199,6 +203,10 @@ namespace Client
             {
                 _keyMine = true;
             }
+            if (e.KeyCode == Keys.T)
+            {
+                _keyUndo = true;
+            }
         }
 
         //Timer that checks button presses
@@ -217,13 +225,24 @@ namespace Client
             int y = 0;
             string action = "";
 
+            string command = null;
+
+            Player p = null;
+            foreach (var item in game.players)
+            {
+                if(item.id == connection.ConnectionId)
+                {
+                    p = item;
+                }
+            }
+
             if (_keyLeft)
             {
                 x -= 1;
             }
             if (_keyRight)
             {
-                x += 1;
+                x += 1; 
             }
             if (_keyTop)
             {
@@ -241,17 +260,61 @@ namespace Client
             {
                 action = "placeMine";
             }
+            if (_keyUndo)
+            {
+                action = "undo";
+            }
+
+            if (x == -1 && y == 0)
+            {
+                command = "moveleft";
+            }
+            if (x == 1 && y == 0)
+            {
+                command = "moveright";
+            }
+            if (x == 0 && y == -1)
+            {
+                command = "moveup";
+            }
+            if (x == 0 && y == 1)
+            {
+                command = "movedown";
+            }
+            if (x == -1 && y == -1)
+            {
+                command = "moveleftup";
+            }
+            if (x == -1 && y == 1)
+            {
+                command = "moveleftdown";
+            }
+            if (x == 1 && y == -1)
+            {
+                command = "moverightup";
+            }
+            if (x == 1 && y == 1)
+            {
+                command = "moverightdown";
+            }
+
             SendActionCommand(action);
-            SendMoveCommand(x, y);
-            
+            //SendMoveCommand(x, y);
+            SendMoveCommand(command);
+
         }
 
         //Send a move command to the server
-        public async void SendMoveCommand(int x, int y)
+        //public async void SendMoveCommand(int x, int y)
+        public async void SendMoveCommand(string command)
         {
+            if(command == null)
+            {
+                return;
+            }
             try
             {
-                await connection.InvokeAsync("SendMoveMessage", x, y);
+                await connection.InvokeAsync("SendMoveMessage", command);
             }
             catch (Exception ex)
             {

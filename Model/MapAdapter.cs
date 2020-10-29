@@ -17,7 +17,12 @@ namespace Model
         public void PerformPlayerActions(Player player, double time)
         {
             map.PlaceExplosive(player, time);
-            map.Move(player);
+            player.Move();
+            if (player.actiontwo == "undo")
+            {
+                player.Undo();
+                player.actiontwo = "";
+            }
             map.PickupBoost(player);
         }
 
@@ -29,6 +34,10 @@ namespace Model
         public string GetJson(JsonSerializerSettings settings)
         {
             return map.GetJson(settings);
+        }
+        public MapFacade GetMapFacade()
+        {
+            return map.mapFacade;
         }
 
     }

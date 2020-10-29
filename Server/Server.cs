@@ -13,6 +13,7 @@ namespace Server
 {
     public static class Server
     {
+        public static MapFacade current;
         public static List<Player> playerList = new List<Player>();    
         public static IHubCallerClients context;
         public static GameServer game;

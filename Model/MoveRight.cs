@@ -6,19 +6,23 @@ namespace Model
 {
     public class MoveRight : ICommand
     {
-        public Player player { get; set; }
-        public MoveRight(Player player)
+        private Player player;
+        private MapFacade facade;
+        private int speed;
+        public MoveRight(Player player, MapFacade facade)
         {
             this.player = player;
+            this.speed = player.speed;
+            this.facade = facade;
         }
         public void Execute()
         {
-            this.player.directionx = 1;
+            facade.Move(player, 1, 0, speed);
         }
 
         public void Undo()
         {
-            this.player.directionx = -1;
+            facade.Move(player, -1, 0, speed);
         }
     }
 }

@@ -16,9 +16,9 @@ namespace Model
             em = new ExplosionManager(xSize, ySize, units, boosts);
         }
 
-        public void Move(Player movingPlayer)
+        public void Move(Player movingPlayer, int x, int y, int speed)
         {
-            pcm.Move(movingPlayer);
+            pcm.Move(movingPlayer, x, y, speed);
         }
 
         public void PlaceExplosive(Player player, double placeTime)

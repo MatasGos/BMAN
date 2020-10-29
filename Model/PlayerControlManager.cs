@@ -72,10 +72,10 @@ namespace Model
             }
         }
 
-        public void Move(Player movingPlayer)
+        public void Move(Player movingPlayer, int x, int y, int speed)
         {
-            int px = movingPlayer.directionx;
-            int py = movingPlayer.directiony;
+            int px = x;
+            int py = y;
 
             if (px == 0 && py == 0)
             {
@@ -88,25 +88,22 @@ namespace Model
 
             for (int i = 0; i < 4; i++)
             {
-                edges[i, 0] += px * movingPlayer.speed;
-                edges[i, 1] += py * movingPlayer.speed;
+                edges[i, 0] += px * speed;
+                edges[i, 1] += py * speed;
                 edges1[i, 0] += px;
                 edges1[i, 1] += py;
             }
 
             if (isOccupiedSquared(edges, b))
             {
-                movingPlayer.x += px * movingPlayer.speed;
-                movingPlayer.y += py * movingPlayer.speed;
+                movingPlayer.x += px * speed;
+                movingPlayer.y += py * speed;
             }
             else if (isOccupiedSquared(edges1, b))
             {
                 movingPlayer.x += px;
                 movingPlayer.y += py;
             }
-
-            movingPlayer.directionx = 0;
-            movingPlayer.directiony = 0;
         }
 
         public bool isOccupiedSquared(int[,] edges, Unit[] b)

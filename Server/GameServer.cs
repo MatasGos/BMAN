@@ -22,7 +22,7 @@ namespace Server
         public bool isRunning = false;
         Stopwatch sw;
         public List<IPlayerObserver> playerList = new List<IPlayerObserver>();
-        private IHubCallerClients context;
+        private IHubCallerClients context;       
 
         JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
         
@@ -56,7 +56,7 @@ namespace Server
                 map = new MapAdapter(temp);
                 Server.AddMap(temp);
             }
-
+            Server.current = map.GetMapFacade(); 
         }
 
         public void AddObserver(IPlayerObserver player)
@@ -92,6 +92,7 @@ namespace Server
             foreach(Player player in playerList)
             {
                 map.PerformPlayerActions(player, sw.Elapsed.TotalMilliseconds);
+                
             }
             map.UpdateExplosives(sw.Elapsed.TotalMilliseconds);
 

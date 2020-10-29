@@ -25,6 +25,8 @@ namespace Model
         public int directionx { get; set; }
         public int directiony { get; set; }
         public string action { get; set; }
+        public string actiontwo { get; set; }
+        private MovementControl movementControl;
 
         public enum PlayerNum : int
         {
@@ -42,7 +44,8 @@ namespace Model
             this.speed = 3;
             this.explosionPower = 2;
             this.boosts = new List<Boost>();
-            this.pictureStructure = "";      
+            this.pictureStructure = "";
+            this.movementControl = new MovementControl();
         }
 
         public Player(string id, string username, int num) : this()
@@ -86,15 +89,16 @@ namespace Model
             return new int[] { this.x, this.y };
         }
 
-        public void SetDirection(int px, int py)
-        {
-            directionx = px;
-            directiony = py;
-        }
-
         public void SetAction(string action)
         {
-            this.action = action;
+            if(action == "undo")
+            {
+                this.actiontwo = action;
+            }
+            else 
+            {
+                this.action = action;
+            }          
         }
 
         public void AddBoost(Boost boost)
@@ -148,6 +152,18 @@ namespace Model
         public void update(IHubCallerClients context, string jsonMap, string jsonPlayers)
         {
             context.Client(id).SendAsync("SendData", jsonPlayers, jsonMap);
+        }
+        public void Move()
+        {
+            this.movementControl.Move();
+        }
+        public void Undo()
+        {
+            this.movementControl.Undo();
+        }
+        public void SetCommand(ICommand command)
+        {
+            this.movementControl.AddCommand(command);
         }
     }
 }

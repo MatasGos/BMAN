@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Model
 {
-    public class MoveLeft : ICommand
+    public class MoveLeftUp : ICommand
     {
         private Player player;
         private MapFacade facade;
         private int speed;
-        public MoveLeft(Player player, MapFacade facade)
+        public MoveLeftUp(Player player, MapFacade facade)
         {
             this.player = player;
             this.speed = player.speed;
@@ -17,12 +17,12 @@ namespace Model
         }
         public void Execute()
         {
-            facade.Move(player, -1, 0, speed);
+            facade.Move(player, -1, -1, speed);
         }
 
         public void Undo()
         {
-            facade.Move(player, 1, 0, speed);
+            facade.Move(player, 1, 1, speed);
         }
     }
 }

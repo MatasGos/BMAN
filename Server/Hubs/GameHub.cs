@@ -6,11 +6,13 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Model;
+using Newtonsoft.Json;
 
 namespace Server.Hubs
 {
     public class GameHub : Hub
     {
+        JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
         //Logs the player into the game, saves his information and sends a login message to everyone else
         public async Task SendLoginMessage(string username)
         {
@@ -40,12 +42,50 @@ namespace Server.Hubs
         }
 
         //Sends a move message
-        public async Task SendMoveMessage(int x, int y)
+        /*public async Task SendMoveMessage(int x, int y)
         {
             await Task.Run(() =>
             {
                 Server.GetPlayerById(Context.ConnectionId).directionx = x;
                 Server.GetPlayerById(Context.ConnectionId).directiony = y;
+            });
+        }*/
+        public async Task SendMoveMessage(string moveCommand)
+        {
+            await Task.Run(() =>
+            {
+                ICommand command = null;
+                Player p = Server.GetPlayerById(Context.ConnectionId);
+                switch (moveCommand)
+                {
+                    case "moveleft":
+                        command = new MoveLeft(p, Server.current);
+                        break;
+                    case "moveright":
+                        command = new MoveRight(p, Server.current);
+                        break;
+                    case "moveup":
+                        command = new MoveUp(p, Server.current);
+                        break;
+                    case "movedown":
+                        command = new MoveDown(p, Server.current);
+                        break;
+                    case "moveleftup":
+                        command = new MoveLeftUp(p, Server.current);
+                        break;
+                    case "moveleftdown":
+                        command = new MoveLeftDown(p, Server.current);
+                        break;
+                    case "moverightup":
+                        command = new MoveRightUp(p, Server.current);
+                        break;
+                    case "moverightdown":
+                        command = new MoveRightDown(p, Server.current);
+                        break;
+                }
+                p.SetCommand(command);
+                //Server.GetPlayerById(Context.ConnectionId).movementControl = new MovementControl(command);
+                //Server.GetPlayerById(Context.ConnectionId).movementControl.Move();
             });
         }
 
