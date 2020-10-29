@@ -104,30 +104,22 @@ namespace Client
                         }
                         break;
                 }
-                switch (s[1])
-                {
-                    case '0':
-                        break;
-                    case '1':
-                        for (int x = 0; x < playerSize; x++)
+                if (s.Contains("f")) { 
+                    for (int x = 0; x < playerSize; x++)
+                    {
+                        for (int y = 0; y < playerSize; y++)
                         {
-                            for (int y = 0; y < playerSize; y++)
+                            if (graphics.ColorA(fedoraColor[x, y]) > 0)
                             {
-                                if (graphics.ColorA(fedoraColor[x, y]) > 0)
-                                {
-                                    c = graphics.ColorFromArgb(graphics.ColorA(fedoraColor[x, y]), graphics.ColorR(fedoraColor[x, y]), graphics.ColorG(fedoraColor[x, y]), graphics.ColorB(fedoraColor[x, y]));
-                                    tempColor[x, y] = c;
-                                }
+                                c = graphics.ColorFromArgb(graphics.ColorA(fedoraColor[x, y]), graphics.ColorR(fedoraColor[x, y]), graphics.ColorG(fedoraColor[x, y]), graphics.ColorB(fedoraColor[x, y]));
+                                tempColor[x, y] = c;
                             }
                         }
-                        break;
+                    }
                 }
-                switch (s[2])
+                if (s.Contains("s"))
                 {
-                    case '0':
-                        break;
-                    case '1':
-                        for (int x = 0; x < playerSize; x++)
+                    for (int x = 0; x < playerSize; x++)
                         {
                             for (int y = 0; y < playerSize; y++)
                             {
@@ -138,9 +130,7 @@ namespace Client
                                 }
                             }
                         }
-                        break;
                 }
-                //int.Parse(s[0].ToString())
                 B[,] temp = new B[playerSize, playerSize];
                 for (int x = 0; x < playerSize; x++)
                 {

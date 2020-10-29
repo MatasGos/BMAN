@@ -12,7 +12,7 @@ namespace Model
         }
         public override string GetPlayerStructure()
         {
-            return tempPlayer.GetPlayerStructure() + "1";
+            return tempPlayer.GetPlayerStructure() + "s";
         }
     }
 }
