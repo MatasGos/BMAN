@@ -58,7 +58,7 @@ namespace Model
             switch (this.num)
             {
                 case PlayerNum.P1:
-                    playerStructure = new PlayerShoesDecorator(new PlayerFedoraDecorator(new PlayerRed()));
+                    playerStructure = new PlayerRed();
                     this.x = 26;
                     this.y = 26;
                     break;
@@ -68,7 +68,7 @@ namespace Model
                     this.y = 26;
                     break;
                 case PlayerNum.P3:
-                    playerStructure = new PlayerShoesDecorator(new PlayerFedoraDecorator(new PlayerGreen()));
+                    playerStructure = new PlayerGreen();
                     this.x = 26;
                     this.y = 434;
                     break;
