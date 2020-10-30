@@ -62,7 +62,6 @@ namespace Client
                     break;
                 default:
                     throw new NotImplementedException();
-                    break;
             }
             return toReturn;
         }

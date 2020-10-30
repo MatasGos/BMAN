@@ -118,11 +118,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(590, 176);
+            this.label1.Location = new System.Drawing.Point(590, 163);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
+            this.label1.Size = new System.Drawing.Size(88, 75);
             this.label1.TabIndex = 11;
-            this.label1.Text = "label1";
+            this.label1.Text = "Q - bomb\r\nM - mine\r\nN - superbomb\r\nB - supermine\r\n ";
             // 
             // ClientForm
             // 
@@ -142,7 +142,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "ClientForm";
-            this.Text = "Add boost (superbomb)";
+            this.Text = "Q - bomb\r\nM - mine\r\nN - superbomb\r\nB - supermine\r\n ";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);

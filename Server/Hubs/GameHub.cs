@@ -37,8 +37,11 @@ namespace Server.Hubs
         //Sends a message to start the game to everyone after someone presses the start button
         public async Task StartMessage()
         {
-            Server.context = this.Clients;  //Sets the context to send messages to clients not only from the hub
-            Server.StartGame();
+            await Task.Run(() =>
+            {
+                Server.context = this.Clients;  //Sets the context to send messages to clients not only from the hub
+                Server.StartGame();
+            });
         }
 
         //Sends a move message
