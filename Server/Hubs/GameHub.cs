@@ -97,23 +97,5 @@ namespace Server.Hubs
                 Server.GetPlayerById(Context.ConnectionId).SetAction(action);
             });
         }
-
-        public async Task DebugAddBoost()
-        {
-            await Task.Run(() =>
-            {
-                Server.GetPlayerById(Context.ConnectionId).AddBoost(new Boost(0, 0));
-                Console.WriteLine("Add");
-            });
-        }
-
-        public async Task DebugRemoveBoost()
-        {
-            await Task.Run(() =>
-            {
-                Server.GetPlayerById(Context.ConnectionId).RemoveBoostDebug("superexplosive");
-                Console.WriteLine("Remove");
-            });
-        }
     }
 }

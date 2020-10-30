@@ -76,7 +76,7 @@ namespace Model
 
         public override void BuildTeleporter()
         {
-            //TODO: Build the teleporter
+            int[] teleporterIn = new int[] { 1, 4 };
         }
 
         public override Map GetMap()

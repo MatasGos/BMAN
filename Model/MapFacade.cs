@@ -10,10 +10,10 @@ namespace Model
         PlayerControlManager pcm;
         ExplosionManager em;
 
-        public MapFacade(int xSize, int ySize, Unit[,] units, Boost[,] boosts)
+        public MapFacade(int xSize, int ySize, Unit[,] units, Explosive[,] explosions)
         {
-            pcm = new PlayerControlManager(xSize, ySize, units, boosts);
-            em = new ExplosionManager(xSize, ySize, units, boosts);
+            pcm = new PlayerControlManager(xSize, ySize, units, explosions);
+            em = new ExplosionManager(xSize, ySize, units, explosions);
         }
 
         public void Move(Player movingPlayer, int x, int y, int speed)

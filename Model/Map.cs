@@ -20,7 +20,7 @@ namespace Model
         public int xSize { get; set; }
         public int ySize { get; set; }
         public Unit[,] units { get; set; }
-        public Boost[,] boosts { get; set; }
+        public Explosive[,] explosions { get; set; }
         public MapFacade mapFacade { get; set; }
 
         public Map(int xSize, int ySize)
@@ -28,8 +28,8 @@ namespace Model
             this.xSize = xSize;
             this.ySize = ySize;
             units = new Unit[xSize, ySize];
-            boosts = new Boost[xSize, ySize];
-            mapFacade = new MapFacade(xSize, ySize, units, boosts);
+            explosions = new Explosive[xSize, ySize];
+            mapFacade = new MapFacade(xSize, ySize, units, explosions);
         }
 
         public Unit[,] getUnits()
@@ -37,14 +37,9 @@ namespace Model
             return units;
         }
 
-        public Boost[,] getBoosts()
+        public Explosive[,] getExplosions()
         {
-            return boosts;
-        }
-
-        public void Move(Player movingPlayer)
-        {
-            //mapFacade.Move(movingPlayer);
+            return explosions;
         }
 
         public void PlaceExplosive(Player player, double placeTime)
@@ -75,13 +70,13 @@ namespace Model
                 return clone;
             }
             clone.units = new Unit[xSize, ySize];
-            clone.boosts = new Boost[xSize, ySize];
+            clone.explosions = new Explosive[xSize, ySize];
             for (int i = 0; i < xSize; i++)
             {
                 for (int j = 0; j < ySize; j++)
                 {
                     clone.units[i, j] = units[i, j];
-                    clone.boosts[i, j] = boosts[i, j];
+                    clone.explosions[i, j] = explosions[i, j];
                 }
             }
             return clone;

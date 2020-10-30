@@ -9,14 +9,14 @@ namespace Model
         int xSize;
         int ySize;
         Unit[,] units;
-        Boost[,] boosts;
+        Explosive[,] explosions;
 
-        public PlayerControlManager(int xSize, int ySize, Unit[,] units, Boost[,] boosts)
+        public PlayerControlManager(int xSize, int ySize, Unit[,] units, Explosive[,] explosions)
         {
             this.xSize = xSize;
             this.ySize = ySize;
             this.units = units;
-            this.boosts = boosts;
+            this.explosions = explosions;
         }
 
         public void PlaceExplosive(Player player, double placeTime)
@@ -29,9 +29,17 @@ namespace Model
             ExplosiveAbstractFactory factory;
             Explosive toPlace = null;
 
+            string command = player.action;
+            bool placeSuper = false;
+            if (command[command.Length -1] == 'S')
+            {
+                placeSuper = true;
+                command = command.Remove(command.Length - 1);
+            }
+
             if (units[playerTile[0], playerTile[1]] == null)
             {
-                if (player.HasBoost("superexplosive"))
+                if (placeSuper && player.hasSuperbombs)
                 {
                     factory = new SuperExplosiveConcreteFactory();
                 }
@@ -40,7 +48,7 @@ namespace Model
                     factory = new RegularExplosiveConcreteFactory();
                 }
 
-                switch (player.action)
+                switch (command)
                 {
                     case "placeBomb":
                         toPlace = factory.CreateBomb(playerTile[0], playerTile[1], player.explosionPower, placeTime);
@@ -63,12 +71,12 @@ namespace Model
             int[] playerCenter = getCenterPlayer(new int[] { player.x, player.y });
             int[] playerTile = getTile(playerCenter[0], playerCenter[1]);
 
-            if (boosts[playerTile[0], playerTile[1]] is Boost)
+            if (units[playerTile[0], playerTile[1]] is Boost)
             {
-                Boost boost = (Boost)boosts[playerTile[0], playerTile[1]];
+                Boost boost = (Boost)units[playerTile[0], playerTile[1]];
                 boost.algorithm.UseBoost(player);
 
-                boosts[playerTile[0], playerTile[1]] = null;
+                units[playerTile[0], playerTile[1]] = null;
             }
         }
 

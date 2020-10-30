@@ -19,7 +19,7 @@ namespace Client
         private Game<Bitmap, Color> game;                  //Game logic object for user-side
 
         private string username;                                        //Player's chosen username
-        private bool _keyTop, _keyLeft, _keyRight, _keyBot, _keyBomb, _keyMine, _keyUndo;   //Booleans to see if the key was pressed at a specific time frame
+        private bool _keyTop, _keyLeft, _keyRight, _keyBot, _keyBomb, _keyMine, _keyUndo, _keySuperMine, _keySuperBomb;   //Booleans to see if the key was pressed at a specific time frame
 
         //Json settings
         JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
@@ -73,6 +73,8 @@ namespace Client
             _keyLeft = false;
             _keyRight = false;
             _keyBomb = false;
+            _keySuperMine = false;
+            _keySuperBomb = false;
         }
         
         //Login button
@@ -157,6 +159,14 @@ namespace Client
             {
                 _keyUndo = false;
             }
+            if (e.KeyCode == Keys.B)
+            {
+                _keySuperMine = false;
+            }
+            if (e.KeyCode == Keys.N)
+            {
+                _keySuperBomb = false;
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -207,6 +217,15 @@ namespace Client
             {
                 _keyUndo = true;
             }
+            if (e.KeyCode == Keys.B)
+            {
+                _keySuperMine = true;
+            }
+            if (e.KeyCode == Keys.N)
+            {
+                _keySuperBomb = true;
+            }
+
         }
 
         //Timer that checks button presses
@@ -263,6 +282,14 @@ namespace Client
             if (_keyUndo)
             {
                 action = "undo";
+            }
+            if (_keySuperMine)
+            {
+                action = "placeMineS";
+            }
+            if (_keySuperBomb)
+            {
+                action = "placeBombS";
             }
 
             if (x == -1 && y == 0)

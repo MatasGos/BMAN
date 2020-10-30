@@ -34,7 +34,7 @@ namespace Client
                     toReturn = (A)(object)Images.mine;
                     break;
                 case "boost":
-                    toReturn = (A)(object)Images.mine;
+                    toReturn = (A)(object)Images.boost;
                     break;
                 case "superbomb":
                     toReturn = (A)(object)Images.superbomb;
@@ -50,6 +50,15 @@ namespace Client
                     break;
                 case "shoes":
                     toReturn = (A)(object)Images.shoes;
+                    break;
+                case "superexplosion":
+                    toReturn = (A)(object)Images.superexplosion;
+                    break;
+                case "teleporterin":
+                    toReturn = (A)(object)Images.teleporterin;
+                    break;
+                case "teleporterout":
+                    toReturn = (A)(object)Images.teleporterout;
                     break;
                 default:
                     throw new NotImplementedException();

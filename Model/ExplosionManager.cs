@@ -9,14 +9,14 @@ namespace Model
         int xSize;
         int ySize;
         Unit[,] units;
-        Boost[,] boosts;
+        Explosive[,] explosions;
 
-        public ExplosionManager(int xSize, int ySize, Unit[,] units, Boost[,] boosts)
+        public ExplosionManager(int xSize, int ySize, Unit[,] units, Explosive[,] explosions)
         {
             this.xSize = xSize;
             this.ySize = ySize;
             this.units = units;
-            this.boosts = boosts;
+            this.explosions = explosions;
         }
 
         public void UpdateExplosives(double time)
@@ -26,12 +26,20 @@ namespace Model
                 for (int y = 0; y < ySize; y++)
                 {
                     ExplosiveAbstractFactory factory;
-                    if (units[x, y] is Explosion)
+                    if (explosions[x, y] is Explosion)
                     {
-                        Explosion explosion = (Explosion)units[x, y];
+                        Explosion explosion = (Explosion)explosions[x, y];
                         if (explosion.removalTime < time)
                         {
-                            units[x, y] = null;
+                            explosions[x, y] = null;
+                        }
+                    }
+                    if (explosions[x, y] is SuperExplosion)
+                    {
+                        SuperExplosion explosion = (SuperExplosion)explosions[x, y];
+                        if (explosion.removalTime < time)
+                        {
+                            explosions[x, y] = null;
                         }
                     }
                     else if (units[x, y] is Bomb)
@@ -41,6 +49,7 @@ namespace Model
 
                         if (bomb.detonationTime < time)
                         {
+                            units[x, y] = null;
                             PlaceRegularExplosion(x, y, bomb.explosionPower, time, factory);
                         }
                     }
@@ -51,6 +60,7 @@ namespace Model
 
                         if (bomb.detonationTime < time)
                         {
+                            units[x, y] = null;
                             PlaceSuperExplosion(x, y, bomb.explosionPower, time, factory);
                         }
                     }
@@ -64,8 +74,7 @@ namespace Model
             bool bottomFinished = false;
             bool leftFinished = false;
             bool rightFinished = false;
-
-            units[xTile, yTile] = factory.CreateExplosion(xTile, yTile, placeTime);
+            explosions[xTile, yTile] = factory.CreateExplosion(xTile, yTile, placeTime);
 
             for (int i = 1; i < explosionPower; i++)
             {
@@ -90,9 +99,9 @@ namespace Model
 
         private bool RegularExplosionCreation(int x, int y, double placeTime, bool isFinished, ExplosiveAbstractFactory factory)
         {
-            if (units[x, y] == null || units[x, y] is Explosion)
+            if (units[x, y] == null || explosions[x, y] is Explosion || explosions[x,y] is SuperExplosion || units[x,y].isSolid == false)
             {
-                units[x, y] = factory.CreateExplosion(x, y, placeTime);
+                explosions[x, y] = factory.CreateExplosion(x, y, placeTime);
             }
             else
             {
@@ -102,9 +111,13 @@ namespace Model
                     int n = rand.Next(100);
                     if (n < 30)
                     {
-                        boosts[x, y] = PickBoostStrategy(x, y);
+                        units[x, y] = PickBoostStrategy(x, y);
                     }
-                    units[x, y] = factory.CreateExplosion(x, y, placeTime);
+                    else
+                    {
+                        units[x, y] = null;
+                    }
+                    explosions[x, y] = factory.CreateExplosion(x, y, placeTime);
 
                 }
                 isFinished = true;
@@ -132,15 +145,20 @@ namespace Model
 
         private void PlaceSuperExplosion(int xTile, int yTile, int explosionPower, double placeTime, ExplosiveAbstractFactory factory)
         {
-            units[xTile, yTile] = factory.CreateExplosion(xTile, yTile, placeTime);
+            explosions[xTile, yTile] = factory.CreateExplosion(xTile, yTile, placeTime);
 
             for (int x = Math.Max(1, xTile - explosionPower); x <= Math.Min(xTile + explosionPower, xSize - 2); x++)
             {
                 for (int y = Math.Max(1, yTile - explosionPower); y <= Math.Min(yTile + explosionPower, ySize - 2); y++)
                 {
-                    if (units[x, y] == null || units[x, y] is Box || units[x, y] is Explosion)
+                    if (units[x, y] == null || units[x, y] is Box)
                     {
-                        units[x, y] = factory.CreateExplosion(x, y, placeTime);
+                        units[x, y] = null;
+                        explosions[x, y] = factory.CreateExplosion(x, y, placeTime);
+                    }
+                    else if (units[x,y].isSolid == false)
+                    {
+                        explosions[x, y] = factory.CreateExplosion(x, y, placeTime);
                     }
                 }
             }

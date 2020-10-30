@@ -18,8 +18,7 @@ namespace Model
                     toReturn = new Box(x, y);
                     break;
                 case "Teleporter":
-                    //toReturn = new Teleporter(x,y);
-                    throw new NotImplementedException();
+                    toReturn = new Teleporter(x,y);
                     break;
                 default:
                     break;

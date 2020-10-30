@@ -40,6 +40,9 @@ namespace Client
         B[,] explosionPicColor;
         B[,] fedoraColor;
         B[,] shoesColor;
+        B[,] teleporterinPicColor;
+        B[,] teleporteroutPicColor;
+        B[,] superexplosionPicColor;
 
         Dictionary<int, B[,]> playerPicsColors;
 
@@ -176,7 +179,7 @@ namespace Client
             minePicColor = minePic.GetColorArray();
 
             GraphicsAdapter<A, B> boostPic = graphics.CreateGraphicsObject(unitSize, unitSize);
-            boostPic.SetImage(graphics.GetImage("mine"));
+            boostPic.SetImage(graphics.GetImage("boost"));
             boostPicColor = boostPic.GetColorArray();
 
             GraphicsAdapter<A, B> superbombPic = graphics.CreateGraphicsObject(unitSize, unitSize);
@@ -198,6 +201,18 @@ namespace Client
             GraphicsAdapter<A, B> shoes = graphics.CreateGraphicsObject(playerSize, playerSize);
             shoes.SetImage(graphics.GetImage("shoes"));
             shoesColor = shoes.GetColorArray();
+
+            GraphicsAdapter<A, B> teleporterin = graphics.CreateGraphicsObject(unitSize, unitSize);
+            teleporterin.SetImage(graphics.GetImage("teleporterin"));
+            teleporterinPicColor = teleporterin.GetColorArray();
+
+            GraphicsAdapter<A, B> teleporterout = graphics.CreateGraphicsObject(unitSize, unitSize);
+            teleporterout.SetImage(graphics.GetImage("teleporterout"));
+            teleporteroutPicColor = teleporterout.GetColorArray();
+
+            GraphicsAdapter<A, B> superexplosionPic = graphics.CreateGraphicsObject(unitSize, unitSize);
+            superexplosionPic.SetImage(graphics.GetImage("superexplosion"));
+            superexplosionPicColor = superexplosionPic.GetColorArray();
 
             FormPlayerImages();
 
@@ -237,33 +252,12 @@ namespace Client
         {
             //Get map data and get a background picture copy
             Unit[,] blocks = map.getUnits();
-            Boost[,] boosts = map.getBoosts();
+            Explosive[,] explosions = map.getExplosions();
             field.SetImage(background.GetImageCopy());
 
             B[,] picColor = null;
             //Lock the Bitmap bits for faster drawing
             field.LockBits();
-
-            //Draw boosts
-            for (int i = 0; i < xSize; i++)
-            {
-                for (int j = 0; j < ySize; j++)
-                {
-                    if (boosts[i, j] != null)
-                    {
-                        //TODO: Switch thru different boost pictures
-                        picColor = boostPicColor;
-
-                        for (int x = 0; x < unitSize; x++)
-                        {
-                            for (int y = 0; y < unitSize; y++)
-                            {
-                                field.SetPixel(i * unitSize + x, j * unitSize + y, picColor[x, y]);
-                            }
-                        }
-                    }
-                }
-            }
 
             //Draw units
             for (int i = 0; i < xSize; i++)
@@ -277,9 +271,6 @@ namespace Client
                             case Box x:
                                 picColor = boxPicColor;
                                 break;
-                            case Explosion x:
-                                picColor = explosionPicColor;
-                                break;
                             case Bomb x:
                                 picColor = bombPicColor;
                                 break;
@@ -291,6 +282,38 @@ namespace Client
                                 break;
                             case SuperMine x:
                                 picColor = superminePicColor;
+                                break;
+                            case Boost x:
+                                picColor = boostPicColor;
+                                break;
+                            default:
+                                break;
+                        }
+                        for (int x = 0; x < unitSize; x++)
+                        {
+                            for (int y = 0; y < unitSize; y++)
+                            {
+                                field.SetPixel(i * unitSize + x, j * unitSize + y, picColor[x, y]);
+                            }
+                        }
+                    }
+                }
+            }
+
+            //Draw explosions
+            for (int i = 0; i < xSize; i++)
+            {
+                for (int j = 0; j < ySize; j++)
+                {
+                    if (explosions[i, j] != null)
+                    {
+                        switch (explosions[i, j])
+                        {
+                            case Explosion x:
+                                picColor = explosionPicColor;
+                                break;
+                            case SuperExplosion x:
+                                picColor = superexplosionPicColor;
                                 break;
                             default:
                                 break;

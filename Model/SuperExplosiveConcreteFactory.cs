@@ -13,8 +13,7 @@ namespace Model
 
         public override Explosive CreateExplosion(int x, int y, double placeTime)
         {
-            //TODO: SUPER EXPLOSIVE
-            return new Explosion(x, y, placeTime);
+            return new SuperExplosion(x, y, placeTime);
         }
 
         public override Explosive CreateMine(int x, int y)

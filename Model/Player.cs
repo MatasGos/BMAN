@@ -19,7 +19,9 @@ namespace Model
         public int explosionPower { get; set; } //Player's bomb explosion power/radius
         public int health { get; set; }         //Player's health
         public int bombCount { get; set; }      //Number of bombs that the player can place at once
-        public List<Boost> boosts { get; set; } //List of collected boosts
+        //public List<Boost> boosts { get; set; } //List of collected boosts
+
+        public bool hasSuperbombs;
 
         //Variables to check where the player is moving to and what action he might be doing
         public int directionx { get; set; }
@@ -43,9 +45,9 @@ namespace Model
             this.action = "";
             this.speed = 3;
             this.explosionPower = 2;
-            this.boosts = new List<Boost>();
             this.pictureStructure = "";
             this.movementControl = new MovementControl();
+            this.hasSuperbombs = true;
         }
 
         public Player(string id, string username, int num) : this()
@@ -99,54 +101,6 @@ namespace Model
             {
                 this.action = action;
             }          
-        }
-
-        public void AddBoost(Boost boost)
-        {
-            bool canAdd = true;
-            foreach (var x in boosts)
-            {
-                if (x.boostType.Equals(boost.boostType))
-                {
-                    canAdd = false;
-                    break;
-                }
-            }
-            boosts.Add(boost);
-        }
-
-        public void RemoveBoost(Boost boost)
-        {
-            boosts.Remove(boost);
-        }
-
-        public bool HasBoost(string boostType)
-        {
-            foreach (var x in boosts)
-            {
-                if (x.boostType.Equals(boostType))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public void RemoveBoostDebug(string boostType)
-        {
-            int index = 0;
-            foreach (var x in boosts)
-            {
-                if (x.boostType.Equals(boostType))
-                {
-                    break;
-                }
-                index++;
-            }
-            if (index < boosts.Count)
-            {
-                boosts.RemoveAt(index);
-            }
         }
 
         public void update(IHubCallerClients context, string jsonMap, string jsonPlayers)
