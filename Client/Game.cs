@@ -286,6 +286,16 @@ namespace Client
                             case Boost x:
                                 picColor = boostPicColor;
                                 break;
+                            case Teleporter x:
+                                if (x.HasDestination())
+                                {
+                                    picColor = teleporterinPicColor;
+                                }
+                                else
+                                {
+                                    picColor = teleporteroutPicColor;
+                                }
+                                break;
                             default:
                                 break;
                         }

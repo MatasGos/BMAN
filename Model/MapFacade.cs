@@ -28,7 +28,7 @@ namespace Model
 
         public void PickupBoost(Player player)
         {
-            pcm.PickupBoost(player);
+            pcm.ActivateBlock(player);
         }
 
         public void UpdateExplosives(double time)

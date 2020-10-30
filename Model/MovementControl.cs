@@ -41,6 +41,11 @@ namespace Model
             {
                 item.Undo();
             }
+            Clear();
+        }
+
+        public void Clear()
+        {
             movementList.Clear();
         }
     }

@@ -66,17 +66,36 @@ namespace Model
             player.action = "";
         }
 
-        public void PickupBoost(Player player)
+        public void ActivateBlock(Player player)
         {
             int[] playerCenter = getCenterPlayer(new int[] { player.x, player.y });
             int[] playerTile = getTile(playerCenter[0], playerCenter[1]);
-
-            if (units[playerTile[0], playerTile[1]] is Boost)
+            Unit playerStandsOn = units[playerTile[0], playerTile[1]];
+            switch (playerStandsOn)
             {
-                Boost boost = (Boost)units[playerTile[0], playerTile[1]];
-                boost.algorithm.UseBoost(player);
+                case Boost x:
+                    PickupBoost(player, x);
+                    break;
+                case Teleporter x:
+                    Teleport(player, x);
+                    break;
+                default:
+                    break;
+            }
+        }
 
-                units[playerTile[0], playerTile[1]] = null;
+        public void PickupBoost(Player player, Boost playerStandsOn)
+        {
+            playerStandsOn.algorithm.UseBoost(player);
+            units[playerStandsOn.x, playerStandsOn.y] = null;
+        }
+
+        public void Teleport(Player player, Teleporter playerStandsOn)
+        {
+            if (playerStandsOn.HasDestination())
+            {
+                int[] destination = GetTileToCoordinates(playerStandsOn.GetDestination().x, playerStandsOn.GetDestination().y);
+                player.SetPos(destination[0], destination[1]);
             }
         }
 
@@ -176,6 +195,14 @@ namespace Model
             result[0] = x / 25;
             result[1] = y / 25;
 
+            return result;
+        }
+
+        public int[] GetTileToCoordinates(int x, int y)
+        {
+            int[] result = new int[2];
+            result[0] = x * 25 + 5;
+            result[1] = y * 25 + 5;
             return result;
         }
 

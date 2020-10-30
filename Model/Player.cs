@@ -91,6 +91,12 @@ namespace Model
             return new int[] { this.x, this.y };
         }
 
+        public void SetPos(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
         public void SetAction(string action)
         {
             if(action == "undo")
@@ -118,6 +124,11 @@ namespace Model
         public void SetCommand(ICommand command)
         {
             this.movementControl.AddCommand(command);
+        }
+
+        public void ClearCommandHistory()
+        {
+            this.movementControl.Clear();
         }
     }
 }
