@@ -96,6 +96,7 @@ namespace Model
             {
                 int[] destination = GetTileToCoordinates(playerStandsOn.GetDestination().x, playerStandsOn.GetDestination().y);
                 player.SetPos(destination[0], destination[1]);
+                player.ClearCommandHistory();
             }
         }
 
