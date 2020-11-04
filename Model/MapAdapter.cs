@@ -18,10 +18,10 @@ namespace Model
         {
             map.PlaceExplosive(player, time);
             player.Move();
-            if (player.actiontwo == "undo")
+            if (player.actionSecondary == "undo")
             {
                 player.Undo();
-                player.actiontwo = "";
+                player.actionSecondary = "";
             }
             map.PickupBoost(player);
         }
