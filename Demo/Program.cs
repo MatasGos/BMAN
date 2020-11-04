@@ -13,7 +13,19 @@ namespace Demo
             //AbstractFactoryDemo();
             //AdapterDemo();
             //PrototypeDemo();
-            CommanderDemo();
+            //CommanderDemo();
+            DecoratorDemo();
+        }
+
+        public static void DecoratorDemo()
+        {
+            IPlayerStructure structureOne = new PlayerRed();
+            IPlayerStructure structureTwo = new PlayerFedoraDecorator(new PlayerShoesDecorator(new PlayerBlue()));
+            IPlayerStructure structureThree = new PlayerShoesDecorator(new PlayerFedoraDecorator(new PlayerGreen()));
+
+            Console.WriteLine("Pirmojo zaidejo isvaizda:" + structureOne.GetPlayerStructure());
+            Console.WriteLine("Antrojo zaidejo isvaizda:" + structureTwo.GetPlayerStructure());
+            Console.WriteLine("Trečiojo zaidejo isvaizda:" + structureThree.GetPlayerStructure());
         }
 
         public static void FactoryDemo()

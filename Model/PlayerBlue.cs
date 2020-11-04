@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model
 {
-    class PlayerBlue : IPlayerStructure
+    public class PlayerBlue : IPlayerStructure
     {
         public string GetPlayerStructure()
         {
