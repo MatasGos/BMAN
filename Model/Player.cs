@@ -28,6 +28,7 @@ namespace Model
         public int directiony { get; set; }
         public string action { get; set; }
         public string actiontwo { get; set; }
+
         private MovementControl movementControl;
 
         public enum PlayerNum : int
