@@ -47,7 +47,8 @@ namespace Server.Hubs
 
         public async Task UpdateSkin(string skin)
         {
-            Server.UpdatePlayerSkin(Context.ConnectionId, skin);
+            Server.GetPlayerById(Context.ConnectionId).pictureStructure = skin;
+            //Server.UpdatePlayerSkin(Context.ConnectionId, skin);
             string jsonPlayers = JsonConvert.SerializeObject(Server.GetPlayers(), settings);
             await Clients.All.SendAsync("UpdatePlayerImages", jsonPlayers);
         }
