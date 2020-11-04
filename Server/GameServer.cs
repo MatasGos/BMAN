@@ -33,9 +33,13 @@ namespace Server
             Random rand = new Random();
             int r = rand.Next(100);
             MapDirector mapDirector;
-            if (r < 50)
+            if (r < 30)
             {
                 mapDirector = new MapDirector(new ConcreteMapBuilder());
+            }
+            else if(r < 60)
+            {
+                mapDirector = new MapDirector(new DefaultMapBuilder());
             }
             else
             {

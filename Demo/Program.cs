@@ -13,6 +13,7 @@ namespace Demo
             //AbstractFactoryDemo();
             //AdapterDemo();
             //PrototypeDemo();
+            CommanderDemo();
         }
 
         public static void FactoryDemo()
@@ -78,6 +79,27 @@ namespace Demo
                         Console.WriteLine(pixels[i, j]);
                 }
             }
+        }
+
+        public static void CommanderDemo()
+        {
+            Unit[,] units = new Unit[50,50];
+            Explosive[,] explosion = new Explosive[0, 0];
+            MapFacade mapOriginal = new MapFacade(10, 10, units, explosion);
+
+
+            Player player = new Player("aaaa", "Player", 0);
+            Console.WriteLine("Pradine pozicija " + player.getPos()[0] + "-"+player.getPos()[1]);
+
+            ICommand command = new MoveDown(player, mapOriginal);
+            player.SetCommand(command);
+            player.Move();
+
+            Console.WriteLine("Pajudejimas i apacia " + player.getPos()[0] + "-" + player.getPos()[1]);
+
+            player.Undo();
+
+            Console.WriteLine("Pozicija po undo " + player.getPos()[0] + "-" + player.getPos()[1]);
         }
     }
 }

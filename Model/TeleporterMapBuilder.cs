@@ -4,14 +4,14 @@ using System.Text;
 
 namespace Model
 {
-    public class ConcreteMapBuilder : MapBuilder
+    public class TeleporterMapBuilder : MapBuilder
     {
         private int xSize = 23;
         private int ySize = 19;
         private Map map;
         Factory factory;
 
-        public ConcreteMapBuilder()
+        public TeleporterMapBuilder()
         {
             this.map = new Map(xSize, ySize);
             this.map.mapName = "concrete";
@@ -76,7 +76,13 @@ namespace Model
 
         public override void BuildTeleporter()
         {
-       
+            int[] teleporterIn = new int[] { 1, 4 };
+            int[] teleporterOut = new int[] { 1, 10 };
+            Unit input = factory.CreateBlock("Teleporter", teleporterIn[0], teleporterIn[1]);
+            Unit output = factory.CreateBlock("Teleporter", teleporterOut[0], teleporterOut[1]);
+            map.units[teleporterIn[0], teleporterIn[1]] = input;
+            map.units[teleporterOut[0], teleporterOut[1]] = output;
+            ((Teleporter)input).SetDestination((Teleporter)output);            
         }
 
         public override Map GetMap()
