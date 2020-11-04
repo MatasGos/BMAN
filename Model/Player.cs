@@ -92,6 +92,39 @@ namespace Model
             return new int[] { this.x, this.y };
         }
 
+        public void UpdatePlayerStructure(string structure)
+        {
+            int num = (int)this.num;
+            IPlayerStructure playerStructure = null;
+
+            switch (this.num)
+            {
+                case PlayerNum.P1:
+                    playerStructure = new PlayerRed();
+                    break;
+                case PlayerNum.P2:
+                    playerStructure = new PlayerBlue();
+                    break;
+                case PlayerNum.P3:
+                    playerStructure = new PlayerGreen();
+                    break;
+                case PlayerNum.P4:
+                    playerStructure = new PlayerYellow();
+                    break;
+            }
+
+            if (structure.Contains("f"))
+            {
+                playerStructure = new PlayerFedoraDecorator(playerStructure);
+            }
+
+            if (structure.Contains("s"))
+            {
+                playerStructure = new PlayerShoesDecorator(playerStructure);
+            }
+            this.pictureStructure = playerStructure.GetPlayerStructure();
+        }
+
         public void SetPos(int x, int y)
         {
             this.x = x;

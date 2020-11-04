@@ -38,7 +38,14 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.skinBox = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.skinBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -59,7 +66,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Black;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(-13, -3);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(576, 477);
@@ -124,11 +131,78 @@
             this.label1.TabIndex = 11;
             this.label1.Text = "Q - bomb\r\nM - mine\r\nN - superbomb\r\nB - supermine\r\nT - undo";
             // 
+            // skinBox
+            // 
+            this.skinBox.Controls.Add(this.button4);
+            this.skinBox.Controls.Add(this.label3);
+            this.skinBox.Controls.Add(this.label2);
+            this.skinBox.Controls.Add(this.comboBox2);
+            this.skinBox.Controls.Add(this.comboBox1);
+            this.skinBox.Location = new System.Drawing.Point(590, 284);
+            this.skinBox.Name = "skinBox";
+            this.skinBox.Size = new System.Drawing.Size(138, 211);
+            this.skinBox.TabIndex = 12;
+            this.skinBox.TabStop = false;
+            this.skinBox.Text = "Skin";
+            this.skinBox.Enter += new System.EventHandler(this.Skin_Enter);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(6, 154);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 14;
+            this.button4.Text = "Update";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 90);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(38, 15);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Shoes";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 32);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(26, 15);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Hat";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "None",
+            "Yes"});
+            this.comboBox2.Location = new System.Drawing.Point(6, 108);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 23);
+            this.comboBox2.TabIndex = 1;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "None",
+            "Fedora"});
+            this.comboBox1.Location = new System.Drawing.Point(6, 50);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 23);
+            this.comboBox1.TabIndex = 0;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(803, 655);
+            this.Controls.Add(this.skinBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -147,6 +221,8 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.skinBox.ResumeLayout(false);
+            this.skinBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,6 +238,12 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox skinBox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBox2;
+        public System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button4;
     }
 }
 

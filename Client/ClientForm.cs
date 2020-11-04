@@ -35,7 +35,6 @@ namespace Client
             game = new Game<Bitmap, Color>();      //Initialize the game logic object
             timer1.Enabled = true;  //Enable timer that draws the map
 
-
             // RECEIVING MESSAGES
             //Receive another player's login message
             connection.On<string>("ReceiveLoginMessage", (username) =>
@@ -63,6 +62,16 @@ namespace Client
                 game.drawMap();
                 pictureBox1.Image = game.GetField().GetImage();
             });
+
+            connection.On<string>("UpdatePlayerImages", (jsonPlayers) =>
+            {
+                game.players = JsonConvert.DeserializeObject<List<Player>>(jsonPlayers, settings);
+                game.FormPlayerImages();
+            });
+
+            skinBox.Visible = false;
+            comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 0;
         }
 
         //Initialize boolean keypress values
@@ -90,6 +99,7 @@ namespace Client
                     richTextBox1.AppendText("Connected to the server\n", Color.Green);
                     textBox1.Enabled = false;
                     button1.Enabled = false;
+                    skinBox.Visible = true;
                 }
                 catch (Exception ex)
                 {
@@ -128,7 +138,7 @@ namespace Client
             }
         }
 
-        //Form key press event handler
+            //Form key press event handler
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.W)
@@ -166,6 +176,38 @@ namespace Client
             if (e.KeyCode == Keys.N)
             {
                 _keySuperBomb = false;
+            }
+        }
+
+        private void Skin_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void button4_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                string skin = "";
+                if (comboBox1.Text == "Fedora")
+                {
+                    skin += "f";
+                }
+
+                if (comboBox2.Text == "Yes")
+                {
+                    skin += "h";
+                }
+                await connection.InvokeAsync("UpdateSkin", skin);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
             }
         }
 
@@ -225,7 +267,6 @@ namespace Client
             {
                 _keySuperBomb = true;
             }
-
         }
 
         //Timer that checks button presses

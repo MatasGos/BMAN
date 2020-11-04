@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Model;
 using Newtonsoft.Json;
+using System.Xml.Schema;
 
 namespace Server.Hubs
 {
@@ -44,15 +45,13 @@ namespace Server.Hubs
             });
         }
 
-        //Sends a move message
-        /*public async Task SendMoveMessage(int x, int y)
+        public async Task UpdateSkin(string skin)
         {
-            await Task.Run(() =>
-            {
-                Server.GetPlayerById(Context.ConnectionId).directionx = x;
-                Server.GetPlayerById(Context.ConnectionId).directiony = y;
-            });
-        }*/
+            Server.UpdatePlayerSkin(Context.ConnectionId, skin);
+            string jsonPlayers = JsonConvert.SerializeObject(Server.GetPlayers(), settings);
+            await Clients.All.SendAsync("UpdatePlayerImages", jsonPlayers);
+        }
+
         public async Task SendMoveMessage(string moveCommand)
         {
             await Task.Run(() =>
@@ -87,8 +86,6 @@ namespace Server.Hubs
                         break;
                 }
                 p.SetCommand(command);
-                //Server.GetPlayerById(Context.ConnectionId).movementControl = new MovementControl(command);
-                //Server.GetPlayerById(Context.ConnectionId).movementControl.Move();
             });
         }
 

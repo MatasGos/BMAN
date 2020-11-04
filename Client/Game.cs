@@ -59,6 +59,7 @@ namespace Client
 
         public void FormPlayerImages()
         {
+            playerPicsColors = new Dictionary<int, B[,]>();
             B[,] tempColor = new B[playerSize, playerSize];
             B c = graphics.ColorFromArgb(0, 0, 0, 0);
             foreach (var p in players)

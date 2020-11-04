@@ -45,6 +45,17 @@ namespace Server
             return toReturn;
         }
 
+        public static void UpdatePlayerSkin(string contextId, string skin)
+        {
+            for (int i = 0; i < playerList.Count; i++)
+            {
+                if(playerList[i].id == contextId)
+                {
+                    playerList[i].UpdatePlayerStructure(skin);
+                }
+            }
+        }
+
         public static void AddMap(Map map)
         {
             mapCache.Add(map.Clone(true));
