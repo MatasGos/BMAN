@@ -9,12 +9,15 @@ namespace Demo
     {
         static void Main(string[] args)
         {
-
+            //FactoryDemo();
+            //AbstractFactoryDemo();
+            //AdapterDemo();
+            //PrototypeDemo();
         }
 
         public static void FactoryDemo()
         {
-            Factory factory = new BlockFactory();
+            BlockFactory factory = BlockFactorySingleton.GetInstance();
             Block wall = factory.CreateBlock("wall",0, 0);
             Block box = factory.CreateBlock("wall", 0, 0);
             Block teleporter = factory.CreateBlock("teleporter", 0, 0);
@@ -48,8 +51,8 @@ namespace Demo
             Console.WriteLine("mapOriginal.explosions == mapDeepClone.explosions : " + (mapOriginal.explosions == mapDeepClone.explosions));
 
             Console.WriteLine("Shallow kopijos palyginimas:");
-            Console.WriteLine("mapOriginal.units == mapDeepClone.units : " + (mapOriginal.units == mapShallowClone.units));
-            Console.WriteLine("mapOriginal.explosions == mapDeepClone.explosions : " + (mapOriginal.explosions == mapShallowClone.explosions));
+            Console.WriteLine("mapOriginal.units == mapShallowClone.units : " + (mapOriginal.units == mapShallowClone.units));
+            Console.WriteLine("mapOriginal.explosions == mapShallowClone.explosions : " + (mapOriginal.explosions == mapShallowClone.explosions));
         }
 
         public static void AdapterDemo()
