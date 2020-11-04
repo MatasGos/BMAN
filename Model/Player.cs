@@ -27,7 +27,7 @@ namespace Model
         public int directionx { get; set; }
         public int directiony { get; set; }
         public string action { get; set; }
-        public string actiontwo { get; set; }
+        public string actionSecondary { get; set; }
 
         private MovementControl movementControl;
 
@@ -69,7 +69,7 @@ namespace Model
                     this.y = 26;
                     break;
                 case PlayerNum.P2:
-                    playerStructure = new PlayerShoesDecorator(new PlayerFedoraDecorator(new PlayerBlue()));
+                    playerStructure = new PlayerBlue();
                     this.x = 534;
                     this.y = 26;
                     break;
@@ -79,7 +79,7 @@ namespace Model
                     this.y = 434;
                     break;
                 case PlayerNum.P4:
-                    playerStructure = new PlayerShoesDecorator(new PlayerFedoraDecorator(new PlayerYellow()));
+                    playerStructure = new PlayerYellow();
                     this.x = 534;
                     this.y = 434;
                     break;
@@ -135,7 +135,7 @@ namespace Model
         {
             if(action == "undo")
             {
-                this.actiontwo = action;
+                this.actionSecondary = action;
             }
             else 
             {
