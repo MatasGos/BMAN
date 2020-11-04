@@ -13,7 +13,8 @@ namespace Demo
             //AbstractFactoryDemo();
             //AdapterDemo();
             //PrototypeDemo();
-            CommanderDemo();
+            //CommanderDemo();
+            BuilderDemo();
         }
 
         public static void FactoryDemo()
@@ -100,6 +101,45 @@ namespace Demo
             player.Undo();
 
             Console.WriteLine("Pozicija po undo " + player.getPos()[0] + "-" + player.getPos()[1]);
+        }
+
+        public static void BuilderDemo()
+        {
+            Random rand = new Random();
+            int r = rand.Next(100);
+            MapDirector mapDirector;
+            if (r < 30)
+            {
+                mapDirector = new MapDirector(new ConcreteMapBuilder());
+            }
+            else if (r < 60)
+            {
+                mapDirector = new MapDirector(new DefaultMapBuilder());
+            }
+            else
+            {
+                mapDirector = new MapDirector(new TeleporterMapBuilder());
+            }
+            Console.WriteLine(r);
+            mapDirector.constructMap();
+            Map map = mapDirector.getMap();
+
+            Unit[,] units = map.getUnits();
+            for (int i = 0; i < map.xSize; i++)
+            {
+                for (int j = 0; j < map.ySize; j++)
+                {
+                    if (units[i, j]!=null)
+                    {
+                        Console.Write(units[i, j] + "-");
+                    }
+                    else
+                    {
+                        Console.Write("blank-");
+                    }
+                }
+                Console.WriteLine();
+            }
         }
     }
 }

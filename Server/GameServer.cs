@@ -43,7 +43,7 @@ namespace Server
             }
             else
             {
-                mapDirector = new MapDirector(new DefaultMapBuilder());                
+                mapDirector = new MapDirector(new TeleporterMapBuilder());                
             }
 
             Map mapFromCache = Server.GetMapByName(mapDirector.getMap().mapName);
