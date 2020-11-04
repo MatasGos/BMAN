@@ -201,7 +201,7 @@ namespace Client
 
                 if (comboBox2.Text == "Yes")
                 {
-                    skin += "h";
+                    skin += "s";
                 }
                 await connection.InvokeAsync("UpdateSkin", skin);
             }
@@ -367,7 +367,6 @@ namespace Client
             }
 
             SendActionCommand(action);
-            //SendMoveCommand(x, y);
             SendMoveCommand(command);
 
         }
