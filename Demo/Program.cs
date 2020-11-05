@@ -14,7 +14,33 @@ namespace Demo
             //AdapterDemo();
             //PrototypeDemo();
             //CommanderDemo();
-            BuilderDemo();
+            //BuilderDemo();
+            //SingletonDemo();
+            //StrategyDemo();
+        }
+
+        public static void StrategyDemo()
+        {
+            Boost boost = new Boost(0, 0);
+            boost.algorithm = new SpeedBoostAlgorithm();
+            Player player = new Player();
+            Console.WriteLine("Zaidejo greitis: " + player.speed);
+
+            boost.algorithm.UseBoost(player);
+            Console.WriteLine("Zaidejo greitis po Boost panaudojimo: " + player.speed);
+        }
+
+        public static void SingletonDemo()
+        {
+            Factory factory1 = BlockFactorySingleton.GetInstance();
+            Factory factory2 = BlockFactorySingleton.GetInstance();
+
+            //Console.WriteLine(factory1.CreateBlock("box", 0, 0).isSolid);
+
+            if (Object.ReferenceEquals(factory1, factory2))
+            {
+                Console.WriteLine("Factory1 ir Factory2 yra tas pats objektas");
+            }
         }
 
         public static void FactoryDemo()
