@@ -155,7 +155,7 @@ namespace Client
         {
             //Get map blocks(units) and initialise background picture with it's color
             Unit[,] blocks = map.getUnits();
-            background = graphics.CreateGraphicsObject(xSize * unitSize, ySize * unitSize);
+            background = graphics.CreateGraphicsObject(xSize * unitSize + 150, ySize * unitSize);
             B backgroundColor = graphics.GetBackgroundColor();
 
             //Save pictures as Color object arrays to know every pixel's color

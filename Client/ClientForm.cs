@@ -35,17 +35,19 @@ namespace Client
             game = new Game<Bitmap, Color>();      //Initialize the game logic object
             timer1.Enabled = true;  //Enable timer that draws the map
 
+            richTextBox1.AppendText("BMAN v1", Color.Purple);
+
             // RECEIVING MESSAGES
             //Receive another player's login message
             connection.On<string>("ReceiveLoginMessage", (username) =>
             {
-                richTextBox1.AppendText(username + " has logged in\n", Color.Green);
+                richTextBox1.AppendText("\n" + username + " has logged in", Color.Green);
             });
 
             //Receive another player's sent message
             connection.On<string, string>("ReceiveMessage", (username, message) =>
             {
-                richTextBox1.AppendText(username + ": " + message + "\n");
+                richTextBox1.AppendText("\n" + username + ": " + message, Color.Black);
             });
 
             //Game has started info of players sent
@@ -158,7 +160,7 @@ namespace Client
                     await connection.StartAsync();
                     username = textBox1.Text;
                     await connection.InvokeAsync("SendLoginMessage", username);
-                    richTextBox1.AppendText("Connected to the server\n", Color.Green);
+                    richTextBox1.AppendText("\nConnected to the server", Color.Green);
                     button1.Enabled = false;
                     button1.Visible = false;
                     textBox1.Enabled = false;

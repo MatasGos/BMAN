@@ -49,7 +49,7 @@
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(219, 225);
+            this.button1.Location = new System.Drawing.Point(244, 225);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(238, 43);
@@ -70,7 +70,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(675, 475);
+            this.pictureBox1.Size = new System.Drawing.Size(725, 475);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -78,7 +78,7 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.textBox1.Location = new System.Drawing.Point(188, 150);
+            this.textBox1.Location = new System.Drawing.Point(213, 150);
             this.textBox1.MaxLength = 15;
             this.textBox1.Name = "textBox1";
             this.textBox1.PlaceholderText = "Enter username";
@@ -98,7 +98,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-            this.richTextBox1.Size = new System.Drawing.Size(675, 150);
+            this.richTextBox1.Size = new System.Drawing.Size(725, 150);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.TabStop = false;
             this.richTextBox1.Text = "";
@@ -109,14 +109,14 @@
             this.textBox2.Location = new System.Drawing.Point(2, 630);
             this.textBox2.Margin = new System.Windows.Forms.Padding(0);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(595, 23);
+            this.textBox2.Size = new System.Drawing.Size(645, 23);
             this.textBox2.TabIndex = 8;
             this.textBox2.TabStop = false;
             // 
             // button2
             // 
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(599, 629);
+            this.button2.Location = new System.Drawing.Point(649, 629);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 25);
             this.button2.TabIndex = 9;
@@ -134,7 +134,7 @@
             this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(225, 395);
+            this.button3.Location = new System.Drawing.Point(250, 395);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(225, 43);
             this.button3.TabIndex = 10;
@@ -153,7 +153,7 @@
             // ClientForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(675, 655);
+            this.ClientSize = new System.Drawing.Size(725, 655);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
