@@ -61,6 +61,16 @@ namespace Client {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] arcadeFont {
+            get {
+                object obj = ResourceManager.GetObject("arcadeFont", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap bomb {
@@ -113,6 +123,36 @@ namespace Client {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap loginButton {
+            get {
+                object obj = ResourceManager.GetObject("loginButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap loginButtonHover {
+            get {
+                object obj = ResourceManager.GetObject("loginButtonHover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menuBackground {
+            get {
+                object obj = ResourceManager.GetObject("menuBackground", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap mine {
             get {
                 object obj = ResourceManager.GetObject("mine", resourceCulture);
@@ -146,6 +186,26 @@ namespace Client {
         internal static System.Drawing.Bitmap shoes {
             get {
                 object obj = ResourceManager.GetObject("shoes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap startButton {
+            get {
+                object obj = ResourceManager.GetObject("startButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap startButtonHover {
+            get {
+                object obj = ResourceManager.GetObject("startButtonHover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

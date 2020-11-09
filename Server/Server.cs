@@ -22,7 +22,6 @@ namespace Server
         public static void AddPlayer(string id, string username)
         {
             Player p = new Player(id, username, playerList.Count);
-            Console.WriteLine(p.pictureStructure);
             playerList.Add(p);
         }
 
