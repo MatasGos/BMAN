@@ -34,7 +34,7 @@ namespace Model
                             explosions[x, y] = null;
                         }
                     }
-                    if (explosions[x, y] is SuperExplosion)
+                    else if (explosions[x, y] is SuperExplosion)
                     {
                         SuperExplosion explosion = (SuperExplosion)explosions[x, y];
                         if (explosion.removalTime < time)
@@ -42,7 +42,7 @@ namespace Model
                             explosions[x, y] = null;
                         }
                     }
-                    else if (units[x, y] is Bomb)
+                    if (units[x, y] is Bomb)
                     {
                         factory = new RegularExplosiveConcreteFactory();
                         Bomb bomb = (Bomb)units[x, y];
@@ -145,19 +145,19 @@ namespace Model
 
         private void PlaceSuperExplosion(int xTile, int yTile, int explosionPower, double placeTime, ExplosiveAbstractFactory factory)
         {
-            explosions[xTile, yTile] = factory.CreateExplosion(xTile, yTile, placeTime);
+            //explosions[xTile, yTile] = factory.CreateExplosion(xTile, yTile, placeTime);
 
             for (int x = Math.Max(1, xTile - explosionPower); x <= Math.Min(xTile + explosionPower, xSize - 2); x++)
             {
                 for (int y = Math.Max(1, yTile - explosionPower); y <= Math.Min(yTile + explosionPower, ySize - 2); y++)
                 {
-                    if (units[x, y] == null || units[x, y] is Box)
+                    if (units[x, y] == null || explosions[x, y] is Explosion || explosions[x, y] is SuperExplosion || units[x, y].isSolid == false)
                     {
-                        units[x, y] = null;
                         explosions[x, y] = factory.CreateExplosion(x, y, placeTime);
                     }
-                    else if (units[x,y].isSolid == false)
+                    else if (units[x, y] is Box)
                     {
+                        units[x, y] = null;
                         explosions[x, y] = factory.CreateExplosion(x, y, placeTime);
                     }
                 }
