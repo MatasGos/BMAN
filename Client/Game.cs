@@ -26,23 +26,7 @@ namespace Client
         private GraphicsAdapter<A, B> background;
 
         private GraphicsRepository<A, B> graphics;
-
-
-        //Pictures saved as Color arrays
-        B[,] wallPicColor;
-        B[,] playerPicColor;
-        B[,] boxPicColor;
-        B[,] bombPicColor;
-        B[,] minePicColor;
-        B[,] boostPicColor;
-        B[,] superbombPicColor;
-        B[,] superminePicColor;
-        B[,] explosionPicColor;
-        B[,] fedoraColor;
-        B[,] shoesColor;
-        B[,] teleporterinPicColor;
-        B[,] teleporteroutPicColor;
-        B[,] superexplosionPicColor;
+        private PictureFlyweight<A, B> pictures;
 
         Dictionary<int, B[,]> playerPicsColors;
 
@@ -55,6 +39,7 @@ namespace Client
             this.map = new Map(xSize, ySize);
             this.graphics = new GraphicsRepository<A, B>();
             this.field = graphics.CreateGraphicsObject(xSize * unitSize, ySize * unitSize);
+            this.pictures = new PictureFlyweight<A, B>();
         }
 
         public void FormPlayerImages()
@@ -62,6 +47,7 @@ namespace Client
             playerPicsColors = new Dictionary<int, B[,]>();
             B[,] tempColor = new B[playerSize, playerSize];
             B c = graphics.ColorFromArgb(0, 0, 0, 0);
+            B[,] playerPic = pictures.GetPictureArray("p1");
             foreach (var p in players)
             {
                 string s = p.pictureStructure;
@@ -72,7 +58,7 @@ namespace Client
                         {
                             for (int y = 0; y < playerSize; y++)
                             {
-                                c = graphics.ColorFromArgb(graphics.ColorA(playerPicColor[x, y]), Math.Min(255, graphics.ColorR(playerPicColor[x, y]) + 255), graphics.ColorG(playerPicColor[x, y]), graphics.ColorB(playerPicColor[x, y]));
+                                c = graphics.ColorFromArgb(graphics.ColorA(playerPic[x, y]), Math.Min(255, graphics.ColorR(playerPic[x, y]) + 255), graphics.ColorG(playerPic[x, y]), graphics.ColorB(playerPic[x, y]));
                                 tempColor[x, y] = c;
                             }
                         }
@@ -82,7 +68,7 @@ namespace Client
                         {
                             for (int y = 0; y < playerSize; y++)
                             {
-                                c = graphics.ColorFromArgb(graphics.ColorA(playerPicColor[x, y]), graphics.ColorR(playerPicColor[x, y]), graphics.ColorG(playerPicColor[x, y]), Math.Min(255, graphics.ColorB(playerPicColor[x, y]) + 255));
+                                c = graphics.ColorFromArgb(graphics.ColorA(playerPic[x, y]), graphics.ColorR(playerPic[x, y]), graphics.ColorG(playerPic[x, y]), Math.Min(255, graphics.ColorB(playerPic[x, y]) + 255));
                                 tempColor[x, y] = c;
                             }
                         }
@@ -92,7 +78,7 @@ namespace Client
                         {
                             for (int y = 0; y < playerSize; y++)
                             {
-                                c = graphics.ColorFromArgb(graphics.ColorA(playerPicColor[x, y]), graphics.ColorR(playerPicColor[x, y]), Math.Min(255, graphics.ColorG(playerPicColor[x, y]) + 255), graphics.ColorB(playerPicColor[x, y]));
+                                c = graphics.ColorFromArgb(graphics.ColorA(playerPic[x, y]), graphics.ColorR(playerPic[x, y]), Math.Min(255, graphics.ColorG(playerPic[x, y]) + 255), graphics.ColorB(playerPic[x, y]));
                                 tempColor[x, y] = c;
                             }
                         }
@@ -102,20 +88,21 @@ namespace Client
                         {
                             for (int y = 0; y < playerSize; y++)
                             {
-                                c = graphics.ColorFromArgb(graphics.ColorA(playerPicColor[x, y]), Math.Min(255, graphics.ColorR(playerPicColor[x, y]) + 255), Math.Min(255, graphics.ColorG(playerPicColor[x, y]) + 255), graphics.ColorB(playerPicColor[x, y]));
+                                c = graphics.ColorFromArgb(graphics.ColorA(playerPic[x, y]), Math.Min(255, graphics.ColorR(playerPic[x, y]) + 255), Math.Min(255, graphics.ColorG(playerPic[x, y]) + 255), graphics.ColorB(playerPic[x, y]));
                                 tempColor[x, y] = c;
                             }
                         }
                         break;
                 }
-                if (s.Contains("f")) { 
+                if (s.Contains("f")) {
+                    B[,] fedoraPic = pictures.GetPictureArray("fedora");
                     for (int x = 0; x < playerSize; x++)
                     {
                         for (int y = 0; y < playerSize; y++)
                         {
-                            if (graphics.ColorA(fedoraColor[x, y]) > 0)
+                            if (graphics.ColorA(fedoraPic[x, y]) > 0)
                             {
-                                c = graphics.ColorFromArgb(graphics.ColorA(fedoraColor[x, y]), graphics.ColorR(fedoraColor[x, y]), graphics.ColorG(fedoraColor[x, y]), graphics.ColorB(fedoraColor[x, y]));
+                                c = graphics.ColorFromArgb(graphics.ColorA(fedoraPic[x, y]), graphics.ColorR(fedoraPic[x, y]), graphics.ColorG(fedoraPic[x, y]), graphics.ColorB(fedoraPic[x, y]));
                                 tempColor[x, y] = c;
                             }
                         }
@@ -123,13 +110,14 @@ namespace Client
                 }
                 if (s.Contains("s"))
                 {
+                    B[,] shoesPic = pictures.GetPictureArray("shoes");
                     for (int x = 0; x < playerSize; x++)
                         {
                             for (int y = 0; y < playerSize; y++)
                             {
-                                if (graphics.ColorA(shoesColor[x, y]) > 0)
+                                if (graphics.ColorA(shoesPic[x, y]) > 0)
                                 {
-                                    c = graphics.ColorFromArgb(graphics.ColorA(shoesColor[x, y]), graphics.ColorR(shoesColor[x, y]), graphics.ColorG(shoesColor[x, y]), graphics.ColorB(shoesColor[x, y]));
+                                    c = graphics.ColorFromArgb(graphics.ColorA(shoesPic[x, y]), graphics.ColorR(shoesPic[x, y]), graphics.ColorG(shoesPic[x, y]), graphics.ColorB(shoesPic[x, y]));
                                     tempColor[x, y] = c;
                                 }
                             }
@@ -158,63 +146,6 @@ namespace Client
             background = graphics.CreateGraphicsObject(xSize * unitSize + 150, ySize * unitSize);
             B backgroundColor = graphics.GetBackgroundColor();
 
-            //Save pictures as Color object arrays to know every pixel's color
-            GraphicsAdapter<A, B> wallPic = graphics.CreateGraphicsObject(unitSize, unitSize);
-            wallPic.SetImage(graphics.GetImage("wall"));
-            wallPicColor = wallPic.GetColorArray();
-
-            GraphicsAdapter<A, B> playerPic = graphics.CreateGraphicsObject(playerSize, playerSize);
-            playerPic.SetImage(graphics.GetImage("p1"));
-            playerPicColor = playerPic.GetColorArray();
-
-            GraphicsAdapter<A, B> boxPic = graphics.CreateGraphicsObject(unitSize, unitSize);
-            boxPic.SetImage(graphics.GetImage("box"));
-            boxPicColor = boxPic.GetColorArray();
-
-            GraphicsAdapter<A, B> bombPic = graphics.CreateGraphicsObject(unitSize, unitSize);
-            bombPic.SetImage(graphics.GetImage("bomb"));
-            bombPicColor = bombPic.GetColorArray();
-
-            GraphicsAdapter<A, B> minePic = graphics.CreateGraphicsObject(unitSize, unitSize);
-            minePic.SetImage(graphics.GetImage("mine"));
-            minePicColor = minePic.GetColorArray();
-
-            GraphicsAdapter<A, B> boostPic = graphics.CreateGraphicsObject(unitSize, unitSize);
-            boostPic.SetImage(graphics.GetImage("boost"));
-            boostPicColor = boostPic.GetColorArray();
-
-            GraphicsAdapter<A, B> superbombPic = graphics.CreateGraphicsObject(unitSize, unitSize);
-            superbombPic.SetImage(graphics.GetImage("superbomb"));
-            superbombPicColor = superbombPic.GetColorArray();
-
-            GraphicsAdapter<A, B> superminePic = graphics.CreateGraphicsObject(unitSize, unitSize);
-            superminePic.SetImage(graphics.GetImage("supermine"));
-            superminePicColor = superminePic.GetColorArray();
-
-            GraphicsAdapter<A, B> explosionPic = graphics.CreateGraphicsObject(unitSize, unitSize);
-            explosionPic.SetImage(graphics.GetImage("explosion"));
-            explosionPicColor = explosionPic.GetColorArray();
-
-            GraphicsAdapter<A, B> fedora = graphics.CreateGraphicsObject(playerSize, playerSize);
-            fedora.SetImage(graphics.GetImage("fedora"));
-            fedoraColor = fedora.GetColorArray();
-
-            GraphicsAdapter<A, B> shoes = graphics.CreateGraphicsObject(playerSize, playerSize);
-            shoes.SetImage(graphics.GetImage("shoes"));
-            shoesColor = shoes.GetColorArray();
-
-            GraphicsAdapter<A, B> teleporterin = graphics.CreateGraphicsObject(unitSize, unitSize);
-            teleporterin.SetImage(graphics.GetImage("teleporterin"));
-            teleporterinPicColor = teleporterin.GetColorArray();
-
-            GraphicsAdapter<A, B> teleporterout = graphics.CreateGraphicsObject(unitSize, unitSize);
-            teleporterout.SetImage(graphics.GetImage("teleporterout"));
-            teleporteroutPicColor = teleporterout.GetColorArray();
-
-            GraphicsAdapter<A, B> superexplosionPic = graphics.CreateGraphicsObject(unitSize, unitSize);
-            superexplosionPic.SetImage(graphics.GetImage("superexplosion"));
-            superexplosionPicColor = superexplosionPic.GetColorArray();
-
             FormPlayerImages();
 
 
@@ -230,6 +161,7 @@ namespace Client
             }
 
             //Draw walls
+            B[,] wallPicTest = pictures.GetPictureArray("wall");
             for (int i = 0; i < xSize; i++)
             {
                 for (int j = 0; j < ySize; j++)
@@ -240,7 +172,7 @@ namespace Client
                         {
                             for (int y = 0; y < unitSize; y++)
                             {
-                                background.SetPixel(i * unitSize + x, j * unitSize + y, wallPicColor[x, y]);
+                                background.SetPixel(i * unitSize + x, j * unitSize + y, wallPicTest[x, y]);
                             }
                         }
                     }
@@ -270,31 +202,31 @@ namespace Client
                         switch (blocks[i,j])
                         {
                             case Box x:
-                                picColor = boxPicColor;
+                                picColor = pictures.GetPictureArray("box");
                                 break;
                             case Bomb x:
-                                picColor = bombPicColor;
+                                picColor = pictures.GetPictureArray("bomb");
                                 break;
                             case Mine x:
-                                picColor = minePicColor;
+                                picColor = pictures.GetPictureArray("mine");
                                 break;
                             case SuperBomb x:
-                                picColor = superbombPicColor;
+                                picColor = pictures.GetPictureArray("superbomb");
                                 break;
                             case SuperMine x:
-                                picColor = superminePicColor;
+                                picColor = pictures.GetPictureArray("supermine");
                                 break;
                             case Boost x:
-                                picColor = boostPicColor;
+                                picColor = pictures.GetPictureArray("boost");
                                 break;
                             case Teleporter x:
                                 if (x.HasDestination())
                                 {
-                                    picColor = teleporterinPicColor;
+                                    picColor = pictures.GetPictureArray("teleporterin");
                                 }
                                 else
                                 {
-                                    picColor = teleporteroutPicColor;
+                                    picColor = pictures.GetPictureArray("teleporterout");
                                 }
                                 break;
                             default:
@@ -321,10 +253,10 @@ namespace Client
                         switch (explosions[i, j])
                         {
                             case Explosion x:
-                                picColor = explosionPicColor;
+                                picColor = pictures.GetPictureArray("explosion");
                                 break;
                             case SuperExplosion x:
-                                picColor = superexplosionPicColor;
+                                picColor = pictures.GetPictureArray("superexplosion");
                                 break;
                             default:
                                 break;
@@ -339,7 +271,6 @@ namespace Client
                     }
                 }
             }
-
             //Draw players
             foreach (Player p in players)
             {

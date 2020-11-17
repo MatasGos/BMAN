@@ -18,6 +18,8 @@ namespace Model
         public int speed { get; set; }          //Player's walking speed
         public int explosionPower { get; set; } //Player's bomb explosion power/radius
         public int health { get; set; }         //Player's health
+
+        public double invincibleUntil { get; set; }
         public int bombCount { get; set; }      //Number of bombs that the player can place at once
         //public List<Boost> boosts { get; set; } //List of collected boosts
 
@@ -41,7 +43,7 @@ namespace Model
 
         public Player()
         {
-            this.health = 2;
+            this.health = 5;
             this.bombCount = 1;
             this.action = "";
             this.speed = 3;
