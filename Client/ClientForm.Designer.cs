@@ -38,6 +38,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.labelHealth = new System.Windows.Forms.Label();
+            this.labelHealthValue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -150,10 +152,36 @@
             this.textBox3.Size = new System.Drawing.Size(0, 23);
             this.textBox3.TabIndex = 11;
             // 
+            // labelHealth
+            // 
+            this.labelHealth.AutoSize = true;
+            this.labelHealth.BackColor = System.Drawing.Color.Transparent;
+            this.labelHealth.Location = new System.Drawing.Point(578, 15);
+            this.labelHealth.Name = "labelHealth";
+            this.labelHealth.Size = new System.Drawing.Size(45, 15);
+            this.labelHealth.TabIndex = 12;
+            this.labelHealth.Text = "Health:";
+            this.labelHealth.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.labelHealth.Visible = false;
+            this.labelHealth.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // labelHealthValue
+            // 
+            this.labelHealthValue.AutoSize = true;
+            this.labelHealthValue.BackColor = System.Drawing.Color.Transparent;
+            this.labelHealthValue.Location = new System.Drawing.Point(629, 15);
+            this.labelHealthValue.Name = "labelHealthValue";
+            this.labelHealthValue.Size = new System.Drawing.Size(38, 15);
+            this.labelHealthValue.TabIndex = 13;
+            this.labelHealthValue.Text = "label2";
+            this.labelHealthValue.Visible = false;
+            // 
             // ClientForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(725, 655);
+            this.Controls.Add(this.labelHealthValue);
+            this.Controls.Add(this.labelHealth);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
@@ -187,6 +215,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label labelHealth;
+        private System.Windows.Forms.Label labelHealthValue;
     }
 }
 

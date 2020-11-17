@@ -26,9 +26,9 @@ namespace Model
             pcm.PlaceExplosive(player, placeTime);
         }
 
-        public void PickupBoost(Player player)
+        public void PickupBoost(Player player, double time)
         {
-            pcm.ActivateBlock(player);
+            pcm.ActivateBlock(player, time);
         }
 
         public void UpdateExplosives(double time)

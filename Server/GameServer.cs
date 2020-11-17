@@ -95,8 +95,10 @@ namespace Server
         {
             foreach(Player player in playerList)
             {
-                map.PerformPlayerActions(player, sw.Elapsed.TotalMilliseconds);
-                
+                if (player.IsAlive())
+                {
+                    map.PerformPlayerActions(player, sw.Elapsed.TotalMilliseconds);
+                }                
             }
             map.UpdateExplosives(sw.Elapsed.TotalMilliseconds);
 

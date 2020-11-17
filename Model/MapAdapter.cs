@@ -23,7 +23,7 @@ namespace Model
                 player.Undo();
                 player.actionSecondary = "";
             }
-            map.PickupBoost(player);
+            map.PickupBoost(player, time);
         }
 
         public void UpdateExplosives(double time)

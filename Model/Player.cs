@@ -51,6 +51,7 @@ namespace Model
             this.pictureStructure = "";
             this.movementControl = new MovementControl();
             this.hasSuperbombs = true;
+            invincibleUntil = 0;
         }
 
         public Player(string id, string username, int num) : this()
@@ -147,7 +148,7 @@ namespace Model
 
         public void update(IHubCallerClients context, string jsonMap, string jsonPlayers)
         {
-            context.Client(id).SendAsync("SendData", jsonPlayers, jsonMap);
+            context.Client(id).SendAsync("SendData", jsonPlayers, jsonMap, health);
         }
         public void Move()
         {
@@ -165,6 +166,25 @@ namespace Model
         public void ClearCommandHistory()
         {
             this.movementControl.Clear();
+        }
+
+        public void ReduceHealth()
+        {
+            if (health > 0)
+            {
+                this.health -= 1;
+            }
+            
+        }
+
+        public void BecomeInvincible(double time)
+        {
+            this.invincibleUntil = time + 1000.0;
+        }
+
+        public Boolean IsAlive()
+        {
+            return health > 0;
         }
     }
 }

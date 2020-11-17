@@ -51,7 +51,7 @@ namespace Client
             });
 
             //Game has started info of players sent
-            connection.On<string, string>("SendData", (jsonPlayers, jsonMap) =>
+            connection.On<string, string, int>("SendData", (jsonPlayers, jsonMap, playerHealth) =>
             {
                 game.players = JsonConvert.DeserializeObject<List<Player>>(jsonPlayers, settings);
                 game.map = JsonConvert.DeserializeObject<Map>(jsonMap, settings);
@@ -70,8 +70,13 @@ namespace Client
 
                     textBox3.Focus();
 
+                    labelHealth.Visible = true;
+                    labelHealthValue.Visible = true;
+                    
+
                     game.drawBackground();
                 }
+                labelHealthValue.Text = playerHealth.ToString();
                 game.drawMap();
                 pictureBox1.Image = game.GetField().GetImage();
             });
@@ -148,6 +153,11 @@ namespace Client
         {
             button3.BackgroundImage = Images.startButton;
             button3.Refresh();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
 
         //Login button

@@ -274,12 +274,15 @@ namespace Client
             //Draw players
             foreach (Player p in players)
             {
-                int[] xy = p.getPos();
-                for (int x = 0; x < playerSize; x++)
+                if (p.IsAlive())
                 {
-                    for (int y = 0; y < playerSize; y++)
+                    int[] xy = p.getPos();
+                    for (int x = 0; x < playerSize; x++)
                     {
-                        field.SetPixel(x + xy[0], y + xy[1], playerPicsColors[(int)p.num][x, y]);
+                        for (int y = 0; y < playerSize; y++)
+                        {
+                            field.SetPixel(x + xy[0], y + xy[1], playerPicsColors[(int)p.num][x, y]);
+                        }
                     }
                 }
             }

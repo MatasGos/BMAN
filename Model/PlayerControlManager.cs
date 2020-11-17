@@ -66,7 +66,7 @@ namespace Model
             player.action = "";
         }
 
-        public void ActivateBlock(Player player)
+        public void ActivateBlock(Player player, double time)
         {
             int[] playerCenter = getCenterPlayer(new int[] { player.x, player.y });
             int[] playerTile = getTile(playerCenter[0], playerCenter[1]);
@@ -82,12 +82,43 @@ namespace Model
                 default:
                     break;
             }
+            List<int[]> playerCorners = new List<int[]>();
+            playerCorners.Add(new int[] { player.x, player.y });
+            playerCorners.Add(new int[] { player.x, player.y + 14});
+            playerCorners.Add(new int[] { player.x + 14, player.y });
+            playerCorners.Add(new int[] { player.x + 14, player.y + 14});
+            foreach (var playerCoordinate in playerCorners)
+            {
+                playerTile = getTile(playerCoordinate[0], playerCoordinate[1]);
+                playerStandsOn = explosions[playerTile[0], playerTile[1]];
+                switch (playerStandsOn)
+                {
+                    case Explosion x:
+                        PlayerExplode(player, time);
+                        break;
+                    case SuperExplosion x:
+                        PlayerExplode(player, time);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
         }
 
         public void PickupBoost(Player player, Boost playerStandsOn)
         {
             playerStandsOn.algorithm.UseBoost(player);
             units[playerStandsOn.x, playerStandsOn.y] = null;
+        }
+
+        public void PlayerExplode(Player player, double time)
+        {
+            if (!(player.invincibleUntil > time))
+            {
+                player.BecomeInvincible(time);
+                player.ReduceHealth();
+            }
         }
 
         public void Teleport(Player player, Teleporter playerStandsOn)
