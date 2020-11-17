@@ -29,7 +29,11 @@ namespace Server
         public GameServer(IHubCallerClients _context)
         {
             context = _context;
+            GameSetup();
+        }
 
+        public void GameSetup()
+        {
             Random rand = new Random();
             int r = rand.Next(100);
             MapDirector mapDirector;
@@ -37,13 +41,13 @@ namespace Server
             {
                 mapDirector = new MapDirector(new ConcreteMapBuilder());
             }
-            else if(r < 60)
+            else if (r < 60)
             {
                 mapDirector = new MapDirector(new DefaultMapBuilder());
             }
             else
             {
-                mapDirector = new MapDirector(new TeleporterMapBuilder());                
+                mapDirector = new MapDirector(new TeleporterMapBuilder());
             }
 
             Map mapFromCache = Server.GetMapByName(mapDirector.getMap().mapName);
@@ -60,7 +64,7 @@ namespace Server
                 map = new MapAdapter(temp);
                 Server.AddMap(temp);
             }
-            Server.current = map.GetMapFacade(); 
+            Server.current = map.GetMapFacade();
         }
 
         public void AddObserver(IPlayerObserver player)
@@ -83,6 +87,17 @@ namespace Server
                 double startTime = sw.Elapsed.TotalMilliseconds;
                 GameLogic();
                 double elapsedTime = sw.Elapsed.TotalMilliseconds - startTime;
+                if (Server.CheckRoundEnd())
+                {
+                    GameSetup();
+                    foreach (Player player in playerList)
+                    {
+                        player.ResetPlayer();
+                    }
+                    Console.WriteLine("Baigtas raundas");
+                    Thread.Sleep(2000);
+                    Console.WriteLine("Naujas raundas");
+                }
                 if (elapsedTime < oneTickLength)
                 {
                     //await Task.Delay((int)(oneTickLength - elapsedTime));

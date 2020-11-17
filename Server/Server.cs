@@ -18,6 +18,7 @@ namespace Server
         public static IHubCallerClients context;
         public static GameServer game;
         public static List<Map> mapCache = new List<Map>();
+        public static bool canStartRound = true;
 
         public static void AddPlayer(string id, string username)
         {
@@ -79,17 +80,31 @@ namespace Server
             return toReturn;
         }
 
+        public static bool CheckRoundEnd()
+        {
+            bool roundEnded = true;
+            foreach(var player in playerList)
+            {
+                if (player.IsAlive())
+                {
+                    roundEnded = false;
+                    break;
+                }
+            }
+            return roundEnded;
+        }
+
         public static void StartGame()
         {
             if (game == null)
-            {
-                game = new GameServer(context);
-                foreach(var player in playerList)
-                {
-                    game.AddObserver(player);
-                }
-                Thread gameLoop = new Thread(new ThreadStart(game.GameLoop));
-                gameLoop.Start();
+            {                
+                    game = new GameServer(context);
+                    foreach(var player in playerList)
+                    {
+                        game.AddObserver(player);
+                    }
+                    Thread gameLoop = new Thread(new ThreadStart(game.GameLoop));                    
+                    gameLoop.Start();           
             }
         }
     }

@@ -43,15 +43,7 @@ namespace Model
 
         public Player()
         {
-            this.health = 5;
-            this.bombCount = 1;
-            this.action = "";
-            this.speed = 3;
-            this.explosionPower = 2;
-            this.pictureStructure = "";
-            this.movementControl = new MovementControl();
-            this.hasSuperbombs = true;
-            invincibleUntil = 0;
+            InitializeValues();
         }
 
         public Player(string id, string username, int num) : this()
@@ -62,32 +54,8 @@ namespace Model
 
             //DEFAULT VALUES
             //TODO: check which player it is and where to spawn him
-            
-            IPlayerStructure playerStructure = null;
-            switch (this.num)
-            {
-                case PlayerNum.P1:
-                    playerStructure = new PlayerRed();
-                    this.x = 26;
-                    this.y = 26;
-                    break;
-                case PlayerNum.P2:
-                    playerStructure = new PlayerBlue();
-                    this.x = 534;
-                    this.y = 26;
-                    break;
-                case PlayerNum.P3:
-                    playerStructure = new PlayerGreen();
-                    this.x = 26;
-                    this.y = 434;
-                    break;
-                case PlayerNum.P4:
-                    playerStructure = new PlayerYellow();
-                    this.x = 534;
-                    this.y = 434;
-                    break;
-            }
-            this.pictureStructure = playerStructure.GetPlayerStructure();
+
+            InitializePlayerStructure();
         }
 
         public int[] getPos()
@@ -182,9 +150,55 @@ namespace Model
             this.invincibleUntil = time + 1000.0;
         }
 
-        public Boolean IsAlive()
+        public bool IsAlive()
         {
             return health > 0;
+        }
+        public void ResetPlayer()
+        {
+            InitializeValues();
+            InitializePlayerStructure();
+        }
+
+        private void InitializeValues()
+        {
+            this.health = 5;
+            this.bombCount = 1;
+            this.action = "";
+            this.speed = 3;
+            this.explosionPower = 2;
+            this.pictureStructure = "";
+            this.movementControl = new MovementControl();
+            this.hasSuperbombs = true;
+            this.invincibleUntil = 0;
+        }
+        private void InitializePlayerStructure()
+        {
+            IPlayerStructure playerStructure = null;
+            switch (this.num)
+            {
+                case PlayerNum.P1:
+                    playerStructure = new PlayerRed();
+                    this.x = 26;
+                    this.y = 26;
+                    break;
+                case PlayerNum.P2:
+                    playerStructure = new PlayerBlue();
+                    this.x = 534;
+                    this.y = 26;
+                    break;
+                case PlayerNum.P3:
+                    playerStructure = new PlayerGreen();
+                    this.x = 26;
+                    this.y = 434;
+                    break;
+                case PlayerNum.P4:
+                    playerStructure = new PlayerYellow();
+                    this.x = 534;
+                    this.y = 434;
+                    break;
+            }
+            this.pictureStructure = playerStructure.GetPlayerStructure();
         }
     }
 }

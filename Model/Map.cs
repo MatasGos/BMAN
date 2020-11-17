@@ -79,7 +79,7 @@ namespace Model
                     clone.explosions[i, j] = explosions[i, j];
                 }
             }
-            mapFacade = new MapFacade(xSize, ySize, units, explosions);
+            clone.mapFacade = new MapFacade(xSize, ySize, clone.units, clone.explosions);
             return clone;
         }
     }
