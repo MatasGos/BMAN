@@ -17,6 +17,25 @@ namespace Demo
             //BuilderDemo();
             //SingletonDemo();
             //StrategyDemo();
+            IteratorDemo();
+        }
+
+        public static void IteratorDemo()
+        {
+            PlayerList playerList = new PlayerList();
+            playerList.addPlayer(new Player());
+            playerList.addPlayer(new Player());
+            playerList.addPlayer(new Player());
+
+            Iterator iterator = playerList.getIterator();
+
+            while(iterator.hasNext())
+            {
+                Player p = (Player)iterator.next();
+                Console.WriteLine(p.ToString());
+                
+            }
+            Console.ReadLine();
         }
 
         public static void StrategyDemo()

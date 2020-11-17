@@ -14,7 +14,7 @@ namespace Server
     public static class Server
     {
         public static MapFacade current;
-        public static List<Player> playerList = new List<Player>();    
+        public static PlayerList playerList = new PlayerList();    
         public static IHubCallerClients context;
         public static GameServer game;
         public static List<Map> mapCache = new List<Map>();
@@ -22,23 +22,24 @@ namespace Server
 
         public static void AddPlayer(string id, string username)
         {
-            Player p = new Player(id, username, playerList.Count);
-            playerList.Add(p);
+            Player p = new Player(id, username, playerList.getCount());
+            playerList.addPlayer(p);
         }
 
         public static List<Player> GetPlayers()
         {
-            return playerList;
+            return playerList.getPlayers();
         }
 
         public static Player GetPlayerById(string id)
         {
             Player toReturn = null;
-            foreach (var player in playerList)
+            for(Iterator iter = playerList.getIterator(); iter.hasNext();)
             {
-                if (player.id == id)
+                Player p = (Player)iter.next();
+                if (p.id == id)
                 {
-                    toReturn = player;
+                    toReturn = p;
                     break;
                 }
             }
@@ -47,11 +48,12 @@ namespace Server
 
         public static void UpdatePlayerSkin(string contextId, string skin)
         {
-            for (int i = 0; i < playerList.Count; i++)
+            for (Iterator iter = playerList.getIterator(); iter.hasNext();)
             {
-                if(playerList[i].id == contextId)
+                Player p = (Player)iter.next();
+                if(p.id == contextId)
                 {
-                    playerList[i].UpdatePlayerStructure(skin);
+                    p.UpdatePlayerStructure(skin);
                 }
             }
         }
@@ -83,9 +85,10 @@ namespace Server
         public static bool CheckRoundEnd()
         {
             bool roundEnded = true;
-            foreach(var player in playerList)
+            for (Iterator iter = playerList.getIterator(); iter.hasNext();)
             {
-                if (player.IsAlive())
+                Player p = (Player)iter.next();
+                if (p.IsAlive())
                 {
                     roundEnded = false;
                     break;
@@ -98,13 +101,14 @@ namespace Server
         {
             if (game == null)
             {                
-                    game = new GameServer(context);
-                    foreach(var player in playerList)
-                    {
-                        game.AddObserver(player);
-                    }
-                    Thread gameLoop = new Thread(new ThreadStart(game.GameLoop));                    
-                    gameLoop.Start();           
+                game = new GameServer(context);
+                for (Iterator iter = playerList.getIterator(); iter.hasNext();)
+                {
+                    Player p = (Player)iter.next();
+                    game.AddObserver(p);
+                }
+                Thread gameLoop = new Thread(new ThreadStart(game.GameLoop));                    
+                gameLoop.Start();           
             }
         }
     }
