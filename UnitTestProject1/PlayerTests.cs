@@ -1,8 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Server;
+using Newtonsoft.Json;
 
 namespace Model.Tests
 {
@@ -90,11 +93,29 @@ namespace Model.Tests
             Assert.AreEqual(action, player.actionSecondary);
         }
 
-        /*[TestMethod()]
+        [TestMethod()]
         public void updateTest()
         {
-            Assert.Fail();
-        }*/
+            IHubCallerClients test = new HubTest();
+            HubTest testHub = (HubTest)test;
+            List<Player> players = new List<Player>();
+            for (int i = 0; i < 4; i++)
+            {
+                Player x = new Player("id" + i.ToString(), "username", i);
+                x.x = i * 25;
+                x.y = 0;
+                players.Add(x);
+                testHub.AddClient(x);
+            }
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+            Map map = new Map(23, 19);
+            string jsonMap = map.GetJson(settings);
+            string jsonPlayers = JsonConvert.SerializeObject(players, settings);
+            foreach(var player in players)
+            {
+                player.update(test, jsonMap, jsonPlayers);
+            }
+        }
 
         [TestMethod()]
         public void MoveTest()
