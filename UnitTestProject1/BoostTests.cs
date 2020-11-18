@@ -9,7 +9,10 @@ namespace Model.Tests
     [TestClass()]
     public class BoostTests
     {
-        [TestMethod()]
+        [DataTestMethod]
+        [DataRow(0,0)]
+        [DataRow(0,10)]
+        [DataRow(50,50)]
         public void BoostTest()
         {
             Boost boost = new Boost(0, 0);

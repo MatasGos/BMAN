@@ -142,8 +142,7 @@ namespace Model
             if (health > 0)
             {
                 this.health -= 1;
-            }
-            
+            }            
         }
 
         public void BecomeInvincible(double time)

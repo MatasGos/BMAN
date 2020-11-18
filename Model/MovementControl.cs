@@ -26,7 +26,7 @@ namespace Model
             if (command != null)
             {
                 command.Execute();
-                if (movementList.Count > 20)
+                if (movementList.Count >= 20)
                 {
                     movementList.RemoveLast();
                 }
