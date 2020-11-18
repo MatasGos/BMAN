@@ -13,9 +13,9 @@ namespace Model.Tests
         [DataRow(0,0)]
         [DataRow(0,10)]
         [DataRow(50,50)]
-        public void BoostTest()
+        public void BoostTest(int x, int y)
         {
-            Boost boost = new Boost(0, 0);
+            Boost boost = new Boost(x, y);
             Assert.IsFalse(boost.isBreakable);
             Assert.IsFalse(boost.isSolid);
         }

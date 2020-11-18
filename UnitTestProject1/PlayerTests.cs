@@ -59,7 +59,6 @@ namespace Model.Tests
             string structure = "fs";
             Player player = new Player("id", "username", x);
             player.UpdatePlayerStructure(structure);
-            string id = player.id;
             Assert.AreEqual(player.pictureStructure, x.ToString() + structure);
         }
 
