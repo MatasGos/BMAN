@@ -7,6 +7,7 @@ using Model;
 
 namespace Server
 {
+    //Mock class for testing
     public class HubTest : IHubCallerClients
     {
         public List<ClientTest> clientList = new List<ClientTest>();

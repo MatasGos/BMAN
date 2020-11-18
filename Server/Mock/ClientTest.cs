@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 
 namespace Server
 {
+    //Mock class for testing
     public class ClientTest : IClientProxy
     {
         public Player client { get; }
