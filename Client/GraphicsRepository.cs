@@ -9,63 +9,6 @@ namespace Client
     //A - image (for example Bitmap)
     public class GraphicsRepository<A, B>
     {
-        public A GetImage(string name)
-        {
-            if (typeof(A) != typeof(Bitmap))
-            {
-                throw new NotImplementedException();
-            }
-            A toReturn = default(A);
-            switch (name)
-            {
-                case "wall":
-                    toReturn = (A)(object)Images.wall;
-                    break;
-                case "p1":
-                    toReturn = (A)(object)Images.p1;
-                    break;
-                case "box":
-                    toReturn = (A)(object)Images.box;
-                    break;
-                case "bomb":
-                    toReturn = (A)(object)Images.bomb;
-                    break;
-                case "mine":
-                    toReturn = (A)(object)Images.mine;
-                    break;
-                case "boost":
-                    toReturn = (A)(object)Images.boost;
-                    break;
-                case "superbomb":
-                    toReturn = (A)(object)Images.superbomb;
-                    break;
-                case "supermine":
-                    toReturn = (A)(object)Images.supermine;
-                    break;
-                case "explosion":
-                    toReturn = (A)(object)Images.explosion;
-                    break;
-                case "fedora":
-                    toReturn = (A)(object)Images.fedora;
-                    break;
-                case "shoes":
-                    toReturn = (A)(object)Images.shoes;
-                    break;
-                case "superexplosion":
-                    toReturn = (A)(object)Images.superexplosion;
-                    break;
-                case "teleporterin":
-                    toReturn = (A)(object)Images.teleporterin;
-                    break;
-                case "teleporterout":
-                    toReturn = (A)(object)Images.teleporterout;
-                    break;
-                default:
-                    throw new NotImplementedException();
-            }
-            return toReturn;
-        }
-
         public B GetBackgroundColor()
         {
             if (typeof(B) != typeof(Color))

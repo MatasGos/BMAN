@@ -117,7 +117,8 @@ namespace Model
 
         public void update(IHubCallerClients context, string jsonMap, string jsonPlayers)
         {
-            context.Client(id).SendAsync("SendData", jsonPlayers, jsonMap, health);
+            context.Client(id).SendCoreAsync("SendData", new object[] { jsonPlayers, jsonMap, health});
+            //context.Client(id).SendAsync("SendData", jsonPlayers, jsonMap, health);
         }
         public void Move()
         {
@@ -142,8 +143,7 @@ namespace Model
             if (health > 0)
             {
                 this.health -= 1;
-            }
-            
+            }            
         }
 
         public void BecomeInvincible(double time)

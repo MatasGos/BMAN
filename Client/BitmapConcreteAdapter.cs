@@ -40,12 +40,6 @@ namespace Client
                 //Get source bitmap pixel format size
                 depth = Bitmap.GetPixelFormatSize(image.PixelFormat);
 
-                //Check if bpp (Bits Per Pixel) is 8, 24, or 32
-                if (depth != 8 && depth != 24 && depth != 32)
-                {
-                    throw new Exception("Only 8, 24 and 32 bpp images are supported.");
-                }
-
                 //Lock bitmap and return bitmap data
                 bitmapData = image.LockBits(rectangle, ImageLockMode.ReadWrite, image.PixelFormat);
 
@@ -104,16 +98,6 @@ namespace Client
                 pixels[i + 1] = color.G;
                 pixels[i + 2] = color.R;
                 pixels[i + 3] = color.A;
-            }
-            if (depth == 24) //For 24 bpp set Red, Green and Blue
-            {
-                pixels[i] = color.B;
-                pixels[i + 1] = color.G;
-                pixels[i + 2] = color.R;
-            }
-            if (depth == 8) //For 8 bpp set color value (Red, Green and Blue values are the same)
-            {
-                pixels[i] = color.B;
             }
         }
         public int GetWidth()
