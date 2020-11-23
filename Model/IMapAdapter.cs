@@ -7,7 +7,7 @@ namespace Model
 {
     public interface IMapAdapter
     {
-        public void PerformPlayerActions(Player player, double time);
+        public void PerformPlayerActions(Player player, double time, ScoreboardTemplate scoreboard);
 
         public void UpdateExplosives(double time);
 

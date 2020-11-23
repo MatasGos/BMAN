@@ -9,10 +9,18 @@ namespace Model
         public int explosionPower { get; set; }
         public double timeToExplosion { get; set; }
 
-        public Explosive(int x, int y) : base(x, y)
+        private Player owner;
+
+        public Explosive(int x, int y, Player owner) : base(x, y)
         {
             explosionPower = 2;
             timeToExplosion = 500.0;
+            this.owner = owner;
+        }
+
+        public Player GetOwner()
+        {
+            return owner;
         }
     }
 }

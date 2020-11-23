@@ -22,7 +22,8 @@ namespace Server
         public bool isRunning = false;
         Stopwatch sw;
         public List<IPlayerObserver> playerList = new List<IPlayerObserver>();
-        private IHubCallerClients context;       
+        private IHubCallerClients context;
+        private ScoreboardTemplate scoreboard;
 
         JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
         
@@ -34,6 +35,11 @@ namespace Server
 
         public void GameSetup()
         {
+            scoreboard = new ScoreboardRound();
+            foreach (Player player in playerList)
+            {
+                scoreboard.AddPlayer(player);
+            }
             Random rand = new Random();
             int r = rand.Next(100);
             MapDirector mapDirector;
@@ -70,6 +76,7 @@ namespace Server
         public void AddObserver(IPlayerObserver player)
         {
             playerList.Add(player);
+            scoreboard.AddPlayer((Player)player);
         }
 
         public void GameLoop()
@@ -89,6 +96,22 @@ namespace Server
                 double elapsedTime = sw.Elapsed.TotalMilliseconds - startTime;
                 if (Server.CheckRoundEnd())
                 {
+                    foreach(Player player in playerList)
+                    {
+                        if (player.IsAlive())
+                        {
+                            Server.scoreboard.AddScore(player, 1);
+                            break;
+                        }
+                    }
+                    string jsonMap = map.GetJson(settings);
+                    string jsonPlayers = JsonConvert.SerializeObject(Server.GetPlayers(), settings);
+                    string jsonScoreboard = JsonConvert.SerializeObject(Server.scoreboard);
+                    foreach (var player in playerList)
+                    {
+                        player.update(context, jsonMap, jsonPlayers, jsonScoreboard, 1);
+                    }
+
                     GameSetup();
                     foreach (Player player in playerList)
                     {
@@ -112,7 +135,7 @@ namespace Server
             {
                 if (player.IsAlive())
                 {
-                    map.PerformPlayerActions(player, sw.Elapsed.TotalMilliseconds);
+                    map.PerformPlayerActions(player, sw.Elapsed.TotalMilliseconds, scoreboard);
                 }                
             }
             map.UpdateExplosives(sw.Elapsed.TotalMilliseconds);
@@ -120,10 +143,11 @@ namespace Server
             //TODO: Make copies of map and players as it sometimes crashes
             string jsonMap = map.GetJson(settings);
             string jsonPlayers = JsonConvert.SerializeObject(Server.GetPlayers(), settings);
+            string jsonScoreboard = JsonConvert.SerializeObject(scoreboard);
 
             foreach(var player in playerList)
             {
-                player.update(context, jsonMap, jsonPlayers);
+                player.update(context, jsonMap, jsonPlayers, jsonScoreboard, 0);
             }
             //context.All.SendAsync("SendData", jsonPlayers, jsonMap);
         }

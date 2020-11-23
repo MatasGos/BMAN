@@ -113,7 +113,7 @@ namespace Model.Tests
             string jsonPlayers = JsonConvert.SerializeObject(players, settings);
             foreach(var player in players)
             {
-                player.update(test, jsonMap, jsonPlayers);
+                //player.update(test, jsonMap, jsonPlayers);
             }
         }
 

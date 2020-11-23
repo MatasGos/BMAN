@@ -6,7 +6,7 @@ namespace Model
 {
     public abstract class SuperExplosive : Explosive
     {
-        public SuperExplosive(int x, int y) : base(x, y)
+        public SuperExplosive(int x, int y, Player owner) : base(x, y, owner)
         {
         }
     }

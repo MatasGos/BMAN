@@ -6,7 +6,7 @@ namespace Model
 {
     public class SuperMine : SuperExplosive
     {
-        public SuperMine(int x, int y) : base(x, y)
+        public SuperMine(int x, int y, Player owner) : base(x, y, owner)
         {
             isSolid = false;
             timeToExplosion = -1;

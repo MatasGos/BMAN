@@ -7,7 +7,7 @@ namespace Model
 {
     public abstract class RegularExplosive : Explosive
     {
-        public RegularExplosive(int x, int y) : base(x, y)
+        public RegularExplosive(int x, int y, Player owner) : base(x, y, owner)
         {
         }
     }

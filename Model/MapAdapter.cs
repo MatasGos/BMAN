@@ -14,7 +14,7 @@ namespace Model
             this.map = map;
         }
 
-        public void PerformPlayerActions(Player player, double time)
+        public void PerformPlayerActions(Player player, double time, ScoreboardTemplate scoreboard)
         {
             map.PlaceExplosive(player, time);
             player.Move();
@@ -23,7 +23,7 @@ namespace Model
                 player.Undo();
                 player.actionSecondary = "";
             }
-            map.PickupBoost(player, time);
+            map.PickupBoost(player, time, scoreboard);
         }
 
         public void UpdateExplosives(double time)

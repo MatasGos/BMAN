@@ -115,9 +115,9 @@ namespace Model
             }          
         }
 
-        public void update(IHubCallerClients context, string jsonMap, string jsonPlayers)
+        public void update(IHubCallerClients context, string jsonMap, string jsonPlayers, string jsonScoreboard, int roundEnded)
         {
-            context.Client(id).SendCoreAsync("SendData", new object[] { jsonPlayers, jsonMap, health});
+            context.Client(id).SendCoreAsync("SendData", new object[] { jsonPlayers, jsonMap, health, jsonScoreboard, roundEnded });
             //context.Client(id).SendAsync("SendData", jsonPlayers, jsonMap, health);
         }
         public void Move()
@@ -143,7 +143,12 @@ namespace Model
             if (health > 0)
             {
                 this.health -= 1;
-            }            
+            }    
+            else
+            {
+                x = -25;
+                y = -25;
+            }
         }
 
         public void BecomeInvincible(double time)

@@ -8,7 +8,7 @@ namespace Model
     {
         public double detonationTime { get; set; }
 
-        public SuperBomb(int x, int y, int explosionPower, double placeTime) : base(x, y)
+        public SuperBomb(int x, int y, int explosionPower, double placeTime, Player owner) : base(x, y, owner)
         {
             isSolid = false;
             timeToExplosion = 3000.0;

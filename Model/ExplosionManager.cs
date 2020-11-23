@@ -50,7 +50,7 @@ namespace Model
                         if (bomb.detonationTime < time)
                         {
                             units[x, y] = null;
-                            PlaceRegularExplosion(x, y, bomb.explosionPower, time, factory);
+                            PlaceRegularExplosion(x, y, bomb.explosionPower, time, factory, bomb.GetOwner());
                         }
                     }
                     else if (units[x, y] is SuperBomb)
@@ -61,47 +61,47 @@ namespace Model
                         if (bomb.detonationTime < time)
                         {
                             units[x, y] = null;
-                            PlaceSuperExplosion(x, y, bomb.explosionPower, time, factory);
+                            PlaceSuperExplosion(x, y, bomb.explosionPower, time, factory, bomb.GetOwner());
                         }
                     }
                 }
             }
         }
 
-        private void PlaceRegularExplosion(int xTile, int yTile, int explosionPower, double placeTime, ExplosiveAbstractFactory factory)
+        private void PlaceRegularExplosion(int xTile, int yTile, int explosionPower, double placeTime, ExplosiveAbstractFactory factory, Player owner)
         {
             bool topFinished = false;
             bool bottomFinished = false;
             bool leftFinished = false;
             bool rightFinished = false;
-            explosions[xTile, yTile] = factory.CreateExplosion(xTile, yTile, placeTime);
+            explosions[xTile, yTile] = factory.CreateExplosion(xTile, yTile, placeTime, owner);
 
             for (int i = 1; i < explosionPower; i++)
             {
                 if (!topFinished)
                 {
-                    topFinished = RegularExplosionCreation(xTile, yTile - i, placeTime, topFinished, factory);
+                    topFinished = RegularExplosionCreation(xTile, yTile - i, placeTime, topFinished, factory, owner);
                 }
                 if (!bottomFinished)
                 {
-                    bottomFinished = RegularExplosionCreation(xTile, yTile + i, placeTime, bottomFinished, factory);
+                    bottomFinished = RegularExplosionCreation(xTile, yTile + i, placeTime, bottomFinished, factory, owner);
                 }
                 if (!leftFinished)
                 {
-                    leftFinished = RegularExplosionCreation(xTile - i, yTile, placeTime, leftFinished, factory);
+                    leftFinished = RegularExplosionCreation(xTile - i, yTile, placeTime, leftFinished, factory, owner);
                 }
                 if (!rightFinished)
                 {
-                    rightFinished = RegularExplosionCreation(xTile + i, yTile, placeTime, rightFinished, factory);
+                    rightFinished = RegularExplosionCreation(xTile + i, yTile, placeTime, rightFinished, factory, owner);
                 }
             }
         }
 
-        private bool RegularExplosionCreation(int x, int y, double placeTime, bool isFinished, ExplosiveAbstractFactory factory)
+        private bool RegularExplosionCreation(int x, int y, double placeTime, bool isFinished, ExplosiveAbstractFactory factory, Player owner)
         {
             if (units[x, y] == null || explosions[x, y] is Explosion || explosions[x,y] is SuperExplosion || units[x,y].isSolid == false)
             {
-                explosions[x, y] = factory.CreateExplosion(x, y, placeTime);
+                explosions[x, y] = factory.CreateExplosion(x, y, placeTime, owner);
             }
             else
             {
@@ -117,7 +117,7 @@ namespace Model
                     {
                         units[x, y] = null;
                     }
-                    explosions[x, y] = factory.CreateExplosion(x, y, placeTime);
+                    explosions[x, y] = factory.CreateExplosion(x, y, placeTime, owner);
 
                 }
                 isFinished = true;
@@ -143,7 +143,7 @@ namespace Model
             return boost;
         }
 
-        private void PlaceSuperExplosion(int xTile, int yTile, int explosionPower, double placeTime, ExplosiveAbstractFactory factory)
+        private void PlaceSuperExplosion(int xTile, int yTile, int explosionPower, double placeTime, ExplosiveAbstractFactory factory, Player owner)
         {
             //explosions[xTile, yTile] = factory.CreateExplosion(xTile, yTile, placeTime);
 
@@ -153,12 +153,12 @@ namespace Model
                 {
                     if (units[x, y] == null || explosions[x, y] is Explosion || explosions[x, y] is SuperExplosion || units[x, y].isSolid == false)
                     {
-                        explosions[x, y] = factory.CreateExplosion(x, y, placeTime);
+                        explosions[x, y] = factory.CreateExplosion(x, y, placeTime, owner);
                     }
                     else if (units[x, y] is Box)
                     {
                         units[x, y] = null;
-                        explosions[x, y] = factory.CreateExplosion(x, y, placeTime);
+                        explosions[x, y] = factory.CreateExplosion(x, y, placeTime, owner);
                     }
                 }
             }

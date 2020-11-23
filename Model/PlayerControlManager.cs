@@ -51,10 +51,10 @@ namespace Model
                 switch (command)
                 {
                     case "placeBomb":
-                        toPlace = factory.CreateBomb(playerTile[0], playerTile[1], player.explosionPower, placeTime);
+                        toPlace = factory.CreateBomb(playerTile[0], playerTile[1], player.explosionPower, placeTime, player);
                         break;
                     case "placeMine":
-                        toPlace = factory.CreateMine(playerTile[0], playerTile[1]);
+                        toPlace = factory.CreateMine(playerTile[0], playerTile[1], player);
                         break;
                     default:
                         throw new Exception();
@@ -66,7 +66,7 @@ namespace Model
             player.action = "";
         }
 
-        public void ActivateBlock(Player player, double time)
+        public void ActivateBlock(Player player, double time, ScoreboardTemplate scoreboard)
         {
             int[] playerCenter = getCenterPlayer(new int[] { player.x, player.y });
             int[] playerTile = getTile(playerCenter[0], playerCenter[1]);
@@ -94,10 +94,10 @@ namespace Model
                 switch (playerStandsOn)
                 {
                     case Explosion x:
-                        PlayerExplode(player, time);
+                        PlayerExplode(player, time, scoreboard, x.GetOwner());
                         break;
                     case SuperExplosion x:
-                        PlayerExplode(player, time);
+                        PlayerExplode(player, time, scoreboard, x.GetOwner());
                         break;
                     default:
                         break;
@@ -112,12 +112,37 @@ namespace Model
             units[playerStandsOn.x, playerStandsOn.y] = null;
         }
 
-        public void PlayerExplode(Player player, double time)
+        public void PlayerExplode(Player player, double time, ScoreboardTemplate scoreboard, Player bombOwner)
         {
             if (!(player.invincibleUntil > time))
             {
                 player.BecomeInvincible(time);
                 player.ReduceHealth();
+                if (player != bombOwner)
+                {
+                    if (player.IsAlive())
+                    {
+                        scoreboard.AddScore(bombOwner, 1);
+                    }
+                    else
+                    {
+                        scoreboard.AddScore(bombOwner, 3);
+                        scoreboard.ChangeStatus(player);
+                    }
+                }
+                else
+                {
+                    if (player.IsAlive())
+                    {
+                        scoreboard.AddScore(player, -1);
+                    }
+                    else
+                    {
+                        scoreboard.AddScore(player, -1);
+                        scoreboard.ChangeStatus(player);
+                    }
+                    
+                }
             }
         }
 

@@ -47,9 +47,9 @@ namespace Model
             mapFacade.PlaceExplosive(player, placeTime);
         }
 
-        public void PickupBoost(Player player, double time)
+        public void PickupBoost(Player player, double time, ScoreboardTemplate scoreboard)
         {
-            mapFacade.PickupBoost(player, time);
+            mapFacade.PickupBoost(player, time, scoreboard);
         }
 
         public void UpdateExplosives(double time)

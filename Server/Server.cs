@@ -19,11 +19,13 @@ namespace Server
         public static GameServer game;
         public static List<Map> mapCache = new List<Map>();
         public static bool canStartRound = true;
+        public static ScoreboardTemplate scoreboard = new ScoreboardMatch();
 
         public static void AddPlayer(string id, string username)
         {
             Player p = new Player(id, username, playerList.getCount());
             playerList.addPlayer(p);
+            scoreboard.AddPlayer(p);
         }
 
         public static List<Player> GetPlayers()
@@ -84,17 +86,23 @@ namespace Server
 
         public static bool CheckRoundEnd()
         {
-            bool roundEnded = true;
+            int deadCount = 0;
             for (Iterator iter = playerList.getIterator(); iter.hasNext();)
             {
                 Player p = (Player)iter.next();
-                if (p.IsAlive())
+                if (!p.IsAlive())
                 {
-                    roundEnded = false;
-                    break;
+                    deadCount++;
                 }
             }
-            return roundEnded;
+            if (playerList.getCount() == 1)
+            {
+                return deadCount == 1;
+            }
+            else
+            {
+                return deadCount == (playerList.getCount() - 1);
+            }
         }
 
         public static void StartGame()

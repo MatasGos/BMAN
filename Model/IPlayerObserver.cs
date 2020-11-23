@@ -7,6 +7,6 @@ namespace Model
 {
     public interface IPlayerObserver
     {
-        public abstract void update(IHubCallerClients context, string jsonMap, string jsonPlayers);
+        public abstract void update(IHubCallerClients context, string jsonMap, string jsonPlayers, string jsonScoreboardRound, int roundEnded);
     }
 }

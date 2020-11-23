@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -51,10 +52,22 @@ namespace Client
             });
 
             //Game has started info of players sent
-            connection.On<string, string, int>("SendData", (jsonPlayers, jsonMap, playerHealth) =>
+            connection.On<string, string, int, string, int>("SendData", (jsonPlayers, jsonMap, playerHealth, scoreboard, roundEnded) =>
             {
                 game.players = JsonConvert.DeserializeObject<List<Player>>(jsonPlayers, settings);
                 game.map = JsonConvert.DeserializeObject<Map>(jsonMap, settings);
+
+                switch(roundEnded)
+                {
+                    case 0:
+                        PrintScoreboardRound(JsonConvert.DeserializeObject<ScoreboardRound>(scoreboard, settings));
+                        break;
+                    case 1:
+                        PrintScoreboardMatch(JsonConvert.DeserializeObject<ScoreboardMatch>(scoreboard, settings));
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
                 if (game.gameStarted == false)
                 {
                     game.gameStarted = true;
@@ -72,7 +85,8 @@ namespace Client
 
                     labelHealth.Visible = true;
                     labelHealthValue.Visible = true;
-                    
+                    label5.Visible = true;
+                 
 
                     game.drawBackground();
                 }
@@ -183,6 +197,11 @@ namespace Client
                     richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
                 }
             }
+        }
+
+        private void richTextBox2_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         //Send message button
@@ -450,7 +469,73 @@ namespace Client
                 richTextBox1.Text = richTextBox1.Text + ex.Message + "\n";
             }
         }
+
+        private void PrintScoreboardRound(ScoreboardTemplate scoreboard)
+        {
+            foreach(var x in scoreboard.ToStringTable())
+            {
+                switch(x.Item1)
+                { //red blue green yellow
+                    case 0:
+                        label1.ForeColor = Color.Red;
+                        label1.Text = x.Item2.ToString();
+                        label1.Visible = true;
+                        break;
+                    case 1:
+                        label2.ForeColor = Color.Blue;
+                        label2.Text = x.Item2.ToString();
+                        label2.Visible = true;
+                        break;
+                    case 2:
+                        label3.ForeColor = Color.Green;
+                        label3.Text = x.Item2.ToString();
+                        label3.Visible = true;
+                        break;
+                    case 3:
+                        label4.ForeColor = Color.Yellow;
+                        label4.Text = x.Item2.ToString();
+                        label4.Visible = true;
+                        break;
+                    default:
+                        throw new NotImplementedException();                   
+                }
+            }
+        }
+
+        private void PrintScoreboardMatch(ScoreboardTemplate scoreboard)
+        {
+            label6.Visible = true;
+            foreach (var x in scoreboard.ToStringTable())
+            {
+                switch (x.Item1)
+                { //red blue green yellow
+                    case 0:
+                        label7.ForeColor = Color.Red;
+                        label7.Text = x.Item2.ToString();
+                        label7.Visible = true;
+                        break;
+                    case 1:
+                        label8.ForeColor = Color.Blue;
+                        label8.Text = x.Item2.ToString();
+                        label8.Visible = true;
+                        break;
+                    case 2:
+                        label9.ForeColor = Color.Green;
+                        label9.Text = x.Item2.ToString();
+                        label9.Visible = true;
+                        break;
+                    case 3:
+                        label10.ForeColor = Color.Yellow;
+                        label10.Text = x.Item2.ToString();
+                        label10.Visible = true;
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
+            }
+        }
     }
+
 
     public static class RichTextBoxExtension
     {
