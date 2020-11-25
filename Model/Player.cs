@@ -34,6 +34,9 @@ namespace Model
 
         private MovementControl movementControl;
 
+        private Context stateContext;
+
+
         public enum PlayerNum : int
         {
             P1 = 0,
@@ -122,11 +125,11 @@ namespace Model
         }
         public void Move()
         {
-            this.movementControl.Move();
+            stateContext.Move();
         }
         public void Undo()
         {
-            this.movementControl.Undo();
+            stateContext.Undo();
         }
         public void SetCommand(ICommand command)
         {
@@ -140,15 +143,7 @@ namespace Model
 
         public void ReduceHealth()
         {
-            if (health > 0)
-            {
-                this.health -= 1;
-            }    
-            else
-            {
-                x = -25;
-                y = -25;
-            }
+            stateContext.ReduceHealth();
         }
 
         public void BecomeInvincible(double time)
@@ -158,12 +153,13 @@ namespace Model
 
         public bool IsAlive()
         {
-            return health > 0;
+            return stateContext.IsAlive();
         }
         public void ResetPlayer()
         {
             InitializeValues();
             InitializePlayerStructure();
+
         }
 
         private void InitializeValues()
@@ -177,6 +173,8 @@ namespace Model
             this.movementControl = new MovementControl();
             this.hasSuperbombs = true;
             this.invincibleUntil = 0;
+            stateContext = new Context(movementControl, this);
+            stateContext.SetState(new Alive());
         }
         private void InitializePlayerStructure()
         {
