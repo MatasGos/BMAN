@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Server.Tests
 {
@@ -57,28 +58,6 @@ namespace Server.Tests
             {
                 game.AddObserver(Server.GetPlayers()[i]);
             }
-        }
-
-        [TestMethod()]
-        public void GameLoopTest()
-        {
-            ResetServer();
-            IHubCallerClients context = new HubTest();
-            HubTest temp = (HubTest)context;
-            for (int i = 0; i < 4; i++)
-            {
-                Server.AddPlayer("id" + i, "username" + i);
-                temp.AddClient(Server.GetPlayers()[i]);
-            }
-            GameServer game = new GameServer(context);
-            for (int i = 0; i < 4; i++)
-            {
-                game.AddObserver(Server.GetPlayers()[i]);
-            }
-            Thread gameLoop = new Thread(new ThreadStart(game.GameLoop));
-            gameLoop.Start();
-            Thread.Sleep(200);
-            gameLoop.Interrupt();
         }
 
         [TestMethod()]
