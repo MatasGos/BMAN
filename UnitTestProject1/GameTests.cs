@@ -129,6 +129,61 @@ namespace Client.Tests
             game.drawMap();
         }
 
+        [TestMethod()]
+        public void drawMap3Test()
+        {
+            Game<Bitmap, Color> game = new Game<Bitmap, Color>();
+            game.map = new Map(game.xSize, game.ySize);
+            game.map.units[0, 0] = new Explosion(8, 0, 0.0);
+            //game.map.explosions[0, 1] = new SuperExplosion(9, 0, 0.0);
+            for (int i = 0; i < 4; i++)
+            {
+                Player x = new Player("id", "username", i);
+                x.UpdatePlayerStructure("fs");
+                x.x = i * 25;
+                x.y = 0;
+                game.players.Add(x);
+            }
+            game.drawBackground();
+            bool exception_Thrown = false;
+            try
+            {
+                game.drawMap();
+            }
+            catch
+            {
+                exception_Thrown = true;
+            }
+            Assert.IsTrue(exception_Thrown);
+        }
+
+        [TestMethod()]
+        public void drawMap4Test()
+        {
+            Game<Bitmap, Color> game = new Game<Bitmap, Color>();
+            game.map = new Map(game.xSize, game.ySize);
+            game.map.explosions[0, 0] = new Bomb(0, 0, 0, 0);
+            for (int i = 0; i < 4; i++)
+            {
+                Player x = new Player("id", "username", i);
+                x.UpdatePlayerStructure("fs");
+                x.x = i * 25;
+                x.y = 0;
+                game.players.Add(x);
+            }
+            game.drawBackground();
+            bool exception_Thrown = false;
+            try
+            {
+                game.drawMap();
+            }
+            catch
+            {
+                exception_Thrown = true;
+            }
+            Assert.IsTrue(exception_Thrown);
+        }
+
 
 
         [TestMethod()]

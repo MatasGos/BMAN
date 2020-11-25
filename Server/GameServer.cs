@@ -20,7 +20,7 @@ namespace Server
 
         public IMapAdapter map;
         public bool isRunning = false;
-        Stopwatch sw;
+        public Stopwatch sw;
         public List<IPlayerObserver> playerList = new List<IPlayerObserver>();
         private IHubCallerClients context;       
 
