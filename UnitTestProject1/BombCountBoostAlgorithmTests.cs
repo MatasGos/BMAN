@@ -7,6 +7,7 @@ using System.Text;
 namespace Model.Tests
 {
     [TestClass()]
+    //bomb count boost unit test
     public class BombCountBoostAlgorithmTests
     {
         [DataTestMethod]

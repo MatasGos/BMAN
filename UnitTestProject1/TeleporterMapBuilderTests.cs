@@ -9,6 +9,7 @@ namespace Model.Tests
     [TestClass()]
     public class TeleporterMapBuilderTests
     {
+        //Tests map construction and wether it wat built correctly
         [TestMethod()]
         public void TeleporterMapBuilderTest()
         {

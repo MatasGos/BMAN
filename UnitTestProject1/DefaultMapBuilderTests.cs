@@ -9,6 +9,7 @@ namespace Model.Tests
     [TestClass()]
     public class DefaultMapBuilderTests
     {
+        //Tests default map constructor ant checks wether it was built correctly
         [TestMethod()]
         public void DefaultMapBuilderTest()
         {

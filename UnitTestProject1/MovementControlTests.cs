@@ -9,6 +9,7 @@ namespace Model.Tests
     [TestClass()]
     public class MovementControlTests
     {
+        //Tests new movement command constructor
         [TestMethod()]
         public void MovementControlTest()
         {
@@ -20,7 +21,7 @@ namespace Model.Tests
             player.Move();
         }
 
-
+        //Tests 8 types of movement commands
         [TestMethod()]
         public void MoveTest()
         {
@@ -63,6 +64,7 @@ namespace Model.Tests
 
         }
 
+        //Tests 8 types of movement undoes
         [TestMethod()]
         public void UndoTest()
         {
@@ -108,7 +110,7 @@ namespace Model.Tests
             Assert.AreEqual(pos[0], player.getPos()[0]);
             Assert.AreEqual(pos[1], player.getPos()[1]);
         }
-
+        //Tests clear method in movement controller
         [TestMethod()]
         public void ClearTest()
         {

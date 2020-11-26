@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Model.Tests
 {
+    //Explosion range boost algorith test creates new boost and tests its functionality
     [TestClass()]
     public class ExplosionRangeBoostAlgorithmTests
     {
