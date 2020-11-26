@@ -20,11 +20,6 @@ namespace Model.Tests
             player.Move();
         }
 
-        [TestMethod()]
-        public void AddCommandTest()
-        {
-            Assert.Fail();
-        }
 
         [TestMethod()]
         public void MoveTest()
@@ -142,9 +137,12 @@ namespace Model.Tests
 
             player.Undo();
             int[] pos = player.getPos();
+            player.SetCommand(moveLeftUp);
+            player.Move();
             player.Undo();
 
-            Assert.AreEqual(pos, player.getPos());
+            Assert.AreEqual(pos[0], player.getPos()[0]);
+            Assert.AreEqual(pos[1], player.getPos()[1]);
         }
     }
 }
