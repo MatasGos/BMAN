@@ -27,6 +27,7 @@ namespace Model.Tests
         [DataRow(4)]
         [DataRow(5)]
         [DataRow(6)]
+        //Checks if the constructor throws an exception when 
         public void PlayerTestFail(int x)
         {
             bool exceptionThrown = false;
@@ -43,6 +44,7 @@ namespace Model.Tests
 
         [DataTestMethod]
         [DataRow(15,50)]
+        //Tests getPos method by checking if it assigns correct values
         public void getPosTest(int x, int y)
         {
             Player player = new Player("id", "username", 0);
@@ -57,6 +59,7 @@ namespace Model.Tests
         [DataRow(2)]
         [DataRow(3)]
         [DataRow(0)]
+        //Tests UpdatePlayerStructure method by checking if it sets a correct structure
         public void UpdatePlayerStructureTest(int x)
         {
             string structure = "fs";
@@ -67,6 +70,7 @@ namespace Model.Tests
 
         [DataTestMethod]
         [DataRow(15, 50)]
+        //Tests SetPos method by checking if the assigned values are correct
         public void SetPosTest(int x, int y)
         {
             Player player = new Player("id", "username", 0);
@@ -78,6 +82,7 @@ namespace Model.Tests
         [DataTestMethod]
         [DataRow("placeBomb")]
         [DataRow("placeMine")]
+        //Tests SetAction method by checking if the correct value is assigned
         public void SetActionTest(string action)
         {
             Player player = new Player("id", "username", 0);
@@ -86,6 +91,7 @@ namespace Model.Tests
         }
         [DataTestMethod]
         [DataRow("undo")]
+        //Tests SetAction method by setting a secondary action and checking if it is assigned
         public void SetActionSecondaryTest(string action)
         {
             Player player = new Player("id", "username", 0);
@@ -94,6 +100,7 @@ namespace Model.Tests
         }
 
         [TestMethod()]
+        //Tests update method by mocking SignalR interface
         public void updateTest()
         {
             IHubCallerClients test = new HubTest();
@@ -118,6 +125,7 @@ namespace Model.Tests
         }
 
         [TestMethod()]
+        //Tests Move method by checking if the player is in the correct position after moving
         public void MoveTest()
         {
             Player player = new Player("id", "username", 0);
@@ -133,6 +141,7 @@ namespace Model.Tests
 
 
         [TestMethod()]
+        //Tests Undo method by checking if the player is in the correct position after undoing his actions
         public void UndoTest()
         {
             Player player = new Player("id", "username", 0);
@@ -153,6 +162,7 @@ namespace Model.Tests
         }
 
         [TestMethod()]
+        //Tests Undo method by checking if it only rewinds the last 20 moves 
         public void UndoLimitTest()
         {
             Player player = new Player("id", "username", 0);
@@ -173,6 +183,7 @@ namespace Model.Tests
         }
 
         [TestMethod()]
+        //Tests CheckCommand method by executing it
         public void SetCommandTest()
         {
             Player player = new Player("id", "username", 0);
@@ -186,6 +197,7 @@ namespace Model.Tests
         }
 
         [TestMethod()]
+        //Tests ClearCommandHistory method by checking if Undo does nothing after the command history is cleared
         public void ClearCommandHistoryTest()
         {
             Player player = new Player("id", "username", 0);
@@ -207,6 +219,7 @@ namespace Model.Tests
         }
 
         [TestMethod()]
+        //Tests ReduceHealth method by checking if it reduces the health by 1
         public void ReduceHealthTest()
         {
             Player player = new Player("id", "username", 0);
@@ -216,6 +229,7 @@ namespace Model.Tests
         }
 
         [TestMethod()]
+        //Tests ReduceHealth method by checking if it doesn't reduce the players health below 0
         public void ReduceHealthLimitTest()
         {
             Player player = new Player("id", "username", 0);
@@ -228,6 +242,7 @@ namespace Model.Tests
         }
 
         [TestMethod()]
+        //Tests BecomeInvisible method by checking if it makes the player invincible for exactly 1000 miliseconds
         public void BecomeInvincibleTest()
         {
             Player player = new Player("id", "username", 0);
@@ -236,6 +251,7 @@ namespace Model.Tests
         }
 
         [TestMethod()]
+        //Tests IsAlive method by reducing players health but making sure it's still above 0 (IsAlive should return true)
         public void IsAliveTest()
         {
             Player player = new Player("id", "username", 0);
@@ -249,6 +265,7 @@ namespace Model.Tests
         }
 
         [TestMethod()]
+        //Tests IsAlive method by reducing players health to 0 (IsAlive should return false)
         public void IsAlive2Test()
         {
             Player player = new Player("id", "username", 0);
@@ -262,6 +279,8 @@ namespace Model.Tests
         }
 
         [TestMethod()]
+        //Tests ResetPlayer method by checking if it resets all user attributes to their default values
+
         public void ResetPlayerTest()
         {
             Player player = new Player("id", "username", 0);

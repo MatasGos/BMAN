@@ -11,6 +11,7 @@ namespace Client.Tests
     public class GraphicsRepositoryTests
     {
         [TestMethod()]
+        //Tests the constructor
         public void GetBackgroundColorTest()
         {
             GraphicsRepository<Bitmap, Color> graphics = new GraphicsRepository<Bitmap, Color>();
@@ -18,6 +19,7 @@ namespace Client.Tests
         } 
 
         [TestMethod()]
+        //Tests the CraeteGraphicsObject method
         public void CreateGraphicsObjectTest()
         {
             GraphicsRepository<Bitmap, Color> graphics = new GraphicsRepository<Bitmap, Color>();
@@ -25,6 +27,7 @@ namespace Client.Tests
         }
 
         [TestMethod()]
+        //Tests the ColorFromArgb method by checking if it returns proper values
         public void ColorFromArgbTest()
         {
             GraphicsRepository<Bitmap, Color> graphics = new GraphicsRepository<Bitmap, Color>();
@@ -36,6 +39,7 @@ namespace Client.Tests
         }
 
         [TestMethod()]
+        //Tests The ColorA method by checking if it return a proper value
         public void ColorATest()
         {
             GraphicsRepository<Bitmap, Color> graphics = new GraphicsRepository<Bitmap, Color>();
@@ -44,6 +48,7 @@ namespace Client.Tests
         }
 
         [TestMethod()]
+        //Tests The ColorR method by checking if it return a proper value
         public void ColorRTest()
         {
             GraphicsRepository<Bitmap, Color> graphics = new GraphicsRepository<Bitmap, Color>();
@@ -52,6 +57,7 @@ namespace Client.Tests
         }
 
         [TestMethod()]
+        //Tests The ColorG method by checking if it return a proper value
         public void ColorGTest()
         {
             GraphicsRepository<Bitmap, Color> graphics = new GraphicsRepository<Bitmap, Color>();
@@ -60,6 +66,7 @@ namespace Client.Tests
         }
 
         [TestMethod()]
+        //Tests The ColorB method by checking if it return a proper value
         public void ColorBTest()
         {
             GraphicsRepository<Bitmap, Color> graphics = new GraphicsRepository<Bitmap, Color>();
@@ -68,6 +75,7 @@ namespace Client.Tests
         }
 
         [TestMethod()]
+        //Checks if the methods of this class throw exceptions when initialized with wrong types
         public void WrongTypesTest()
         {
             GraphicsRepository<Color, Bitmap> graphics = new GraphicsRepository<Color, Bitmap>();

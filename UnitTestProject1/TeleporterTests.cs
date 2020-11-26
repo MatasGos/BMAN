@@ -13,6 +13,7 @@ namespace Model.Tests
         [DataRow(0,0)]
         [DataRow(0,10)]
         [DataRow(50,50)]
+        //Tests the constructor by checking if the correct values are assigned and if the default values are correct
         public void TeleporterTest(int x, int y)
         {
             Teleporter teleporter = new Teleporter(x, y);
@@ -25,6 +26,7 @@ namespace Model.Tests
         }
 
         [TestMethod()]
+        //Tests SetDestination method by checking if the destination was assigned
         public void SetDestinationTest()
         {
             Teleporter teleporterin = new Teleporter(0, 0);
@@ -34,6 +36,7 @@ namespace Model.Tests
         }
 
         [TestMethod()]
+        //Tests GetDestination method by assigning a destination and then checking if the destination that was set is the same
         public void GetDestinationTest()
         {
             Teleporter teleporterin = new Teleporter(0, 0);
@@ -44,6 +47,7 @@ namespace Model.Tests
         }
 
         [TestMethod()]
+        //Tests HasDestination method by setting a destination and checking if it returns true
         public void HasDestinationTest()
         {
             Teleporter teleporterin = new Teleporter(0, 0);

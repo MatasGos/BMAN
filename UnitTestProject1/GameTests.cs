@@ -12,6 +12,7 @@ namespace Client.Tests
     public class GameTests
     {
         [TestMethod()]
+        //Tests the contructor
         public void GameTest()
         {
             Game<Bitmap, Color> game = new Game<Bitmap, Color>();
@@ -22,6 +23,7 @@ namespace Client.Tests
         }
 
         [TestMethod()]
+        //Tests FormPlayerImages method by checking if the placed players have a color that is not the background
         public void FormPlayerImagesTest()
         {
             Game<Bitmap, Color> game = new Game<Bitmap, Color>();
@@ -56,6 +58,7 @@ namespace Client.Tests
         }
 
         [TestMethod()]
+        //Tests drawBackground method by checking if the Wall object is drawn properly
         public void drawBackgroundTest()
         {
             Game<Bitmap, Color> game = new Game<Bitmap, Color>();
@@ -76,6 +79,7 @@ namespace Client.Tests
         }
 
         [TestMethod()]
+        //Tests drawMap method by checking if it draws Bomb and Mine properly
         public void drawMapTest()
         {
             Game<Bitmap, Color> game = new Game<Bitmap, Color>();
@@ -99,7 +103,7 @@ namespace Client.Tests
         }
 
         [TestMethod()]
-        //Patikrina ar nėra exception su visais įmanomais elementų tipais.
+        //Checks if the drawMap method doesn't throw an exception with all possible unit and explosion objects
         public void drawMap2Test()
         {
             Game<Bitmap, Color> game = new Game<Bitmap, Color>();
@@ -130,6 +134,7 @@ namespace Client.Tests
         }
 
         [TestMethod()]
+        //Tests if drawMap throws an exception when an explosion is added to units
         public void drawMap3Test()
         {
             Game<Bitmap, Color> game = new Game<Bitmap, Color>();
@@ -158,6 +163,7 @@ namespace Client.Tests
         }
 
         [TestMethod()]
+        //Tests if drawMap throws an exception when an unit is added to explosions
         public void drawMap4Test()
         {
             Game<Bitmap, Color> game = new Game<Bitmap, Color>();

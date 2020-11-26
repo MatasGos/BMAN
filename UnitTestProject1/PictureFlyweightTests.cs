@@ -11,11 +11,13 @@ namespace Client.Tests
     public class PictureFlyweightTests
     {
         [TestMethod()]
+        //Tests the constructor
         public void PictureFlyweightTest()
         {
             PictureFlyweight<Bitmap, Color> pictures = new PictureFlyweight<Bitmap, Color>();
         }
         [TestMethod()]
+        //Tests the constructor by creating it with unsupported types
         public void PictureFlyweightFailTest()
         {
             bool exceptionThrown = false;
@@ -31,6 +33,7 @@ namespace Client.Tests
         }
 
         [TestMethod()]
+        //Tests GetPictureArray method by checking if it can create all objects it should be able to create
         public void GetPictureArrayTest()
         {
             PictureFlyweight<Bitmap, Color> pictures = new PictureFlyweight<Bitmap, Color>();
@@ -46,6 +49,7 @@ namespace Client.Tests
         }
 
         [TestMethod()]
+        //Tests GetPictureArray method by checking if it throws and exception when it tries to create an object that should be not defined
         public void GetPictureArrayFailTest()
         {
             PictureFlyweight<Bitmap, Color> pictures = new PictureFlyweight<Bitmap, Color>();

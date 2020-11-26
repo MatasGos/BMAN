@@ -10,6 +10,7 @@ namespace Model.Tests
     public class WallTests
     {
         [TestMethod()]
+        //Tests constructor by checking if the correct default values are assigned
         public void WallTest()
         {
             Wall wall = new Wall(0, 0);

@@ -11,6 +11,7 @@ namespace Server.Tests
     public class ServerTests
     {
         [TestMethod()]
+        //Tests AddPlayer method by adding a few players
         public void AddPlayerTest()
         {
             ResetServer();
@@ -19,6 +20,7 @@ namespace Server.Tests
         }
 
         [TestMethod()]
+        //Tests GetPlayers method by adding a few players and making sure that they were added
         public void GetPlayersTest()
         {
             ResetServer();
@@ -28,6 +30,7 @@ namespace Server.Tests
         }
 
         [TestMethod()]
+        //Tests GetPlayerById method by getting a player who was previously added
         public void GetPlayerByIdTest()
         {
             ResetServer();
@@ -37,6 +40,7 @@ namespace Server.Tests
         }
 
         [TestMethod()]
+        //Tests UpdatePlayerSkin method
         public void UpdatePlayerSkinTest()
         {
             ResetServer();
@@ -46,6 +50,7 @@ namespace Server.Tests
         }
 
         [TestMethod()]
+        //Tests AddMap method
         public void AddMapTest()
         {
             ResetServer();
@@ -56,6 +61,7 @@ namespace Server.Tests
         }
 
         [TestMethod()]
+        //Tests GetMapByName method by adding a map and trying to find it using this method
         public void GetMapByNameTest()
         {
             ResetServer();
@@ -67,6 +73,7 @@ namespace Server.Tests
         }
 
         [TestMethod()]
+        //Tests GetMapByName method by trying to find a map that doesn't exist (should return null)
         public void GetMapByName2Test()
         {
             ResetServer();
@@ -78,6 +85,7 @@ namespace Server.Tests
         }
 
         [TestMethod()]
+        //Tests CheckRoundEnd method by adding players who are still alive (if they are all alive the round should not have ended)
         public void CheckRoundEndTest()
         {
             ResetServer();
@@ -89,6 +97,7 @@ namespace Server.Tests
             Assert.IsFalse(Server.CheckRoundEnd());
         }
         [TestMethod()]
+        //Tests CheckRoundEnd method by adding players who are still alive and then making their health 0 (if they are all dead the round should have ended)
         public void CheckRoundEnd2Test()
         {
             ResetServer();
@@ -104,7 +113,8 @@ namespace Server.Tests
             }
             Assert.IsTrue(Server.CheckRoundEnd());
         }
-
+        
+        //Helper method
         public void ResetServer()
         {
             Server.current = null;
