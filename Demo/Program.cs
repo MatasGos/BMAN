@@ -83,9 +83,9 @@ namespace Demo
                     abstractFactory = new SuperExplosiveConcreteFactory();
                     break;
             }
-            Explosive bomb = abstractFactory.CreateBomb(0, 0, 100, 0);
-            Explosive mine = abstractFactory.CreateMine(0, 0);
-            Explosive explosion = abstractFactory.CreateExplosion(0, 0, 0);
+            //Explosive bomb = abstractFactory.CreateBomb(0, 0, 100, 0);
+           // Explosive mine = abstractFactory.CreateMine(0, 0);
+            //Explosive explosion = abstractFactory.CreateExplosion(0, 0, 0);
         }
 
         public static void PrototypeDemo()

@@ -472,7 +472,7 @@ namespace Client
 
         private void PrintScoreboardRound(ScoreboardTemplate scoreboard)
         {
-            foreach(var x in scoreboard.ToStringTable())
+            foreach(var x in scoreboard.FormTable())
             {
                 switch(x.Item1)
                 { //red blue green yellow
@@ -505,7 +505,7 @@ namespace Client
         private void PrintScoreboardMatch(ScoreboardTemplate scoreboard)
         {
             label6.Visible = true;
-            foreach (var x in scoreboard.ToStringTable())
+            foreach (var x in scoreboard.FormTable())
             {
                 switch (x.Item1)
                 { //red blue green yellow
@@ -513,21 +513,53 @@ namespace Client
                         label7.ForeColor = Color.Red;
                         label7.Text = x.Item2.ToString();
                         label7.Visible = true;
+                        if (x.Item3 == "bold")
+                        {
+                            label7.Font = new Font(label7.Font.Name, label7.Font.Size, FontStyle.Bold);
+                        }
+                        else
+                        {
+                            label7.Font = new Font(label7.Font.Name, label7.Font.Size);
+                        }
                         break;
                     case 1:
                         label8.ForeColor = Color.Blue;
                         label8.Text = x.Item2.ToString();
                         label8.Visible = true;
+                        if (x.Item3 == "bold")
+                        {
+                            label8.Font = new Font(label8.Font.Name, label8.Font.Size, FontStyle.Bold);
+                        }
+                        else
+                        {
+                            label8.Font = new Font(label8.Font.Name, label8.Font.Size);
+                        }
                         break;
                     case 2:
                         label9.ForeColor = Color.Green;
                         label9.Text = x.Item2.ToString();
                         label9.Visible = true;
+                        if (x.Item3 == "bold")
+                        {
+                            label9.Font = new Font(label9.Font.Name, label9.Font.Size, FontStyle.Bold);
+                        }
+                        else
+                        {
+                            label9.Font = new Font(label9.Font.Name, label9.Font.Size);
+                        }
                         break;
                     case 3:
                         label10.ForeColor = Color.Yellow;
                         label10.Text = x.Item2.ToString();
                         label10.Visible = true;
+                        if (x.Item3 == "bold")
+                        {
+                            label10.Font = new Font(label10.Font.Name, label10.Font.Size, FontStyle.Bold);
+                        }
+                        else
+                        {
+                            label10.Font = new Font(label10.Font.Name, label10.Font.Size);
+                        }
                         break;
                     default:
                         throw new NotImplementedException();

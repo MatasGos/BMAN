@@ -6,17 +6,19 @@ namespace Model
 {
     public abstract class ScoreboardTemplate
     {
-        private List<Player> players;
+        protected List<Player> players;
         public IDictionary<string, ValueTuple<int, int, int>> playerScores;
         public int longestNameLength;
+        public string lastAdded;
 
         public ScoreboardTemplate()
         {
             players = new List<Player>();
             playerScores = new Dictionary<string, ValueTuple<int, int, int>>();
             longestNameLength = 0;
+            lastAdded = "";
         }
-        
+
         public void AddPlayer(Player player)
         {
             players.Add(player);
@@ -32,6 +34,7 @@ namespace Model
             ValueTuple<int, int, int> tuple = playerScores[player.username];
             tuple.Item2 += pointCount;
             playerScores[player.username] = tuple;
+            lastAdded = player.username;
         }
 
         public void ChangeStatus(Player player)
@@ -41,6 +44,16 @@ namespace Model
             playerScores[player.username] = tuple;
         }
 
-        public abstract List<Tuple<int, string>> ToStringTable();
+        protected abstract List<Tuple<int, string, string>> ToStringTable(IDictionary<string, string> styles);
+
+        protected abstract IDictionary<string, string> TextStyle();
+
+        public List<Tuple<int, string, string>> FormTable()
+        {
+            IDictionary<string, string> styles = TextStyle();
+            List<Tuple<int, string, string>> table = ToStringTable(styles);
+            return table;
+        }
+
     }
 }

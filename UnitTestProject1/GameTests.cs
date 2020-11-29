@@ -80,8 +80,8 @@ namespace Client.Tests
         {
             Game<Bitmap, Color> game = new Game<Bitmap, Color>();
             game.map = new Map(game.xSize, game.ySize);
-            game.map.units[0, 0] = (Unit)new Bomb(0, 0, 0, 0.0);
-            game.map.units[1, 0] = (Unit)new Mine(1, 0);
+            //game.map.units[0, 0] = (Unit)new Bomb(0, 0, 0, 0.0);
+            //game.map.units[1, 0] = (Unit)new Mine(1, 0);
             game.drawBackground();
             game.drawMap();
             Color[,] picture = game.GetField().GetColorArray();
@@ -104,19 +104,19 @@ namespace Client.Tests
         {
             Game<Bitmap, Color> game = new Game<Bitmap, Color>();
             game.map = new Map(game.xSize, game.ySize);
-            game.map.units[0, 0] = (Unit)new Bomb(0, 0, 0, 0.0);
-            game.map.units[1, 0] = (Unit)new Mine(1, 0);
-            game.map.units[2, 0] = (Unit)new Box(2, 0);
-            game.map.units[3, 0] = (Unit)new SuperBomb(3, 0, 0, 0.0);
-            game.map.units[4, 0] = (Unit)new SuperMine(4, 0);
-            game.map.units[5, 0] = (Unit)new Boost(5, 0);
+           // game.map.units[0, 0] = (Unit)new Bomb(0, 0, 0, 0.0);
+           // game.map.units[1, 0] = (Unit)new Mine(1, 0);
+//game.map.units[2, 0] = (Unit)new Box(2, 0);
+        //    game.map.units[3, 0] = (Unit)new SuperBomb(3, 0, 0, 0.0);
+        //   game.map.units[4, 0] = (Unit)new SuperMine(4, 0);
+        //    game.map.units[5, 0] = (Unit)new Boost(5, 0);
             Teleporter teleporterin = new Teleporter(6, 0);
             Teleporter teleporterout = new Teleporter(7, 0);
             teleporterin.SetDestination(teleporterout);
             game.map.units[6, 0] = teleporterin;
             game.map.units[7, 0] = teleporterout;
-            game.map.explosions[8, 0] = new Explosion(8, 0, 0.0);
-            game.map.explosions[9, 0] = new SuperExplosion(9, 0, 0.0);
+            //game.map.explosions[8, 0] = new Explosion(8, 0, 0.0);
+            //game.map.explosions[9, 0] = new SuperExplosion(9, 0, 0.0);
             for (int i = 0; i < 4; i++)
             {
                 Player x = new Player("id", "username", i);
