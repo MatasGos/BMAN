@@ -22,5 +22,10 @@ namespace Model
         {
             return owner;
         }
+
+        public override void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }

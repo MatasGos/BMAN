@@ -14,5 +14,7 @@ namespace Model
             this.x = x;
             this.y = y;
         }
+
+        public abstract void Accept(IVisitor visitor);
     }
 }

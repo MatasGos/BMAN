@@ -130,12 +130,22 @@ namespace Model
             Boost boost = new Boost(x, y);
             Random rand = new Random();
             int n = rand.Next(100);
-            if (n < 50)
+            if (n < 25)
             {
                 boost.boostType = "speed";
                 boost.algorithm = new SpeedBoostAlgorithm();
             }
-            else if (n < 100)
+            else if (n >= 25 && n < 50)
+            {
+                boost.boostType = "bomb";
+                boost.algorithm = new BombCountBoostAlgorithm();
+            }
+            else if (n >= 50 && n < 75)
+            {
+                boost.boostType = "health";
+                boost.algorithm = new HealthBoostAlgorithm();
+            }
+            else if (n > 75)
             {
                 boost.boostType = "explosion";
                 boost.algorithm = new ExplosionRangeBoostAlgorithm();
