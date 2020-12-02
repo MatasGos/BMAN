@@ -6,6 +6,6 @@ namespace Model
 {
     public abstract class BoostAlgorithm
     {
-        public abstract void UseBoost(Player player);
+        public abstract void UseBoost(Player player, Unit[,] units);
     }
 }

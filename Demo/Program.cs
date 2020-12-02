@@ -45,7 +45,7 @@ namespace Demo
             Player player = new Player();
             Console.WriteLine("Zaidejo greitis: " + player.speed);
 
-            boost.algorithm.UseBoost(player);
+            boost.algorithm.UseBoost(player, null);
             Console.WriteLine("Zaidejo greitis po Boost panaudojimo: " + player.speed);
         }
 

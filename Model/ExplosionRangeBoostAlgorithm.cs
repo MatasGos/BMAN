@@ -6,7 +6,7 @@ namespace Model
 {
     public class ExplosionRangeBoostAlgorithm : BoostAlgorithm
     {
-        public override void UseBoost(Player player)
+        public override void UseBoost(Player player, Unit[,] units)
         {
             player.explosionPower += 1;
         }

@@ -109,7 +109,7 @@ namespace Model
         public void PickupBoost(Player player, Boost playerStandsOn)
         {
             units[playerStandsOn.x, playerStandsOn.y] = null;
-            playerStandsOn.algorithm.UseBoost(player);
+            playerStandsOn.algorithm.UseBoost(player, units);
         }
 
         public void PlayerExplode(Player player, double time, ScoreboardTemplate scoreboard, Player bombOwner)

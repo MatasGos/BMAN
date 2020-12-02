@@ -129,12 +129,23 @@ namespace Model
         {
             Boost boost = new Boost(x, y);
             Random rand = new Random();
-            int n = rand.Next(100);
+            int n = rand.Next(150);
             if (n < 25)
             {
                 boost.boostType = "speed";
                 boost.algorithm = new SpeedBoostAlgorithm();
             }
+            else if (n >= 25 && n < 100)
+            {
+                boost.boostType = "teleporter";
+                boost.algorithm = new TeleporterChangeBoostAlgorithm();
+            }
+            else if (n >= 100 && n < 150)
+            {
+                boost.boostType = "boost";
+                boost.algorithm = new BoostRandomizeBoostAlgorithm();
+            }
+            /*
             else if (n >= 25 && n < 50)
             {
                 boost.boostType = "bomb";
@@ -145,11 +156,21 @@ namespace Model
                 boost.boostType = "health";
                 boost.algorithm = new HealthBoostAlgorithm();
             }
-            else if (n > 75)
+            else if (n >= 75 && n < 100)
             {
                 boost.boostType = "explosion";
                 boost.algorithm = new ExplosionRangeBoostAlgorithm();
             }
+            else if (n >= 100 && n < 110)
+            {
+                boost.boostType = "teleporter";
+                boost.algorithm = new TeleporterChangeBoostAlgorithm();
+            }
+            else if (n >= 110 && n < 120)
+            {
+                boost.boostType = "boost";
+                boost.algorithm = new BoostRandomizeBoostAlgorithm();
+            }*/
             return boost;
         }
 
