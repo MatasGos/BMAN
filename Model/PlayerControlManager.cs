@@ -167,27 +167,12 @@ namespace Model
             }
 
             Unit[] b = getNearbyBlocks(movingPlayer.x, movingPlayer.y);
-            int[,] edges = getEdges(new int[] { movingPlayer.x, movingPlayer.y });
-            int[,] edges1 = getEdges(new int[] { movingPlayer.x, movingPlayer.y });
+            MovementHandler full = new FullMove();
+            full.SetNextChain( new HalfMove());
+            full.GetNextChain().SetNextChain(new QuarterMove());
+            full.GetNextChain().GetNextChain().SetNextChain(new OneMove());
 
-            for (int i = 0; i < 4; i++)
-            {
-                edges[i, 0] += px * speed;
-                edges[i, 1] += py * speed;
-                edges1[i, 0] += px;
-                edges1[i, 1] += py;
-            }
-
-            if (isOccupiedSquared(edges, b))
-            {
-                movingPlayer.x += px * speed;
-                movingPlayer.y += py * speed;
-            }
-            else if (isOccupiedSquared(edges1, b))
-            {
-                movingPlayer.x += px;
-                movingPlayer.y += py;
-            }
+            full.Calculate(movingPlayer, px, py, speed, this, b);
         }
 
         public bool isOccupiedSquared(int[,] edges, Unit[] b)
