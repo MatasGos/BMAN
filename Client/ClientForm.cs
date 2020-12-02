@@ -60,10 +60,10 @@ namespace Client
                 switch(roundEnded)
                 {
                     case 0:
-                        PrintScoreboardRound(JsonConvert.DeserializeObject<ScoreboardRound>(scoreboard, settings));
+                        PrintScoreboardRound(new ScoreboardTemplateProxy(JsonConvert.DeserializeObject<ScoreboardRound>(scoreboard, settings)));
                         break;
                     case 1:
-                        PrintScoreboardMatch(JsonConvert.DeserializeObject<ScoreboardMatch>(scoreboard, settings));
+                        PrintScoreboardMatch(new ScoreboardTemplateProxy(JsonConvert.DeserializeObject<ScoreboardMatch>(scoreboard, settings)));
                         break;
                     default:
                         throw new NotImplementedException();
@@ -470,7 +470,7 @@ namespace Client
             }
         }
 
-        private void PrintScoreboardRound(ScoreboardTemplate scoreboard)
+        private void PrintScoreboardRound(IScoreboardTemplate scoreboard)
         {
             foreach(var x in scoreboard.FormTable())
             {
@@ -502,7 +502,7 @@ namespace Client
             }
         }
 
-        private void PrintScoreboardMatch(ScoreboardTemplate scoreboard)
+        private void PrintScoreboardMatch(IScoreboardTemplate scoreboard)
         {
             label6.Visible = true;
             foreach (var x in scoreboard.FormTable())

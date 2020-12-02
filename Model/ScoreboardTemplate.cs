@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model
 {
-    public abstract class ScoreboardTemplate
+    public abstract class ScoreboardTemplate : IScoreboardTemplate
     {
         protected List<Player> players;
         public IDictionary<string, ValueTuple<int, int, int>> playerScores;
