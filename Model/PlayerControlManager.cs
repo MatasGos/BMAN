@@ -168,7 +168,7 @@ namespace Model
 
             Unit[] b = getNearbyBlocks(movingPlayer.x, movingPlayer.y);
             MovementHandler full = new FullMove();
-            full.SetNextChain( new HalfMove());
+            full.SetNextChain(new HalfMove());
             full.GetNextChain().SetNextChain(new QuarterMove());
             full.GetNextChain().GetNextChain().SetNextChain(new OneMove());
 

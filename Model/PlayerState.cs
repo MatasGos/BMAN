@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model
 {
-    public interface PlayerState
+    public interface IPlayerState
     {
         public void Move(Context context);
         public void Undo(Context context);

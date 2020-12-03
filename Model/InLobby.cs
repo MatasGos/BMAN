@@ -4,24 +4,24 @@ using System.Text;
 
 namespace Model
 {
-    class InLobby : PlayerState
+    class InLobby : IPlayerState
     {
         public bool IsAlive(Context context)
         {
             return false;
         }
 
-        void PlayerState.Move(Context context)
+        public void Move(Context context)
         {
             throw new NotImplementedException();
         }
 
-        void PlayerState.ReduceHealth(Context context)
+        public void ReduceHealth(Context context)
         {
             throw new NotImplementedException();
         }
 
-        void PlayerState.Undo(Context context)
+        public void Undo(Context context)
         {
             throw new NotImplementedException();
         }

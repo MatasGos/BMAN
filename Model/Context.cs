@@ -7,7 +7,7 @@ namespace Model
 {
     public class Context
     {
-        PlayerState currentState;
+        IPlayerState currentState;
         private MovementControl movementControl;
         public Player player;
 
@@ -28,7 +28,7 @@ namespace Model
             return player;
         }    
 
-        public void SetState(PlayerState state)
+        public void SetState(IPlayerState state)
         {
             currentState = state;
         }

@@ -4,19 +4,19 @@ using System.Text;
 
 namespace Model
 {
-    class Alive : PlayerState
+    public class Alive : IPlayerState
     {
         public bool IsAlive(Context context)
         {
             return true;
         }
 
-        void PlayerState.Move(Context context)
+        public void Move(Context context)
         {
             context.GetMovement().Move();
         }
 
-        void PlayerState.ReduceHealth(Context context)
+        public void ReduceHealth(Context context)
         {
             if (context.GetPlayer().health > 0)
                 context.GetPlayer().health -= 1;

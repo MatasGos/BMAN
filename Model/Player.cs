@@ -123,14 +123,17 @@ namespace Model
             context.Client(id).SendCoreAsync("SendData", new object[] { jsonPlayers, jsonMap, health, jsonScoreboard, roundEnded });
             //context.Client(id).SendAsync("SendData", jsonPlayers, jsonMap, health);
         }
+
         public void Move()
         {
             stateContext.Move();
         }
+
         public void Undo()
         {
             stateContext.Undo();
         }
+
         public void SetCommand(ICommand command)
         {
             this.movementControl.AddCommand(command);
@@ -155,6 +158,7 @@ namespace Model
         {
             return stateContext.IsAlive();
         }
+
         public void ResetPlayer()
         {
             InitializeValues();
@@ -176,6 +180,7 @@ namespace Model
             stateContext = new Context(movementControl, this);
             stateContext.SetState(new Alive());
         }
+
         private void InitializePlayerStructure()
         {
             IPlayerStructure playerStructure = null;

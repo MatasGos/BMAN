@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model
 {
-    class Dead : PlayerState
+    class Dead : IPlayerState
     {
         public bool IsAlive(Context context)
         {
