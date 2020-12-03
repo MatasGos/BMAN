@@ -17,7 +17,11 @@ namespace Demo
             //BuilderDemo();
             //SingletonDemo();
             //StrategyDemo();
-            IteratorDemo();
+            //IteratorDemo();
+            string a = "a";
+            if (true)
+                a = "b";
+            Console.WriteLine(a);
         }
 
         public static void IteratorDemo()

@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IfBracesAnalizer", "IfBracesAnalizer\IfBracesAnalizer\IfBracesAnalizer.csproj", "{55D09219-B946-49C2-8B89-79B1CBB6544D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IfBracesAnalizer.CodeFixes", "IfBracesAnalizer\IfBracesAnalizer.CodeFixes\IfBracesAnalizer.CodeFixes.csproj", "{66AB25E9-D0F8-4D3A-9F3B-101F06E18B0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IfBracesAnalizer.Package", "IfBracesAnalizer\IfBracesAnalizer.Package\IfBracesAnalizer.Package.csproj", "{9AE15756-AB40-4173-BC2A-7E60CD3F72A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IfBracesAnalizer.Test", "IfBracesAnalizer\IfBracesAnalizer.Test\IfBracesAnalizer.Test.csproj", "{DE14BB6D-3C26-42B3-9177-33DE3C906E44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IfBracesAnalizer.Vsix", "IfBracesAnalizer\IfBracesAnalizer.Vsix\IfBracesAnalizer.Vsix.csproj", "{DF7D48E0-9E4E-43F6-A51A-D166236C13A8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55D09219-B946-49C2-8B89-79B1CBB6544D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55D09219-B946-49C2-8B89-79B1CBB6544D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55D09219-B946-49C2-8B89-79B1CBB6544D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55D09219-B946-49C2-8B89-79B1CBB6544D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66AB25E9-D0F8-4D3A-9F3B-101F06E18B0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66AB25E9-D0F8-4D3A-9F3B-101F06E18B0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66AB25E9-D0F8-4D3A-9F3B-101F06E18B0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66AB25E9-D0F8-4D3A-9F3B-101F06E18B0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AE15756-AB40-4173-BC2A-7E60CD3F72A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE15756-AB40-4173-BC2A-7E60CD3F72A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AE15756-AB40-4173-BC2A-7E60CD3F72A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AE15756-AB40-4173-BC2A-7E60CD3F72A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE14BB6D-3C26-42B3-9177-33DE3C906E44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE14BB6D-3C26-42B3-9177-33DE3C906E44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE14BB6D-3C26-42B3-9177-33DE3C906E44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE14BB6D-3C26-42B3-9177-33DE3C906E44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF7D48E0-9E4E-43F6-A51A-D166236C13A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF7D48E0-9E4E-43F6-A51A-D166236C13A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF7D48E0-9E4E-43F6-A51A-D166236C13A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF7D48E0-9E4E-43F6-A51A-D166236C13A8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {057A68B7-D516-4B5F-9850-EB160DA1502B}
+	EndGlobalSection
+EndGlobal
