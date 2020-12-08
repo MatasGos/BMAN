@@ -71,6 +71,7 @@ namespace Model
             int[] playerCenter = getCenterPlayer(new int[] { player.x, player.y });
             int[] playerTile = getTile(playerCenter[0], playerCenter[1]);
             Unit playerStandsOn = units[playerTile[0], playerTile[1]];
+            //Explosive playerStandsOnMine = explosions[playerTile[0], playerTile[1]];
             switch (playerStandsOn)
             {
                 case Boost x:
@@ -79,9 +80,16 @@ namespace Model
                 case Teleporter x:
                     Teleport(player, x);
                     break;
+                case Mine x:
+                    RegularMineExplosion(player, x, time);
+                    break;
+                case SuperMine x:
+                    SuperMineExplosion(player, x, time);
+                    break;
                 default:
                     break;
             }
+            
             List<int[]> playerCorners = new List<int[]>();
             playerCorners.Add(new int[] { player.x, player.y });
             playerCorners.Add(new int[] { player.x, player.y + 14});
@@ -103,6 +111,7 @@ namespace Model
                         break;
                 }
             }
+            
 
         }
 
@@ -110,6 +119,22 @@ namespace Model
         {
             units[playerStandsOn.x, playerStandsOn.y] = null;
             playerStandsOn.algorithm.UseBoost(player, units);
+        }
+        public void RegularMineExplosion(Player player, Mine playerStandsOn, double time)
+        {
+            if (player != playerStandsOn.GetOwner())
+            {
+                units[playerStandsOn.x, playerStandsOn.y] = null;
+                explosions[playerStandsOn.x, playerStandsOn.y] = new Explosion(playerStandsOn.x, playerStandsOn.y, time, playerStandsOn.GetOwner());
+            }
+        }
+        public void SuperMineExplosion(Player player, SuperMine playerStandsOn, double time)
+        {
+            if (player != playerStandsOn.GetOwner())
+            {
+                units[playerStandsOn.x, playerStandsOn.y] = null;
+                explosions[playerStandsOn.x, playerStandsOn.y] = new SuperExplosion(playerStandsOn.x, playerStandsOn.y, time, playerStandsOn.GetOwner());
+            }
         }
 
         public void PlayerExplode(Player player, double time, ScoreboardTemplate scoreboard, Player bombOwner)

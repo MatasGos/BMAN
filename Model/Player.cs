@@ -20,6 +20,8 @@ namespace Model
         public int explosionPower { get; set; } //Player's bomb explosion power/radius
         public int health { get; set; }         //Player's health
 
+
+
         public double invincibleUntil { get; set; }
         public int bombCount { get; set; }      //Number of bombs that the player can place at once
         //public List<Boost> boosts { get; set; } //List of collected boosts
@@ -32,6 +34,7 @@ namespace Model
         public string action { get; set; }
         public string actionSecondary { get; set; }
 
+        private int[] previousBlock;
         private MovementControl movementControl;
 
         private Context stateContext;
@@ -60,6 +63,15 @@ namespace Model
             //TODO: check which player it is and where to spawn him
 
             InitializePlayerStructure();
+        }
+        public void SetPreviousBlock(int[] previousBlock)
+        {
+            this.previousBlock = previousBlock;
+        }
+
+        public int[] GetPreviousBlock(int[] previousBlock)
+        {
+            return previousBlock;
         }
 
         public int[] getPos()
