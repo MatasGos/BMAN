@@ -109,7 +109,7 @@ namespace Model
                 {
                     Random rand = new Random();
                     int n = rand.Next(100);
-                    if (n < 30)
+                    if (n < 25)
                     {
                         units[x, y] = PickBoostStrategy(x, y);
                     }
@@ -129,23 +129,12 @@ namespace Model
         {
             Boost boost = new Boost(x, y);
             Random rand = new Random();
-            int n = rand.Next(150);
+            int n = rand.Next(115);
             if (n < 25)
             {
                 boost.boostType = "speed";
                 boost.algorithm = new SpeedBoostAlgorithm();
             }
-            else if (n >= 25 && n < 100)
-            {
-                boost.boostType = "teleporter";
-                boost.algorithm = new TeleporterChangeBoostAlgorithm();
-            }
-            else if (n >= 100 && n < 150)
-            {
-                boost.boostType = "boost";
-                boost.algorithm = new BoostRandomizeBoostAlgorithm();
-            }
-            /*
             else if (n >= 25 && n < 50)
             {
                 boost.boostType = "bomb";
@@ -161,23 +150,26 @@ namespace Model
                 boost.boostType = "explosion";
                 boost.algorithm = new ExplosionRangeBoostAlgorithm();
             }
-            else if (n >= 100 && n < 110)
+            else if (n >= 100 && n < 105)
             {
                 boost.boostType = "teleporter";
                 boost.algorithm = new TeleporterChangeBoostAlgorithm();
             }
-            else if (n >= 110 && n < 120)
+            else if (n >= 105 && n < 110)
             {
                 boost.boostType = "boost";
                 boost.algorithm = new BoostRandomizeBoostAlgorithm();
-            }*/
+            }
+            else if (n >= 110 && n < 115)
+            {
+                boost.boostType = "armageddon";
+                boost.algorithm = new ArmageddonBoostAlgorithm();
+            }
             return boost;
         }
 
         private void PlaceSuperExplosion(int xTile, int yTile, int explosionPower, double placeTime, ExplosiveAbstractFactory factory, Player owner)
         {
-            //explosions[xTile, yTile] = factory.CreateExplosion(xTile, yTile, placeTime);
-
             for (int x = Math.Max(1, xTile - explosionPower); x <= Math.Min(xTile + explosionPower, xSize - 2); x++)
             {
                 for (int y = Math.Max(1, yTile - explosionPower); y <= Math.Min(yTile + explosionPower, ySize - 2); y++)
