@@ -29,14 +29,17 @@ namespace Client
         {
             // FORM AND DATA INITIALIZATION
             InitializeComponent();  //Initialize form components
-            initializeValues();     //Initialize keypress booleans
-
-            connection = new HubConnectionBuilder().WithUrl("http://localhost:5000/gamehub").Build();   //Set up the hub connection
+            InitializeValues();     //Initialize keypress booleans
 
             game = new Game<Bitmap, Color>();      //Initialize the game logic object
             timer1.Enabled = true;  //Enable timer that draws the map
 
             richTextBox1.AppendText("BMAN v1", Color.Purple);
+        }
+
+        public void InitializeConnection()
+        {
+            connection = new HubConnectionBuilder().WithUrl($"http://{ textBox4.Text }:5000/gamehub").Build();   //Set up the hub connection
 
             // RECEIVING MESSAGES
             //Receive another player's login message
@@ -57,7 +60,7 @@ namespace Client
                 game.players = JsonConvert.DeserializeObject<List<Player>>(jsonPlayers, settings);
                 game.map = JsonConvert.DeserializeObject<Map>(jsonMap, settings);
 
-                switch(roundEnded)
+                switch (roundEnded)
                 {
                     case 0:
                         PrintScoreboardRound(new ScoreboardTemplateProxy(JsonConvert.DeserializeObject<ScoreboardRound>(scoreboard, settings)));
@@ -86,7 +89,7 @@ namespace Client
                     labelHealth.Visible = true;
                     labelHealthValue.Visible = true;
                     label5.Visible = true;
-                 
+
 
                     game.drawBackground();
                 }
@@ -104,7 +107,7 @@ namespace Client
         }
 
         //Initialize default values
-        public void initializeValues()
+        public void InitializeValues()
         {
             _keyTop = false;
             _keyBot = false;
@@ -177,10 +180,11 @@ namespace Client
         //Login button
         private async void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text != "")
+            if (textBox1.Text != "" && textBox4.Text != "")
             {
                 try
                 {
+                    InitializeConnection();
                     await connection.StartAsync();
                     username = textBox1.Text;
                     await connection.InvokeAsync("SendLoginMessage", username);
@@ -191,6 +195,8 @@ namespace Client
                     textBox1.Visible = false;
                     button3.Enabled = true;
                     button3.Visible = true;
+                    textBox4.Enabled = false;
+                    textBox4.Visible = false;
                 }
                 catch (Exception ex)
                 {
