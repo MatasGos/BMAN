@@ -51,16 +51,64 @@ namespace Model
                 switch (command)
                 {
                     case "placeBomb":
-                        toPlace = factory.CreateBomb(playerTile[0], playerTile[1], player.explosionPower, placeTime, player);
+                        toPlace = factory.CreateBomb(playerTile[0], playerTile[1], player.explosionPower, placeTime, player);              
                         break;
                     case "placeMine":
-                        toPlace = factory.CreateMine(playerTile[0], playerTile[1], player);
+                        toPlace = factory.CreateMine(playerTile[0], playerTile[1], player);                    
                         break;
                     default:
                         throw new Exception();
                 }
-
-                units[playerTile[0], playerTile[1]] = toPlace;
+                bool canPlace = true;
+                switch(toPlace)
+                {
+                    case Bomb x:
+                        if (player.bombCount <= 0)
+                        {
+                            canPlace = false;
+                        }
+                        else
+                        {
+                            player.bombCount--;
+                        }
+                        break;
+                    case SuperBomb x:
+                        if (player.superBombCount <= 0)
+                        {
+                            canPlace = false;
+                        }
+                        else
+                        {
+                            player.superBombCount--;
+                        }
+                        break;
+                    case Mine x:
+                        if (player.mineCount <= 0)
+                        {
+                            canPlace = false;
+                        }
+                        else
+                        {
+                            player.mineCount--;
+                        }
+                        break;
+                    case SuperMine x:
+                        if (player.superMineCount <= 0)
+                        {
+                            canPlace = false;
+                        }
+                        else
+                        {
+                            player.superMineCount--;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                if (canPlace)
+                {
+                    units[playerTile[0], playerTile[1]] = toPlace;
+                }
             }
 
             player.action = "";

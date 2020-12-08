@@ -49,6 +49,7 @@ namespace Model
 
                         if (bomb.detonationTime < time)
                         {
+                            bomb.GetOwner().bombCount++;
                             units[x, y] = null;
                             PlaceRegularExplosion(x, y, bomb.explosionPower, time, factory, bomb.GetOwner());
                         }
@@ -60,6 +61,7 @@ namespace Model
 
                         if (bomb.detonationTime < time)
                         {
+                            bomb.GetOwner().superBombCount++;
                             units[x, y] = null;
                             PlaceSuperExplosion(x, y, bomb.explosionPower, time, factory, bomb.GetOwner());
                         }

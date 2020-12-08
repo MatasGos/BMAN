@@ -25,6 +25,9 @@ namespace Model
         public double invincibleUntil { get; set; }
         public int bombCount { get; set; }      //Number of bombs that the player can place at once
         //public List<Boost> boosts { get; set; } //List of collected boosts
+        public int superBombCount { get; set; }
+        public int mineCount { get; set; }
+        public int superMineCount { get; set; }
 
         public bool hasSuperbombs;
 
@@ -182,6 +185,9 @@ namespace Model
         {
             this.health = 5;
             this.bombCount = 1;
+            this.superBombCount = 1;
+            this.mineCount = 10;
+            this.superMineCount = 5;
             this.action = "";
             this.speed = 3;
             this.explosionPower = 2;
