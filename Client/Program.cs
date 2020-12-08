@@ -14,6 +14,9 @@ namespace Client
         [STAThread]
         static void Main()
         {
+            //Make custom fonts work
+            Application.SetCompatibleTextRenderingDefault(true);
+
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

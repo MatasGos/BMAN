@@ -63,9 +63,9 @@ namespace Client {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] arcadeFont {
+        internal static byte[] arcadeClassicFont {
             get {
-                object obj = ResourceManager.GetObject("arcadeFont", resourceCulture);
+                object obj = ResourceManager.GetObject("arcadeClassicFont", resourceCulture);
                 return ((byte[])(obj));
             }
         }

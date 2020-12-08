@@ -7,7 +7,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,6 +26,22 @@ namespace Client
 
         //Json settings
         JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+
+        //Custom font
+        private static PrivateFontCollection pfc = new PrivateFontCollection();
+        private static uint cFonts = 0;
+
+        [DllImport("gdi32.dll")]
+        private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, [In] ref uint pcFonts);
+
+        private static void AddFont(byte[] fontdata)
+        {
+            System.IntPtr dataPointer = Marshal.AllocCoTaskMem(fontdata.Length);
+            Marshal.Copy(fontdata, 0, dataPointer, (int)fontdata.Length);
+            AddFontMemResourceEx(dataPointer, (uint)fontdata.Length, IntPtr.Zero, ref cFonts);
+            cFonts += 1;
+            pfc.AddMemoryFont(dataPointer, (int)fontdata.Length);
+        }
 
         public ClientForm()
         {
@@ -132,6 +150,10 @@ namespace Client
 
             textBox2.KeyPress += TextBox2_KeyPress;
             richTextBox1.TextChanged += RichTextBox1_TextChanged;
+
+            //Use custom font
+            AddFont(Images.arcadeClassicFont);
+            labelHealth.Font = new Font(pfc.Families[0], 16);
         }
 
         private void RichTextBox1_TextChanged(object sender, EventArgs e)
