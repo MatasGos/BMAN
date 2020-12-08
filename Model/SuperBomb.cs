@@ -10,7 +10,7 @@ namespace Model
 
         public SuperBomb(int x, int y, int explosionPower, double placeTime, Player owner) : base(x, y, owner)
         {
-            isSolid = false;
+            isSolid = true;
             timeToExplosion = 3000.0;
             this.explosionPower = explosionPower;
             detonationTime = placeTime + timeToExplosion;

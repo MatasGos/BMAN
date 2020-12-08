@@ -34,7 +34,7 @@ namespace Model
         public string action { get; set; }
         public string actionSecondary { get; set; }
 
-        private int[] previousBlock;
+        private List<int[]> previousBlock;
         private MovementControl movementControl;
 
         private Context stateContext;
@@ -64,12 +64,12 @@ namespace Model
 
             InitializePlayerStructure();
         }
-        public void SetPreviousBlock(int[] previousBlock)
+        public void SetPreviousBlock(List<int[]> previousBlock)
         {
             this.previousBlock = previousBlock;
         }
 
-        public int[] GetPreviousBlock(int[] previousBlock)
+        public List<int[]> GetPreviousBlock()
         {
             return previousBlock;
         }
@@ -191,6 +191,11 @@ namespace Model
             this.invincibleUntil = 0;
             stateContext = new Context(movementControl, this);
             stateContext.SetState(new Alive());
+            this.previousBlock = new List<int[]>();
+            for (int i = 0; i < 4; i++)
+            {
+                previousBlock.Add(new int[2]);
+            }
         }
 
         private void InitializePlayerStructure()

@@ -10,7 +10,7 @@ namespace Model
 
         public Bomb(int x, int y, int explosionPower, double placeTime, Player owner) : base(x, y, owner)
         {
-            isSolid = false;
+            isSolid = true;
             timeToExplosion = 2000.0;
             this.explosionPower = explosionPower;
             detonationTime = placeTime + timeToExplosion;
