@@ -21,9 +21,22 @@ namespace Server
         public static bool canStartRound = true;
         public static ScoreboardTemplate scoreboard = new ScoreboardMatch();
 
+        public static ILogMediator mediator = new LogMediator();
+        public static ConsoleLogger consoleLog = new ConsoleLogger(mediator);
+        public static LogPlayer playerLog = new LogPlayer(mediator);
+        public static FileLogger fileLog = new FileLogger(mediator);
+
+        public static void InitializeLogger()
+        {
+            mediator.addLogReceiver(consoleLog);
+            mediator.addLogSender(playerLog);
+            mediator.addLogReceiver(fileLog);
+            playerLog.sendMessage("Bandom");
+        }
+
         public static void AddPlayer(string id, string username)
         {
-            Player p = new Player(id, username, playerList.getCount());
+            Player p = new Player(id, username, playerList.getCount(), playerLog);
             playerList.addPlayer(p);
             scoreboard.AddPlayer(p);
         }

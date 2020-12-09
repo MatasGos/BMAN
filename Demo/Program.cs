@@ -17,7 +17,25 @@ namespace Demo
             //BuilderDemo();
             //SingletonDemo();
             //StrategyDemo();
-            IteratorDemo();
+            //IteratorDemo();
+            MediatorDemo();
+        }
+
+        public static void MediatorDemo()
+        {
+            ILogMediator mediator = new LogMediator();
+
+            ConsoleLogger consoleLog = new ConsoleLogger(mediator);
+
+            LogPlayer playerLog = new LogPlayer(mediator);
+
+            mediator.addLogReceiver(consoleLog);
+            mediator.addLogSender(playerLog);
+
+            playerLog.sendMessage("Player killed Player 2");
+
+            consoleLog.sendMessage("error: console error");
+
         }
 
         public static void IteratorDemo()

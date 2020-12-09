@@ -20,7 +20,7 @@ namespace Model
         public int explosionPower { get; set; } //Player's bomb explosion power/radius
         public int health { get; set; }         //Player's health
 
-
+        public LogPlayer playerLog { get; set; }
 
         public double invincibleUntil { get; set; }
         public int bombCount { get; set; }      //Number of bombs that the player can place at once
@@ -62,11 +62,19 @@ namespace Model
             this.username = username;
             this.num = (PlayerNum)num;
 
+
             //DEFAULT VALUES
             //TODO: check which player it is and where to spawn him
 
             InitializePlayerStructure();
         }
+
+        public Player(string id, string username, int num, LogPlayer playerLog) : this(id, username, num)
+        {
+            this.playerLog = playerLog;
+            playerLog.sendMessage($"Player { username } created");
+        }
+
         public void SetPreviousBlock(List<int[]> previousBlock)
         {
             this.previousBlock = previousBlock;
