@@ -7,7 +7,7 @@ namespace Model
     public class ScoreboardMatch : ScoreboardTemplate
     {
 
-        protected override IDictionary<string, string> TextStyle()
+        protected override sealed IDictionary<string, string> TextStyle()
         {
             IDictionary<string, string> result = new Dictionary<string, string>();
             foreach (var score in playerScores)
@@ -23,7 +23,7 @@ namespace Model
             }
             return result;
         }
-        protected override List<Tuple<int, string, string>> ToStringTable(IDictionary<string, string> styles)
+        protected override sealed List<Tuple<int, string, string>> ToStringTable(IDictionary<string, string> styles)
         {
             List<Tuple<int, string, string>> table = new List<Tuple<int, string, string>>();
             foreach(var score in playerScores)

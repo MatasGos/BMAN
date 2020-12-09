@@ -21,7 +21,8 @@ namespace Demo
             //StrategyDemo();
             //IteratorDemo();
             //MediatorDemo();
-            FlyweightDemo();
+            TemplateDemo();
+            //FlyweightDemo();
         }
 
         public static void MediatorDemo()
@@ -243,6 +244,44 @@ namespace Demo
             }
             sw.Stop();
             Console.WriteLine("Time to read " + countOfIterations + " elements with flyweight " + sw.ElapsedMilliseconds + "ms");
+        }
+
+        public static void TemplateDemo()
+        {
+            ScoreboardTemplate templateMatch = new ScoreboardMatch();
+            ScoreboardTemplate templateRound = new ScoreboardRound();
+
+            Player player1 = new Player("aaaa1", "Player1", 0);
+            Player player2 = new Player("aaaa2", "Player2", 1);
+            Player player3 = new Player("aaaa3", "Player3", 2);
+
+            templateMatch.AddPlayer(player1);
+            templateMatch.AddPlayer(player2);
+            templateMatch.AddPlayer(player3);
+
+            templateRound.AddPlayer(player1);
+            templateRound.AddPlayer(player2);
+            templateRound.AddPlayer(player3);
+
+            templateMatch.AddScore(player1, 1);
+            templateMatch.AddScore(player1, 1);
+            templateMatch.AddScore(player2, 3);
+
+            templateRound.AddScore(player1, 1);
+            templateRound.AddScore(player1, 1);
+            templateRound.AddScore(player2, 1);
+
+            Console.WriteLine("Match template:");
+            foreach (var x in templateMatch.FormTable())
+            {
+                Console.WriteLine(x.Item2);
+            }
+            Console.WriteLine("Round template:");
+            foreach (var x in templateRound.FormTable())
+            {
+                Console.WriteLine(x.Item2);
+            }
+
         }
     }
 }
