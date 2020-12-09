@@ -19,13 +19,20 @@ namespace Server.Hubs
         {
             //TODO: Check if the game has already started and dont allow to connect
             //TODO: Check if more than 4 players are trying to connect
-            Server.AddPlayer(Context.ConnectionId, username);
+            if (!Server.CheckUsernames(username))
+            {
+                Server.AddPlayer(Context.ConnectionId, username);
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(username + " has logged in.");
-            Console.ResetColor();
-
-            await Clients.Others.SendAsync("ReceiveLoginMessage", username);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(username + " has logged in.");
+                Console.ResetColor();
+                await Clients.Caller.SendAsync("SuccessfulLogin", "temp");
+                await Clients.Others.SendAsync("ReceiveLoginMessage", username);
+            }
+            else
+            {
+                await Clients.Caller.SendAsync("ReceiveMessage", "Server", "This username already exists in the game");
+            }
         }
 
         //Sends a message to everyone

@@ -20,12 +20,16 @@ namespace Server
         public static List<Map> mapCache = new List<Map>();
         public static bool canStartRound = true;
         public static ScoreboardTemplate scoreboard = new ScoreboardMatch();
+        public static object _locker = new object();
 
         public static void AddPlayer(string id, string username)
         {
-            Player p = new Player(id, username, playerList.getCount());
-            playerList.addPlayer(p);
-            scoreboard.AddPlayer(p);
+            lock (_locker)
+            {
+                Player p = new Player(id, username, playerList.getCount());
+                playerList.addPlayer(p);
+                scoreboard.AddPlayer(p);
+            }
         }
 
         public static List<Player> GetPlayers()
@@ -36,16 +40,37 @@ namespace Server
         public static Player GetPlayerById(string id)
         {
             Player toReturn = null;
-            for(Iterator iter = playerList.getIterator(); iter.hasNext();)
-            {
-                Player p = (Player)iter.next();
-                if (p.id == id)
+            lock (_locker)
+            {                
+                for (Iterator iter = playerList.getIterator(); iter.hasNext();)
                 {
-                    toReturn = p;
-                    break;
+                    Player p = (Player)iter.next();
+                    if (p.id == id)
+                    {
+                        toReturn = p;
+                        break;
+                    }
                 }
             }
             return toReturn;
+        }
+
+        public static bool CheckUsernames(string username)
+        {
+            bool usernameExists = false;
+            lock(_locker)
+            {
+                for (Iterator iter = playerList.getIterator(); iter.hasNext();)
+                {
+                    Player p = (Player)iter.next();
+                    if (p.username == username)
+                    {
+                        usernameExists = true;
+                        break;
+                    }
+                }
+            }
+            return usernameExists;
         }
 
         public static void UpdatePlayerSkin(string contextId, string skin)
