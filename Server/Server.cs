@@ -35,14 +35,20 @@ namespace Server
             playerLog.sendMessage("Bandom");
         }
 
-        public static void AddPlayer(string id, string username)
+        public static bool AddPlayer(string id, string username)
         {
+            bool success = false;
             lock (_locker)
             {
-                Player p = new Player(id, username, playerList.getCount(), playerLog);
-                playerList.addPlayer(p);
-                scoreboard.AddPlayer(p);
+                if (playerList.getCount() < 4)
+                {
+                    Player p = new Player(id, username, playerList.getCount(), playerLog);
+                    playerList.addPlayer(p);
+                    scoreboard.AddPlayer(p);
+                    success = true;
+                }
             }
+            return success;
         }
 
         public static List<Player> GetPlayers()

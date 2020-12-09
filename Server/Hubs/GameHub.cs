@@ -21,13 +21,18 @@ namespace Server.Hubs
             //TODO: Check if more than 4 players are trying to connect
             if (!Server.CheckUsernames(username))
             {
-                Server.AddPlayer(Context.ConnectionId, username);
-
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine(username + " has logged in.");
-                Console.ResetColor();
-                await Clients.Caller.SendAsync("SuccessfulLogin", "temp");
-                await Clients.Others.SendAsync("ReceiveLoginMessage", username);
+                if (Server.AddPlayer(Context.ConnectionId, username))
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(username + " has logged in.");
+                    Console.ResetColor();
+                    await Clients.Caller.SendAsync("SuccessfulLogin", "temp");
+                    await Clients.Others.SendAsync("ReceiveLoginMessage", username);
+                }
+                else
+                {
+                    await Clients.Caller.SendAsync("ReceiveMessage", "Server", "Player limit reached");
+                }                
             }
             else
             {
