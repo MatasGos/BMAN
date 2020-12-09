@@ -13,7 +13,7 @@ namespace Model
             this.mediator = mediator;
             type = "Receiver";
 
-            string file = "Log.txt";
+            string file = @"..\..\..\Log.txt";
 
             if (File.Exists(file))
             {
