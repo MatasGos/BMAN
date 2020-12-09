@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model
 {
-    class Memento
+    public class Memento
     {
         private string state;
 
