@@ -66,12 +66,15 @@ namespace Model
                             return "Skin saved at index " + player.SavePlayerStructure();
                         case "load":
                             int parsedInt;
-                            if (int.TryParse(splitCommand[1], out parsedInt))
+                            if (splitCommand.Length > 1)
                             {
-                                if (parsedInt < player.caretaker.GetLength())
+                                if (int.TryParse(splitCommand[1], out parsedInt))
                                 {
-                                    player.UndoPlayerStructure(parsedInt);
-                                    return "";
+                                    if (parsedInt < player.caretaker.GetLength())
+                                    {
+                                        player.UndoPlayerStructure(parsedInt);
+                                        return "";
+                                    }
                                 }
                             }
                             return ("Wrong command. Read manual");
