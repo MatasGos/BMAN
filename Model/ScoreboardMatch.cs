@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model
 {
-    public class ScoreboardMatch : ScoreboardTemplate
+    public sealed class ScoreboardMatch : ScoreboardTemplate
     {
 
         protected override sealed IDictionary<string, string> TextStyle()
