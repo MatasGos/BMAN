@@ -59,6 +59,7 @@ namespace Model
                                     }
                                 }
                             }
+                            Console.WriteLine(skinCode);
                             player.UpdatePlayerStructure(skinCode);
                             return "";
                         case "save":

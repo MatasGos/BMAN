@@ -59,6 +59,8 @@ namespace Model
         public Player()
         {
             InitializeValues();
+            originator = new Originator();
+            caretaker = new Caretaker();
         }
 
         public Player(string id, string username, int num) : this()
