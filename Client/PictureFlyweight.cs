@@ -31,7 +31,7 @@ namespace Client
             else            
             {
                 A picObject = GetImage(type);
-                Console.WriteLine(sizex + " " + sizey);
+                //Console.WriteLine(sizex + " " + sizey);
                 GraphicsAdapter<A, B> pic = graphics.CreateGraphicsObject(sizex, sizey);
                 pic.SetImage(picObject);
                 picToReturn = pic.GetColorArray();

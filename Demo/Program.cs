@@ -2,6 +2,8 @@
 using System.Drawing;
 using Model;
 using Client;
+using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace Demo
 {
@@ -18,7 +20,8 @@ namespace Demo
             //SingletonDemo();
             //StrategyDemo();
             //IteratorDemo();
-            MediatorDemo();
+            //MediatorDemo();
+            FlyweightDemo();
         }
 
         public static void MediatorDemo()
@@ -36,7 +39,10 @@ namespace Demo
 
             consoleLog.sendMessage("error: console error");
 
+            
         }
+
+
 
         public static void IteratorDemo()
         {
@@ -203,6 +209,40 @@ namespace Demo
                 }
                 Console.WriteLine();
             }
+        }
+
+        public static void FlyweightDemo()
+        {
+            int countOfIterations = 1000;
+            Stopwatch sw = new Stopwatch();
+            string[] pictures = { "wall", "bomb", "box" };
+            var graphics = new GraphicsRepository<Bitmap, Color>();
+            var picturesFlyweight = new PictureFlyweight<Bitmap, Color>();
+            sw.Start();
+            Color[,] temp;
+            for (int i = 0; i < countOfIterations; i++)
+            {
+                GraphicsAdapter<Bitmap, Color> pic = graphics.CreateGraphicsObject(25, 25);
+                pic.SetImage(Images.wall);
+                temp = pic.GetColorArray();
+                pic.SetImage(Images.bomb);
+                temp = pic.GetColorArray();
+                pic.SetImage(Images.box);
+                temp = pic.GetColorArray();
+            }
+            sw.Stop();
+            Console.WriteLine("Time to read " + countOfIterations + " elements without flyweight " + sw.ElapsedMilliseconds + "ms");
+            sw.Reset();
+            sw.Start();
+            for (int i = 0; i < countOfIterations; i++)
+            {
+                for (int j  = 0; j < pictures.Length; j++)
+                {
+                    temp = picturesFlyweight.GetPictureArray(pictures[j]);
+                }
+            }
+            sw.Stop();
+            Console.WriteLine("Time to read " + countOfIterations + " elements with flyweight " + sw.ElapsedMilliseconds + "ms");
         }
     }
 }

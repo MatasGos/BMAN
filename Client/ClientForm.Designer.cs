@@ -95,7 +95,7 @@
             this.textBox1.MaxLength = 15;
             this.textBox1.Name = "textBox1";
             this.textBox1.PlaceholderText = "Enter username";
-            this.textBox1.Size = new System.Drawing.Size(300, 52);
+            this.textBox1.Size = new System.Drawing.Size(300, 43);
             this.textBox1.TabIndex = 6;
             this.textBox1.TabStop = false;
             this.textBox1.Text = "Player";
@@ -122,7 +122,7 @@
             this.textBox2.Location = new System.Drawing.Point(2, 630);
             this.textBox2.Margin = new System.Windows.Forms.Padding(0);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(645, 27);
+            this.textBox2.Size = new System.Drawing.Size(645, 23);
             this.textBox2.TabIndex = 8;
             this.textBox2.TabStop = false;
             // 
@@ -160,7 +160,7 @@
             // 
             this.textBox3.Location = new System.Drawing.Point(12, 12);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(0, 27);
+            this.textBox3.Size = new System.Drawing.Size(0, 23);
             this.textBox3.TabIndex = 11;
             // 
             // labelHealth
@@ -169,7 +169,7 @@
             this.labelHealth.BackColor = System.Drawing.Color.BurlyWood;
             this.labelHealth.Location = new System.Drawing.Point(578, 15);
             this.labelHealth.Name = "labelHealth";
-            this.labelHealth.Size = new System.Drawing.Size(56, 20);
+            this.labelHealth.Size = new System.Drawing.Size(45, 15);
             this.labelHealth.TabIndex = 12;
             this.labelHealth.Text = "Health:";
             this.labelHealth.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -182,7 +182,7 @@
             this.labelHealthValue.BackColor = System.Drawing.Color.BurlyWood;
             this.labelHealthValue.Location = new System.Drawing.Point(629, 15);
             this.labelHealthValue.Name = "labelHealthValue";
-            this.labelHealthValue.Size = new System.Drawing.Size(50, 20);
+            this.labelHealthValue.Size = new System.Drawing.Size(38, 15);
             this.labelHealthValue.TabIndex = 13;
             this.labelHealthValue.Text = "label2";
             this.labelHealthValue.Visible = false;
@@ -193,7 +193,7 @@
             this.label1.BackColor = System.Drawing.Color.BurlyWood;
             this.label1.Location = new System.Drawing.Point(578, 57);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 20);
+            this.label1.Size = new System.Drawing.Size(38, 15);
             this.label1.TabIndex = 14;
             this.label1.Text = "label1";
             this.label1.Visible = false;
@@ -204,7 +204,7 @@
             this.label2.BackColor = System.Drawing.Color.BurlyWood;
             this.label2.Location = new System.Drawing.Point(578, 72);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 20);
+            this.label2.Size = new System.Drawing.Size(38, 15);
             this.label2.TabIndex = 15;
             this.label2.Text = "label2";
             this.label2.Visible = false;
@@ -215,7 +215,7 @@
             this.label3.BackColor = System.Drawing.Color.BurlyWood;
             this.label3.Location = new System.Drawing.Point(578, 87);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 20);
+            this.label3.Size = new System.Drawing.Size(38, 15);
             this.label3.TabIndex = 16;
             this.label3.Text = "label3";
             this.label3.Visible = false;
@@ -226,7 +226,7 @@
             this.label4.BackColor = System.Drawing.Color.BurlyWood;
             this.label4.Location = new System.Drawing.Point(578, 102);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(50, 20);
+            this.label4.Size = new System.Drawing.Size(38, 15);
             this.label4.TabIndex = 17;
             this.label4.Text = "label4";
             this.label4.Visible = false;
@@ -237,7 +237,7 @@
             this.label5.BackColor = System.Drawing.Color.BurlyWood;
             this.label5.Location = new System.Drawing.Point(578, 42);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 20);
+            this.label5.Size = new System.Drawing.Size(81, 15);
             this.label5.TabIndex = 18;
             this.label5.Text = "Round scores:";
             this.label5.Visible = false;
@@ -248,7 +248,7 @@
             this.label6.BackColor = System.Drawing.Color.BurlyWood;
             this.label6.Location = new System.Drawing.Point(578, 130);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(98, 20);
+            this.label6.Size = new System.Drawing.Size(80, 15);
             this.label6.TabIndex = 19;
             this.label6.Text = "Match scores:";
             this.label6.Visible = false;
@@ -259,7 +259,7 @@
             this.label7.BackColor = System.Drawing.Color.BurlyWood;
             this.label7.Location = new System.Drawing.Point(578, 145);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(50, 20);
+            this.label7.Size = new System.Drawing.Size(38, 15);
             this.label7.TabIndex = 20;
             this.label7.Text = "label7";
             this.label7.Visible = false;
@@ -270,7 +270,7 @@
             this.label8.BackColor = System.Drawing.Color.BurlyWood;
             this.label8.Location = new System.Drawing.Point(578, 160);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(50, 20);
+            this.label8.Size = new System.Drawing.Size(38, 15);
             this.label8.TabIndex = 21;
             this.label8.Text = "label8";
             this.label8.Visible = false;
@@ -281,7 +281,7 @@
             this.label9.BackColor = System.Drawing.Color.BurlyWood;
             this.label9.Location = new System.Drawing.Point(578, 175);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(50, 20);
+            this.label9.Size = new System.Drawing.Size(38, 15);
             this.label9.TabIndex = 22;
             this.label9.Text = "label9";
             this.label9.Visible = false;
@@ -292,7 +292,7 @@
             this.label10.BackColor = System.Drawing.Color.BurlyWood;
             this.label10.Location = new System.Drawing.Point(578, 190);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(58, 20);
+            this.label10.Size = new System.Drawing.Size(44, 15);
             this.label10.TabIndex = 23;
             this.label10.Text = "label10";
             this.label10.Visible = false;
@@ -304,7 +304,7 @@
             this.textBox4.MaxLength = 15;
             this.textBox4.Name = "textBox4";
             this.textBox4.PlaceholderText = "Enter ip";
-            this.textBox4.Size = new System.Drawing.Size(300, 52);
+            this.textBox4.Size = new System.Drawing.Size(300, 43);
             this.textBox4.TabIndex = 24;
             this.textBox4.TabStop = false;
             this.textBox4.Text = "localhost";

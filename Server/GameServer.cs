@@ -114,8 +114,10 @@ namespace Server
 
                     ScoreboardTemplateProxy proxy = new ScoreboardTemplateProxy(scoreboard);
                     ScoreboardTemplateProxy serverProxy = new ScoreboardTemplateProxy(Server.scoreboard);
+                    Console.WriteLine("Scoreboard");
                     Console.WriteLine(proxy.Log());
                     Console.WriteLine();
+                    Console.WriteLine("Server scoreboard");
                     Console.WriteLine(serverProxy.Log());
 
                     GameSetup();

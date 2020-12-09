@@ -18,9 +18,18 @@ namespace Model
         {
             map.PlaceExplosive(player, time);
             player.Move();
+            if (player.undoTimer < time)
+            {
+                player.canUndo = true;
+            }
             if (player.actionSecondary == "undo")
             {
-                player.Undo();
+                if (player.canUndo)
+                {
+                    player.Undo();
+                    player.undoTimer = time + 1000*60;
+                    player.canUndo = false;
+                }
                 player.actionSecondary = "";
             }
             map.PickupBoost(player, time, scoreboard);

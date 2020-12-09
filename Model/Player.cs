@@ -37,6 +37,9 @@ namespace Model
         public string action { get; set; }
         public string actionSecondary { get; set; }
 
+        public double undoTimer { get; set; }
+        public bool canUndo { get; set; }
+
         private List<int[]> previousBlock;
         private MovementControl movementControl;
 
@@ -203,6 +206,8 @@ namespace Model
             this.movementControl = new MovementControl();
             this.hasSuperbombs = true;
             this.invincibleUntil = 0;
+            this.undoTimer = 0;
+            this.canUndo = true;
             stateContext = new Context(movementControl, this);
             stateContext.SetState(new Alive());
             this.previousBlock = new List<int[]>();
