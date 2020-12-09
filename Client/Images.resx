@@ -121,17 +121,41 @@
   <data name="arcadeClassicFont" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\arcadeFont.TTF;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="armageddon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\armageddon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="bomb" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\bomb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="boost" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\boost.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="boostArmageddon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\boostArmageddon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boostBomb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\boostBomb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boostExplosion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\boostExplosion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boostHealth" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\boostHealth.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boostMine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\boostMine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="boostRandom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\boostRandom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boostSpeed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\boostSpeed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boostSuperbomb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\boostSuperbomb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boostSupermine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\boostSupermine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boostTeleporter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\boostTeleporter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="box" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\box.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -163,9 +187,6 @@
   <data name="p1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\p1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="shoe" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\shoe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="shoes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\shoes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -189,9 +210,6 @@
   </data>
   <data name="teleporterout" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\teleporterout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="teleporterRandom" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\teleporterRandom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="wall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\wall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

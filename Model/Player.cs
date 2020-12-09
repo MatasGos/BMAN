@@ -195,7 +195,7 @@ namespace Model
         private void InitializeValues()
         {
             this.health = 5;
-            this.bombCount = 1;
+            this.bombCount = 15;
             this.superBombCount = 1;
             this.mineCount = 10;
             this.superMineCount = 5;

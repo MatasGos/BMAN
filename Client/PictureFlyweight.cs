@@ -115,6 +115,56 @@ namespace Client
                     sizex = 25;
                     sizey = 25;
                     break;
+                case "boostArmageddon":
+                    toReturn = (A)(object)Images.boostArmageddon;
+                    sizex = 25;
+                    sizey = 25;
+                    break;
+                case "boostRandom":
+                    toReturn = (A)(object)Images.boostRandom;
+                    sizex = 25;
+                    sizey = 25;
+                    break;
+                case "boostHealth":
+                    toReturn = (A)(object)Images.boostHealth;
+                    sizex = 25;
+                    sizey = 25;
+                    break;
+                case "boostSpeed":
+                    toReturn = (A)(object)Images.boostSpeed;
+                    sizex = 25;
+                    sizey = 25;
+                    break;
+                case "boostTeleporter":
+                    toReturn = (A)(object)Images.boostTeleporter;
+                    sizex = 25;
+                    sizey = 25;
+                    break;
+                case "boostExplosion":
+                    toReturn = (A)(object)Images.boostExplosion;
+                    sizex = 25;
+                    sizey = 25;
+                    break;
+                case "boostBomb":
+                    toReturn = (A)(object)Images.boostBomb;
+                    sizex = 25;
+                    sizey = 25;
+                    break;
+                case "boostMine":
+                    toReturn = (A)(object)Images.boostMine;
+                    sizex = 25;
+                    sizey = 25;
+                    break;
+                case "boostSuperbomb":
+                    toReturn = (A)(object)Images.boostSuperbomb;
+                    sizex = 25;
+                    sizey = 25;
+                    break;
+                case "boostSupermine":
+                    toReturn = (A)(object)Images.boostSupermine;
+                    sizex = 25;
+                    sizey = 25;
+                    break;
                 default:
                     throw new NotImplementedException();
             }

@@ -217,7 +217,50 @@ namespace Client
                                 picColor = pictures.GetPictureArray("supermine");
                                 break;
                             case Boost x:
-                                picColor = pictures.GetPictureArray("boost");
+                                if (x.boostType == "speed")
+                                {
+                                    picColor = pictures.GetPictureArray("boostSpeed");
+                                }
+                                else if (x.boostType == "bomb")
+                                {
+                                    picColor = pictures.GetPictureArray("boostBomb");
+                                }
+                                else if (x.boostType == "health")
+                                {
+                                    picColor = pictures.GetPictureArray("boostHealth");
+                                }
+                                else if (x.boostType == "explosion")
+                                {
+                                    picColor = pictures.GetPictureArray("boostExplosion");
+                                }
+                                else if (x.boostType == "teleporter")
+                                {
+                                    picColor = pictures.GetPictureArray("boostTeleporter");
+                                }
+                                else if (x.boostType == "boost")
+                                {
+                                    picColor = pictures.GetPictureArray("boostRandom");
+                                }
+                                else if (x.boostType == "armageddon")
+                                {
+                                    picColor = pictures.GetPictureArray("boostArmageddon");
+                                }
+                                else if (x.boostType == "mine")
+                                {
+                                    picColor = pictures.GetPictureArray("boostMine");
+                                }
+                                else if (x.boostType == "supermine")
+                                {
+                                    picColor = pictures.GetPictureArray("boostSuperbomb");
+                                }
+                                else if (x.boostType == "superbomb")
+                                {
+                                    picColor = pictures.GetPictureArray("boostSupermine");
+                                }
+                                else
+                                {
+                                    picColor = pictures.GetPictureArray("boost");
+                                }
                                 break;
                             case Teleporter x:
                                 if (x.HasDestination())

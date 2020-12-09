@@ -61,7 +61,6 @@ namespace Model
 
                         if (bomb.detonationTime < time)
                         {
-                            bomb.GetOwner().superBombCount++;
                             units[x, y] = null;
                             PlaceSuperExplosion(x, y, bomb.explosionPower, time, factory, bomb.GetOwner());
                         }
@@ -111,7 +110,8 @@ namespace Model
                 {
                     Random rand = new Random();
                     int n = rand.Next(100);
-                    if (n < 25)
+                    //FOR TESTING
+                    if (n < 100)
                     {
                         units[x, y] = PickBoostStrategy(x, y);
                     }
@@ -131,7 +131,7 @@ namespace Model
         {
             Boost boost = new Boost(x, y);
             Random rand = new Random();
-            int n = rand.Next(115);
+            int n = rand.Next(135);
             if (n < 25)
             {
                 boost.boostType = "speed";
@@ -152,17 +152,32 @@ namespace Model
                 boost.boostType = "explosion";
                 boost.algorithm = new ExplosionRangeBoostAlgorithm();
             }
-            else if (n >= 100 && n < 105)
+            else if (n >= 100 && n < 110)
+            {
+                boost.boostType = "mine";
+                boost.algorithm = new MineCountBoostAlgorithm();
+            }
+            else if (n >= 110 && n < 115)
+            {
+                boost.boostType = "supermine";
+                boost.algorithm = new SuperMineCountBoostAlgorithm();
+            }
+            else if (n >= 115 && n < 120)
+            {
+                boost.boostType = "superbomb";
+                boost.algorithm = new SuperBombCountBoostAlgorithm();
+            }
+            else if (n >= 120 && n < 125)
             {
                 boost.boostType = "teleporter";
                 boost.algorithm = new TeleporterChangeBoostAlgorithm();
             }
-            else if (n >= 105 && n < 110)
+            else if (n >= 125 && n < 130)
             {
                 boost.boostType = "boost";
                 boost.algorithm = new BoostRandomizeBoostAlgorithm();
             }
-            else if (n >= 110 && n < 115)
+            else if (n >= 130 && n < 135)
             {
                 boost.boostType = "armageddon";
                 boost.algorithm = new ArmageddonBoostAlgorithm();
@@ -172,6 +187,10 @@ namespace Model
 
         private void PlaceSuperExplosion(int xTile, int yTile, int explosionPower, double placeTime, ExplosiveAbstractFactory factory, Player owner)
         {
+            if (explosionPower > 5)
+            {
+                explosionPower = 5;
+            }
             for (int x = Math.Max(1, xTile - explosionPower); x <= Math.Min(xTile + explosionPower, xSize - 2); x++)
             {
                 for (int y = Math.Max(1, yTile - explosionPower); y <= Math.Min(yTile + explosionPower, ySize - 2); y++)

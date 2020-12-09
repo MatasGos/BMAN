@@ -16,7 +16,16 @@ namespace Model
             {
                 explosive.explosionPower = 5;
             }
-            explosive.timeToExplosion = 0.0;
+            if (explosive is Bomb)
+            {
+                Bomb b = (Bomb)explosive;
+                b.detonationTime = 0.0;
+            }
+            else if (explosive is SuperBomb)
+            {
+                SuperBomb sb = (SuperBomb)explosive;
+                sb.detonationTime = 0.0;
+            }
         }
     }
 }
