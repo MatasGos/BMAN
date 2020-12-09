@@ -112,6 +112,12 @@ namespace Server
                         player.update(context, jsonMap, jsonPlayers, jsonScoreboard, 1);
                     }
 
+                    ScoreboardTemplateProxy proxy = new ScoreboardTemplateProxy(scoreboard);
+                    ScoreboardTemplateProxy serverProxy = new ScoreboardTemplateProxy(Server.scoreboard);
+                    Console.WriteLine(proxy.Log());
+                    Console.WriteLine();
+                    Console.WriteLine(serverProxy.Log());
+
                     GameSetup();
                     foreach (Player player in playerList)
                     {

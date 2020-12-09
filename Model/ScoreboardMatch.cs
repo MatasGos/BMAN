@@ -28,7 +28,10 @@ namespace Model
             List<Tuple<int, string, string>> table = new List<Tuple<int, string, string>>();
             foreach(var score in playerScores)
             {
-                table.Add(new Tuple<int, string, string>(score.Value.Item1, String.Format("{0, -" + (longestNameLength + 1).ToString() + "} {1}", score.Key, score.Value.Item2), styles[score.Key]));
+                table.Add(new Tuple<int, string, string>(score.Value.Item1, 
+                    String.Format("{0, -" + (longestNameLength + 1).ToString() + "} {1}", 
+                    score.Key, score.Value.Item2), 
+                    styles[score.Key]));
             }
             return table;
         }
