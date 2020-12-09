@@ -14,20 +14,24 @@ namespace Client
         BitmapData bitmapData;          //Map bitmap data construct with properties
         byte[] pixels;                  //Map pixel data array in bytes
         int depth;                      //How many bits per pixel are there in the map image
+
         public BitmapConcreteAdapter(int x, int y)
         {
             image = new Bitmap(x, y);
         }
+
         public Bitmap GetImageCopy()
         {
             RectangleF cloneRectangle = new RectangleF(0, 0, image.Width, image.Height);
             PixelFormat format = image.PixelFormat;
             return image.Clone(cloneRectangle, format);
         }
+
         public Bitmap GetImage()
         {
             return image;
         }
+
         public void LockBits()
         {
             try
@@ -56,6 +60,7 @@ namespace Client
                 throw ex;
             }
         }
+
         public void UnlockBits()
         {
             try
@@ -71,6 +76,7 @@ namespace Client
                 throw ex;
             }
         }
+
         public Color[,] GetColorArray()
         {
             Color[,] destination = new Color[image.Width, image.Height];
@@ -94,20 +100,26 @@ namespace Client
 
             if (depth == 32) //For 32 bpp set Red, Green, Blue and Alpha
             {
-                pixels[i] = color.B;
-                pixels[i + 1] = color.G;
-                pixels[i + 2] = color.R;
-                pixels[i + 3] = color.A;
+                if (color.A > 50)
+                {
+                    pixels[i] = color.B;
+                    pixels[i + 1] = color.G;
+                    pixels[i + 2] = color.R;
+                    pixels[i + 3] = color.A;
+                }
             }
         }
+
         public int GetWidth()
         {
             return image.Width;
         }
+
         public int GetHeight()
         {
             return image.Height;
         }
+
         public void SetImage(Bitmap image)
         {
             this.image = image;
