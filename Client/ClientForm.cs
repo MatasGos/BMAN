@@ -148,6 +148,7 @@ namespace Client
             _keyLeft = false;
             _keyRight = false;
             _keyBomb = false;
+            _keyMine = false;
             _keySuperMine = false;
             _keySuperBomb = false;
             _keyMessaging = false;
@@ -301,7 +302,7 @@ namespace Client
             {
                 _keyRight = false;
             }
-            if (e.KeyCode == Keys.Q)
+            if (e.KeyCode == Keys.Space)
             {
                 _keyBomb = false;
             }
@@ -342,7 +343,7 @@ namespace Client
             {
                 _keyRight = true;
             }
-            if (e.KeyCode == Keys.Q)
+            if (e.KeyCode == Keys.Space)
             {
                 _keyBomb = true;
             }
