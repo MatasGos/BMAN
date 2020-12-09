@@ -34,7 +34,7 @@ namespace Model
             {
                 foreach (var s in senders)
                 {
-                    s.sendMessage(msg);
+                    s.receiveMessage(msg);
                 }
             }
         }

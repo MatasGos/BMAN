@@ -13,7 +13,9 @@ namespace Model
             this.mediator = mediator;
             type = "Receiver";
 
-            if (File.Exists("Log.txt"))
+            string file = "Log.txt";
+
+            if (File.Exists(file))
             {
                 exists = true;
             }
@@ -23,17 +25,15 @@ namespace Model
         {
             if (exists)
             {
-                using (StreamWriter w = new StreamWriter("Log.txt"))
+                using (StreamWriter w = new StreamWriter(@"..\..\..\Log.txt", true))
                 {
                     w.WriteLine(msg);
                 }
             }
             else
             {
-                Console.WriteLine("Shit broke.");
-                //mediator.broadcastMessage(this, "File not found.");
+                sendMessage("Log file not found.");
             }
-                //sendMessage("Log file not found.");
 
         }
 
