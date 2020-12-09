@@ -23,7 +23,7 @@ namespace Client
 
         private string username;                                        //Player's chosen username
         private bool _keyTop, _keyLeft, _keyRight, _keyBot, _keyBomb, _keyMine, _keyUndo, _keySuperMine, _keySuperBomb, _keyMessaging;   //Booleans to see if the key was pressed at a specific time frame
-
+        private bool connectionStarted = false;
         //Json settings
         JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
@@ -57,7 +57,10 @@ namespace Client
 
         public void InitializeConnection()
         {
-            connection = new HubConnectionBuilder().WithUrl($"http://{ textBox4.Text }:5000/gamehub").Build();   //Set up the hub connection
+            if (connection == null)
+            {
+                connection = new HubConnectionBuilder().WithUrl($"http://{ textBox4.Text }:5000/gamehub").Build();   //Set up the hub connection
+            }
 
             // RECEIVING MESSAGES
             //Receive another player's login message
@@ -121,6 +124,19 @@ namespace Client
             {
                 game.players = JsonConvert.DeserializeObject<List<Player>>(jsonPlayers, settings);
                 game.FormPlayerImages();
+            });
+
+            connection.On<string>("SuccessfulLogin", (message) =>
+            {
+                richTextBox1.AppendText("\nConnected to the server", Color.Green);
+                button1.Enabled = false;
+                button1.Visible = false;
+                textBox1.Enabled = false;
+                textBox1.Visible = false;
+                button3.Enabled = true;
+                button3.Visible = true;
+                textBox4.Enabled = false;
+                textBox4.Visible = false;
             });
         }
 
@@ -205,12 +221,16 @@ namespace Client
             if (textBox1.Text != "" && textBox4.Text != "")
             {
                 try
-                {
-                    InitializeConnection();
-                    await connection.StartAsync();
+                {                    
+                    if (!connectionStarted)
+                    {
+                        InitializeConnection();
+                        connectionStarted = true;
+                        await connection.StartAsync();
+                    }
                     username = textBox1.Text;
                     await connection.InvokeAsync("SendLoginMessage", username);
-                    richTextBox1.AppendText("\nConnected to the server", Color.Green);
+                    /*richTextBox1.AppendText("\nConnected to the server", Color.Green);
                     button1.Enabled = false;
                     button1.Visible = false;
                     textBox1.Enabled = false;
@@ -218,7 +238,7 @@ namespace Client
                     button3.Enabled = true;
                     button3.Visible = true;
                     textBox4.Enabled = false;
-                    textBox4.Visible = false;
+                    textBox4.Visible = false;*/
                 }
                 catch (Exception ex)
                 {

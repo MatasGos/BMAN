@@ -20,6 +20,7 @@ namespace Server
         public static List<Map> mapCache = new List<Map>();
         public static bool canStartRound = true;
         public static ScoreboardTemplate scoreboard = new ScoreboardMatch();
+        public static object _locker = new object();
 
         public static ILogMediator mediator = new LogMediator();
         public static ConsoleLogger consoleLog = new ConsoleLogger(mediator);
@@ -34,11 +35,20 @@ namespace Server
             playerLog.sendMessage("Bandom");
         }
 
-        public static void AddPlayer(string id, string username)
+        public static bool AddPlayer(string id, string username)
         {
-            Player p = new Player(id, username, playerList.getCount(), playerLog);
-            playerList.addPlayer(p);
-            scoreboard.AddPlayer(p);
+            bool success = false;
+            lock (_locker)
+            {
+                if (playerList.getCount() < 4)
+                {
+                    Player p = new Player(id, username, playerList.getCount(), playerLog);
+                    playerList.addPlayer(p);
+                    scoreboard.AddPlayer(p);
+                    success = true;
+                }
+            }
+            return success;
         }
 
         public static List<Player> GetPlayers()
@@ -49,16 +59,37 @@ namespace Server
         public static Player GetPlayerById(string id)
         {
             Player toReturn = null;
-            for(Iterator iter = playerList.getIterator(); iter.hasNext();)
-            {
-                Player p = (Player)iter.next();
-                if (p.id == id)
+            lock (_locker)
+            {                
+                for (Iterator iter = playerList.getIterator(); iter.hasNext();)
                 {
-                    toReturn = p;
-                    break;
+                    Player p = (Player)iter.next();
+                    if (p.id == id)
+                    {
+                        toReturn = p;
+                        break;
+                    }
                 }
             }
             return toReturn;
+        }
+
+        public static bool CheckUsernames(string username)
+        {
+            bool usernameExists = false;
+            lock(_locker)
+            {
+                for (Iterator iter = playerList.getIterator(); iter.hasNext();)
+                {
+                    Player p = (Player)iter.next();
+                    if (p.username == username)
+                    {
+                        usernameExists = true;
+                        break;
+                    }
+                }
+            }
+            return usernameExists;
         }
 
         public static void UpdatePlayerSkin(string contextId, string skin)
