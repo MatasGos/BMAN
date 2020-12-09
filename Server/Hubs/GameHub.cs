@@ -43,6 +43,22 @@ namespace Server.Hubs
         //Sends a message to everyone
         public async Task SendMessage(string username, string message)
         {
+            if (message.Length > 5)
+            {
+                if (message.Substring(0, 5) == "/skin")
+                {
+                    Expression exp = new Expression(message, Context.ConnectionId, Server.GetPlayers());
+                    string returnValue = (exp.initialize());
+                    Console.WriteLine(returnValue);
+                    string jsonPlayers = JsonConvert.SerializeObject(Server.GetPlayers(), settings);
+                    await Clients.All.SendAsync("UpdatePlayerImages", jsonPlayers);
+                    if (returnValue != "")
+                    {
+                        await Clients.Caller.SendAsync("ReceiveMessage", "SERVER", returnValue);
+                    }
+                    return;
+                }
+            }
             Console.WriteLine(username + ": " + message);
             await Clients.All.SendAsync("ReceiveMessage", username, message);
         }

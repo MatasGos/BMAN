@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model
 {
-    class Originator
+    public class Originator
     {
         private string state;
         public void setState(string state) {

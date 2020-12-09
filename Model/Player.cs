@@ -10,6 +10,8 @@ namespace Model
 {
     public class Player : IPlayerObserver
     {
+        public Originator originator { get; set; }
+        public Caretaker caretaker { get; set; }
         public string pictureStructure { get; set; }
         public PlayerNum num { get; set; }      //Which player it is(changes spawn position and player image)
         public string id { get; set; }          //Player's id (equals to connection id)
@@ -57,6 +59,8 @@ namespace Model
         public Player()
         {
             InitializeValues();
+            originator = new Originator();
+            caretaker = new Caretaker();
         }
 
         public Player(string id, string username, int num) : this()
@@ -124,6 +128,16 @@ namespace Model
                 playerStructure = new PlayerShoesDecorator(playerStructure);
             }
             this.pictureStructure = playerStructure.GetPlayerStructure();
+            originator.setState(this.pictureStructure);
+        }
+        public int SavePlayerStructure()
+        {
+            return caretaker.add(originator.SaveSateToMemento());
+        }
+        public void UndoPlayerStructure(int index)
+        {
+            originator.GetStateFromMemento(caretaker.Get(index));
+            this.pictureStructure = originator.getState();
         }
 
         public void SetPos(int x, int y)

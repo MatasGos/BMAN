@@ -4,17 +4,22 @@ using System.Text;
 
 namespace Model
 {
-    class Caretaker
+    public class Caretaker
     {
         private List<Memento> mementoList = new List<Memento>();
 
-        public void add(Memento state)
+        public int add(Memento state)
         {
             mementoList.Add(state);
+            return mementoList.Count - 1;
         }
         public Memento Get(int index)
         {
             return mementoList[index];
+        }
+        public int GetLength()
+        {
+            return mementoList.Count;
         }
     }
 }
