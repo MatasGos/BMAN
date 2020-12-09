@@ -32,7 +32,7 @@ namespace Server
             mediator.addLogReceiver(consoleLog);
             mediator.addLogSender(playerLog);
             mediator.addLogReceiver(fileLog);
-            playerLog.sendMessage("Bandom");
+            //playerLog.sendMessage("Bandom");
         }
 
         public static bool AddPlayer(string id, string username)

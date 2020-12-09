@@ -251,11 +251,11 @@ namespace Client
                                 }
                                 else if (x.boostType == "supermine")
                                 {
-                                    picColor = pictures.GetPictureArray("boostSuperbomb");
+                                    picColor = pictures.GetPictureArray("boostSupermine");
                                 }
                                 else if (x.boostType == "superbomb")
                                 {
-                                    picColor = pictures.GetPictureArray("boostSupermine");
+                                    picColor = pictures.GetPictureArray("boostSuperbomb");
                                 }
                                 else
                                 {
