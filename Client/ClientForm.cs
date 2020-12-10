@@ -689,21 +689,53 @@ namespace Client
                         label7.ForeColor = Color.Red;
                         label7.Text = x.Item2.ToString();
                         label7.Visible = true;
+                        if (x.Item3 == "bold")
+                        {
+                            label7.Font = new Font(pfc.Families[0], 14, FontStyle.Italic);
+                        }
+                        else
+                        {
+                            label7.Font = new Font(pfc.Families[0], 14);
+                        }
                         break;
                     case 1:
                         label8.ForeColor = Color.Blue;
                         label8.Text = x.Item2.ToString();
                         label8.Visible = true;
+                        if (x.Item3 == "bold")
+                        {
+                            label8.Font = new Font(pfc.Families[0], 14, FontStyle.Italic);
+                        }
+                        else
+                        {
+                            label8.Font = new Font(pfc.Families[0], 14);
+                        }
                         break;
                     case 2:
                         label9.ForeColor = Color.Green;
                         label9.Text = x.Item2.ToString();
                         label9.Visible = true;
+                        if (x.Item3 == "bold")
+                        {
+                            label9.Font = new Font(pfc.Families[0], 14, FontStyle.Italic);
+                        }
+                        else
+                        {
+                            label9.Font = new Font(pfc.Families[0], 14);
+                        }
                         break;
                     case 3:
                         label10.ForeColor = Color.Yellow;
                         label10.Text = x.Item2.ToString();
                         label10.Visible = true;
+                        if (x.Item3 == "bold")
+                        {
+                            label10.Font = new Font(pfc.Families[0], 14, FontStyle.Italic);
+                        }
+                        else
+                        {
+                            label10.Font = new Font(pfc.Families[0], 14);
+                        }
                         break;
                     default:
                         throw new NotImplementedException();
