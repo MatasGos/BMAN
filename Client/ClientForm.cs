@@ -285,6 +285,19 @@ namespace Client
             timeBox.Image = Images.clock;
             timeLabel.Parent = pictureBox1;
             timeLabel.Font = new Font(pfc.Families[0], 22);
+
+            label5.Font = new Font(pfc.Families[0], 16);
+            label6.Font = new Font(pfc.Families[0], 16);
+
+            label1.Font = new Font(pfc.Families[0], 14);
+            label2.Font = new Font(pfc.Families[0], 14);
+            label3.Font = new Font(pfc.Families[0], 14);
+            label4.Font = new Font(pfc.Families[0], 14);
+
+            label7.Font = new Font(pfc.Families[0], 14);
+            label8.Font = new Font(pfc.Families[0], 14);
+            label9.Font = new Font(pfc.Families[0], 14);
+            label10.Font = new Font(pfc.Families[0], 14);
         }
 
         private void RichTextBox1_TextChanged(object sender, EventArgs e)
@@ -676,53 +689,21 @@ namespace Client
                         label7.ForeColor = Color.Red;
                         label7.Text = x.Item2.ToString();
                         label7.Visible = true;
-                        if (x.Item3 == "bold")
-                        {
-                            label7.Font = new Font(label7.Font.Name, label7.Font.Size, FontStyle.Bold);
-                        }
-                        else
-                        {
-                            label7.Font = new Font(label7.Font.Name, label7.Font.Size);
-                        }
                         break;
                     case 1:
                         label8.ForeColor = Color.Blue;
                         label8.Text = x.Item2.ToString();
                         label8.Visible = true;
-                        if (x.Item3 == "bold")
-                        {
-                            label8.Font = new Font(label8.Font.Name, label8.Font.Size, FontStyle.Bold);
-                        }
-                        else
-                        {
-                            label8.Font = new Font(label8.Font.Name, label8.Font.Size);
-                        }
                         break;
                     case 2:
                         label9.ForeColor = Color.Green;
                         label9.Text = x.Item2.ToString();
                         label9.Visible = true;
-                        if (x.Item3 == "bold")
-                        {
-                            label9.Font = new Font(label9.Font.Name, label9.Font.Size, FontStyle.Bold);
-                        }
-                        else
-                        {
-                            label9.Font = new Font(label9.Font.Name, label9.Font.Size);
-                        }
                         break;
                     case 3:
                         label10.ForeColor = Color.Yellow;
                         label10.Text = x.Item2.ToString();
                         label10.Visible = true;
-                        if (x.Item3 == "bold")
-                        {
-                            label10.Font = new Font(label10.Font.Name, label10.Font.Size, FontStyle.Bold);
-                        }
-                        else
-                        {
-                            label10.Font = new Font(label10.Font.Name, label10.Font.Size);
-                        }
                         break;
                     default:
                         throw new NotImplementedException();

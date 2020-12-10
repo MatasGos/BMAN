@@ -192,7 +192,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.BurlyWood;
-            this.label1.Location = new System.Drawing.Point(21, 518);
+            this.label1.Location = new System.Drawing.Point(587, 203);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 15);
             this.label1.TabIndex = 14;
@@ -203,7 +203,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.BurlyWood;
-            this.label2.Location = new System.Drawing.Point(21, 533);
+            this.label2.Location = new System.Drawing.Point(587, 223);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 15);
             this.label2.TabIndex = 15;
@@ -214,7 +214,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.BurlyWood;
-            this.label3.Location = new System.Drawing.Point(21, 548);
+            this.label3.Location = new System.Drawing.Point(587, 243);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 15);
             this.label3.TabIndex = 16;
@@ -225,7 +225,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.BurlyWood;
-            this.label4.Location = new System.Drawing.Point(21, 563);
+            this.label4.Location = new System.Drawing.Point(587, 263);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 15);
             this.label4.TabIndex = 17;
@@ -236,29 +236,31 @@
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.BurlyWood;
-            this.label5.Location = new System.Drawing.Point(21, 491);
+            this.label5.ForeColor = System.Drawing.Color.Maroon;
+            this.label5.Location = new System.Drawing.Point(579, 173);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(81, 15);
+            this.label5.Size = new System.Drawing.Size(78, 15);
             this.label5.TabIndex = 18;
-            this.label5.Text = "Round scores:";
+            this.label5.Text = "Round scores";
             this.label5.Visible = false;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.BurlyWood;
-            this.label6.Location = new System.Drawing.Point(153, 491);
+            this.label6.ForeColor = System.Drawing.Color.Maroon;
+            this.label6.Location = new System.Drawing.Point(579, 296);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(80, 15);
+            this.label6.Size = new System.Drawing.Size(77, 15);
             this.label6.TabIndex = 19;
-            this.label6.Text = "Match scores:";
+            this.label6.Text = "Match scores";
             this.label6.Visible = false;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.BurlyWood;
-            this.label7.Location = new System.Drawing.Point(153, 518);
+            this.label7.Location = new System.Drawing.Point(585, 329);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(38, 15);
             this.label7.TabIndex = 20;
@@ -269,7 +271,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.BurlyWood;
-            this.label8.Location = new System.Drawing.Point(153, 533);
+            this.label8.Location = new System.Drawing.Point(585, 349);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(38, 15);
             this.label8.TabIndex = 21;
@@ -280,7 +282,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.BurlyWood;
-            this.label9.Location = new System.Drawing.Point(153, 548);
+            this.label9.Location = new System.Drawing.Point(585, 369);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(38, 15);
             this.label9.TabIndex = 22;
@@ -291,7 +293,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.BurlyWood;
-            this.label10.Location = new System.Drawing.Point(153, 563);
+            this.label10.Location = new System.Drawing.Point(585, 389);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(44, 15);
             this.label10.TabIndex = 23;
