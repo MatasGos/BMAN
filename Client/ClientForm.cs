@@ -92,6 +92,7 @@ namespace Client
                     default:
                         throw new NotImplementedException();
                 }
+
                 if (game.gameStarted == false)
                 {
                     game.gameStarted = true;
@@ -107,14 +108,80 @@ namespace Client
 
                     textBox3.Focus();
 
-                    labelHealth.Visible = true;
-                    labelHealthValue.Visible = true;
                     label5.Visible = true;
 
+                    healthBox.Visible = true;
+                    healthLabel.Visible = true;
+
+                    speedBox.Visible = true;
+                    speedLabel.Visible = true;
+
+                    bombCountBox.Visible = true;
+                    bombCountLabel.Visible = true;
+
+                    mineCountBox.Visible = true;
+                    mineCountLabel.Visible = true;
+
+                    superBombCountBox.Visible = true;
+                    superBombCountLabel.Visible = true;
+
+                    superMineCountBox.Visible = true;
+                    superMineCountLabel.Visible = true;
+
+                    bombRadiusBox.Visible = true;
+                    bombRadiusLabel.Visible = true;
+
+                    superBombRadiusBox.Visible = true;
+                    superBombRadiusLabel.Visible = true;
+
+                    timeBox.Visible = true;
+                    timeLabel.Visible = true;
 
                     game.drawBackground();
                 }
-                labelHealthValue.Text = playerHealth.ToString();
+
+                Player player = null;
+
+                //Get player
+                foreach (var p in game.players)
+                {
+                    if (p.id == connection.ConnectionId)
+                    {
+                        player = p;
+                    }
+                }
+
+                //Change player stats on the right side
+                healthLabel.Text = player.health.ToString();
+                speedLabel.Text = player.speed.ToString();
+                bombCountLabel.Text = player.bombCount.ToString();
+                mineCountLabel.Text = player.mineCount.ToString();
+                superBombCountLabel.Text = player.superBombCount.ToString();
+                superMineCountLabel.Text = player.superMineCount.ToString();
+                bombRadiusLabel.Text = player.explosionPower.ToString();
+
+                double timeLeft = (player.undoTimer - game.map.serverTime) / 1000;
+                int timeLeftInt = (int)timeLeft;
+                if (timeLeftInt < 0.0)
+                {
+                    timeLabel.Text = "0";
+                }
+                else
+                {
+                    timeLabel.Text = timeLeftInt.ToString();
+                }
+
+                int expPow = player.explosionPower;
+                if (expPow > 4)
+                {
+                    expPow = 4;
+                }
+                else if (expPow < 2)
+                {
+                    expPow = 2;
+                }
+                superBombRadiusLabel.Text = expPow.ToString();
+
                 game.drawMap();
                 pictureBox1.Image = game.GetField().GetImage();
             });
@@ -155,6 +222,7 @@ namespace Client
 
             pictureBox1.BackgroundImage = Images.menuBackground;
 
+            //Login and start buttons
             button1.Parent = pictureBox1;
             button1.BackgroundImage = Images.loginButton;
             button1.MouseEnter += Button1_MouseEnter;
@@ -165,12 +233,58 @@ namespace Client
             button3.MouseEnter += Button3_MouseEnter;
             button3.MouseLeave += Button3_MouseLeave;
 
+            //Events for chat box
             textBox2.KeyPress += TextBox2_KeyPress;
             richTextBox1.TextChanged += RichTextBox1_TextChanged;
 
             //Use custom font
             AddFont(Images.arcadeClassicFont);
-            labelHealth.Font = new Font(pfc.Families[0], 16);
+
+            //Side images and labels for stats
+            healthBox.Parent = pictureBox1;
+            healthBox.Image = Images.heart;
+            healthLabel.Parent = pictureBox1;
+            healthLabel.Font = new Font(pfc.Families[0], 22);
+
+            speedBox.Parent = pictureBox1;
+            speedBox.Image = Images.shoe;
+            speedLabel.Parent = pictureBox1;
+            speedLabel.Font = new Font(pfc.Families[0], 22);
+
+            bombCountBox.Parent = pictureBox1;
+            bombCountBox.Image = Images.bomb;
+            bombCountLabel.Parent = pictureBox1;
+            bombCountLabel.Font = new Font(pfc.Families[0], 22);
+
+            mineCountBox.Parent = pictureBox1;
+            mineCountBox.Image = Images.mine;
+            mineCountLabel.Parent = pictureBox1;
+            mineCountLabel.Font = new Font(pfc.Families[0], 22);
+
+            superBombCountBox.Parent = pictureBox1;
+            superBombCountBox.Image = Images.superbomb;
+            superBombCountLabel.Parent = pictureBox1;
+            superBombCountLabel.Font = new Font(pfc.Families[0], 22);
+
+            superMineCountBox.Parent = pictureBox1;
+            superMineCountBox.Image = Images.supermine;
+            superMineCountLabel.Parent = pictureBox1;
+            superMineCountLabel.Font = new Font(pfc.Families[0], 22);
+
+            bombRadiusBox.Parent = pictureBox1;
+            bombRadiusBox.Image = Images.explosion;
+            bombRadiusLabel.Parent = pictureBox1;
+            bombRadiusLabel.Font = new Font(pfc.Families[0], 22);
+
+            superBombRadiusBox.Parent = pictureBox1;
+            superBombRadiusBox.Image = Images.superexplosion;
+            superBombRadiusLabel.Parent = pictureBox1;
+            superBombRadiusLabel.Font = new Font(pfc.Families[0], 22);
+
+            timeBox.Parent = pictureBox1;
+            timeBox.Image = Images.clock;
+            timeLabel.Parent = pictureBox1;
+            timeLabel.Font = new Font(pfc.Families[0], 22);
         }
 
         private void RichTextBox1_TextChanged(object sender, EventArgs e)

@@ -209,12 +209,12 @@ namespace Model
         private void InitializeValues()
         {
             this.health = 5;
-            this.bombCount = 15;
-            this.superBombCount = 1;
-            this.mineCount = 10;
-            this.superMineCount = 5;
+            this.bombCount = 1;
+            this.superBombCount = 0;
+            this.mineCount = 1;
+            this.superMineCount = 0;
             this.action = "";
-            this.speed = 3;
+            this.speed = 2;
             this.explosionPower = 2;
             this.pictureStructure = "";
             this.movementControl = new MovementControl();

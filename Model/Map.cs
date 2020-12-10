@@ -22,6 +22,7 @@ namespace Model
         public Unit[,] units { get; set; }
         public Explosive[,] explosions { get; set; }
         public MapFacade mapFacade { get; set; }
+        public double serverTime { get; set; }
 
         public Map(int xSize, int ySize)
         {

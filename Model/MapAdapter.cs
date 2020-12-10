@@ -49,5 +49,10 @@ namespace Model
             return map.mapFacade;
         }
 
+        public void SetServerTime(double time)
+        {
+            map.serverTime = time;
+        }
+
     }
 }

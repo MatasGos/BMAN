@@ -187,9 +187,14 @@ namespace Model
 
         private void PlaceSuperExplosion(int xTile, int yTile, int explosionPower, double placeTime, ExplosiveAbstractFactory factory, Player owner)
         {
-            if (explosionPower > 5)
+
+            if (explosionPower > 4)
             {
-                explosionPower = 5;
+                explosionPower = 4;
+            }
+            else if (explosionPower < 2)
+            {
+                explosionPower = 2;
             }
             for (int x = Math.Max(1, xTile - explosionPower); x <= Math.Min(xTile + explosionPower, xSize - 2); x++)
             {

@@ -92,6 +92,7 @@ namespace Server
             while (isRunning)
             {
                 double startTime = sw.Elapsed.TotalMilliseconds;
+                map.SetServerTime(sw.Elapsed.TotalMilliseconds);
                 GameLogic();
                 double elapsedTime = sw.Elapsed.TotalMilliseconds - startTime;
                 if (Server.CheckRoundEnd())

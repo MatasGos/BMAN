@@ -14,5 +14,7 @@ namespace Model
         public string GetJson(JsonSerializerSettings settings);
 
         public MapFacade GetMapFacade();
+
+        public void SetServerTime(double time);
     }
 }
